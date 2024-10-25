@@ -38902,7 +38902,7 @@ Processed APP_processConsumedEvent(uint8_t tableIndex, Message *m) {
     }
     ledMode = evs[12];
     for (ledNo=0; ledNo<(4*8); ledNo++) {
-        flags = evs[4 + ledNo/8] & ((1 << ledNo)%8);
+        flags = evs[4 + ledNo/8] & (1 << (ledNo%8));
         if (flags) {
 
             polarity = evs[8 + ledNo/8]& ((1 << ledNo)%8);

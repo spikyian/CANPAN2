@@ -58,45 +58,49 @@ void initOutputs(void) {
     for (i=0; i< NUM_LED_ROWS; i++) {
         ledMatrix[i] = 0;
     }
-    TRISCbits.TRISC6 = 0;   // anode driver output
+     TRISCbits.TRISC6 = 0;   // anode driver output
     TRISCbits.TRISC7 = 0;   // anode driver output
-    TRISBbits.TRISB6 = 0;   // anode driver output
-    TRISBbits.TRISB7 = 0;   // anode driver output
+    TRISBbits.TRISB4 = 0;   // anode driver output
+    TRISBbits.TRISB5 = 0;   // anode driver output
     
-    LATBbits.LATB6 = 0;    // LED anode drivers off
-    LATBbits.LATB7 = 0;
+    LATBbits.LATB4 = 0;    // LED anode drivers off
+    LATBbits.LATB5 = 0;
     LATCbits.LATC6 = 0;
     LATCbits.LATC7 = 0;
     
     // Cathode driver output enable
     TRISCbits.TRISC2 = 0;
-    LATCbits.LATC2 = 1;     // disabled.
+    LATCbits.LATC2 = 0;     // disabled.
     
     // latch
     TRISCbits.TRISC4 = 0;
-    LATCbits.LATC4 = 0;     // disabled.
+    LATCbits.LATC4 = 0;     // unlatch
     
     //Set up the MSSP to drive the switch matrix
-    TRISCbits.TRISC3 = 0;
-    TRISCbits.TRISC5 = 0;
+    TRISCbits.TRISC3 = 0;   //clock
+    LATCbits.LATC3 = 0;
+    TRISCbits.TRISC5 = 0;   // data
+    LATCbits.LATC5 = 0;
     
-    SPI1CON0 = 0x03; // MSb first, host mode, Total bit count Mode, transmit only
-    SPI1CON1 = 0;   // SSP=0 for active high and latches when it goes low
-    SPI1TCNT=1;     // 1 byte
+    SPI1CON0 = 0x03; // MSb first, host mode, Total bit count Mode=1, transmit only
+    SPI1CON1 = 0x44; // clock edge, SSP=0 for active low and latches when it goes low
+    SPI1CON2 = 0x02; // transmitter on, receiver off
+        
+    SPI1TCNTH=0;     // 1 byte
+    SPI1TCNTL=1;     // 1 byte
     SPI1TWIDTH=0;   // 8 bits
-    SPI1CON1 = 0x04; // SSP is active low
-    SPI1CON2 = 0x00; // receiver off
+
     SPI1CLK = 0x00; // Clock from Fosc
-    SPI1BAUD = 31;  // Fosc/64
+    SPI1BAUD = 15;  // Fosc/32
 
     // set up PPS to the correct pins
     RC5PPS = 0x32; // SPI1SDO
-    RC3PPS = 0x34; // SPI1SCK
+    RC3PPS = 0x31; // SPI1SCK
     RC4PPS = 0x33; // SPI1SS, latch
 
     // ready
     SPI1CON0bits.EN = 1;
-    
+   
     // Set up TMR2 to generate interrupt every 2ms
     T2CONbits.CKPS = 5;     // clock prescalar 1:32
     T2CONbits.OUTPS = 0;    // clock postscalar 1:1
@@ -117,34 +121,71 @@ void outputIsr(void)
 void __interrupt(irq(IRQ_TMR2), base(IVT_BASE)) processOutputs(void) 
 #endif
 {
-    unsigned char dummy;
-    unsigned char anodes;
-    unsigned char cathodes;
+    uint8_t i;
+    uint8_t cathodes;
     
     if (PIR3bits.TMR2IF) {
         current_row++;
         current_row &= 0x3;
         
-        // turn off the cathode drivers
+        // disable the cathode driver
         LATCbits.LATC2 = 1; // OE
+        // also turn the anodes off
+        LATBbits.LATB4 = 0;
+        LATBbits.LATB5 = 0;
+        LATCbits.LATC6 = 0;
+        LATCbits.LATC7 = 0;
 
         cathodes = ledMatrix[current_row];
-        SPI1TXB = cathodes;
+        SPI1TCNTH=0;     // 1 byte
+        SPI1TCNTL=1;     // 1 byte
+        SPI1TWIDTH=0;   // 8 bits
+        
+        SPI1TXB = cathodes; // do the write and send the data
 
         // wait for data to be sent
-        // This takes quite a bit of time but we have to ensure the cathodes have the
+        // This takes quite a few cycles but we have to ensure the cathodes have the
         // right data before turning on the anodes otherwise we don't get a clean display.
         while (SPI1CON2bits.BUSY)
             ;
+        
+/*        for (i=0; i<8; i++) {
+            // set up the data
+            if (cathodes & (1 << i)) {
+                LATCbits.LATC5 = 1;
+            } else {
+                LATCbits.LATC5 = 0;
+            }
+            // pulse the clock - must be more than 20ns
+            LATCbits.LATC3 = 1;
+            NOP();
+            NOP();
+            NOP();
+            LATCbits.LATC3 = 0;
+        }
+ */
+        /*
+        LATCbits.LATC4 = 1; // latch the data clocked in - must be more than 20ns at 16Mhz crystal and 4xPLL this should be 62.5ns
+        NOP();
+        LATCbits.LATC4 = 0;*/
 
         // turn the relevant anode driver on
-        anodes = (uint8_t)(1 << (4+current_row));
-        LATBbits.LATB4 = anodes & 0x10 ? 1 : 0;
-        LATBbits.LATB5 = anodes & 0x20 ? 1 : 0;
-        LATBbits.LATB6 = anodes & 0x40 ? 1 : 0;
-        LATBbits.LATB7 = anodes & 0x80 ? 1 : 0;
+        switch (current_row) {
+            case 0:
+                LATBbits.LATB4 = 1;
+                break;
+            case 1:
+                LATBbits.LATB5 = 1;
+                break;
+            case 2:
+                LATCbits.LATC6 = 1;
+                break;
+            case 3:
+                LATCbits.LATC7 = 1;
+                break;
+        }
         
-        // turn the relevant cathode driver back on
+        // enable the cathode driver
         LATCbits.LATC2 = 0; //OE 
 
         PIR3bits.TMR2IF = 0;

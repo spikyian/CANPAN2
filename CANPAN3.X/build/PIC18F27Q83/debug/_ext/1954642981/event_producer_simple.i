@@ -38785,6 +38785,13 @@ extern Boolean sendProducedEvent(Happening h, EventState state);
 extern void deleteHappeningRange(Happening happening, uint8_t number);
 # 103 "../../VLCBlib_PIC/event_producer.h"
 extern EventState APP_GetEventState(Happening h);
+
+
+
+
+
+
+extern EventState APP_GetEventIndexState(uint8_t tableIndex);
 # 54 "../../VLCBlib_PIC/event_producer_simple.c" 2
 
 # 1 "../../VLCBlib_PIC/mns.h" 1
@@ -38865,8 +38872,6 @@ static void producerPowerUp(void) {
 # 114 "../../VLCBlib_PIC/event_producer_simple.c"
 static Processed producerProcessMessage(Message *m) {
     uint8_t index;
-    Happening h;
-    int16_t ev;
 
     switch (m->opc) {
         case OPC_AREQ:
@@ -38882,25 +38887,14 @@ static Processed producerProcessMessage(Message *m) {
             }
             if (index == 0xff) return PROCESSED;
 
-            ev = getEv(index, 0);
-            if (ev <= 0) return PROCESSED;
-
-            h = (uint8_t)ev;
-
-
-
-
-
-
-
             if (m->opc == OPC_AREQ) {
-                if (APP_GetEventState(h) == EVENT_ON) {
+                if (APP_GetEventIndexState(index) == EVENT_ON) {
                     sendMessage4(OPC_ARON, m->bytes[0], m->bytes[1], m->bytes[2], m->bytes[3]);
                 } else {
                     sendMessage4(OPC_AROF, m->bytes[0], m->bytes[1], m->bytes[2], m->bytes[3]);
                 }
             } else {
-                if (APP_GetEventState(h) == EVENT_ON) {
+                if (APP_GetEventIndexState(index) == EVENT_ON) {
                     sendMessage4(OPC_ARSON, nn.bytes.hi, nn.bytes.lo, m->bytes[2], m->bytes[3]);
                 } else {
                     sendMessage4(OPC_ARSOF, nn.bytes.hi, nn.bytes.lo, m->bytes[2], m->bytes[3]);
@@ -38925,7 +38919,7 @@ static DiagnosticVal * producerGetDiagnostic(uint8_t index) {
     }
     return &(producerDiagnostics[index]);
 }
-# 184 "../../VLCBlib_PIC/event_producer_simple.c"
+# 171 "../../VLCBlib_PIC/event_producer_simple.c"
 static uint8_t producerEsdData(uint8_t index) {
     switch (index){
         case 0:

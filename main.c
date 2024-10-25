@@ -183,10 +183,10 @@ void setup(void) {
     initInputs();
     
     // Lock the PPS
-    PPSLOCK = 0x55; //Required sequence
+/*    PPSLOCK = 0x55; //Required sequence
     PPSLOCK = 0xAA; //Required sequence
     PPSLOCKbits.PPSLOCKED = 1; //Set PPSLOCKED bit
-
+*/
     // enable interrupts, all init now done
     ei(); 
 

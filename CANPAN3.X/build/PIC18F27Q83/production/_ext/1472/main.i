@@ -39072,9 +39072,9 @@ void setup(void) {
     initInputs();
 
 
-    PPSLOCK = 0x55;
-    PPSLOCK = 0xAA;
-    PPSLOCKbits.PPSLOCKED = 1;
+
+
+
 
 
     (INTCON0bits.GIE = 1);

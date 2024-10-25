@@ -130,14 +130,14 @@ Processed APP_processConsumedEvent(uint8_t tableIndex, Message *m) {
     uint8_t flags;
     uint8_t polarity;
     
-    onOff = m->opc & 1;
+    onOff = !(m->opc & 1);
     if (getEVs(tableIndex)) {   
         // something went wrong
         return PROCESSED;
     }
     ledMode = evs[EV_LEDMODE];
     for (ledNo=0; ledNo<NUM_LEDS; ledNo++) {
-        flags = evs[EV_LEDFLAGS1 + ledNo/8] & ((1 << ledNo)%8);
+        flags = evs[EV_LEDFLAGS1 + ledNo/8] & (1 << (ledNo%8));
         if (flags) {
             // this LED is impacted
             polarity = evs[EV_LEDPOLARITY1 + ledNo/8]& ((1 << ledNo)%8);

@@ -38786,21 +38786,21 @@ void initOutputs(void) {
         outputState[i] = 0;
     }
     for (i=0; i< 4; i++) {
-        ledMatrix[i] = 0;
+        ledMatrix[i] = 0xAA;
     }
     TRISCbits.TRISC6 = 0;
     TRISCbits.TRISC7 = 0;
-    TRISBbits.TRISB6 = 0;
-    TRISBbits.TRISB7 = 0;
+    TRISBbits.TRISB4 = 0;
+    TRISBbits.TRISB5 = 0;
 
-    LATBbits.LATB6 = 0;
-    LATBbits.LATB7 = 0;
+    LATBbits.LATB4 = 0;
+    LATBbits.LATB5 = 0;
     LATCbits.LATC6 = 0;
     LATCbits.LATC7 = 0;
 
 
     TRISCbits.TRISC2 = 0;
-    LATCbits.LATC2 = 1;
+    LATCbits.LATC2 = 0;
 
 
     TRISCbits.TRISC4 = 0;
@@ -38808,21 +38808,25 @@ void initOutputs(void) {
 
 
     TRISCbits.TRISC3 = 0;
+    LATCbits.LATC3 = 0;
     TRISCbits.TRISC5 = 0;
+    LATCbits.LATC5 = 0;
 
     SPI1CON0 = 0x03;
-    SPI1CON1 = 0;
-    SPI1TCNT=1;
+    SPI1CON1 = 0x45;
+    SPI1CON2 = 0x02;
+
+    SPI1TCNTH=0;
+    SPI1TCNTL=1;
     SPI1TWIDTH=0;
-    SPI1CON1 = 0x04;
-    SPI1CON2 = 0x00;
+
     SPI1CLK = 0x00;
-    SPI1BAUD = 31;
+    SPI1BAUD = 15;
 
 
     RC5PPS = 0x32;
     RC3PPS = 0x34;
-    RC4PPS = 0x33;
+
 
 
     SPI1CON0bits.EN = 1;
@@ -38847,9 +38851,9 @@ void initOutputs(void) {
 void __attribute__((picinterrupt(("irq(27), base(0x900)")))) processOutputs(void)
 
 {
-    unsigned char dummy;
-    unsigned char anodes;
-    unsigned char cathodes;
+    uint8_t i;
+    uint8_t anodes;
+    uint8_t cathodes;
 
     if (PIR3bits.TMR2IF) {
         current_row++;
@@ -38858,7 +38862,16 @@ void __attribute__((picinterrupt(("irq(27), base(0x900)")))) processOutputs(void
 
         LATCbits.LATC2 = 1;
 
+        LATBbits.LATB4 = 0;
+        LATBbits.LATB5 = 0;
+        LATCbits.LATC6 = 0;
+        LATCbits.LATC7 = 0;
+
         cathodes = ledMatrix[current_row];
+        SPI1TCNTH=0;
+        SPI1TCNTL=1;
+        SPI1TWIDTH=0;
+
         SPI1TXB = cathodes;
 
 
@@ -38866,13 +38879,27 @@ void __attribute__((picinterrupt(("irq(27), base(0x900)")))) processOutputs(void
 
         while (SPI1CON2bits.BUSY)
             ;
+# 168 "../canpan3Outputs.c"
+        LATCbits.LATC4 = 1;
+        __nop();
+        LATCbits.LATC4 = 0;
 
 
-        anodes = (uint8_t)(1 << (4+current_row));
-        LATBbits.LATB4 = anodes & 0x10 ? 1 : 0;
-        LATBbits.LATB5 = anodes & 0x20 ? 1 : 0;
-        LATBbits.LATB6 = anodes & 0x40 ? 1 : 0;
-        LATBbits.LATB7 = anodes & 0x80 ? 1 : 0;
+        anodes = (uint8_t)(1 << (current_row));
+        switch (anodes) {
+            case 0:
+                LATBbits.LATB4 = 0;
+                break;
+            case 1:
+                LATBbits.LATB5 = 0;
+                break;
+            case 2:
+                LATCbits.LATC6 = 0;
+                break;
+            case 3:
+                LATCbits.LATC7 = 0;
+                break;
+        }
 
 
         LATCbits.LATC2 = 0;

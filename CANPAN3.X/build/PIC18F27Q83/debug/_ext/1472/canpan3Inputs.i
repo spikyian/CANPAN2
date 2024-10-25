@@ -38800,11 +38800,14 @@ typedef struct {
 # 42 "../canpan3Inputs.c" 2
 
 # 1 "../canpan3Events.h" 1
+# 40 "../canpan3Events.h"
+extern void initEvents(void);
+extern void doFlash(void);
 # 43 "../canpan3Inputs.c" 2
 
 
 static uint8_t buttonState[8];
-uint8_t outputState[32];
+uint8_t outputState[(8*4)];
 
 static uint8_t column;
 static uint8_t ready;
@@ -38845,7 +38848,7 @@ void initInputs(void) {
 
     column = 0;
     driveColumn();
-    for (i=0; i<32; i++) {
+    for (i=0; i<(8*4); i++) {
         outputState[i] = 0;
     }
     for (i=0; i<8; i++) {
@@ -38873,7 +38876,7 @@ void inputScan(void) {
 
 
 
-    row = (PORTC & 0x03) << 2;
+    row = (uint8_t)((PORTC & 0x03) << 2);
     row |= (PORTB & 0x03);
     diff = row ^ buttonState[column];
 
@@ -38882,7 +38885,7 @@ void inputScan(void) {
     for (i=0; i<4; i++) {
         if (diff & (1 << i)) {
 
-            onOff = row & (1 << i);
+            onOff = !!(row & (1 << i));
             buttonNo = column*4 + i;
             tableIndex = findEventForSwitch(buttonNo);
             if (tableIndex != 0xff) {

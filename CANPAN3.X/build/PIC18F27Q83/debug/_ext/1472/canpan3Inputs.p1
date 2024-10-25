@@ -3616,7 +3616,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;../canpan3Inputs.c: 45: static uint8_t buttonState[8];
 [v _buttonState `uc ~T0 @X0 -> 8 `i s ]
 "46
-[; ;../canpan3Inputs.c: 46: uint8_t outputState[32];
+[; ;../canpan3Inputs.c: 46: uint8_t outputState[(8*4)];
 [v _outputState `uc ~T0 @X0 -> 32 `i e ]
 "48
 [; ;../canpan3Inputs.c: 48: static uint8_t column;
@@ -3670,10 +3670,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;../canpan3Inputs.c: 86:     driveColumn();
 [e ( _driveColumn ..  ]
 "87
-[; ;../canpan3Inputs.c: 87:     for (i=0; i<32; i++) {
+[; ;../canpan3Inputs.c: 87:     for (i=0; i<(8*4); i++) {
 {
 [e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 32 `i 3233  ]
+[e $ < -> _i `i * -> 8 `i -> 4 `i 3233  ]
 [e $U 3234  ]
 [e :U 3233 ]
 {
@@ -3684,7 +3684,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;../canpan3Inputs.c: 89:     }
 }
 [e ++ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 32 `i 3233  ]
+[e $ < -> _i `i * -> 8 `i -> 4 `i 3233  ]
 [e :U 3234 ]
 }
 "90
@@ -3749,7 +3749,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;../canpan3Inputs.c: 111:     uint8_t opc;
 [v _opc `uc ~T0 @X0 1 a ]
 "115
-[; ;../canpan3Inputs.c: 115:     row = (PORTC & 0x03) << 2;
+[; ;../canpan3Inputs.c: 115:     row = (uint8_t)((PORTC & 0x03) << 2);
 [e = _row -> << & -> _PORTC `i -> 3 `i -> 2 `i `uc ]
 "116
 [; ;../canpan3Inputs.c: 116:     row |= (PORTB & 0x03);
@@ -3770,8 +3770,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $ ! != & -> _diff `i << -> 1 `i -> _i `i -> 0 `i 3243  ]
 {
 "124
-[; ;../canpan3Inputs.c: 124:             onOff = row & (1 << i);
-[e = _onOff -> & -> _row `i << -> 1 `i -> _i `i `uc ]
+[; ;../canpan3Inputs.c: 124:             onOff = !!(row & (1 << i));
+[e = _onOff -> -> ! ! != & -> _row `i << -> 1 `i -> _i `i -> 0 `i `i `uc ]
 "125
 [; ;../canpan3Inputs.c: 125:             buttonNo = column*4 + i;
 [e = _buttonNo -> + * -> _column `i -> 4 `i -> _i `i `uc ]

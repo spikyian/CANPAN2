@@ -38752,22 +38752,177 @@ extern void showStatus(StatusDisplay s);
 # 8 "..\\module.h" 2
 # 40 "../canpan3Outputs.c" 2
 
+# 1 "../canpan3Outputs.h" 1
+# 40 "../canpan3Outputs.h"
+enum canpan3LedState {
+    CANPANLED_ON,
+    CANPANLED_OFF,
+    CANPANLED_FLASH,
+    CANPANLED_ANTIFLASH
+};
+
+extern enum canpan3LedState ledStates[(4*8)];
+extern uint8_t outputState[(4*8)];
+
+extern void setLed(uint8_t no);
+extern void clearLed(uint8_t no);
+extern uint8_t testLed(uint8_t no);
+# 41 "../canpan3Outputs.c" 2
+
+
+
+
+
+static unsigned char current_row = 0;
+unsigned char ledMatrix[4];
+enum canpan3LedState ledStates[(4*8)];
+
 
 void initOutputs(void) {
+    uint8_t i;
 
+    for (i=0; i<(4*8); i++) {
+        ledStates[i] = CANPANLED_OFF;
+        outputState[i] = 0;
+    }
+    for (i=0; i< 4; i++) {
+        ledMatrix[i] = 0;
+    }
+     TRISCbits.TRISC6 = 0;
+    TRISCbits.TRISC7 = 0;
+    TRISBbits.TRISB4 = 0;
+    TRISBbits.TRISB5 = 0;
+
+    LATBbits.LATB4 = 0;
+    LATBbits.LATB5 = 0;
+    LATCbits.LATC6 = 0;
+    LATCbits.LATC7 = 0;
+
+
+    TRISCbits.TRISC2 = 0;
+    LATCbits.LATC2 = 0;
+
+
+    TRISCbits.TRISC4 = 0;
+    LATCbits.LATC4 = 0;
+
+
+    TRISCbits.TRISC3 = 0;
+    LATCbits.LATC3 = 0;
+    TRISCbits.TRISC5 = 0;
+    LATCbits.LATC5 = 0;
+
+    SPI1CON0 = 0x03;
+    SPI1CON1 = 0x44;
+    SPI1CON2 = 0x02;
+
+    SPI1TCNTH=0;
+    SPI1TCNTL=1;
+    SPI1TWIDTH=0;
+
+    SPI1CLK = 0x00;
+    SPI1BAUD = 15;
+
+
+    RC5PPS = 0x32;
+    RC3PPS = 0x31;
+    RC4PPS = 0x33;
+
+
+    SPI1CON0bits.EN = 1;
+
+
+    T2CONbits.CKPS = 5;
+    T2CONbits.OUTPS = 0;
+    T2CLKCON = 1;
+    T2PR = 250;
+    T2HLTbits.MODE = 0;
+
+    PIR3bits.TMR2IF = 0;
+    PIE3bits.TMR2IE = 1;
+    T2CONbits.ON = 1;
 }
 
 
 
 
 
-void __attribute__((picinterrupt(("irq(28), base(0x900)")))) processOutputs(void)
+
+void __attribute__((picinterrupt(("irq(27), base(0x900)")))) processOutputs(void)
 
 {
+    uint8_t i;
+    uint8_t cathodes;
+
+    if (PIR3bits.TMR2IF) {
+        current_row++;
+        current_row &= 0x3;
 
 
+        LATCbits.LATC2 = 1;
+
+        LATBbits.LATB4 = 0;
+        LATBbits.LATB5 = 0;
+        LATCbits.LATC6 = 0;
+        LATCbits.LATC7 = 0;
+
+        cathodes = ledMatrix[current_row];
+        SPI1TCNTH=0;
+        SPI1TCNTL=1;
+        SPI1TWIDTH=0;
+
+        SPI1TXB = cathodes;
+
+
+
+
+        while (SPI1CON2bits.BUSY)
+            ;
+# 173 "../canpan3Outputs.c"
+        switch (current_row) {
+            case 0:
+                LATBbits.LATB4 = 1;
+                break;
+            case 1:
+                LATBbits.LATB5 = 1;
+                break;
+            case 2:
+                LATCbits.LATC6 = 1;
+                break;
+            case 3:
+                LATCbits.LATC7 = 1;
+                break;
+        }
+
+
+        LATCbits.LATC2 = 0;
+
+        PIR3bits.TMR2IF = 0;
+    }
 }
 
-void outputsIsr(void) {
 
+
+
+
+
+
+void setLed(uint8_t no) {
+    ledMatrix[no/8] |= (1 << (no%8));
+}
+
+
+
+
+void clearLed(uint8_t no) {
+    ledMatrix[no/8] &= ~(1 << (no%8));
+}
+
+
+
+
+
+
+uint8_t testLed(uint8_t no) {
+    return ledMatrix[no/8] & (1 << (no%8));
 }

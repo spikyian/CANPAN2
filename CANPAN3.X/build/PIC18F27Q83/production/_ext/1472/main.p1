@@ -108,21 +108,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 "40 ../canpan3Inputs.h
 [; ;../canpan3Inputs.h: 40: extern void initInputs(void);
 [v _initInputs `(v ~T0 @X0 0 ef ]
-"23433 C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h
-[; ;C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h: 23433: extern volatile unsigned char PPSLOCK __attribute__((address(0x200)));
-[v _PPSLOCK `Vuc ~T0 @X0 0 e@512 ]
-"23439
-[; ;C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h: 23439:     struct {
-[s S1050 :1 `uc 1 ]
-[n S1050 . PPSLOCKED ]
-"23438
-[; ;C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h: 23438: typedef union {
-[u S1049 `S1050 1 ]
-[n S1049 . . ]
-"23443
-[; ;C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h: 23443: extern volatile PPSLOCKbits_t PPSLOCKbits __attribute__((address(0x200)));
-[v _PPSLOCKbits `VS1049 ~T0 @X0 0 e@512 ]
-"2864
+"2864 C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h
 [s S3128 :1 `uc 1 :1 `uc 1 :1 `uc 1 :2 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S3128 . INT0EDG INT1EDG INT2EDG . IPEN GIEL GIE ]
 "2873
@@ -3776,15 +3762,6 @@ Version 4.0 HI-TECH Software Intermediate Code
 "183
 [; ;../main.c: 183:     initInputs();
 [e ( _initInputs ..  ]
-"186
-[; ;../main.c: 186:     PPSLOCK = 0x55;
-[e = _PPSLOCK -> -> 85 `i `uc ]
-"187
-[; ;../main.c: 187:     PPSLOCK = 0xAA;
-[e = _PPSLOCK -> -> 170 `i `uc ]
-"188
-[; ;../main.c: 188:     PPSLOCKbits.PPSLOCKED = 1;
-[e = . . _PPSLOCKbits 0 0 -> -> 1 `i `uc ]
 "191
 [; ;../main.c: 191:     (INTCON0bits.GIE = 1);
 [e = . . _INTCON0bits 0 6 -> -> 1 `i `uc ]

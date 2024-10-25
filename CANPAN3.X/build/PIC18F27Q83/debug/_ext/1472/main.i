@@ -38901,6 +38901,13 @@ extern Boolean sendProducedEvent(Happening h, EventState state);
 extern void deleteHappeningRange(Happening happening, uint8_t number);
 # 103 "../../VLCBlib_PIC\\event_producer.h"
 extern EventState APP_GetEventState(Happening h);
+
+
+
+
+
+
+extern EventState APP_GetEventIndexState(uint8_t tableIndex);
 # 11 "../main.c" 2
 
 # 1 "../../VLCBlib_PIC\\event_acknowledge.h" 1
@@ -38972,10 +38979,13 @@ typedef int ptrdiff_t;
 extern void initInputs(void);
 extern void inputScan(void);
 
-extern uint8_t outputState[32];
+extern uint8_t outputState[(8*4)];
 # 24 "../main.c" 2
 
 # 1 "../canpan3Events.h" 1
+# 40 "../canpan3Events.h"
+extern void initEvents(void);
+extern void doFlash(void);
 # 25 "../main.c" 2
 # 92 "../main.c"
 void __init(void);
@@ -38998,14 +39008,12 @@ extern void processOutputs(void);
 
 
 
-
 static TickValue startTime;
 static uint8_t started;
 TickValue lastServoStartTime;
 static TickValue lastInputScanTime;
 static TickValue lastActionPollTime;
-
-static uint8_t io;
+static TickValue flashTime;
 
 const Service * const services[] = {
     &canService,
@@ -39050,7 +39058,7 @@ void setup(void) {
 
 
     transport = &canTransport;
-# 175 "../main.c"
+# 173 "../main.c"
     WPUA = 0b00001000;
     WPUB = 0;
     WPUC = 0;
@@ -39059,8 +39067,14 @@ void setup(void) {
     ANSELC = 0x00;
 
 
+    initEvents();
     initOutputs();
     initInputs();
+
+
+
+
+
 
 
     (INTCON0bits.GIE = 1);
@@ -39069,6 +39083,7 @@ void setup(void) {
     lastServoStartTime.val = startTime.val;
     lastInputScanTime.val = startTime.val;
     lastActionPollTime.val = startTime.val;
+    flashTime.val = startTime.val;
 
     started = FALSE;
 
@@ -39096,9 +39111,14 @@ void loop(void) {
             inputScan();
             lastInputScanTime.val = tickGet();
         }
+
+        if ((tickGet() - flashTime.val) > 2*(62500/1000)) {
+            doFlash();
+            flashTime.val = tickGet();
+        }
     }
 }
-# 235 "../main.c"
+# 245 "../main.c"
 ValidTime APP_isSuitableTimeToWriteFlash(void){
     return GOOD_TIME;
 }
@@ -39115,18 +39135,4 @@ Processed APP_preProcessMessage(Message * m) {
 
 Processed APP_postProcessMessage(Message * m) {
     return NOT_PROCESSED;
-}
-
-
-
-
-EventState APP_GetEventState(Happening h) {
-    uint8_t flags;
-    uint8_t happeningIndex;
-    Boolean disable_off;
-
-
-
-    return outputState[io]?EVENT_ON:EVENT_OFF;
-
 }

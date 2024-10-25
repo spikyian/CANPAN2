@@ -121,7 +121,7 @@ void inputScan(void) {
     for (i=0; i<NUM_BUTTON_ROWS; i++) {
         if (diff & (1 << i)) {
             // has this particular switch changed?
-            onOff = row & (1 << i);
+            onOff = !!(row & (1 << i));
             buttonNo = column*NUM_BUTTON_ROWS + i;
             tableIndex = findEventForSwitch(buttonNo);
             if (tableIndex != NO_INDEX) {

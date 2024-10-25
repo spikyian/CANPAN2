@@ -3819,8 +3819,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 3246 ]
 {
 "140
-[; ;../canpan3Events.c: 140:         flags = evs[4 + ledNo/8] & ((1 << ledNo)%8);
-[e = _flags -> & -> *U + &U _evs * -> -> + -> 4 `i / -> _ledNo `i -> 8 `i `ui `ux -> -> # *U &U _evs `ui `ux `i % << -> 1 `i -> _ledNo `i -> 8 `i `uc ]
+[; ;../canpan3Events.c: 140:         flags = evs[4 + ledNo/8] & (1 << (ledNo%8));
+[e = _flags -> & -> *U + &U _evs * -> -> + -> 4 `i / -> _ledNo `i -> 8 `i `ui `ux -> -> # *U &U _evs `ui `ux `i << -> 1 `i % -> _ledNo `i -> 8 `i `uc ]
 "141
 [; ;../canpan3Events.c: 141:         if (flags) {
 [e $ ! != -> _flags `i -> 0 `i 3249  ]

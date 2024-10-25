@@ -38875,6 +38875,13 @@ extern Boolean sendProducedEvent(Happening h, EventState state);
 extern void deleteHappeningRange(Happening happening, uint8_t number);
 # 103 "../../VLCBlib_PIC/event_producer.h"
 extern EventState APP_GetEventState(Happening h);
+
+
+
+
+
+
+extern EventState APP_GetEventIndexState(uint8_t tableIndex);
 # 140 "../../VLCBlib_PIC/mns.c" 2
 
 Boolean sendProducedEvent(Happening happening, EventState onOff);
