@@ -38876,9 +38876,17 @@ void __attribute__((picinterrupt(("irq(27), base(0x900)")))) processOutputs(void
 
 
 
-        while (SPI1CON2bits.BUSY)
+
+
+
+        while (! SPI1STATUSbits.TXBE)
             ;
-# 173 "../canpan3Outputs.c"
+
+
+
+
+
+
         switch (current_row) {
             case 0:
                 LATBbits.LATB4 = 1;

@@ -38799,11 +38799,65 @@ typedef struct {
 } Event;
 # 42 "../canpan3Inputs.c" 2
 
+# 1 "../../VLCBlib_PIC\\timedResponse.h" 1
+# 86 "../../VLCBlib_PIC\\timedResponse.h"
+typedef enum {
+    TIMED_RESPONSE_RESULT_FINISHED,
+    TIMED_RESPONSE_RESULT_RETRY,
+    TIMED_RESPONSE_RESULT_NEXT
+} TimedResponseResult;
+
+
+
+
+
+typedef TimedResponseResult (* TimedResponseCallback)(uint8_t type, const Service * service, uint8_t step);
+
+
+
+
+extern void initTimedResponse(void);
+
+
+
+
+
+
+
+extern void startTimedResponse(uint8_t type, uint8_t serviceIndex, TimedResponseResult (*callback)(uint8_t type, uint8_t si, uint8_t step));
+
+
+
+
+
+extern void pollTimedResponse(void);
+# 43 "../canpan3Inputs.c" 2
+
+# 1 "../../VLCBlib_PIC\\event_producer.h" 1
+# 79 "../../VLCBlib_PIC\\event_producer.h"
+typedef uint8_t Happening;
+
+
+extern const Service eventProducerService;
+# 93 "../../VLCBlib_PIC\\event_producer.h"
+extern Boolean sendProducedEvent(Happening h, EventState state);
+extern void deleteHappeningRange(Happening happening, uint8_t number);
+# 103 "../../VLCBlib_PIC\\event_producer.h"
+extern EventState APP_GetEventState(Happening h);
+
+
+
+
+
+
+extern EventState APP_GetEventIndexState(uint8_t tableIndex);
+# 44 "../canpan3Inputs.c" 2
+
 # 1 "../canpan3Events.h" 1
 # 40 "../canpan3Events.h"
 extern void initEvents(void);
 extern void doFlash(void);
-# 43 "../canpan3Inputs.c" 2
+# 45 "../canpan3Inputs.c" 2
 
 
 static uint8_t buttonState[8];
@@ -38820,6 +38874,8 @@ static uint8_t ready;
 
 void driveColumn(void);
 uint8_t findEventForSwitch(uint8_t buttonNo);
+TimedResponseResult sodTRCallback(uint8_t type, uint8_t serviceIndex, uint8_t step);
+void canpanSendProducedEvent(uint8_t tableIndex, uint8_t onOff, uint8_t sv);
 
 
 
@@ -38885,7 +38941,7 @@ void inputScan(void) {
     for (i=0; i<4; i++) {
         if (diff & (1 << i)) {
 
-            onOff = row & (1 << i);
+            onOff = !!(row & (1 << i));
             buttonNo = column*4 + i;
             tableIndex = findEventForSwitch(buttonNo);
             if (tableIndex != 0xff) {
@@ -38932,30 +38988,15 @@ void inputScan(void) {
                             break;
                     }
                     if (ready) {
-                        producedEventNN.word = getNN(tableIndex);
-                        producedEventEN.word = getEN(tableIndex);
-                        if ((sv & 0b100000) || (producedEventNN.word == 0)) {
 
-                            if (onOff == EVENT_ON) {
-                                opc = OPC_ASON;
-                            } else {
-                                opc = OPC_ASOF;
-                            }
-                            producedEventNN.word = nn.word;
-                        } else {
 
-                            if (onOff == EVENT_ON) {
-                                opc = OPC_ACON;
-                            } else {
-                                opc = OPC_ACOF;
-                            }
-                        }
                         if (mode_flags & 1) {
+                            producedEventNN.word = getNN(tableIndex);
+                            producedEventEN.word = getEN(tableIndex);
                             sendMessage5(OPC_ARON1, producedEventNN.bytes.hi, producedEventNN.bytes.lo,
                                     producedEventEN.bytes.hi, producedEventEN.bytes.lo, buttonNo+1);
                         } else {
-                            sendMessage4(opc, producedEventNN.bytes.hi, producedEventNN.bytes.lo,
-                                    producedEventEN.bytes.hi, producedEventEN.bytes.lo);
+                            canpanSendProducedEvent(tableIndex, onOff, sv);
                         }
                     }
                 }
@@ -38975,6 +39016,34 @@ void inputScan(void) {
     driveColumn();
 }
 
+void canpanSendProducedEvent(uint8_t tableIndex, uint8_t onOff, uint8_t sv) {
+    uint8_t opc;
+    Word producedEventNN;
+    Word producedEventEN;
+
+    producedEventNN.word = getNN(tableIndex);
+    producedEventEN.word = getEN(tableIndex);
+    if ((sv & 0b100000) || (producedEventNN.word == 0)) {
+
+        if (onOff == EVENT_ON) {
+            opc = OPC_ASON;
+        } else {
+            opc = OPC_ASOF;
+        }
+        producedEventNN.word = nn.word;
+    } else {
+
+        if (onOff == EVENT_ON) {
+            opc = OPC_ACON;
+        } else {
+            opc = OPC_ACOF;
+        }
+    }
+
+    sendMessage4(opc, producedEventNN.bytes.hi, producedEventNN.bytes.lo,
+            producedEventEN.bytes.hi, producedEventEN.bytes.lo);
+}
+
 void driveColumn(void) {
     LATAbits.LATA0 = (column & 0x01)?1:0;
     LATAbits.LATA1 = (column & 0x02)?1:0;
@@ -38983,7 +39052,7 @@ void driveColumn(void) {
 
 uint8_t findEventForSwitch(uint8_t switchNo) {
     uint8_t tableIndex;
-    for (tableIndex=0; tableIndex < 255; tableIndex++) {
+    for (tableIndex=0; tableIndex < 254; tableIndex++) {
         getEVs(tableIndex);
         if (evs[0] == 1) {
             if (evs[1] == switchNo+1) {
@@ -38992,4 +39061,29 @@ uint8_t findEventForSwitch(uint8_t switchNo) {
         }
     }
     return 0xff;
+}
+
+
+
+
+
+
+
+void doSoD(void) {
+    startTimedResponse(1, findServiceIndex(SERVICE_ID_PRODUCER), sodTRCallback);
+}
+# 271 "../canpan3Inputs.c"
+TimedResponseResult sodTRCallback(uint8_t type, uint8_t serviceIndex, uint8_t step) {
+    EventState value;
+
+    if (step >= 254) {
+        return TIMED_RESPONSE_RESULT_FINISHED;
+    }
+
+    value = APP_GetEventIndexState(step);
+
+    if (value != EVENT_UNKNOWN) {
+        canpanSendProducedEvent(step, value, evs[2]);
+    }
+    return TIMED_RESPONSE_RESULT_NEXT;
 }

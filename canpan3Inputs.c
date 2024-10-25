@@ -40,6 +40,8 @@
 #include "module.h"
 #include "mns.h"
 #include "event_teach.h"
+#include "timedResponse.h"
+#include "event_producer.h"
 #include "canpan3Events.h"
 
 static uint8_t buttonState[NUM_BUTTON_COLUMNS];
@@ -56,6 +58,8 @@ static uint8_t ready;   /// indicates if the code has had chance to read all the
 // forward declarations
 void driveColumn(void);
 uint8_t findEventForSwitch(uint8_t buttonNo);
+TimedResponseResult sodTRCallback(uint8_t type, uint8_t serviceIndex, uint8_t step);
+void canpanSendProducedEvent(uint8_t tableIndex, uint8_t onOff, uint8_t sv);
 
 /**
  * Initialise the input (buttons) circuitry.
@@ -168,30 +172,15 @@ void inputScan(void) {
                             break;
                     }
                     if (ready) {
-                        producedEventNN.word = getNN(tableIndex);
-                        producedEventEN.word = getEN(tableIndex);
-                        if ((sv & 0b100000) || (producedEventNN.word == 0)) {
-                            // Short event
-                            if (onOff == EVENT_ON) {
-                                opc = OPC_ASON;
-                            } else {
-                                opc = OPC_ASOF;
-                            }
-                            producedEventNN.word = nn.word;
-                        } else {
-                            // Long event
-                            if (onOff == EVENT_ON) {
-                                opc = OPC_ACON;
-                            } else {
-                                opc = OPC_ACOF;
-                            }
-                        }
+                        // send the event.
+                        // when in teach mode we actually send a ARON1 instead of the event
                         if (mode_flags & FLAG_MODE_LEARN) {
+                            producedEventNN.word = getNN(tableIndex);
+                            producedEventEN.word = getEN(tableIndex);
                             sendMessage5(OPC_ARON1, producedEventNN.bytes.hi, producedEventNN.bytes.lo, 
                                     producedEventEN.bytes.hi, producedEventEN.bytes.lo, buttonNo+1);
-                        } else {
-                            sendMessage4(opc, producedEventNN.bytes.hi, producedEventNN.bytes.lo, 
-                                    producedEventEN.bytes.hi, producedEventEN.bytes.lo);
+                        } else {    
+                            canpanSendProducedEvent(tableIndex, onOff, sv);
                         }
                     }
                 }
@@ -211,6 +200,34 @@ void inputScan(void) {
     driveColumn();
 }
 
+void canpanSendProducedEvent(uint8_t tableIndex, uint8_t onOff, uint8_t sv) {
+    uint8_t opc;
+    Word producedEventNN;
+    Word producedEventEN;
+    
+    producedEventNN.word = getNN(tableIndex);
+    producedEventEN.word = getEN(tableIndex);
+    if ((sv & 0b100000) || (producedEventNN.word == 0)) {
+        // Short event
+        if (onOff == EVENT_ON) {
+            opc = OPC_ASON;
+        } else {
+            opc = OPC_ASOF;
+        }
+        producedEventNN.word = nn.word;
+    } else {
+        // Long event
+        if (onOff == EVENT_ON) {
+            opc = OPC_ACON;
+        } else {
+            opc = OPC_ACOF;
+        }
+    }
+
+    sendMessage4(opc, producedEventNN.bytes.hi, producedEventNN.bytes.lo, 
+            producedEventEN.bytes.hi, producedEventEN.bytes.lo);
+}
+
 void driveColumn(void) {
     LATAbits.LATA0 = (column & 0x01)?1:0;
     LATAbits.LATA1 = (column & 0x02)?1:0;
@@ -228,4 +245,40 @@ uint8_t findEventForSwitch(uint8_t switchNo) {
         }
     }
     return NO_INDEX;
+}
+
+/**
+ * Do the start of day by sending the current state of all produced events.
+ * Use TimedResponse so we don't overload the bus.
+ * This sets things up so that timedResponse will call back into APP_doSOD() 
+ * whenever another response is required.
+ */
+void doSoD(void) {
+    startTimedResponse(TIMED_RESPONSE_SOD, findServiceIndex(SERVICE_ID_PRODUCER), sodTRCallback);
+}
+
+/**
+ * Send one response CBUS message and increment the step counter ready for the next call.
+ * 
+ * Here I use step 0 to 254 to go through all possible events.
+ *  
+ * This is the callback used by the start of day responses.
+ * @param type always set to TIMED_RESPONSE_SOD
+ * @param serviceIndex indicates the service requesting the responses
+ * @param step loops through each event tableIndex
+ * @return whether all of the responses have been sent yet.
+ */
+TimedResponseResult sodTRCallback(uint8_t type, uint8_t serviceIndex, uint8_t step) {
+    EventState value;
+
+    if (step >= NUM_EVENTS) {
+        return TIMED_RESPONSE_RESULT_FINISHED;
+    }
+    // The step is used to index through the events 
+    value = APP_GetEventIndexState(step);
+
+    if (value != EVENT_UNKNOWN) {
+        canpanSendProducedEvent(step, value, evs[EV_SWITCHSV]);
+    }
+    return TIMED_RESPONSE_RESULT_NEXT;
 }

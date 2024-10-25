@@ -38978,6 +38978,7 @@ typedef int ptrdiff_t;
 # 40 "../canpan3Inputs.h"
 extern void initInputs(void);
 extern void inputScan(void);
+extern void doSoD(void);
 
 extern uint8_t outputState[(8*4)];
 # 24 "../main.c" 2
@@ -38987,7 +38988,7 @@ extern uint8_t outputState[(8*4)];
 extern void initEvents(void);
 extern void doFlash(void);
 # 25 "../main.c" 2
-# 92 "../main.c"
+# 109 "../main.c"
 void __init(void);
 uint8_t checkCBUS( void);
 void ISRHigh(void);
@@ -39058,7 +39059,7 @@ void setup(void) {
 
 
     transport = &canTransport;
-# 173 "../main.c"
+# 190 "../main.c"
     WPUA = 0b00001000;
     WPUB = 0;
     WPUC = 0;
@@ -39118,7 +39119,7 @@ void loop(void) {
         }
     }
 }
-# 245 "../main.c"
+# 262 "../main.c"
 ValidTime APP_isSuitableTimeToWriteFlash(void){
     return GOOD_TIME;
 }

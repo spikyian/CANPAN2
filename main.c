@@ -87,6 +87,23 @@
  * This is the main for the CANPAN2 module.
  */
 
+// TODOs
+// * Startup NV option SENDALL
+// * Startup NV option ALLON
+// * Receipt of event on a toggle switch to update state (Toggle with monitor)
+// * Sending SoD event
+// * On startup restore last state NV1=0
+//
+// Once CANPAN compatible version is released then additional enhancements
+// * Add NVs for LED brightness control
+// * Add additional timer to turn a cathode on late or turn off early according to brightness
+// * Dual button set/reset for 1 event
+
+/* temp notes
+ * Line 2408 check NVstart (NV1)
+ * ALLON sets all taught produced events to ON
+ * 
+ */
 
 // forward declarations
 void __init(void);

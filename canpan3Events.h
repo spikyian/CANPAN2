@@ -44,6 +44,7 @@ extern void doFlash(void);
 #define CANPAN_CONSUMED 0
 #define CANPAN_PRODUCED 1
 #define CANPAN_SOD      2
+#define CANPAN_SELF_SOD 3
 // Switch inputs EVs
 #define EV_TYPE         0
 #define EV_SWITCHNO     1

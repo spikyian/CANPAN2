@@ -57,13 +57,13 @@
 // EVENT TEACH SERVICE
 //
 //
-#define EVENT_TABLE_WIDTH   10  // This the the width of the table - not the 
+#define EVENT_TABLE_WIDTH   13  // This the the width of the table - not the 
                                 // number of EVs per event as multiple rows in
                                 // the table can be used to store an event
-#define NUM_EVENTS          255  // The number of rows in the event table. The
+#define NUM_EVENTS          254 // The number of rows in the event table. The
                                 // actual number of events may be less than this
                                 // if any events use more the 1 row.
-#define EVperEVT            20  // number of EVs per event
+#define EVperEVT            13  // number of EVs per event
 #define EV_FILL             0
 #define NO_ACTION           0
 
@@ -113,8 +113,8 @@
 #define PARAM_MANU              MANU_MERG
 
 #define PARAM_MODULE_ID         MTYP_CANPAN
-#define PARAM_MAJOR_VERSION     5
-#define PARAM_MINOR_VERSION     'a'
+#define PARAM_MAJOR_VERSION     1
+#define PARAM_MINOR_VERSION     'y'
 #define PARAM_BUILD_VERSION     1
 // Module name - must be 7 characters
 #define NAME    "PAN    "

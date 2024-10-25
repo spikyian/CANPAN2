@@ -38822,6 +38822,15 @@ extern void clearLed(uint8_t no);
 extern uint8_t testLed(uint8_t no);
 # 44 "../canpan3Events.c" 2
 
+# 1 "../canpan3Inputs.h" 1
+# 40 "../canpan3Inputs.h"
+extern void initInputs(void);
+extern void inputScan(void);
+extern void doSoD(void);
+
+extern uint8_t outputState[(8*4)];
+# 45 "../canpan3Events.c" 2
+
 
 static uint8_t flashToggle;
 
@@ -38854,7 +38863,7 @@ void initEvents(void) {
 uint8_t APP_addEvent(uint16_t nodeNumber, uint16_t eventNumber, uint8_t evNum, uint8_t evVal, Boolean forceOwnNN) {
     return addEvent(nodeNumber, eventNumber, evNum, evVal, forceOwnNN);
 }
-# 85 "../canpan3Events.c"
+# 86 "../canpan3Events.c"
 uint8_t APP_isConsumedEvent(uint8_t tableIndex) {
     int16_t ev;
 
@@ -38864,6 +38873,9 @@ uint8_t APP_isConsumedEvent(uint8_t tableIndex) {
         return 0;
     }
     if (ev == 0) {
+        return 1;
+    }
+    if (ev == 2) {
         return 1;
     }
     ev = getEv(tableIndex, 2);
@@ -38887,7 +38899,7 @@ uint8_t APP_isProducededEvent(uint8_t tableIndex) {
     }
     return 0;
 }
-# 126 "../canpan3Events.c"
+# 130 "../canpan3Events.c"
 Processed APP_processConsumedEvent(uint8_t tableIndex, Message *m) {
     uint8_t onOff;
     uint8_t ledMode;
@@ -38895,9 +38907,13 @@ Processed APP_processConsumedEvent(uint8_t tableIndex, Message *m) {
     uint8_t flags;
     uint8_t polarity;
 
-    onOff = m->opc & 1;
+    onOff = !(m->opc & 1);
     if (getEVs(tableIndex)) {
 
+        return PROCESSED;
+    }
+    if (onOff && (evs[0] == 2)) {
+        doSoD();
         return PROCESSED;
     }
     ledMode = evs[12];

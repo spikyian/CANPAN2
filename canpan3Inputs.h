@@ -39,5 +39,6 @@
 
 extern void initInputs(void);
 extern void inputScan(void);
+extern void doSoD(void);
 
 extern uint8_t outputState[NUM_BUTTONS];

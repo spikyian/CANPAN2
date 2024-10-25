@@ -38786,9 +38786,9 @@ void initOutputs(void) {
         outputState[i] = 0;
     }
     for (i=0; i< 4; i++) {
-        ledMatrix[i] = 0xAA;
+        ledMatrix[i] = 0;
     }
-    TRISCbits.TRISC6 = 0;
+     TRISCbits.TRISC6 = 0;
     TRISCbits.TRISC7 = 0;
     TRISBbits.TRISB4 = 0;
     TRISBbits.TRISB5 = 0;
@@ -38813,7 +38813,7 @@ void initOutputs(void) {
     LATCbits.LATC5 = 0;
 
     SPI1CON0 = 0x03;
-    SPI1CON1 = 0x45;
+    SPI1CON1 = 0x44;
     SPI1CON2 = 0x02;
 
     SPI1TCNTH=0;
@@ -38825,8 +38825,8 @@ void initOutputs(void) {
 
 
     RC5PPS = 0x32;
-    RC3PPS = 0x34;
-
+    RC3PPS = 0x31;
+    RC4PPS = 0x33;
 
 
     SPI1CON0bits.EN = 1;
@@ -38852,7 +38852,6 @@ void __attribute__((picinterrupt(("irq(27), base(0x900)")))) processOutputs(void
 
 {
     uint8_t i;
-    uint8_t anodes;
     uint8_t cathodes;
 
     if (PIR3bits.TMR2IF) {
@@ -38877,27 +38876,29 @@ void __attribute__((picinterrupt(("irq(27), base(0x900)")))) processOutputs(void
 
 
 
-        while (SPI1CON2bits.BUSY)
+
+
+
+        while (! SPI1STATUSbits.TXBE)
             ;
-# 168 "../canpan3Outputs.c"
-        LATCbits.LATC4 = 1;
-        __nop();
-        LATCbits.LATC4 = 0;
 
 
-        anodes = (uint8_t)(1 << (current_row));
-        switch (anodes) {
+
+
+
+
+        switch (current_row) {
             case 0:
-                LATBbits.LATB4 = 0;
+                LATBbits.LATB4 = 1;
                 break;
             case 1:
-                LATBbits.LATB5 = 0;
+                LATBbits.LATB5 = 1;
                 break;
             case 2:
-                LATCbits.LATC6 = 0;
+                LATCbits.LATC6 = 1;
                 break;
             case 3:
-                LATCbits.LATC7 = 0;
+                LATCbits.LATC7 = 1;
                 break;
         }
 

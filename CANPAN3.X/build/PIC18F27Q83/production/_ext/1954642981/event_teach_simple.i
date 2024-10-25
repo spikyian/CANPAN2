@@ -39050,7 +39050,7 @@ static Processed teachCheckLen(Message * m, uint8_t needed, uint8_t learn) {
 
 static uint8_t teachGetESDdata(uint8_t id) {
     switch (id) {
-        case 1: return 255;
+        case 1: return 254;
         case 2: return 13;
         default: return 0;
     }
@@ -39066,7 +39066,7 @@ static DiagnosticVal * teachGetDiagnostic(uint8_t index) {
 static void clearAllEvents(void) {
     uint8_t tableIndex;
     uint8_t i;
-    for (tableIndex=0; tableIndex<255; tableIndex++) {
+    for (tableIndex=0; tableIndex<254; tableIndex++) {
         removeTableEntry(tableIndex);
     }
 }
@@ -39079,7 +39079,7 @@ static void doNnevn(void) {
 
     uint8_t count = 0;
     uint8_t i;
-    for (i=0; i<255; i++) {
+    for (i=0; i<254; i++) {
         uint16_t eventNumber;
         eventNumber = getEN(i);
         if (eventNumber == 0) {
@@ -39101,7 +39101,7 @@ static void doNerd(void) {
 TimedResponseResult nerdCallback(uint8_t type, uint8_t serviceIndex, uint8_t step){
     Word nodeNumber, eventNumber;
 
-    if (step >= 255) {
+    if (step >= 254) {
         return TIMED_RESPONSE_RESULT_FINISHED;
     }
 
@@ -39126,7 +39126,7 @@ static void doNenrd(uint8_t index) {
 
     tableIndex = evtIdxToTableIndex(index);
 
-    if (tableIndex >= 255) {
+    if (tableIndex >= 254) {
         sendMessage3(OPC_CMDERR, nn.bytes.hi, nn.bytes.lo, CMDERR_INV_EN_IDX);
 
                 sendMessage5(OPC_GRSP, nn.bytes.hi, nn.bytes.lo, OPC_NENRD, SERVICE_ID_OLD_TEACH, CMDERR_INV_EN_IDX);
@@ -39148,7 +39148,7 @@ static void doRqevn(void) {
 
     uint8_t count = 0;
     uint8_t i;
-    for (i=0; i<255; i++) {
+    for (i=0; i<254; i++) {
         uint16_t eventNumber;
         eventNumber = getEN(i);
         if (eventNumber != 0) {
@@ -39211,7 +39211,7 @@ static void doReval(uint8_t enNum, uint8_t evNum) {
     uint8_t tableIndex = evtIdxToTableIndex(enNum);
     int evVal;
 
-    if (tableIndex >= 255) {
+    if (tableIndex >= 254) {
         sendMessage3(OPC_CMDERR, nn.bytes.hi, nn.bytes.lo, CMDERR_INV_EV_IDX);
         return;
     }
@@ -39368,7 +39368,7 @@ uint8_t addEvent(uint16_t nodeNumber, uint16_t eventNumber, uint8_t evNum, uint8
     if (tableIndex == 0xff) {
         error = 1;
 
-        for (tableIndex=0; tableIndex<255; tableIndex++) {
+        for (tableIndex=0; tableIndex<254; tableIndex++) {
             uint16_t en = getEN(tableIndex);
             if (en == 0) {
                 uint8_t e;
@@ -39405,7 +39405,7 @@ uint8_t addEvent(uint16_t nodeNumber, uint16_t eventNumber, uint8_t evNum, uint8
 # 769 "../../VLCBlib_PIC/event_teach_simple.c"
 uint8_t findEvent(uint16_t nodeNumber, uint16_t eventNumber) {
     uint8_t tableIndex;
-    for (tableIndex=0; tableIndex < 255; tableIndex++) {
+    for (tableIndex=0; tableIndex < 254; tableIndex++) {
         uint16_t b = getEN(tableIndex);
         if (b == eventNumber) {
             b = getNN(tableIndex);
@@ -39421,7 +39421,7 @@ uint8_t writeEv(uint8_t tableIndex, uint8_t evNum, uint8_t evVal) {
     if (evNum >= 13) {
         return CMDERR_INV_EV_IDX;
     }
-    if (tableIndex >= 255) {
+    if (tableIndex >= 254) {
         return CMDERR_INV_EN_IDX;
     }
 
@@ -39431,7 +39431,7 @@ uint8_t writeEv(uint8_t tableIndex, uint8_t evNum, uint8_t evVal) {
 }
 # 811 "../../VLCBlib_PIC/event_teach_simple.c"
 int16_t getEv(uint8_t tableIndex, uint8_t evNum) {
-    if (tableIndex >= 255) {
+    if (tableIndex >= 254) {
         return CMDERR_INV_EN_IDX;
     }
     if (evNum >= 13) {
@@ -39463,7 +39463,7 @@ uint8_t evs[13];
 uint8_t getEVs(uint8_t tableIndex) {
 
     uint8_t evIdx;
-    if (tableIndex >= 255) {
+    if (tableIndex >= 254) {
         return CMDERR_INV_EN_IDX;
     }
 
@@ -39477,7 +39477,7 @@ uint16_t getNN(uint8_t tableIndex) {
     uint16_t hi;
     uint16_t lo;
     uint8_t flags;
-    if (tableIndex >= 255) {
+    if (tableIndex >= 254) {
         return CMDERR_INV_EN_IDX;
     }
 

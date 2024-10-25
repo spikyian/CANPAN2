@@ -38855,6 +38855,7 @@ static Processed consumerProcessMessage(Message *m) {
         case OPC_ACON2:
         case OPC_ACON3:
 
+            break;
         case OPC_ASOF:
 
         case OPC_ASOF1:
@@ -38909,7 +38910,7 @@ static DiagnosticVal * consumerGetDiagnostic(uint8_t index) {
     }
     return &(consumerDiagnostics[index-1]);
 }
-# 194 "../../VLCBlib_PIC/event_consumer_simple.c"
+# 195 "../../VLCBlib_PIC/event_consumer_simple.c"
 static uint8_t consumerEsdData(uint8_t index) {
     switch (index){
         case 0:

@@ -38823,12 +38823,12 @@ __asm("db 0");
 # 142 "../../VLCBlib_PIC/boot.c"
 const uint8_t paramBlock[] __attribute__((address(0x820))) = {
     MANU_MERG,
-    'a',
+    'y',
     MTYP_CANPAN,
-    255,
+    254,
     13,
     1,
-    5,
+    1,
     0x08
 
             |0x01
@@ -38862,8 +38862,8 @@ const uint8_t paramBlock[] __attribute__((address(0x820))) = {
     0x08,
     0,
     0,
-    ((MANU_MERG+'a'+MTYP_CANPAN+255 +13 +1 +5 +(8) +(8)+CPUM_MICROCHIP+1 +(20)+(0x48)+(0x08)+1 +2 +PB_CAN+P18F27Q83)&0xFF),
-    ((MANU_MERG+'a'+MTYP_CANPAN+255 +13 +1 +5 +(8) +(8)+CPUM_MICROCHIP+1 +(20)+(0x48)+(0x08)+1 +2 +PB_CAN+P18F27Q83)>>8)
+    ((MANU_MERG+'y'+MTYP_CANPAN+254 +13 +1 +1 +(8) +(8)+CPUM_MICROCHIP+1 +(20)+(0x48)+(0x08)+1 +2 +PB_CAN+P18F27Q83)&0xFF),
+    ((MANU_MERG+'y'+MTYP_CANPAN+254 +13 +1 +1 +(8) +(8)+CPUM_MICROCHIP+1 +(20)+(0x48)+(0x08)+1 +2 +PB_CAN+P18F27Q83)>>8)
 };
 # 194 "../../VLCBlib_PIC/boot.c"
 static Processed bootProcessMessage(Message * m) {

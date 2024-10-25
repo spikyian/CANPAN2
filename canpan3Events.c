@@ -42,6 +42,7 @@
 #include "mns.h"
 #include "canpan3Events.h"
 #include "canpan3Outputs.h"
+#include "canpan3Inputs.h"
 
 static uint8_t flashToggle;
 
@@ -90,14 +91,17 @@ uint8_t APP_isConsumedEvent(uint8_t tableIndex) {
         // TODO If receive an event for a Toggle switch then update our outputState[]
         return 0;
     }
-    if (ev == CANPAN_CONSUMED) {
+    if (ev == CANPAN_CONSUMED) {    // normal consumed event
+        return 1;
+    }
+    if ((ev == CANPAN_SOD)||(ev == CANPAN_SELF_SOD)) {    // SoD consumed event
         return 1;
     }
     ev = getEv(tableIndex, EV_SWITCHSV);
     if (ev < 0) {
         return 0;
     }
-    return (ev & SV_COE);
+    return (ev & SV_COE);       // self consumed event
 }
 /**
  * The CANPAN represents the event type in EV#1. 
@@ -109,7 +113,7 @@ uint8_t APP_isProducededEvent(uint8_t tableIndex) {
     int16_t ev;
     
     ev = getEv(tableIndex, EV_TYPE);
-    if (ev == CANPAN_PRODUCED) {
+    if ((ev == CANPAN_PRODUCED) || (ev == CANPAN_SELF_SOD)) {
         return 1;
     }
     return 0;
@@ -133,6 +137,10 @@ Processed APP_processConsumedEvent(uint8_t tableIndex, Message *m) {
     onOff = !(m->opc & 1);
     if (getEVs(tableIndex)) {   
         // something went wrong
+        return PROCESSED;
+    }
+    if (onOff && (evs[EV_TYPE] == CANPAN_SOD)) {
+        doSoD();
         return PROCESSED;
     }
     ledMode = evs[EV_LEDMODE];

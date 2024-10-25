@@ -143,31 +143,18 @@ void __interrupt(irq(IRQ_TMR2), base(IVT_BASE)) processOutputs(void)
         
         SPI1TXB = cathodes; // do the write and send the data
 
-        // wait for data to be sent
+        // wait for data to be sent and latched to form the anode outputs
         // This takes quite a few cycles but we have to ensure the cathodes have the
         // right data before turning on the anodes otherwise we don't get a clean display.
-        while (SPI1CON2bits.BUSY)
+        //while (SPI1CON2bits.BUSY)
+        //while (! SPI1INTFbits.SRMTIF)
+        //while (SPI1INTFbits.TCZIF)
+        while (! SPI1STATUSbits.TXBE)
             ;
         
-/*        for (i=0; i<8; i++) {
-            // set up the data
-            if (cathodes & (1 << i)) {
-                LATCbits.LATC5 = 1;
-            } else {
-                LATCbits.LATC5 = 0;
-            }
-            // pulse the clock - must be more than 20ns
-            LATCbits.LATC3 = 1;
-            NOP();
-            NOP();
-            NOP();
-            LATCbits.LATC3 = 0;
-        }
- */
-        /*
-        LATCbits.LATC4 = 1; // latch the data clocked in - must be more than 20ns at 16Mhz crystal and 4xPLL this should be 62.5ns
-        NOP();
-        LATCbits.LATC4 = 0;*/
+        // It can take up to 365ns for the TLC5917 outputs to output correct data (LE to OUT)
+        // This is 5 instruction cycles (5 * 62.5 ns)
+        // following code before enabling the cathodes is more than 5 instructions
 
         // turn the relevant anode driver on
         switch (current_row) {
@@ -187,7 +174,7 @@ void __interrupt(irq(IRQ_TMR2), base(IVT_BASE)) processOutputs(void)
         
         // enable the cathode driver
         LATCbits.LATC2 = 0; //OE 
-
+        // clear the timer interrupt flag ready for next timer expiry
         PIR3bits.TMR2IF = 0;
     }
 }
