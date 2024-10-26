@@ -38827,6 +38827,7 @@ extern uint8_t testLed(uint8_t no);
 extern void initInputs(void);
 extern void inputScan(void);
 extern void doSoD(void);
+extern void canpanSetAllSwitchOn(void);
 
 extern uint8_t outputState[(8*4)];
 # 45 "../canpan3Events.c" 2
@@ -38875,7 +38876,7 @@ uint8_t APP_isConsumedEvent(uint8_t tableIndex) {
     if (ev == 0) {
         return 1;
     }
-    if (ev == 2) {
+    if ((ev == 2)||(ev == 3)) {
         return 1;
     }
     ev = getEv(tableIndex, 2);
@@ -38894,7 +38895,7 @@ uint8_t APP_isProducededEvent(uint8_t tableIndex) {
     int16_t ev;
 
     ev = getEv(tableIndex, 0);
-    if (ev == 1) {
+    if ((ev == 1) || (ev == 3)) {
         return 1;
     }
     return 0;

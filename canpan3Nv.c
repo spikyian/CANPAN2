@@ -50,7 +50,7 @@ uint8_t APP_nvDefault(uint8_t index) {
         // Global NVs
         switch(index) {
             case NV_STARTUP:
-                return NV_STARTUP_SENDALL;
+                return NV_STARTUP_RESTORE;
         }
     }
     return 0;

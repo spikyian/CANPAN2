@@ -38979,6 +38979,7 @@ typedef int ptrdiff_t;
 extern void initInputs(void);
 extern void inputScan(void);
 extern void doSoD(void);
+extern void canpanSetAllSwitchOn(void);
 
 extern uint8_t outputState[(8*4)];
 # 24 "../main.c" 2
@@ -38988,7 +38989,7 @@ extern uint8_t outputState[(8*4)];
 extern void initEvents(void);
 extern void doFlash(void);
 # 25 "../main.c" 2
-# 109 "../main.c"
+# 106 "../main.c"
 void __init(void);
 uint8_t checkCBUS( void);
 void ISRHigh(void);
@@ -39057,9 +39058,11 @@ void setup(void) {
 
     uint8_t pu;
 
+    uint8_t nv;
+
 
     transport = &canTransport;
-# 190 "../main.c"
+# 189 "../main.c"
     WPUA = 0b00001000;
     WPUB = 0;
     WPUC = 0;
@@ -39088,17 +39091,22 @@ void setup(void) {
 
     started = FALSE;
 
-    switch(getNV(1)) {
-        case 0:
+    nv = (uint8_t)getNV(1);
 
-            break;
-        case 1:
-            break;
-        case 2:
+    if (nv == 0) {
 
-            break;
+
+    } else if (nv & 1) {
+
+    } else if (! (nv & 2)) {
+
+
+        canpanSetAllSwitchOn();
     }
 }
+
+
+
 
 void loop(void) {
 
@@ -39119,7 +39127,7 @@ void loop(void) {
         }
     }
 }
-# 262 "../main.c"
+# 266 "../main.c"
 ValidTime APP_isSuitableTimeToWriteFlash(void){
     return GOOD_TIME;
 }

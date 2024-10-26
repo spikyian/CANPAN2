@@ -41,6 +41,6 @@
 #define NV_STARTUP  1
 
 // The possible NV_STARTUP values
-#define NV_STARTUP_SENDALL  0
+#define NV_STARTUP_RESTORE  0
 #define NV_STARTUP_NOTHING  1
 #define NV_STARTUP_ALLON    2

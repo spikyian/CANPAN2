@@ -39016,6 +39016,16 @@ void inputScan(void) {
     driveColumn();
 }
 
+
+
+
+void canpanSetAllSwitchOn(void) {
+    uint8_t buttonNo;
+    for (buttonNo=0; buttonNo<(8*4); buttonNo++) {
+        outputState[buttonNo] = 1;
+    }
+}
+
 void canpanSendProducedEvent(uint8_t tableIndex, uint8_t onOff, uint8_t sv) {
     uint8_t opc;
     Word producedEventNN;
@@ -39072,7 +39082,7 @@ uint8_t findEventForSwitch(uint8_t switchNo) {
 void doSoD(void) {
     startTimedResponse(1, findServiceIndex(SERVICE_ID_PRODUCER), sodTRCallback);
 }
-# 271 "../canpan3Inputs.c"
+# 281 "../canpan3Inputs.c"
 TimedResponseResult sodTRCallback(uint8_t type, uint8_t serviceIndex, uint8_t step) {
     EventState value;
 

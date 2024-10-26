@@ -88,10 +88,7 @@
  */
 
 // TODOs
-// * Startup NV option SENDALL
-// * Startup NV option ALLON
 // * Receipt of event on a toggle switch to update state (Toggle with monitor)
-// * Sending SoD event
 // * On startup restore last state NV1=0
 //
 // Once CANPAN compatible version is released then additional enhancements
@@ -174,6 +171,8 @@ void setup(void) {
 #if defined(_18FXXQ83_FAMILY_)
     uint8_t pu;
 #endif
+    uint8_t nv;
+    
     // use CAN as the module's transport
     transport = &canTransport;
 
@@ -215,18 +214,23 @@ void setup(void) {
 
     started = FALSE;
     
-    switch(getNV(NV_STARTUP)) {
-        case NV_STARTUP_SENDALL:
+    nv = (uint8_t)getNV(NV_STARTUP);
+    /* This is done with bit checks as that's what the original CANPAN code did */
+    if (nv == 0) {
+        // case NV_STARTUP_RESTORE:
             // TODO
-            break;
-        case NV_STARTUP_NOTHING:
-            break;
-        case NV_STARTUP_ALLON:
-            // TODO
-            break;
+    } else if (nv & 1) {
+        // case NV_STARTUP_NOTHING:
+    } else if (! (nv & 2)) {
+        // case NV_STARTUP_ALLON:
+        // Why????
+        canpanSetAllSwitchOn();
     }
 }
 
+/**
+ * The loop code call repeatedly from VLCB.
+ */
 void loop(void) {
     // Startup delay for CBUS about 2 seconds to let other modules get powered up - ISR will be running so incoming packets processed
     if (!started && (tickTimeSince(startTime) >  TWO_SECOND)) {

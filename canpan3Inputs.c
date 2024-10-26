@@ -200,6 +200,16 @@ void inputScan(void) {
     driveColumn();
 }
 
+/**
+ * Used at initialisation if NV1 = ALLON
+ */
+void canpanSetAllSwitchOn(void) {
+    uint8_t buttonNo;
+    for (buttonNo=0; buttonNo<NUM_BUTTONS; buttonNo++) {
+        outputState[buttonNo] = 1;
+    }
+}
+
 void canpanSendProducedEvent(uint8_t tableIndex, uint8_t onOff, uint8_t sv) {
     uint8_t opc;
     Word producedEventNN;

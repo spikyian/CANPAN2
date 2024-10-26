@@ -90,7 +90,7 @@
         <targetDevice>PIC18F27Q83</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
-        <platformTool>PK5Tool</platformTool>
+        <platformTool>noID</platformTool>
         <languageToolchain>XC8</languageToolchain>
         <languageToolchainVersion>2.46</languageToolchainVersion>
         <platform>3</platform>
@@ -110,18 +110,18 @@
         <loading>
           <makeArtifact PL="../../../MPLABworkspace/CBUS_PIC_Bootloader.X"
                         CT="1"
-                        CN="PIC18F27Q83"
-                        AC="true"
+                        CN="PIC18F27Q83_canpan"
+                        AC="false"
                         BL="true"
                         WD="../../../MPLABworkspace/CBUS_PIC_Bootloader.X"
-                        BC="${MAKE}  -f Makefile CONF=PIC18F27Q83"
-                        DBC="${MAKE}  -f Makefile CONF=PIC18F27Q83 TYPE_IMAGE=DEBUG_RUN"
-                        CC="rm -rf &quot;build/PIC18F27Q83&quot; &quot;dist/PIC18F27Q83&quot;"
-                        OP="dist/PIC18F27Q83/production/CBUS_PIC_Bootloader.X.production.hex"
-                        DOP="dist/PIC18F27Q83/debug/CBUS_PIC_Bootloader.X.debug.elf"
-                        FL="dist/PIC18F27Q83/production/CBUS_PIC_Bootloader.X.production.hex"
-                        PD="dist/PIC18F27Q83/production/CBUS_PIC_Bootloader.X.production.elf"
-                        DD="dist/PIC18F27Q83/debug/CBUS_PIC_Bootloader.X.debug.elf">
+                        BC="${MAKE}  -f Makefile CONF=PIC18F27Q83_canpan"
+                        DBC="${MAKE}  -f Makefile CONF=PIC18F27Q83_canpan TYPE_IMAGE=DEBUG_RUN"
+                        CC="rm -rf &quot;build/PIC18F27Q83_canpan&quot; &quot;dist/PIC18F27Q83_canpan&quot;"
+                        OP="dist/PIC18F27Q83_canpan/production/CBUS_PIC_Bootloader.X.production.hex"
+                        DOP="dist/PIC18F27Q83_canpan/debug/CBUS_PIC_Bootloader.X.debug.elf"
+                        FL="dist/PIC18F27Q83_canpan/production/CBUS_PIC_Bootloader.X.production.hex"
+                        PD="dist/PIC18F27Q83_canpan/production/CBUS_PIC_Bootloader.X.production.elf"
+                        DD="dist/PIC18F27Q83_canpan/debug/CBUS_PIC_Bootloader.X.debug.elf">
           </makeArtifact>
           <useAlternateLoadableFile>false</useAlternateLoadableFile>
           <parseOnProdLoad>false</parseOnProdLoad>
@@ -156,7 +156,7 @@
         <property key="call-prologues" value="false"/>
         <property key="default-bitfield-type" value="true"/>
         <property key="default-char-type" value="true"/>
-        <property key="define-macros" value=""/>
+        <property key="define-macros" value="HARDWARE=MTYP_CANPanel"/>
         <property key="disable-optimizations" value="false"/>
         <property key="extra-include-directories"
                   value="..\..\VLCB-defs;..\..\VLCBlib_PIC;..\"/>
@@ -413,18 +413,18 @@
         <loading>
           <makeArtifact PL="../../../MPLABworkspace/CBUS_PIC_Bootloader.X"
                         CT="1"
-                        CN="PIC18F26K80"
+                        CN="PIC18F27Q83_canpan"
                         AC="false"
                         BL="true"
                         WD="../../../MPLABworkspace/CBUS_PIC_Bootloader.X"
-                        BC="${MAKE}  -f Makefile CONF=PIC18F26K80"
-                        DBC="${MAKE}  -f Makefile CONF=PIC18F26K80 TYPE_IMAGE=DEBUG_RUN"
-                        CC="rm -rf &quot;build/PIC18F26K80&quot; &quot;dist/PIC18F26K80&quot;"
-                        OP="dist/PIC18F26K80/production/CBUS_PIC_Bootloader.X.production.hex"
-                        DOP="dist/PIC18F26K80/debug/CBUS_PIC_Bootloader.X.debug.elf"
-                        FL="dist/PIC18F26K80/production/CBUS_PIC_Bootloader.X.production.hex"
-                        PD="dist/PIC18F26K80/production/CBUS_PIC_Bootloader.X.production.elf"
-                        DD="dist/PIC18F26K80/debug/CBUS_PIC_Bootloader.X.debug.elf">
+                        BC="${MAKE}  -f Makefile CONF=PIC18F27Q83_canpan"
+                        DBC="${MAKE}  -f Makefile CONF=PIC18F27Q83_canpan TYPE_IMAGE=DEBUG_RUN"
+                        CC="rm -rf &quot;build/PIC18F27Q83_canpan&quot; &quot;dist/PIC18F27Q83_canpan&quot;"
+                        OP="dist/PIC18F27Q83_canpan/production/CBUS_PIC_Bootloader.X.production.hex"
+                        DOP="dist/PIC18F27Q83_canpan/debug/CBUS_PIC_Bootloader.X.debug.elf"
+                        FL="dist/PIC18F27Q83_canpan/production/CBUS_PIC_Bootloader.X.production.hex"
+                        PD="dist/PIC18F27Q83_canpan/production/CBUS_PIC_Bootloader.X.production.elf"
+                        DD="dist/PIC18F27Q83_canpan/debug/CBUS_PIC_Bootloader.X.debug.elf">
           </makeArtifact>
           <useAlternateLoadableFile>false</useAlternateLoadableFile>
           <parseOnProdLoad>false</parseOnProdLoad>
@@ -459,7 +459,7 @@
         <property key="call-prologues" value="false"/>
         <property key="default-bitfield-type" value="true"/>
         <property key="default-char-type" value="true"/>
-        <property key="define-macros" value=""/>
+        <property key="define-macros" value="HARDWARE=MTYP_CANPanel"/>
         <property key="disable-optimizations" value="false"/>
         <property key="extra-include-directories"
                   value="..\..\VLCB-defs;..\..\VLCBlib_PIC;..\"/>

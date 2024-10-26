@@ -72,8 +72,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "62 ../canpan3Inputs.c
 [; ;../canpan3Inputs.c: 62: void canpanSendProducedEvent(uint8_t tableIndex, uint8_t onOff, uint8_t sv);
 [v _canpanSendProducedEvent `(v ~T0 @X0 0 ef3`uc`uc`uc ]
-"212
-[; ;../canpan3Inputs.c: 212:         if (onOff == EVENT_ON) {
+"222
+[; ;../canpan3Inputs.c: 222:         if (onOff == EVENT_ON) {
 [c E22903 255 0 1 .. ]
 [n E22903 . EVENT_UNKNOWN EVENT_OFF EVENT_ON  ]
 "126 ../../VLCBlib_PIC\mns.h
@@ -92,8 +92,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _LATAbits `VS3105 ~T0 @X0 0 e@1214 ]
 "92 ../../VLCBlib_PIC/event_teach.h
 [v _getEVs `(uc ~T0 @X0 0 ef1`uc ]
-"257 ../canpan3Inputs.c
-[; ;../canpan3Inputs.c: 257:     startTimedResponse(1, findServiceIndex(SERVICE_ID_PRODUCER), sodTRCallback);
+"267 ../canpan3Inputs.c
+[; ;../canpan3Inputs.c: 267:     startTimedResponse(1, findServiceIndex(SERVICE_ID_PRODUCER), sodTRCallback);
 [c E23132 0 1 2 .. ]
 [n E23132 . TIMED_RESPONSE_RESULT_FINISHED TIMED_RESPONSE_RESULT_RETRY TIMED_RESPONSE_RESULT_NEXT  ]
 [v F23144 `(E23132 ~T0 @X0 0 tf3`uc`uc`uc ]
@@ -103,8 +103,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "358 ../../VLCBlib_PIC/vlcb.h
 [; ;../../VLCBlib_PIC/vlcb.h: 358: extern uint8_t findServiceIndex(uint8_t id);
 [v _findServiceIndex `(uc ~T0 @X0 0 ef1`uc ]
-"257 ../canpan3Inputs.c
-[; ;../canpan3Inputs.c: 257:     startTimedResponse(1, findServiceIndex(SERVICE_ID_PRODUCER), sodTRCallback);
+"267 ../canpan3Inputs.c
+[; ;../canpan3Inputs.c: 267:     startTimedResponse(1, findServiceIndex(SERVICE_ID_PRODUCER), sodTRCallback);
 [c E22722 0 1 2 3 4 5 6 7 8 9 10 17 .. ]
 [n E22722 VlcbServiceTypes SERVICE_ID_NONE SERVICE_ID_MNS SERVICE_ID_NV SERVICE_ID_CAN SERVICE_ID_OLD_TEACH SERVICE_ID_PRODUCER SERVICE_ID_CONSUMER SERVICE_ID_TEACH SERVICE_ID_CONSUME_OWN_EVENTS SERVICE_ID_EVENTACK SERVICE_ID_BOOT SERVICE_ID_STREAMING  ]
 "61
@@ -4036,8 +4036,39 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;../canpan3Inputs.c: 201: }
 [e :UE 3239 ]
 }
-"203
-[; ;../canpan3Inputs.c: 203: void canpanSendProducedEvent(uint8_t tableIndex, uint8_t onOff, uint8_t sv) {
+"206
+[; ;../canpan3Inputs.c: 206: void canpanSetAllSwitchOn(void) {
+[v _canpanSetAllSwitchOn `(v ~T0 @X0 1 ef ]
+{
+[e :U _canpanSetAllSwitchOn ]
+[f ]
+"207
+[; ;../canpan3Inputs.c: 207:     uint8_t buttonNo;
+[v _buttonNo `uc ~T0 @X0 1 a ]
+"208
+[; ;../canpan3Inputs.c: 208:     for (buttonNo=0; buttonNo<(8*4); buttonNo++) {
+{
+[e = _buttonNo -> -> 0 `i `uc ]
+[e $ < -> _buttonNo `i * -> 8 `i -> 4 `i 3268  ]
+[e $U 3269  ]
+[e :U 3268 ]
+{
+"209
+[; ;../canpan3Inputs.c: 209:         outputState[buttonNo] = 1;
+[e = *U + &U _outputState * -> _buttonNo `ux -> -> # *U &U _outputState `ui `ux -> -> 1 `i `uc ]
+"210
+[; ;../canpan3Inputs.c: 210:     }
+}
+[e ++ _buttonNo -> -> 1 `i `uc ]
+[e $ < -> _buttonNo `i * -> 8 `i -> 4 `i 3268  ]
+[e :U 3269 ]
+}
+"211
+[; ;../canpan3Inputs.c: 211: }
+[e :UE 3267 ]
+}
+"213
+[; ;../canpan3Inputs.c: 213: void canpanSendProducedEvent(uint8_t tableIndex, uint8_t onOff, uint8_t sv) {
 [v _canpanSendProducedEvent `(v ~T0 @X0 1 ef3`uc`uc`uc ]
 {
 [e :U _canpanSendProducedEvent ]
@@ -4045,175 +4076,175 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _onOff `uc ~T0 @X0 1 r2 ]
 [v _sv `uc ~T0 @X0 1 r3 ]
 [f ]
-"204
-[; ;../canpan3Inputs.c: 204:     uint8_t opc;
-[v _opc `uc ~T0 @X0 1 a ]
-"205
-[; ;../canpan3Inputs.c: 205:     Word producedEventNN;
-[v _producedEventNN `S3222 ~T0 @X0 1 a ]
-"206
-[; ;../canpan3Inputs.c: 206:     Word producedEventEN;
-[v _producedEventEN `S3222 ~T0 @X0 1 a ]
-"208
-[; ;../canpan3Inputs.c: 208:     producedEventNN.word = getNN(tableIndex);
-[e = . _producedEventNN 1 ( _getNN (1 _tableIndex ]
-"209
-[; ;../canpan3Inputs.c: 209:     producedEventEN.word = getEN(tableIndex);
-[e = . _producedEventEN 1 ( _getEN (1 _tableIndex ]
-"210
-[; ;../canpan3Inputs.c: 210:     if ((sv & 0b100000) || (producedEventNN.word == 0)) {
-[e $ ! || != & -> _sv `i -> 32 `i -> 0 `i == -> . _producedEventNN 1 `ui -> -> 0 `i `ui 3268  ]
-{
-"212
-[; ;../canpan3Inputs.c: 212:         if (onOff == EVENT_ON) {
-[e $ ! == -> _onOff `i -> . `E22903 2 `i 3269  ]
-{
-"213
-[; ;../canpan3Inputs.c: 213:             opc = OPC_ASON;
-[e = _opc -> . `E22515 77 `uc ]
 "214
-[; ;../canpan3Inputs.c: 214:         } else {
-}
-[e $U 3270  ]
-[e :U 3269 ]
-{
+[; ;../canpan3Inputs.c: 214:     uint8_t opc;
+[v _opc `uc ~T0 @X0 1 a ]
 "215
-[; ;../canpan3Inputs.c: 215:             opc = OPC_ASOF;
-[e = _opc -> . `E22515 78 `uc ]
+[; ;../canpan3Inputs.c: 215:     Word producedEventNN;
+[v _producedEventNN `S3222 ~T0 @X0 1 a ]
 "216
-[; ;../canpan3Inputs.c: 216:         }
-}
-[e :U 3270 ]
-"217
-[; ;../canpan3Inputs.c: 217:         producedEventNN.word = nn.word;
-[e = . _producedEventNN 1 . _nn 1 ]
+[; ;../canpan3Inputs.c: 216:     Word producedEventEN;
+[v _producedEventEN `S3222 ~T0 @X0 1 a ]
 "218
-[; ;../canpan3Inputs.c: 218:     } else {
-}
-[e $U 3271  ]
-[e :U 3268 ]
-{
+[; ;../canpan3Inputs.c: 218:     producedEventNN.word = getNN(tableIndex);
+[e = . _producedEventNN 1 ( _getNN (1 _tableIndex ]
+"219
+[; ;../canpan3Inputs.c: 219:     producedEventEN.word = getEN(tableIndex);
+[e = . _producedEventEN 1 ( _getEN (1 _tableIndex ]
 "220
-[; ;../canpan3Inputs.c: 220:         if (onOff == EVENT_ON) {
-[e $ ! == -> _onOff `i -> . `E22903 2 `i 3272  ]
+[; ;../canpan3Inputs.c: 220:     if ((sv & 0b100000) || (producedEventNN.word == 0)) {
+[e $ ! || != & -> _sv `i -> 32 `i -> 0 `i == -> . _producedEventNN 1 `ui -> -> 0 `i `ui 3272  ]
 {
-"221
-[; ;../canpan3Inputs.c: 221:             opc = OPC_ACON;
-[e = _opc -> . `E22515 69 `uc ]
 "222
-[; ;../canpan3Inputs.c: 222:         } else {
-}
-[e $U 3273  ]
-[e :U 3272 ]
+[; ;../canpan3Inputs.c: 222:         if (onOff == EVENT_ON) {
+[e $ ! == -> _onOff `i -> . `E22903 2 `i 3273  ]
 {
 "223
-[; ;../canpan3Inputs.c: 223:             opc = OPC_ACOF;
-[e = _opc -> . `E22515 70 `uc ]
+[; ;../canpan3Inputs.c: 223:             opc = OPC_ASON;
+[e = _opc -> . `E22515 77 `uc ]
 "224
-[; ;../canpan3Inputs.c: 224:         }
+[; ;../canpan3Inputs.c: 224:         } else {
 }
+[e $U 3274  ]
 [e :U 3273 ]
+{
 "225
-[; ;../canpan3Inputs.c: 225:     }
+[; ;../canpan3Inputs.c: 225:             opc = OPC_ASOF;
+[e = _opc -> . `E22515 78 `uc ]
+"226
+[; ;../canpan3Inputs.c: 226:         }
 }
-[e :U 3271 ]
+[e :U 3274 ]
 "227
-[; ;../canpan3Inputs.c: 227:     sendMessage4(opc, producedEventNN.bytes.hi, producedEventNN.bytes.lo,
-[e ( _sendMessage4 (4 , , , , -> _opc `E22515 . . _producedEventNN 0 1 . . _producedEventNN 0 0 . . _producedEventEN 0 1 . . _producedEventEN 0 0 ]
-"229
-[; ;../canpan3Inputs.c: 229: }
-[e :UE 3267 ]
+[; ;../canpan3Inputs.c: 227:         producedEventNN.word = nn.word;
+[e = . _producedEventNN 1 . _nn 1 ]
+"228
+[; ;../canpan3Inputs.c: 228:     } else {
 }
+[e $U 3275  ]
+[e :U 3272 ]
+{
+"230
+[; ;../canpan3Inputs.c: 230:         if (onOff == EVENT_ON) {
+[e $ ! == -> _onOff `i -> . `E22903 2 `i 3276  ]
+{
 "231
-[; ;../canpan3Inputs.c: 231: void driveColumn(void) {
+[; ;../canpan3Inputs.c: 231:             opc = OPC_ACON;
+[e = _opc -> . `E22515 69 `uc ]
+"232
+[; ;../canpan3Inputs.c: 232:         } else {
+}
+[e $U 3277  ]
+[e :U 3276 ]
+{
+"233
+[; ;../canpan3Inputs.c: 233:             opc = OPC_ACOF;
+[e = _opc -> . `E22515 70 `uc ]
+"234
+[; ;../canpan3Inputs.c: 234:         }
+}
+[e :U 3277 ]
+"235
+[; ;../canpan3Inputs.c: 235:     }
+}
+[e :U 3275 ]
+"237
+[; ;../canpan3Inputs.c: 237:     sendMessage4(opc, producedEventNN.bytes.hi, producedEventNN.bytes.lo,
+[e ( _sendMessage4 (4 , , , , -> _opc `E22515 . . _producedEventNN 0 1 . . _producedEventNN 0 0 . . _producedEventEN 0 1 . . _producedEventEN 0 0 ]
+"239
+[; ;../canpan3Inputs.c: 239: }
+[e :UE 3271 ]
+}
+"241
+[; ;../canpan3Inputs.c: 241: void driveColumn(void) {
 [v _driveColumn `(v ~T0 @X0 1 ef ]
 {
 [e :U _driveColumn ]
 [f ]
-"232
-[; ;../canpan3Inputs.c: 232:     LATAbits.LATA0 = (column & 0x01)?1:0;
+"242
+[; ;../canpan3Inputs.c: 242:     LATAbits.LATA0 = (column & 0x01)?1:0;
 [e = . . _LATAbits 0 0 -> ? != & -> _column `i -> 1 `i -> 0 `i : -> 1 `i -> 0 `i `uc ]
-"233
-[; ;../canpan3Inputs.c: 233:     LATAbits.LATA1 = (column & 0x02)?1:0;
+"243
+[; ;../canpan3Inputs.c: 243:     LATAbits.LATA1 = (column & 0x02)?1:0;
 [e = . . _LATAbits 0 1 -> ? != & -> _column `i -> 2 `i -> 0 `i : -> 1 `i -> 0 `i `uc ]
-"234
-[; ;../canpan3Inputs.c: 234:     LATAbits.LATA2 = (column & 0x04)?1:0;
+"244
+[; ;../canpan3Inputs.c: 244:     LATAbits.LATA2 = (column & 0x04)?1:0;
 [e = . . _LATAbits 0 2 -> ? != & -> _column `i -> 4 `i -> 0 `i : -> 1 `i -> 0 `i `uc ]
-"235
-[; ;../canpan3Inputs.c: 235: }
-[e :UE 3274 ]
+"245
+[; ;../canpan3Inputs.c: 245: }
+[e :UE 3278 ]
 }
-"237
-[; ;../canpan3Inputs.c: 237: uint8_t findEventForSwitch(uint8_t switchNo) {
+"247
+[; ;../canpan3Inputs.c: 247: uint8_t findEventForSwitch(uint8_t switchNo) {
 [v _findEventForSwitch `(uc ~T0 @X0 1 ef1`uc ]
 {
 [e :U _findEventForSwitch ]
 [v _switchNo `uc ~T0 @X0 1 r1 ]
 [f ]
-"238
-[; ;../canpan3Inputs.c: 238:     uint8_t tableIndex;
+"248
+[; ;../canpan3Inputs.c: 248:     uint8_t tableIndex;
 [v _tableIndex `uc ~T0 @X0 1 a ]
-"239
-[; ;../canpan3Inputs.c: 239:     for (tableIndex=0; tableIndex < 254; tableIndex++) {
+"249
+[; ;../canpan3Inputs.c: 249:     for (tableIndex=0; tableIndex < 254; tableIndex++) {
 {
 [e = _tableIndex -> -> 0 `i `uc ]
-[e $ < -> _tableIndex `i -> 254 `i 3276  ]
-[e $U 3277  ]
-[e :U 3276 ]
-{
-"240
-[; ;../canpan3Inputs.c: 240:         getEVs(tableIndex);
-[e ( _getEVs (1 _tableIndex ]
-"241
-[; ;../canpan3Inputs.c: 241:         if (evs[0] == 1) {
-[e $ ! == -> *U + &U _evs * -> -> -> 0 `i `ui `ux -> -> # *U &U _evs `ui `ux `i -> 1 `i 3279  ]
-{
-"242
-[; ;../canpan3Inputs.c: 242:             if (evs[1] == switchNo+1) {
-[e $ ! == -> *U + &U _evs * -> -> -> 1 `i `ui `ux -> -> # *U &U _evs `ui `ux `i + -> _switchNo `i -> 1 `i 3280  ]
-{
-"243
-[; ;../canpan3Inputs.c: 243:                 return tableIndex;
-[e ) _tableIndex ]
-[e $UE 3275  ]
-"244
-[; ;../canpan3Inputs.c: 244:             }
-}
+[e $ < -> _tableIndex `i -> 254 `i 3280  ]
+[e $U 3281  ]
 [e :U 3280 ]
-"245
-[; ;../canpan3Inputs.c: 245:         }
+{
+"250
+[; ;../canpan3Inputs.c: 250:         getEVs(tableIndex);
+[e ( _getEVs (1 _tableIndex ]
+"251
+[; ;../canpan3Inputs.c: 251:         if (evs[0] == 1) {
+[e $ ! == -> *U + &U _evs * -> -> -> 0 `i `ui `ux -> -> # *U &U _evs `ui `ux `i -> 1 `i 3283  ]
+{
+"252
+[; ;../canpan3Inputs.c: 252:             if (evs[1] == switchNo+1) {
+[e $ ! == -> *U + &U _evs * -> -> -> 1 `i `ui `ux -> -> # *U &U _evs `ui `ux `i + -> _switchNo `i -> 1 `i 3284  ]
+{
+"253
+[; ;../canpan3Inputs.c: 253:                 return tableIndex;
+[e ) _tableIndex ]
+[e $UE 3279  ]
+"254
+[; ;../canpan3Inputs.c: 254:             }
 }
-[e :U 3279 ]
-"246
-[; ;../canpan3Inputs.c: 246:     }
+[e :U 3284 ]
+"255
+[; ;../canpan3Inputs.c: 255:         }
+}
+[e :U 3283 ]
+"256
+[; ;../canpan3Inputs.c: 256:     }
 }
 [e ++ _tableIndex -> -> 1 `i `uc ]
-[e $ < -> _tableIndex `i -> 254 `i 3276  ]
-[e :U 3277 ]
+[e $ < -> _tableIndex `i -> 254 `i 3280  ]
+[e :U 3281 ]
 }
-"247
-[; ;../canpan3Inputs.c: 247:     return 0xff;
+"257
+[; ;../canpan3Inputs.c: 257:     return 0xff;
 [e ) -> -> 255 `i `uc ]
-[e $UE 3275  ]
-"248
-[; ;../canpan3Inputs.c: 248: }
-[e :UE 3275 ]
+[e $UE 3279  ]
+"258
+[; ;../canpan3Inputs.c: 258: }
+[e :UE 3279 ]
 }
-"256
-[; ;../canpan3Inputs.c: 256: void doSoD(void) {
+"266
+[; ;../canpan3Inputs.c: 266: void doSoD(void) {
 [v _doSoD `(v ~T0 @X0 1 ef ]
 {
 [e :U _doSoD ]
 [f ]
-"257
-[; ;../canpan3Inputs.c: 257:     startTimedResponse(1, findServiceIndex(SERVICE_ID_PRODUCER), sodTRCallback);
+"267
+[; ;../canpan3Inputs.c: 267:     startTimedResponse(1, findServiceIndex(SERVICE_ID_PRODUCER), sodTRCallback);
 [e ( _startTimedResponse (3 , , -> -> 1 `i `uc ( _findServiceIndex (1 -> . `E22722 5 `uc &U _sodTRCallback ]
-"258
-[; ;../canpan3Inputs.c: 258: }
-[e :UE 3281 ]
+"268
+[; ;../canpan3Inputs.c: 268: }
+[e :UE 3285 ]
 }
-"271
-[; ;../canpan3Inputs.c: 271: TimedResponseResult sodTRCallback(uint8_t type, uint8_t serviceIndex, uint8_t step) {
+"281
+[; ;../canpan3Inputs.c: 281: TimedResponseResult sodTRCallback(uint8_t type, uint8_t serviceIndex, uint8_t step) {
 [v _sodTRCallback `(E23132 ~T0 @X0 1 ef3`uc`uc`uc ]
 {
 [e :U _sodTRCallback ]
@@ -4221,40 +4252,40 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _serviceIndex `uc ~T0 @X0 1 r2 ]
 [v _step `uc ~T0 @X0 1 r3 ]
 [f ]
-"272
-[; ;../canpan3Inputs.c: 272:     EventState value;
-[v _value `E22903 ~T0 @X0 1 a ]
-"274
-[; ;../canpan3Inputs.c: 274:     if (step >= 254) {
-[e $ ! >= -> _step `i -> 254 `i 3283  ]
-{
-"275
-[; ;../canpan3Inputs.c: 275:         return TIMED_RESPONSE_RESULT_FINISHED;
-[e ) . `E23132 0 ]
-[e $UE 3282  ]
-"276
-[; ;../canpan3Inputs.c: 276:     }
-}
-[e :U 3283 ]
-"278
-[; ;../canpan3Inputs.c: 278:     value = APP_GetEventIndexState(step);
-[e = _value ( _APP_GetEventIndexState (1 _step ]
-"280
-[; ;../canpan3Inputs.c: 280:     if (value != EVENT_UNKNOWN) {
-[e $ ! != -> _value `ui -> . `E22903 0 `ui 3284  ]
-{
-"281
-[; ;../canpan3Inputs.c: 281:         canpanSendProducedEvent(step, value, evs[2]);
-[e ( _canpanSendProducedEvent (3 , , _step -> _value `uc *U + &U _evs * -> -> -> 2 `i `ui `ux -> -> # *U &U _evs `ui `ux ]
 "282
-[; ;../canpan3Inputs.c: 282:     }
-}
-[e :U 3284 ]
-"283
-[; ;../canpan3Inputs.c: 283:     return TIMED_RESPONSE_RESULT_NEXT;
-[e ) . `E23132 2 ]
-[e $UE 3282  ]
+[; ;../canpan3Inputs.c: 282:     EventState value;
+[v _value `E22903 ~T0 @X0 1 a ]
 "284
-[; ;../canpan3Inputs.c: 284: }
-[e :UE 3282 ]
+[; ;../canpan3Inputs.c: 284:     if (step >= 254) {
+[e $ ! >= -> _step `i -> 254 `i 3287  ]
+{
+"285
+[; ;../canpan3Inputs.c: 285:         return TIMED_RESPONSE_RESULT_FINISHED;
+[e ) . `E23132 0 ]
+[e $UE 3286  ]
+"286
+[; ;../canpan3Inputs.c: 286:     }
+}
+[e :U 3287 ]
+"288
+[; ;../canpan3Inputs.c: 288:     value = APP_GetEventIndexState(step);
+[e = _value ( _APP_GetEventIndexState (1 _step ]
+"290
+[; ;../canpan3Inputs.c: 290:     if (value != EVENT_UNKNOWN) {
+[e $ ! != -> _value `ui -> . `E22903 0 `ui 3288  ]
+{
+"291
+[; ;../canpan3Inputs.c: 291:         canpanSendProducedEvent(step, value, evs[2]);
+[e ( _canpanSendProducedEvent (3 , , _step -> _value `uc *U + &U _evs * -> -> -> 2 `i `ui `ux -> -> # *U &U _evs `ui `ux ]
+"292
+[; ;../canpan3Inputs.c: 292:     }
+}
+[e :U 3288 ]
+"293
+[; ;../canpan3Inputs.c: 293:     return TIMED_RESPONSE_RESULT_NEXT;
+[e ) . `E23132 2 ]
+[e $UE 3286  ]
+"294
+[; ;../canpan3Inputs.c: 294: }
+[e :UE 3286 ]
 }

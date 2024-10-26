@@ -58,8 +58,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;../canpan3Events.c: 249: EventState APP_GetEventIndexState(uint8_t tableIndex) {
 [c E22903 255 0 1 .. ]
 [n E22903 . EVENT_UNKNOWN EVENT_OFF EVENT_ON  ]
-"44 ../canpan3Inputs.h
-[; ;../canpan3Inputs.h: 44: extern uint8_t outputState[(8*4)];
+"45 ../canpan3Inputs.h
+[; ;../canpan3Inputs.h: 45: extern uint8_t outputState[(8*4)];
 [v _outputState `uc ~T0 @X0 -> 0 `x e ]
 "364 C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h
 [; ;C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h: 364: __asm("BOOTREG equ 038h");
@@ -3717,8 +3717,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 [e :U 3240 ]
 "97
-[; ;../canpan3Events.c: 97:     if (ev == 2) {
-[e $ ! == -> _ev `i -> 2 `i 3241  ]
+[; ;../canpan3Events.c: 97:     if ((ev == 2)||(ev == 3)) {
+[e $ ! || == -> _ev `i -> 2 `i == -> _ev `i -> 3 `i 3241  ]
 {
 "98
 [; ;../canpan3Events.c: 98:         return 1;
@@ -3765,8 +3765,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;../canpan3Events.c: 115:     ev = getEv(tableIndex, 0);
 [e = _ev ( _getEv (2 , _tableIndex -> -> 0 `i `uc ]
 "116
-[; ;../canpan3Events.c: 116:     if (ev == 1) {
-[e $ ! == -> _ev `i -> 1 `i 3244  ]
+[; ;../canpan3Events.c: 116:     if ((ev == 1) || (ev == 3)) {
+[e $ ! || == -> _ev `i -> 1 `i == -> _ev `i -> 3 `i 3244  ]
 {
 "117
 [; ;../canpan3Events.c: 117:         return 1;
