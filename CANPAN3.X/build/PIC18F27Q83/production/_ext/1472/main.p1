@@ -3686,7 +3686,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 "126
 [; ;../main.c: 126: static TickValue flashTime;
 [v _flashTime `S3228 ~T0 @X0 1 s ]
-[v F23249 `*CS3226 ~T0 @X0 1 t ]
+[v F23251 `*CS3226 ~T0 @X0 1 t ]
 "128
 [; ;../main.c: 128: const Service * const services[] = {
 [v _services `C*CS3226 ~T0 @X0 -> 9 `i e ]
@@ -3889,8 +3889,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 [e :U 3244 ]
 "246
-[; ;../main.c: 246:         if ((tickGet() - flashTime.val) > 2*(62500/1000)) {
-[e $ ! > - ( _tickGet ..  . _flashTime 0 -> * -> -> 2 `i `l / -> 62500 `l -> -> 1000 `i `l `ul 3245  ]
+[; ;../main.c: 246:         if ((tickGet() - flashTime.val) > 2*(62500/2)) {
+[e $ ! > - ( _tickGet ..  . _flashTime 0 -> * -> -> 2 `i `l / -> 62500 `l -> -> 2 `i `l `ul 3245  ]
 {
 "247
 [; ;../main.c: 247:             doFlash();

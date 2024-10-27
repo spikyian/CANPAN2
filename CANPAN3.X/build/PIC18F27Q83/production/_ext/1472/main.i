@@ -38990,6 +38990,7 @@ extern uint8_t canpanScanReady;
 # 40 "../canpan3Events.h"
 extern void initEvents(void);
 extern void doFlash(void);
+extern uint8_t APP_isProducedEvent(uint8_t tableIndex);
 # 25 "../main.c" 2
 # 101 "../main.c"
 void __init(void);
@@ -39127,7 +39128,7 @@ void loop(void) {
             lastInputScanTime.val = tickGet();
         }
 
-        if ((tickGet() - flashTime.val) > 2*(62500/1000)) {
+        if ((tickGet() - flashTime.val) > 2*(62500/2)) {
             doFlash();
             flashTime.val = tickGet();
         }

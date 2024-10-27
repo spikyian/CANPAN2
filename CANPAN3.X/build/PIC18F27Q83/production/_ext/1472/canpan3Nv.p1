@@ -3573,8 +3573,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _value `uc ~T0 @X0 1 r2 ]
 [f ]
 "64
-[; ;../canpan3Nv.c: 64:     if (index >= 1) {
-[e $ ! >= -> _index `i -> 1 `i 3237  ]
+[; ;../canpan3Nv.c: 64:     if (value > 3) {
+[e $ ! > -> _value `i -> 3 `i 3237  ]
 {
 "65
 [; ;../canpan3Nv.c: 65:         return INVALID;
@@ -3585,27 +3585,15 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 [e :U 3237 ]
 "67
-[; ;../canpan3Nv.c: 67:     if (value > 3) {
-[e $ ! > -> _value `i -> 3 `i 3238  ]
-{
-"68
-[; ;../canpan3Nv.c: 68:         return INVALID;
-[e ) . `E23092 0 ]
-[e $UE 3236  ]
-"69
-[; ;../canpan3Nv.c: 69:     }
-}
-[e :U 3238 ]
-"70
-[; ;../canpan3Nv.c: 70:     return VALID;
+[; ;../canpan3Nv.c: 67:     return VALID;
 [e ) . `E23092 1 ]
 [e $UE 3236  ]
-"71
-[; ;../canpan3Nv.c: 71: }
+"68
+[; ;../canpan3Nv.c: 68: }
 [e :UE 3236 ]
 }
-"76
-[; ;../canpan3Nv.c: 76: void APP_nvValueChanged(uint8_t index, uint8_t value, uint8_t oldValue) {
+"73
+[; ;../canpan3Nv.c: 73: void APP_nvValueChanged(uint8_t index, uint8_t value, uint8_t oldValue) {
 [v _APP_nvValueChanged `(v ~T0 @X0 1 ef3`uc`uc`uc ]
 {
 [e :U _APP_nvValueChanged ]
@@ -3613,7 +3601,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _value `uc ~T0 @X0 1 r2 ]
 [v _oldValue `uc ~T0 @X0 1 r3 ]
 [f ]
-"77
-[; ;../canpan3Nv.c: 77: }
-[e :UE 3239 ]
+"74
+[; ;../canpan3Nv.c: 74: }
+[e :UE 3238 ]
 }

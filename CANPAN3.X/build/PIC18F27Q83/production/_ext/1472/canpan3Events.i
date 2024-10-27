@@ -38803,6 +38803,7 @@ extern TickValue pbTimer;
 # 40 "../canpan3Events.h"
 extern void initEvents(void);
 extern void doFlash(void);
+extern uint8_t APP_isProducedEvent(uint8_t tableIndex);
 # 43 "../canpan3Events.c" 2
 
 # 1 "../canpan3Outputs.h" 1
@@ -38846,7 +38847,7 @@ void factoryResetGlobalEvents(void) {
 
         addEvent(nn.word, i, 0, 1, TRUE);
         addEvent(nn.word, i, 1, i, TRUE);
-        addEvent(nn.word, i, 2, 1|0b10000, TRUE);
+        addEvent(nn.word, i, 2, 1|0b00010000, TRUE);
 
         addEvent(nn.word, i, 4, ((uint16_t)1<<(i-1))&0xFF, TRUE);
         addEvent(nn.word, i, 5, ((uint16_t)1<<(i-9))&0xFF, TRUE);
@@ -38886,7 +38887,7 @@ uint8_t APP_isConsumedEvent(uint8_t tableIndex) {
     if (ev < 0) {
         return 0;
     }
-    return (ev & 0b10000);
+    return (ev & 0b00010000);
 }
 
 
@@ -38984,7 +38985,7 @@ Processed APP_processConsumedEvent(uint8_t tableIndex, Message *m) {
 
         return PROCESSED;
     }
-    if (onOff && (evs[0] == 2)) {
+    if (onOff && ((evs[0] == 2)||(evs[0] == 3))) {
         doSoD();
         return PROCESSED;
     }
@@ -39032,11 +39033,11 @@ Processed APP_processConsumedEvent(uint8_t tableIndex, Message *m) {
                 case 0xFD:
                     if (!onOff) {
                         if (polarity) {
-                            clearLed(ledNo);
-                            ledStates[ledNo] = CANPANLED_OFF;
-                        } else {
                             setLed(ledNo);
                             ledStates[ledNo] = CANPANLED_ON;
+                        } else {
+                            clearLed(ledNo);
+                            ledStates[ledNo] = CANPANLED_OFF;
                         }
                     }
                     break;
@@ -39091,6 +39092,11 @@ void doFlash(void) {
     flashToggle = !flashToggle;
 }
 
+
+
+
+
+
 EventState APP_GetEventIndexState(uint8_t tableIndex) {
     uint8_t switchNo;
 
@@ -39101,9 +39107,9 @@ EventState APP_GetEventIndexState(uint8_t tableIndex) {
 
     getEVs(tableIndex);
     switchNo = evs[1];
-    if (switchNo >= (8*4)) {
+    if ((switchNo < 1) || (switchNo > (8*4))) {
         return EVENT_UNKNOWN;
     }
 
-    return outputState[switchNo] ? EVENT_ON : EVENT_OFF;
+    return outputState[switchNo-1] ? EVENT_ON : EVENT_OFF;
 }

@@ -39057,7 +39057,7 @@ static uint8_t teachGetESDdata(uint8_t id) {
 }
 # 369 "../../VLCBlib_PIC/event_teach_simple.c"
 static DiagnosticVal * teachGetDiagnostic(uint8_t index) {
-    if ((index<1) || (index>1)) {
+    if (index > 1) {
         return ((void*)0);
     }
     return &(teachDiagnostics[index]);

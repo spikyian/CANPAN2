@@ -38905,7 +38905,7 @@ uint8_t isConsumedEvent(uint8_t eventIndex) {
 
 
 static DiagnosticVal * consumerGetDiagnostic(uint8_t index) {
-    if ((index<1) || (index>1)) {
+    if (index > 1) {
         return ((void*)0);
     }
     return &(consumerDiagnostics[index-1]);
