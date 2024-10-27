@@ -85,22 +85,17 @@
  * Author: Ian Hogg
  * 
  * This is the main for the CANPAN2 module.
+ * Based on EV and NV settings of CANPAN_4c_beta104
  */
 
 // TODOs
 // * Receipt of event on a toggle switch to update state (Toggle with monitor)
-// * On startup restore last state NV1=0
 //
 // Once CANPAN compatible version is released then additional enhancements
 // * Add NVs for LED brightness control
 // * Add additional timer to turn a cathode on late or turn off early according to brightness
 // * Dual button set/reset for 1 event
 
-/* temp notes
- * Line 2408 check NVstart (NV1)
- * ALLON sets all taught produced events to ON
- * 
- */
 
 // forward declarations
 void __init(void);
@@ -216,15 +211,19 @@ void setup(void) {
     
     nv = (uint8_t)getNV(NV_STARTUP);
     /* This is done with bit checks as that's what the original CANPAN code did */
-    if (nv == 0) {
-        // case NV_STARTUP_RESTORE:
-            // TODO
-    } else if (nv & 1) {
-        // case NV_STARTUP_NOTHING:
-    } else if (! (nv & 2)) {
-        // case NV_STARTUP_ALLON:
-        // Why????
-        canpanSetAllSwitchOn();
+    switch (nv) {
+        case NV_STARTUP_RESTORE:
+            loadInputs();
+            break;
+        case NV_STARTUP_NOTHING:
+            canpanScanReady = 1;
+            break;
+        case NV_STARTUP_SCAN:
+            canpanScanReady = 0;
+            break;
+        case NV_STARTUP_ALLOFF:
+            canpanSetAllSwitchOff();
+            break;
     }
 }
 
@@ -244,7 +243,7 @@ void loop(void) {
             lastInputScanTime.val = tickGet();
         }
         
-        if (tickTimeSince(flashTime) > 2*ONE_MILI_SECOND) {
+        if (tickTimeSince(flashTime) > 2*HALF_SECOND) {
             doFlash();    // update flashing LEDs
             flashTime.val = tickGet();
         }
@@ -265,13 +264,6 @@ void loop(void) {
  */
 ValidTime APP_isSuitableTimeToWriteFlash(void){
     return GOOD_TIME;
-}
-
-/**
- * This application doesn't need to process any messages in a special way.
- */
-Processed APP_preProcessMessage(Message * m) {
-    return NOT_PROCESSED;
 }
 
 /**

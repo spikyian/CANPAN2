@@ -3,7 +3,7 @@
 [d edition pro ]
 [d chip 18F27Q83 ]
 [d frameptr 1249 ]
-"133 C:\Users\ianwh\github\CANPAN2/main.c
+"128 C:\Users\ianwh\github\CANPAN2/main.c
 [e E22515 VlcbOpCodes `uc
 OPC_ACK 0
 OPC_NAK 1
@@ -153,7 +153,7 @@ OPC_VCVS 164
 NOT_PROCESSED 0
 PROCESSED 1
 ]
-"177
+"172
 [e E23027 SendResult `uc
 SEND_FAILED 0
 SEND_OK 1
@@ -162,22 +162,22 @@ SEND_OK 1
 NOT_RECEIVED 0
 RECEIVED 1
 ]
-"215
+"210
 [e E22883 Boolean `uc
 FALSE 0
 TRUE 1
 ]
-"266
+"265
 [e E22859 ValidTime `uc
 BAD_TIME 0
 GOOD_TIME 1
 ]
-"55 C:\Users\ianwh\github\CANPAN2/canpan3Events.c
+"56 C:\Users\ianwh\github\CANPAN2/canpan3Events.c
 [e E22883 Boolean `uc
 FALSE 0
 TRUE 1
 ]
-"130
+"114
 [e E22515 VlcbOpCodes `uc
 OPC_ACK 0
 OPC_NAK 1
@@ -327,20 +327,25 @@ OPC_VCVS 164
 NOT_PROCESSED 0
 PROCESSED 1
 ]
-"154
+"223
 [e E23134 canpan3LedState `uc
 CANPANLED_ON 0
 CANPANLED_OFF 1
 CANPANLED_FLASH 2
 CANPANLED_ANTIFLASH 3
 ]
-"249
+"318
 [e E22903 . `uc
 EVENT_UNKNOWN 255
 EVENT_OFF 0
 EVENT_ON 1
 ]
-"180 C:\Users\ianwh\github\CANPAN2/canpan3Inputs.c
+"177 C:\Users\ianwh\github\CANPAN2/canpan3Inputs.c
+[e E22855 . `uc
+EEPROM_NVM_TYPE 0
+FLASH_NVM_TYPE 1
+]
+"184
 [e E22515 VlcbOpCodes `uc
 OPC_ACK 0
 OPC_NAK 1
@@ -486,13 +491,13 @@ OPC_ARSOF3 254
 OPC_EXTC6 255
 OPC_VCVS 164
 ]
-"222
+"232
 [e E22903 . `uc
 EVENT_UNKNOWN 255
 EVENT_OFF 0
 EVENT_ON 1
 ]
-"267
+"277
 [e E23132 . `uc
 TIMED_RESPONSE_RESULT_FINISHED 0
 TIMED_RESPONSE_RESULT_RETRY 1
@@ -3360,38 +3365,42 @@ PRODUCER_EV_SLOTS 2
 [v _main main `(v  1 e 1 0 ]
 "1338
 [v _DEFAULT_ISR DEFAULT_ISR `IIH(v  1 e 1 0 ]
-"49 C:\Users\ianwh\github\CANPAN2/canpan3Events.c
+"50 C:\Users\ianwh\github\CANPAN2/canpan3Events.c
 [v _factoryResetGlobalEvents factoryResetGlobalEvents `(v  1 e 1 0 ]
-"71
+"72
 [v _initEvents initEvents `(v  1 e 1 0 ]
-"75
+"76
 [v _APP_addEvent APP_addEvent `(uc  1 e 1 0 ]
-"86
+"87
 [v _APP_isConsumedEvent APP_isConsumedEvent `(uc  1 e 1 0 ]
-"112
-[v _APP_isProducededEvent APP_isProducededEvent `(uc  1 e 1 0 ]
-"130
+"114
+[v _APP_preProcessMessage APP_preProcessMessage `(E22916  1 e 1 0 ]
+"181
+[v _APP_isProducedEvent APP_isProducedEvent `(uc  1 e 1 0 ]
+"199
 [v _APP_processConsumedEvent APP_processConsumedEvent `(E22916  1 e 1 0 ]
-"221
+"290
 [v _doFlash doFlash `(v  1 e 1 0 ]
-"249
+"318
 [v _APP_GetEventIndexState APP_GetEventIndexState `(E22903  1 e 1 0 ]
-"67 C:\Users\ianwh\github\CANPAN2/canpan3Inputs.c
+"70 C:\Users\ianwh\github\CANPAN2/canpan3Inputs.c
 [v _initInputs initInputs `(v  1 e 1 0 ]
-"104
+"107
 [v _inputScan inputScan `(v  1 e 1 0 ]
-"206
-[v _canpanSetAllSwitchOn canpanSetAllSwitchOn `(v  1 e 1 0 ]
-"213
+"212
+[v _canpanSetAllSwitchOff canpanSetAllSwitchOff `(v  1 e 1 0 ]
+"223
 [v _canpanSendProducedEvent canpanSendProducedEvent `(v  1 e 1 0 ]
-"241
+"251
 [v _driveColumn driveColumn `(v  1 e 1 0 ]
-"247
+"257
 [v _findEventForSwitch findEventForSwitch `(uc  1 e 1 0 ]
-"266
+"276
 [v _doSoD doSoD `(v  1 e 1 0 ]
-"281
+"291
 [v _sodTRCallback sodTRCallback `(E23132  1 e 1 0 ]
+"309
+[v _loadInputs loadInputs `(v  1 e 1 0 ]
 "48 C:\Users\ianwh\github\CANPAN2/canpan3Nv.c
 [v _APP_nvDefault APP_nvDefault `(uc  1 e 1 0 ]
 "63
@@ -3406,19 +3415,17 @@ PRODUCER_EV_SLOTS 2
 [v _setLed setLed `(v  1 e 1 0 ]
 "195
 [v _clearLed clearLed `(v  1 e 1 0 ]
-"151 C:\Users\ianwh\github\CANPAN2/main.c
+"146 C:\Users\ianwh\github\CANPAN2/main.c
 [v _APP_factoryReset APP_factoryReset `(v  1 e 1 0 ]
-"163
+"158
 [v _APP_testMode APP_testMode `(v  1 e 1 0 ]
-"170
+"165
 [v _setup setup `(v  1 e 1 0 ]
-"234
+"233
 [v _loop loop `(v  1 e 1 0 ]
-"266
+"265
 [v _APP_isSuitableTimeToWriteFlash APP_isSuitableTimeToWriteFlash `(E22859  1 e 1 0 ]
-"273
-[v _APP_preProcessMessage APP_preProcessMessage `(E22916  1 e 1 0 ]
-"280
+"272
 [v _APP_postProcessMessage APP_postProcessMessage `(E22916  1 e 1 0 ]
 "7 C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\__lldiv.c
 [v ___lldiv __lldiv `(ul  1 e 4 0 ]
@@ -3472,8 +3479,8 @@ PRODUCER_EV_SLOTS 2
 "160
 [v _rxBuffers rxBuffers `[8]S183  1 s 72 rxBuffers ]
 "161
-[s S2210 MessageQueue 5 `*.39S183 1 messages 2 0 `uc 1 readIndex 1 2 `uc 1 writeIndex 1 3 `uc 1 size 1 4 ]
-[v _rxQueue rxQueue `S2210  1 s 5 rxQueue ]
+[s S2245 MessageQueue 5 `*.39S183 1 messages 2 0 `uc 1 readIndex 1 2 `uc 1 writeIndex 1 3 `uc 1 size 1 4 ]
+[v _rxQueue rxQueue `S2245  1 s 5 rxQueue ]
 [s S24 TickBytes 4 `uc 1 b0 1 0 `uc 1 b1 1 1 `uc 1 b2 1 2 `uc 1 b3 1 3 ]
 "172
 [s S29 TickWords 4 `us 1 w0 2 0 `us 1 w1 2 2 ]
@@ -3510,8 +3517,8 @@ PRODUCER_EV_SLOTS 2
 "151
 [v _mnsService mnsService `CS201  1 e 20 0 ]
 "174
-[u S523 Word 2 `S193 1 bytes 2 0 `us 1 word 2 0 ]
-[v _nn nn `S523  1 e 2 0 ]
+[u S526 Word 2 `S193 1 bytes 2 0 `us 1 word 2 0 ]
+[v _nn nn `S526  1 e 2 0 ]
 "178
 [v _mode_state mode_state `uc  1 e 1 0 ]
 "179
@@ -3525,7 +3532,7 @@ PRODUCER_EV_SLOTS 2
 "198
 [v _setupModePreviousMode setupModePreviousMode `uc  1 s 1 setupModePreviousMode ]
 "202
-[v _previousNN previousNN `S523  1 s 2 previousNN ]
+[v _previousNN previousNN `S526  1 s 2 previousNN ]
 [s S24 TickBytes 4 `uc 1 b0 1 0 `uc 1 b1 1 1 `uc 1 b2 1 2 `uc 1 b3 1 3 ]
 "209
 [s S29 TickWords 4 `us 1 w0 2 0 `us 1 w1 2 2 ]
@@ -3543,12 +3550,12 @@ PRODUCER_EV_SLOTS 2
 [v _nvService nvService `CS201  1 e 20 0 ]
 "107
 [v _nvCache nvCache `[2]uc  1 s 2 nvCache ]
-[s S5512 . 1 `uc 1 writeNeeded 1 0 :1:0 
+[s S5537 . 1 `uc 1 writeNeeded 1 0 :1:0 
 `uc 1 eraseNeeded 1 0 :1:1 
 ]
 "129 C:\Users\ianwh\github/VLCBlib_PIC/nvm.c
-[u S5515 . 1 `uc 1 asByte 1 0 `S5512 1 . 1 0 ]
-[v _flashFlags flashFlags `S5515  1 s 1 flashFlags ]
+[u S5540 . 1 `uc 1 asByte 1 0 `S5537 1 . 1 0 ]
+[v _flashFlags flashFlags `S5540  1 s 1 flashFlags ]
 "138
 [v _flashBlock flashBlock `um  1 s 3 flashBlock ]
 "60 C:\Users\ianwh\github/VLCBlib_PIC/statusLeds2.c
@@ -3584,35 +3591,35 @@ PRODUCER_EV_SLOTS 2
 [v _flashFlushTime flashFlushTime `S32  1 s 4 flashFlushTime ]
 "47 C:\Users\ianwh\github\CANPAN2/canpan3Events.c
 [v _flashToggle flashToggle `uc  1 s 1 flashToggle ]
-"47 C:\Users\ianwh\github\CANPAN2/canpan3Inputs.c
+"48 C:\Users\ianwh\github\CANPAN2/canpan3Inputs.c
 [v _buttonState buttonState `[8]uc  1 s 8 buttonState ]
-"48
+"49
 [v _outputState outputState `[32]uc  1 e 32 0 ]
-"50
+"53
 [v _column column `uc  1 s 1 column ]
-"51
-[v _ready ready `uc  1 s 1 ready ]
+"54
+[v _canpanScanReady canpanScanReady `uc  1 e 1 0 ]
 "46 C:\Users\ianwh\github\CANPAN2/canpan3Outputs.c
 [v _current_row current_row `uc  1 s 1 current_row ]
 "47
 [v _ledMatrix ledMatrix `[4]uc  1 e 4 0 ]
 "48
 [v _ledStates ledStates `[32]E23091  1 e 32 0 ]
-"126 C:\Users\ianwh\github\CANPAN2/main.c
+"121 C:\Users\ianwh\github\CANPAN2/main.c
 [v _startTime startTime `S32  1 s 4 startTime ]
-"127
+"122
 [v _started started `uc  1 s 1 started ]
-"128
+"123
 [v _lastServoStartTime lastServoStartTime `S32  1 e 4 0 ]
-"129
+"124
 [v _lastInputScanTime lastInputScanTime `S32  1 s 4 lastInputScanTime ]
-"130
+"125
 [v _lastActionPollTime lastActionPollTime `S32  1 s 4 lastActionPollTime ]
-"131
+"126
 [v _flashTime flashTime `S32  1 s 4 flashTime ]
-"133
+"128
 [v _services services `C[9]*.32CS201  1 e 18 0 ]
-[s S2419 . 1 `uc 1 SWIE 1 0 :1:0 
+[s S2449 . 1 `uc 1 SWIE 1 0 :1:0 
 `uc 1 HLVDIE 1 0 :1:1 
 `uc 1 OSFIE 1 0 :1:2 
 `uc 1 CSWIE 1 0 :1:3 
@@ -3622,9 +3629,9 @@ PRODUCER_EV_SLOTS 2
 `uc 1 IOCIE 1 0 :1:7 
 ]
 "305 C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h
-[u S2428 . 1 `S2419 1 . 1 0 ]
-[v _PIE0bits PIE0bits `VES2428  1 e 1 @1182 ]
-[s S1428 . 1 `uc 1 SPI1RXIE 1 0 :1:0 
+[u S2458 . 1 `S2449 1 . 1 0 ]
+[v _PIE0bits PIE0bits `VES2458  1 e 1 @1182 ]
+[s S1469 . 1 `uc 1 SPI1RXIE 1 0 :1:0 
 `uc 1 SPI1TXIE 1 0 :1:1 
 `uc 1 SPI1IE 1 0 :1:2 
 `uc 1 TMR2IE 1 0 :1:3 
@@ -3634,26 +3641,26 @@ PRODUCER_EV_SLOTS 2
 `uc 1 TMR0IE 1 0 :1:7 
 ]
 "499
-[u S1437 . 1 `S1428 1 . 1 0 ]
-[v _PIE3bits PIE3bits `VES1437  1 e 1 @1185 ]
-[s S5535 . 1 `uc 1 GO 1 0 :1:0 
+[u S1478 . 1 `S1469 1 . 1 0 ]
+[v _PIE3bits PIE3bits `VES1478  1 e 1 @1185 ]
+[s S5560 . 1 `uc 1 GO 1 0 :1:0 
 ]
 "598
-[s S5537 . 1 `uc 1 NOT_DONE 1 0 :1:0 
+[s S5562 . 1 `uc 1 NOT_DONE 1 0 :1:0 
 ]
-[s S5539 . 1 `uc 1 nDONE 1 0 :1:0 
+[s S5564 . 1 `uc 1 nDONE 1 0 :1:0 
 ]
-[u S5541 . 1 `S5535 1 . 1 0 `S5537 1 . 1 0 `S5539 1 . 1 0 ]
-[v _NVMCON0bits NVMCON0bits `VES5541  1 e 1 @64 ]
-[s S5519 . 1 `uc 1 CMD 1 0 :3:0 
+[u S5566 . 1 `S5560 1 . 1 0 `S5562 1 . 1 0 `S5564 1 . 1 0 ]
+[v _NVMCON0bits NVMCON0bits `VES5566  1 e 1 @64 ]
+[s S5544 . 1 `uc 1 CMD 1 0 :3:0 
 `uc 1 . 1 0 :4:3 
 `uc 1 WRERR 1 0 :1:7 
 ]
 "633
-[s S5523 . 1 `uc 1 NVMCMD 1 0 :3:0 
+[s S5548 . 1 `uc 1 NVMCMD 1 0 :3:0 
 ]
-[u S5525 . 1 `S5519 1 . 1 0 `S5523 1 . 1 0 ]
-[v _NVMCON1bits NVMCON1bits `VES5525  1 e 1 @65 ]
+[u S5550 . 1 `S5544 1 . 1 0 `S5548 1 . 1 0 ]
+[v _NVMCON1bits NVMCON1bits `VES5550  1 e 1 @65 ]
 "653
 [v _NVMLOCK NVMLOCK `VEuc  1 e 1 @66 ]
 "674
@@ -3666,7 +3673,7 @@ PRODUCER_EV_SLOTS 2
 [v _NVMADRU NVMADRU `VEuc  1 e 1 @69 ]
 "887
 [v _NVMDATL NVMDATL `VEuc  1 e 1 @70 ]
-[s S2364 . 1 `uc 1 SWIF 1 0 :1:0 
+[s S2394 . 1 `uc 1 SWIF 1 0 :1:0 
 `uc 1 HLVDIF 1 0 :1:1 
 `uc 1 OSFIF 1 0 :1:2 
 `uc 1 CSWIF 1 0 :1:3 
@@ -3676,9 +3683,9 @@ PRODUCER_EV_SLOTS 2
 `uc 1 IOCIF 1 0 :1:7 
 ]
 "1290
-[u S2373 . 1 `S2364 1 . 1 0 ]
-[v _PIR0bits PIR0bits `VES2373  1 e 1 @1198 ]
-[s S1407 . 1 `uc 1 SPI1RXIF 1 0 :1:0 
+[u S2403 . 1 `S2394 1 . 1 0 ]
+[v _PIR0bits PIR0bits `VES2403  1 e 1 @1198 ]
+[s S1448 . 1 `uc 1 SPI1RXIF 1 0 :1:0 
 `uc 1 SPI1TXIF 1 0 :1:1 
 `uc 1 SPI1IF 1 0 :1:2 
 `uc 1 TMR2IF 1 0 :1:3 
@@ -3688,9 +3695,9 @@ PRODUCER_EV_SLOTS 2
 `uc 1 TMR0IF 1 0 :1:7 
 ]
 "1484
-[u S1416 . 1 `S1407 1 . 1 0 ]
-[v _PIR3bits PIR3bits `VES1416  1 e 1 @1201 ]
-[s S1022 . 1 `uc 1 LATA0 1 0 :1:0 
+[u S1457 . 1 `S1448 1 . 1 0 ]
+[v _PIR3bits PIR3bits `VES1457  1 e 1 @1201 ]
+[s S1055 . 1 `uc 1 LATA0 1 0 :1:0 
 `uc 1 LATA1 1 0 :1:1 
 `uc 1 LATA2 1 0 :1:2 
 `uc 1 LATA3 1 0 :1:3 
@@ -3700,9 +3707,9 @@ PRODUCER_EV_SLOTS 2
 `uc 1 LATA7 1 0 :1:7 
 ]
 "2275
-[u S1031 . 1 `S1022 1 . 1 0 ]
-[v _LATAbits LATAbits `VES1031  1 e 1 @1214 ]
-[s S1218 . 1 `uc 1 LATB0 1 0 :1:0 
+[u S1064 . 1 `S1055 1 . 1 0 ]
+[v _LATAbits LATAbits `VES1064  1 e 1 @1214 ]
+[s S1259 . 1 `uc 1 LATB0 1 0 :1:0 
 `uc 1 LATB1 1 0 :1:1 
 `uc 1 LATB2 1 0 :1:2 
 `uc 1 LATB3 1 0 :1:3 
@@ -3712,9 +3719,9 @@ PRODUCER_EV_SLOTS 2
 `uc 1 LATB7 1 0 :1:7 
 ]
 "2337
-[u S1227 . 1 `S1218 1 . 1 0 ]
-[v _LATBbits LATBbits `VES1227  1 e 1 @1215 ]
-[s S1239 . 1 `uc 1 LATC0 1 0 :1:0 
+[u S1268 . 1 `S1259 1 . 1 0 ]
+[v _LATBbits LATBbits `VES1268  1 e 1 @1215 ]
+[s S1280 . 1 `uc 1 LATC0 1 0 :1:0 
 `uc 1 LATC1 1 0 :1:1 
 `uc 1 LATC2 1 0 :1:2 
 `uc 1 LATC3 1 0 :1:3 
@@ -3724,9 +3731,9 @@ PRODUCER_EV_SLOTS 2
 `uc 1 LATC7 1 0 :1:7 
 ]
 "2399
-[u S1248 . 1 `S1239 1 . 1 0 ]
-[v _LATCbits LATCbits `VES1248  1 e 1 @1216 ]
-[s S753 . 1 `uc 1 TRISA0 1 0 :1:0 
+[u S1289 . 1 `S1280 1 . 1 0 ]
+[v _LATCbits LATCbits `VES1289  1 e 1 @1216 ]
+[s S775 . 1 `uc 1 TRISA0 1 0 :1:0 
 `uc 1 TRISA1 1 0 :1:1 
 `uc 1 TRISA2 1 0 :1:2 
 `uc 1 TRISA3 1 0 :1:3 
@@ -3736,9 +3743,9 @@ PRODUCER_EV_SLOTS 2
 `uc 1 TRISA7 1 0 :1:7 
 ]
 "2461
-[u S762 . 1 `S753 1 . 1 0 ]
-[v _TRISAbits TRISAbits `VES762  1 e 1 @1222 ]
-[s S774 . 1 `uc 1 TRISB0 1 0 :1:0 
+[u S784 . 1 `S775 1 . 1 0 ]
+[v _TRISAbits TRISAbits `VES784  1 e 1 @1222 ]
+[s S796 . 1 `uc 1 TRISB0 1 0 :1:0 
 `uc 1 TRISB1 1 0 :1:1 
 `uc 1 TRISB2 1 0 :1:2 
 `uc 1 TRISB3 1 0 :1:3 
@@ -3748,9 +3755,9 @@ PRODUCER_EV_SLOTS 2
 `uc 1 TRISB7 1 0 :1:7 
 ]
 "2523
-[u S783 . 1 `S774 1 . 1 0 ]
-[v _TRISBbits TRISBbits `VES783  1 e 1 @1223 ]
-[s S795 . 1 `uc 1 TRISC0 1 0 :1:0 
+[u S805 . 1 `S796 1 . 1 0 ]
+[v _TRISBbits TRISBbits `VES805  1 e 1 @1223 ]
+[s S817 . 1 `uc 1 TRISC0 1 0 :1:0 
 `uc 1 TRISC1 1 0 :1:1 
 `uc 1 TRISC2 1 0 :1:2 
 `uc 1 TRISC3 1 0 :1:3 
@@ -3760,9 +3767,9 @@ PRODUCER_EV_SLOTS 2
 `uc 1 TRISC7 1 0 :1:7 
 ]
 "2585
-[u S804 . 1 `S795 1 . 1 0 ]
-[v _TRISCbits TRISCbits `VES804  1 e 1 @1224 ]
-[s S4982 . 1 `uc 1 RA0 1 0 :1:0 
+[u S826 . 1 `S817 1 . 1 0 ]
+[v _TRISCbits TRISCbits `VES826  1 e 1 @1224 ]
+[s S5007 . 1 `uc 1 RA0 1 0 :1:0 
 `uc 1 RA1 1 0 :1:1 
 `uc 1 RA2 1 0 :1:2 
 `uc 1 RA3 1 0 :1:3 
@@ -3772,8 +3779,8 @@ PRODUCER_EV_SLOTS 2
 `uc 1 RA7 1 0 :1:7 
 ]
 "2668
-[u S4991 . 1 `S4982 1 . 1 0 ]
-[v _PORTAbits PORTAbits `VES4991  1 e 1 @1230 ]
+[u S5016 . 1 `S5007 1 . 1 0 ]
+[v _PORTAbits PORTAbits `VES5016  1 e 1 @1230 ]
 "2713
 [v _PORTB PORTB `VEuc  1 e 1 @1231 ]
 "2775
@@ -3800,21 +3807,21 @@ PRODUCER_EV_SLOTS 2
 [v _SPI1TCNTH SPI1TCNTH `VEuc  1 e 1 @131 ]
 "3681
 [v _SPI1CON0 SPI1CON0 `VEuc  1 e 1 @132 ]
-[s S1271 . 1 `uc 1 BMODE 1 0 :1:0 
+[s S1312 . 1 `uc 1 BMODE 1 0 :1:0 
 `uc 1 MST 1 0 :1:1 
 `uc 1 LSBF 1 0 :1:2 
 `uc 1 . 1 0 :4:3 
 `uc 1 EN 1 0 :1:7 
 ]
 "3702
-[s S1277 . 1 `uc 1 SPI1BMODE 1 0 :1:0 
+[s S1318 . 1 `uc 1 SPI1BMODE 1 0 :1:0 
 `uc 1 SPI1MST 1 0 :1:1 
 `uc 1 SPI1LSBF 1 0 :1:2 
 `uc 1 . 1 0 :4:3 
 `uc 1 SPI1SPIEN 1 0 :1:7 
 ]
-[u S1283 . 1 `S1271 1 . 1 0 `S1277 1 . 1 0 ]
-[v _SPI1CON0bits SPI1CON0bits `VES1283  1 e 1 @132 ]
+[u S1324 . 1 `S1312 1 . 1 0 `S1318 1 . 1 0 ]
+[v _SPI1CON0bits SPI1CON0bits `VES1324  1 e 1 @132 ]
 "3747
 [v _SPI1CON1 SPI1CON1 `VEuc  1 e 1 @133 ]
 "3794
@@ -3827,7 +3834,7 @@ PRODUCER_EV_SLOTS 2
 [v _SPI1CON2 SPI1CON2 `VEuc  1 e 1 @134 ]
 "3863
 [v _TBLPTRU TBLPTRU `VEuc  1 e 1 @1272 ]
-[s S1450 . 1 `uc 1 RXBF 1 0 :1:0 
+[s S1491 . 1 `uc 1 RXBF 1 0 :1:0 
 `uc 1 . 1 0 :1:1 
 `uc 1 CLRBF 1 0 :1:2 
 `uc 1 RXRE 1 0 :1:3 
@@ -3837,7 +3844,7 @@ PRODUCER_EV_SLOTS 2
 `uc 1 TXWE 1 0 :1:7 
 ]
 "3954
-[s S1459 . 1 `uc 1 SPI1RXBF 1 0 :1:0 
+[s S1500 . 1 `uc 1 SPI1RXBF 1 0 :1:0 
 `uc 1 . 1 0 :1:1 
 `uc 1 SPI1CLRBF 1 0 :1:2 
 `uc 1 SPI1RXRE 1 0 :1:3 
@@ -3846,19 +3853,19 @@ PRODUCER_EV_SLOTS 2
 `uc 1 . 1 0 :1:6 
 `uc 1 SPI1TXWE 1 0 :1:7 
 ]
-[u S1468 . 1 `S1450 1 . 1 0 `S1459 1 . 1 0 ]
-[v _SPI1STATUSbits SPI1STATUSbits `VES1468  1 e 1 @135 ]
+[u S1509 . 1 `S1491 1 . 1 0 `S1500 1 . 1 0 ]
+[v _SPI1STATUSbits SPI1STATUSbits `VES1509  1 e 1 @135 ]
 "4009
 [v _SPI1TWIDTH SPI1TWIDTH `VEuc  1 e 1 @136 ]
 "4049
 [v _SPI1BAUD SPI1BAUD `VEuc  1 e 1 @137 ]
 "4303
 [v _SPI1CLK SPI1CLK `VEuc  1 e 1 @140 ]
-[s S6264 . 1 `uc 1 NDIV 1 0 :4:0 
+[s S6289 . 1 `uc 1 NDIV 1 0 :4:0 
 `uc 1 NOSC 1 0 :3:4 
 ]
 "5357
-[s S6267 . 1 `uc 1 NDIV0 1 0 :1:0 
+[s S6292 . 1 `uc 1 NDIV0 1 0 :1:0 
 `uc 1 NDIV1 1 0 :1:1 
 `uc 1 NDIV2 1 0 :1:2 
 `uc 1 NDIV3 1 0 :1:3 
@@ -3866,13 +3873,13 @@ PRODUCER_EV_SLOTS 2
 `uc 1 NOSC1 1 0 :1:5 
 `uc 1 NOSC2 1 0 :1:6 
 ]
-[u S6275 . 1 `S6264 1 . 1 0 `S6267 1 . 1 0 ]
-[v _OSCCON1bits OSCCON1bits `VES6275  1 e 1 @173 ]
+[u S6300 . 1 `S6289 1 . 1 0 `S6292 1 . 1 0 ]
+[v _OSCCON1bits OSCCON1bits `VES6300  1 e 1 @173 ]
 "8945
 [v _C1CONL C1CONL `VEuc  1 e 1 @256 ]
 "9004
 [v _C1CONH C1CONH `VEuc  1 e 1 @257 ]
-[s S2258 . 1 `uc 1 WAKFIL 1 0 :1:0 
+[s S2288 . 1 `uc 1 WAKFIL 1 0 :1:0 
 `uc 1 WFT 1 0 :2:1 
 `uc 1 BUSY 1 0 :1:3 
 `uc 1 . 1 0 :1:4 
@@ -3881,15 +3888,15 @@ PRODUCER_EV_SLOTS 2
 `uc 1 ON 1 0 :1:7 
 ]
 "9025
-[s S2266 . 1 `uc 1 . 1 0 :1:0 
+[s S2296 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 WFT0 1 0 :1:1 
 `uc 1 WFT1 1 0 :1:2 
 ]
-[u S2270 . 1 `S2258 1 . 1 0 `S2266 1 . 1 0 ]
-[v _C1CONHbits C1CONHbits `VES2270  1 e 1 @257 ]
+[u S2300 . 1 `S2288 1 . 1 0 `S2296 1 . 1 0 ]
+[v _C1CONHbits C1CONHbits `VES2300  1 e 1 @257 ]
 "9070
 [v _C1CONU C1CONU `VEuc  1 e 1 @258 ]
-[s S2780 . 1 `uc 1 RTXAT 1 0 :1:0 
+[s S2810 . 1 `uc 1 RTXAT 1 0 :1:0 
 `uc 1 ESIGM 1 0 :1:1 
 `uc 1 SERR2LOM 1 0 :1:2 
 `uc 1 STEF 1 0 :1:3 
@@ -3897,21 +3904,21 @@ PRODUCER_EV_SLOTS 2
 `uc 1 OPMOD 1 0 :3:5 
 ]
 "9091
-[s S2787 . 1 `uc 1 . 1 0 :5:0 
+[s S2817 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 OPMOD0 1 0 :1:5 
 `uc 1 OPMOD1 1 0 :1:6 
 `uc 1 OPMOD2 1 0 :1:7 
 ]
-[u S2792 . 1 `S2780 1 . 1 0 `S2787 1 . 1 0 ]
-[v _C1CONUbits C1CONUbits `VES2792  1 e 1 @258 ]
+[u S2822 . 1 `S2810 1 . 1 0 `S2817 1 . 1 0 ]
+[v _C1CONUbits C1CONUbits `VES2822  1 e 1 @258 ]
 "9141
 [v _C1CONT C1CONT `VEuc  1 e 1 @259 ]
-[s S2750 . 1 `uc 1 REQOP 1 0 :3:0 
+[s S2780 . 1 `uc 1 REQOP 1 0 :3:0 
 `uc 1 ABAT 1 0 :1:3 
 `uc 1 TXBWS 1 0 :4:4 
 ]
 "9163
-[s S2754 . 1 `uc 1 REQOP0 1 0 :1:0 
+[s S2784 . 1 `uc 1 REQOP0 1 0 :1:0 
 `uc 1 REQOP1 1 0 :1:1 
 `uc 1 REQOP2 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
@@ -3920,8 +3927,8 @@ PRODUCER_EV_SLOTS 2
 `uc 1 TXBWS2 1 0 :1:6 
 `uc 1 TXBWS3 1 0 :1:7 
 ]
-[u S2763 . 1 `S2750 1 . 1 0 `S2754 1 . 1 0 ]
-[v _C1CONTbits C1CONTbits `VES2763  1 e 1 @259 ]
+[u S2793 . 1 `S2780 1 . 1 0 `S2784 1 . 1 0 ]
+[v _C1CONTbits C1CONTbits `VES2793  1 e 1 @259 ]
 "9218
 [v _C1NBTCFGL C1NBTCFGL `VEuc  1 e 1 @260 ]
 "9282
@@ -3930,7 +3937,7 @@ PRODUCER_EV_SLOTS 2
 [v _C1NBTCFGU C1NBTCFGU `VEuc  1 e 1 @262 ]
 "9416
 [v _C1NBTCFGT C1NBTCFGT `VEuc  1 e 1 @263 ]
-[s S2461 . 1 `uc 1 . 1 0 :2:0 
+[s S2491 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 TXATIF 1 0 :1:2 
 `uc 1 RXOVIF 1 0 :1:3 
 `uc 1 SERRIF 1 0 :1:4 
@@ -3939,18 +3946,18 @@ PRODUCER_EV_SLOTS 2
 `uc 1 IVMIF 1 0 :1:7 
 ]
 "10420
-[u S2469 . 1 `S2461 1 . 1 0 ]
-[v _C1INTHbits C1INTHbits `VES2469  1 e 1 @285 ]
-[s S2385 . 1 `uc 1 TXIE 1 0 :1:0 
+[u S2499 . 1 `S2491 1 . 1 0 ]
+[v _C1INTHbits C1INTHbits `VES2499  1 e 1 @285 ]
+[s S2415 . 1 `uc 1 TXIE 1 0 :1:0 
 `uc 1 RXIE 1 0 :1:1 
 `uc 1 TBCIE 1 0 :1:2 
 `uc 1 MODIE 1 0 :1:3 
 `uc 1 TEFIE 1 0 :1:4 
 ]
 "10469
-[u S2391 . 1 `S2385 1 . 1 0 ]
-[v _C1INTUbits C1INTUbits `VES2391  1 e 1 @286 ]
-[s S2400 . 1 `uc 1 . 1 0 :2:0 
+[u S2421 . 1 `S2415 1 . 1 0 ]
+[v _C1INTUbits C1INTUbits `VES2421  1 e 1 @286 ]
+[s S2430 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 TXATIE 1 0 :1:2 
 `uc 1 RXOVIE 1 0 :1:3 
 `uc 1 SERRIE 1 0 :1:4 
@@ -3959,14 +3966,14 @@ PRODUCER_EV_SLOTS 2
 `uc 1 IVMIE 1 0 :1:7 
 ]
 "10515
-[u S2408 . 1 `S2400 1 . 1 0 ]
-[v _C1INTTbits C1INTTbits `VES2408  1 e 1 @287 ]
+[u S2438 . 1 `S2430 1 . 1 0 ]
+[v _C1INTTbits C1INTTbits `VES2438  1 e 1 @287 ]
 "12117
 [v _C1TRECU C1TRECU `VEuc  1 e 1 @310 ]
-[s S2584 . 1 `uc 1 NRERRCNT 1 0 :8:0 
+[s S2614 . 1 `uc 1 NRERRCNT 1 0 :8:0 
 ]
 "12194
-[s S2586 . 1 `uc 1 NRERRCNT0 1 0 :1:0 
+[s S2616 . 1 `uc 1 NRERRCNT0 1 0 :1:0 
 `uc 1 NRERRCNT1 1 0 :1:1 
 `uc 1 NRERRCNT2 1 0 :1:2 
 `uc 1 NRERRCNT3 1 0 :1:3 
@@ -3975,12 +3982,12 @@ PRODUCER_EV_SLOTS 2
 `uc 1 NRERRCNT6 1 0 :1:6 
 `uc 1 NRERRCNT7 1 0 :1:7 
 ]
-[u S2595 . 1 `S2584 1 . 1 0 `S2586 1 . 1 0 ]
-[v _C1BDIAG0Lbits C1BDIAG0Lbits `VES2595  1 e 1 @312 ]
-[s S2558 . 1 `uc 1 NTERRCNT 1 0 :8:0 
+[u S2625 . 1 `S2614 1 . 1 0 `S2616 1 . 1 0 ]
+[v _C1BDIAG0Lbits C1BDIAG0Lbits `VES2625  1 e 1 @312 ]
+[s S2588 . 1 `uc 1 NTERRCNT 1 0 :8:0 
 ]
 "12264
-[s S2560 . 1 `uc 1 NTERRCNT0 1 0 :1:0 
+[s S2590 . 1 `uc 1 NTERRCNT0 1 0 :1:0 
 `uc 1 NTERRCNT1 1 0 :1:1 
 `uc 1 NTERRCNT2 1 0 :1:2 
 `uc 1 NTERRCNT3 1 0 :1:3 
@@ -3989,8 +3996,8 @@ PRODUCER_EV_SLOTS 2
 `uc 1 NTERRCNT6 1 0 :1:6 
 `uc 1 NTERRCNT7 1 0 :1:7 
 ]
-[u S2569 . 1 `S2558 1 . 1 0 `S2560 1 . 1 0 ]
-[v _C1BDIAG0Hbits C1BDIAG0Hbits `VES2569  1 e 1 @313 ]
+[u S2599 . 1 `S2588 1 . 1 0 `S2590 1 . 1 0 ]
+[v _C1BDIAG0Hbits C1BDIAG0Hbits `VES2599  1 e 1 @313 ]
 "13015
 [v _C1FIFOBA C1FIFOBA `VEul  1 e 4 @332 ]
 "13302
@@ -4007,18 +4014,18 @@ PRODUCER_EV_SLOTS 2
 [v _C1FIFOCON1L C1FIFOCON1L `VEuc  1 e 1 @348 ]
 "13971
 [v _C1FIFOCON1H C1FIFOCON1H `VEuc  1 e 1 @349 ]
-[s S2481 . 1 `uc 1 UINC 1 0 :1:0 
+[s S2511 . 1 `uc 1 UINC 1 0 :1:0 
 `uc 1 TXREQ 1 0 :1:1 
 `uc 1 FRESET 1 0 :1:2 
 ]
 "13983
-[u S2485 . 1 `S2481 1 . 1 0 ]
-[v _C1FIFOCON1Hbits C1FIFOCON1Hbits `VES2485  1 e 1 @349 ]
+[u S2515 . 1 `S2511 1 . 1 0 ]
+[v _C1FIFOCON1Hbits C1FIFOCON1Hbits `VES2515  1 e 1 @349 ]
 "14003
 [v _C1FIFOCON1U C1FIFOCON1U `VEuc  1 e 1 @350 ]
 "14073
 [v _C1FIFOCON1T C1FIFOCON1T `VEuc  1 e 1 @351 ]
-[s S2440 . 1 `uc 1 TFNRFNIF 1 0 :1:0 
+[s S2470 . 1 `uc 1 TFNRFNIF 1 0 :1:0 
 `uc 1 TFHRFHIF 1 0 :1:1 
 `uc 1 TFERFFIF 1 0 :1:2 
 `uc 1 RXOVIF 1 0 :1:3 
@@ -4028,8 +4035,8 @@ PRODUCER_EV_SLOTS 2
 `uc 1 TXABT 1 0 :1:7 
 ]
 "14149
-[u S2449 . 1 `S2440 1 . 1 0 ]
-[v _C1FIFOSTA1Lbits C1FIFOSTA1Lbits `VES2449  1 e 1 @352 ]
+[u S2479 . 1 `S2470 1 . 1 0 ]
+[v _C1FIFOSTA1Lbits C1FIFOSTA1Lbits `VES2479  1 e 1 @352 ]
 "14260
 [v _C1FIFOUA1 C1FIFOUA1 `VEul  1 e 4 @356 ]
 "14554
@@ -4041,18 +4048,18 @@ PRODUCER_EV_SLOTS 2
 "14718
 [v _C1FIFOCON2T C1FIFOCON2T `VEuc  1 e 1 @363 ]
 "14794
-[v _C1FIFOSTA2Lbits C1FIFOSTA2Lbits `VES2449  1 e 1 @364 ]
-[s S2632 . 1 `uc 1 FIFOCI 1 0 :5:0 
+[v _C1FIFOSTA2Lbits C1FIFOSTA2Lbits `VES2479  1 e 1 @364 ]
+[s S2662 . 1 `uc 1 FIFOCI 1 0 :5:0 
 ]
 "14856
-[s S2634 . 1 `uc 1 FIFOCI0 1 0 :1:0 
+[s S2664 . 1 `uc 1 FIFOCI0 1 0 :1:0 
 `uc 1 FIFOCI1 1 0 :1:1 
 `uc 1 FIFOCI2 1 0 :1:2 
 `uc 1 FIFOCI3 1 0 :1:3 
 `uc 1 FIFOCI4 1 0 :1:4 
 ]
-[u S2640 . 1 `S2632 1 . 1 0 `S2634 1 . 1 0 ]
-[v _C1FIFOSTA2Hbits C1FIFOSTA2Hbits `VES2640  1 e 1 @365 ]
+[u S2670 . 1 `S2662 1 . 1 0 `S2664 1 . 1 0 ]
+[v _C1FIFOSTA2Hbits C1FIFOSTA2Hbits `VES2670  1 e 1 @365 ]
 "14905
 [v _C1FIFOUA2 C1FIFOUA2 `VEul  1 e 4 @368 ]
 "15199
@@ -4060,7 +4067,7 @@ PRODUCER_EV_SLOTS 2
 "15261
 [v _C1FIFOCON3H C1FIFOCON3H `VEuc  1 e 1 @373 ]
 "15273
-[v _C1FIFOCON3Hbits C1FIFOCON3Hbits `VES2485  1 e 1 @373 ]
+[v _C1FIFOCON3Hbits C1FIFOCON3Hbits `VES2515  1 e 1 @373 ]
 "15293
 [v _C1FIFOCON3U C1FIFOCON3U `VEuc  1 e 1 @374 ]
 "15305
@@ -4072,9 +4079,9 @@ PRODUCER_EV_SLOTS 2
 "15363
 [v _C1FIFOCON3T C1FIFOCON3T `VEuc  1 e 1 @375 ]
 "15439
-[v _C1FIFOSTA3Lbits C1FIFOSTA3Lbits `VES2449  1 e 1 @376 ]
+[v _C1FIFOSTA3Lbits C1FIFOSTA3Lbits `VES2479  1 e 1 @376 ]
 "15501
-[v _C1FIFOSTA3Hbits C1FIFOSTA3Hbits `VES2640  1 e 1 @377 ]
+[v _C1FIFOSTA3Hbits C1FIFOSTA3Hbits `VES2670  1 e 1 @377 ]
 "15550
 [v _C1FIFOUA3 C1FIFOUA3 `VEul  1 e 4 @380 ]
 "15837
@@ -4109,43 +4116,43 @@ PRODUCER_EV_SLOTS 2
 [v _TMR0L TMR0L `VEuc  1 e 1 @792 ]
 "38243
 [v _TMR0H TMR0H `VEuc  1 e 1 @793 ]
-[s S5810 . 1 `uc 1 OUTPS 1 0 :4:0 
+[s S5835 . 1 `uc 1 OUTPS 1 0 :4:0 
 `uc 1 MD16 1 0 :1:4 
 `uc 1 OUT 1 0 :1:5 
 `uc 1 . 1 0 :1:6 
 `uc 1 EN 1 0 :1:7 
 ]
 "38531
-[s S5816 . 1 `uc 1 T0OUTPS 1 0 :4:0 
+[s S5841 . 1 `uc 1 T0OUTPS 1 0 :4:0 
 `uc 1 T0MD16 1 0 :1:4 
 `uc 1 T0OUT 1 0 :1:5 
 `uc 1 . 1 0 :1:6 
 `uc 1 T0EN 1 0 :1:7 
 ]
 "38531
-[s S5822 . 1 `uc 1 OUTPS0 1 0 :1:0 
+[s S5847 . 1 `uc 1 OUTPS0 1 0 :1:0 
 `uc 1 OUTPS1 1 0 :1:1 
 `uc 1 OUTPS2 1 0 :1:2 
 `uc 1 OUTPS3 1 0 :1:3 
 `uc 1 T016BIT 1 0 :1:4 
 ]
 "38531
-[s S5828 . 1 `uc 1 T0OUTPS0 1 0 :1:0 
+[s S5853 . 1 `uc 1 T0OUTPS0 1 0 :1:0 
 `uc 1 T0OUTPS1 1 0 :1:1 
 `uc 1 T0OUTPS2 1 0 :1:2 
 `uc 1 T0OUTPS3 1 0 :1:3 
 ]
 "38531
-[u S5833 . 1 `S5810 1 . 1 0 `S5816 1 . 1 0 `S5822 1 . 1 0 `S5828 1 . 1 0 ]
+[u S5858 . 1 `S5835 1 . 1 0 `S5841 1 . 1 0 `S5847 1 . 1 0 `S5853 1 . 1 0 ]
 "38531
 "38531
-[v _T0CON0bits T0CON0bits `VES5833  1 e 1 @794 ]
-[s S5752 . 1 `uc 1 CKPS 1 0 :4:0 
+[v _T0CON0bits T0CON0bits `VES5858  1 e 1 @794 ]
+[s S5777 . 1 `uc 1 CKPS 1 0 :4:0 
 `uc 1 ASYNC 1 0 :1:4 
 `uc 1 CS 1 0 :3:5 
 ]
 "38658
-[s S5756 . 1 `uc 1 CKPS0 1 0 :1:0 
+[s S5781 . 1 `uc 1 CKPS0 1 0 :1:0 
 `uc 1 CKPS1 1 0 :1:1 
 `uc 1 CKPS2 1 0 :1:2 
 `uc 1 CKPS3 1 0 :1:3 
@@ -4155,12 +4162,12 @@ PRODUCER_EV_SLOTS 2
 `uc 1 CS2 1 0 :1:7 
 ]
 "38658
-[s S5765 . 1 `uc 1 T0CKPS 1 0 :4:0 
+[s S5790 . 1 `uc 1 T0CKPS 1 0 :4:0 
 `uc 1 . 1 0 :1:4 
 `uc 1 T0CS 1 0 :3:5 
 ]
 "38658
-[s S5769 . 1 `uc 1 T0CKPS0 1 0 :1:0 
+[s S5794 . 1 `uc 1 T0CKPS0 1 0 :1:0 
 `uc 1 T0CKPS1 1 0 :1:1 
 `uc 1 T0CKPS2 1 0 :1:2 
 `uc 1 T0CKPS3 1 0 :1:3 
@@ -4170,23 +4177,23 @@ PRODUCER_EV_SLOTS 2
 `uc 1 T0CS2 1 0 :1:7 
 ]
 "38658
-[u S5778 . 1 `S5752 1 . 1 0 `S5756 1 . 1 0 `S5765 1 . 1 0 `S5769 1 . 1 0 ]
+[u S5803 . 1 `S5777 1 . 1 0 `S5781 1 . 1 0 `S5790 1 . 1 0 `S5794 1 . 1 0 ]
 "38658
 "38658
-[v _T0CON1bits T0CON1bits `VES5778  1 e 1 @795 ]
+[v _T0CON1bits T0CON1bits `VES5803  1 e 1 @795 ]
 "39968
 [v _T2PR T2PR `VEuc  1 e 1 @803 ]
-[s S1299 . 1 `uc 1 OUTPS 1 0 :4:0 
+[s S1340 . 1 `uc 1 OUTPS 1 0 :4:0 
 `uc 1 CKPS 1 0 :3:4 
 `uc 1 ON 1 0 :1:7 
 ]
 "40042
-[s S1303 . 1 `uc 1 T2OUTPS 1 0 :4:0 
+[s S1344 . 1 `uc 1 T2OUTPS 1 0 :4:0 
 `uc 1 T2CKPS 1 0 :3:4 
 `uc 1 T2ON 1 0 :1:7 
 ]
 "40042
-[s S1307 . 1 `uc 1 T2OUTPS0 1 0 :1:0 
+[s S1348 . 1 `uc 1 T2OUTPS0 1 0 :1:0 
 `uc 1 T2OUTPS1 1 0 :1:1 
 `uc 1 T2OUTPS2 1 0 :1:2 
 `uc 1 T2OUTPS3 1 0 :1:3 
@@ -4195,7 +4202,7 @@ PRODUCER_EV_SLOTS 2
 `uc 1 T2CKPS2 1 0 :1:6 
 ]
 "40042
-[s S1315 . 1 `uc 1 OUTPS0 1 0 :1:0 
+[s S1356 . 1 `uc 1 OUTPS0 1 0 :1:0 
 `uc 1 OUTPS1 1 0 :1:1 
 `uc 1 OUTPS2 1 0 :1:2 
 `uc 1 OUTPS3 1 0 :1:3 
@@ -4205,43 +4212,43 @@ PRODUCER_EV_SLOTS 2
 `uc 1 TMR2ON 1 0 :1:7 
 ]
 "40042
-[u S1324 . 1 `S1299 1 . 1 0 `S1303 1 . 1 0 `S1307 1 . 1 0 `S1315 1 . 1 0 ]
+[u S1365 . 1 `S1340 1 . 1 0 `S1344 1 . 1 0 `S1348 1 . 1 0 `S1356 1 . 1 0 ]
 "40042
 "40042
-[v _T2CONbits T2CONbits `VES1324  1 e 1 @804 ]
-[s S1357 . 1 `uc 1 MODE 1 0 :5:0 
+[v _T2CONbits T2CONbits `VES1365  1 e 1 @804 ]
+[s S1398 . 1 `uc 1 MODE 1 0 :5:0 
 `uc 1 CKSYNC 1 0 :1:5 
 `uc 1 CKPOL 1 0 :1:6 
 `uc 1 PSYNC 1 0 :1:7 
 ]
 "40185
-[s S1362 . 1 `uc 1 MODE0 1 0 :1:0 
+[s S1403 . 1 `uc 1 MODE0 1 0 :1:0 
 `uc 1 MODE1 1 0 :1:1 
 `uc 1 MODE2 1 0 :1:2 
 `uc 1 MODE3 1 0 :1:3 
 `uc 1 MODE4 1 0 :1:4 
 ]
 "40185
-[s S1368 . 1 `uc 1 T2MODE 1 0 :5:0 
+[s S1409 . 1 `uc 1 T2MODE 1 0 :5:0 
 `uc 1 T2CKSYNC 1 0 :1:5 
 `uc 1 T2CKPOL 1 0 :1:6 
 `uc 1 T2PSYNC 1 0 :1:7 
 ]
 "40185
-[s S1373 . 1 `uc 1 T2MODE0 1 0 :1:0 
+[s S1414 . 1 `uc 1 T2MODE0 1 0 :1:0 
 `uc 1 T2MODE1 1 0 :1:1 
 `uc 1 T2MODE2 1 0 :1:2 
 `uc 1 T2MODE3 1 0 :1:3 
 `uc 1 T2MODE4 1 0 :1:4 
 ]
 "40185
-[u S1379 . 1 `S1357 1 . 1 0 `S1362 1 . 1 0 `S1368 1 . 1 0 `S1373 1 . 1 0 ]
+[u S1420 . 1 `S1398 1 . 1 0 `S1403 1 . 1 0 `S1409 1 . 1 0 `S1414 1 . 1 0 ]
 "40185
 "40185
-[v _T2HLTbits T2HLTbits `VES1379  1 e 1 @805 ]
+[v _T2HLTbits T2HLTbits `VES1420  1 e 1 @805 ]
 "40280
 [v _T2CLKCON T2CLKCON `VEuc  1 e 1 @806 ]
-[s S2343 . 1 `uc 1 SWIP 1 0 :1:0 
+[s S2373 . 1 `uc 1 SWIP 1 0 :1:0 
 `uc 1 HLVDIP 1 0 :1:1 
 `uc 1 OSFIP 1 0 :1:2 
 `uc 1 CSWIP 1 0 :1:3 
@@ -4251,10 +4258,10 @@ PRODUCER_EV_SLOTS 2
 `uc 1 IOCIP 1 0 :1:7 
 ]
 "47364
-[u S2352 . 1 `S2343 1 . 1 0 ]
+[u S2382 . 1 `S2373 1 . 1 0 ]
 "47364
 "47364
-[v _IPR0bits IPR0bits `VES2352  1 e 1 @866 ]
+[v _IPR0bits IPR0bits `VES2382  1 e 1 @866 ]
 "47665
 [v _IPR5 IPR5 `VEuc  1 e 1 @871 ]
 "58897
@@ -4271,13 +4278,13 @@ PRODUCER_EV_SLOTS 2
 [v _WPUC WPUC `VEuc  1 e 1 @1041 ]
 "63210
 [v _IVTLOCK IVTLOCK `VEuc  1 e 1 @1113 ]
-[s S6294 . 1 `uc 1 IVTLOCKED 1 0 :1:0 
+[s S6319 . 1 `uc 1 IVTLOCKED 1 0 :1:0 
 ]
 "63220
-[u S6296 . 1 `S6294 1 . 1 0 ]
+[u S6321 . 1 `S6319 1 . 1 0 ]
 "63220
 "63220
-[v _IVTLOCKbits IVTLOCKbits `VES6296  1 e 1 @1113 ]
+[v _IVTLOCKbits IVTLOCKbits `VES6321  1 e 1 @1113 ]
 "63416
 [v _IVTBASEL IVTBASEL `VEuc  1 e 1 @1117 ]
 "63478
@@ -4289,12 +4296,19 @@ PRODUCER_EV_SLOTS 2
 {
 "1318
 } 0
-"170 C:\Users\ianwh\github\CANPAN2/main.c
+"165 C:\Users\ianwh\github\CANPAN2/main.c
 [v _setup setup `(v  1 e 1 0 ]
 {
-"174
-[v setup@nv nv `uc  1 a 1 11 ]
-"229
+"169
+[v setup@nv nv `uc  1 a 1 32 ]
+"228
+} 0
+"309 C:\Users\ianwh\github\CANPAN2/canpan3Inputs.c
+[v _loadInputs loadInputs `(v  1 e 1 0 ]
+{
+"310
+[v loadInputs@buttonNo buttonNo `uc  1 a 1 15 ]
+"314
 } 0
 "51 C:\Users\ianwh\github\CANPAN2/canpan3Outputs.c
 [v _initOutputs initOutputs `(v  1 e 1 0 ]
@@ -4303,24 +4317,26 @@ PRODUCER_EV_SLOTS 2
 [v initOutputs@i i `uc  1 a 1 1 ]
 "114
 } 0
-"67 C:\Users\ianwh\github\CANPAN2/canpan3Inputs.c
+"70 C:\Users\ianwh\github\CANPAN2/canpan3Inputs.c
 [v _initInputs initInputs `(v  1 e 1 0 ]
 {
-"68
+"71
 [v initInputs@i i `uc  1 a 1 2 ]
-"97
+"100
 } 0
-"71 C:\Users\ianwh\github\CANPAN2/canpan3Events.c
+"72 C:\Users\ianwh\github\CANPAN2/canpan3Events.c
 [v _initEvents initEvents `(v  1 e 1 0 ]
 {
-"73
+"74
 } 0
-"206 C:\Users\ianwh\github\CANPAN2/canpan3Inputs.c
-[v _canpanSetAllSwitchOn canpanSetAllSwitchOn `(v  1 e 1 0 ]
+"212 C:\Users\ianwh\github\CANPAN2/canpan3Inputs.c
+[v _canpanSetAllSwitchOff canpanSetAllSwitchOff `(v  1 e 1 0 ]
 {
-"207
-[v canpanSetAllSwitchOn@buttonNo buttonNo `uc  1 a 1 1 ]
-"211
+"213
+[v canpanSetAllSwitchOff@buttonNo buttonNo `uc  1 a 1 31 ]
+"214
+[v canpanSetAllSwitchOff@tableIndex tableIndex `uc  1 a 1 30 ]
+"221
 } 0
 "876 C:\Users\ianwh\github/VLCBlib_PIC/vlcb.c
 [v _powerUp powerUp `(v  1 s 1 powerUp ]
@@ -4496,9 +4512,9 @@ PRODUCER_EV_SLOTS 2
 {
 [s S193 . 2 `uc 1 lo 1 0 `uc 1 hi 1 1 ]
 "112
-[u S523 Word 2 `S193 1 bytes 2 0 `us 1 word 2 0 ]
-[v ackEventProcessMessage@eventNN eventNN `S523  1 a 2 76 ]
-[v ackEventProcessMessage@eventEN eventEN `S523  1 a 2 73 ]
+[u S526 Word 2 `S193 1 bytes 2 0 `us 1 word 2 0 ]
+[v ackEventProcessMessage@eventNN eventNN `S526  1 a 2 76 ]
+[v ackEventProcessMessage@eventEN eventEN `S526  1 a 2 73 ]
 "113
 [v ackEventProcessMessage@eventIndex eventIndex `uc  1 a 1 75 ]
 [s S183 Message 9 `uc 1 len 1 0 `E22515 1 opc 1 1 `[7]uc 1 bytes 7 2 ]
@@ -4653,7 +4669,7 @@ PRODUCER_EV_SLOTS 2
 [v doEvlrn@evVal evVal `uc  1 p 1 67 ]
 "533
 } 0
-"75 C:\Users\ianwh\github\CANPAN2/canpan3Events.c
+"76 C:\Users\ianwh\github\CANPAN2/canpan3Events.c
 [v _APP_addEvent APP_addEvent `(uc  1 e 1 0 ]
 {
 [v APP_addEvent@nodeNumber nodeNumber `us  1 p 2 55 ]
@@ -4661,7 +4677,7 @@ PRODUCER_EV_SLOTS 2
 [v APP_addEvent@evNum evNum `uc  1 p 1 59 ]
 [v APP_addEvent@evVal evVal `uc  1 p 1 60 ]
 [v APP_addEvent@forceOwnNN forceOwnNN `E22883  1 p 1 61 ]
-"77
+"78
 } 0
 "108 C:\Users\ianwh\github/VLCBlib_PIC/timedResponse.c
 [v _pollTimedResponse pollTimedResponse `(v  1 e 1 0 ]
@@ -4710,9 +4726,9 @@ PRODUCER_EV_SLOTS 2
 [v reqevCallback@tableIndex tableIndex `uc  1 a 1 wreg ]
 [s S193 . 2 `uc 1 lo 1 0 `uc 1 hi 1 1 ]
 "647
-[u S523 Word 2 `S193 1 bytes 2 0 `us 1 word 2 0 ]
-[v reqevCallback@eventNumber eventNumber `S523  1 a 2 61 ]
-[v reqevCallback@nodeNumber nodeNumber `S523  1 a 2 59 ]
+[u S526 Word 2 `S193 1 bytes 2 0 `us 1 word 2 0 ]
+[v reqevCallback@eventNumber eventNumber `S526  1 a 2 61 ]
+[v reqevCallback@nodeNumber nodeNumber `S526  1 a 2 59 ]
 "650
 [v reqevCallback@ev ev `s  1 a 2 57 ]
 "649
@@ -4729,45 +4745,33 @@ PRODUCER_EV_SLOTS 2
 {
 [s S193 . 2 `uc 1 lo 1 0 `uc 1 hi 1 1 ]
 "427
-[u S523 Word 2 `S193 1 bytes 2 0 `us 1 word 2 0 ]
-[v nerdCallback@eventNumber eventNumber `S523  1 a 2 53 ]
-[v nerdCallback@nodeNumber nodeNumber `S523  1 a 2 51 ]
+[u S526 Word 2 `S193 1 bytes 2 0 `us 1 word 2 0 ]
+[v nerdCallback@eventNumber eventNumber `S526  1 a 2 53 ]
+[v nerdCallback@nodeNumber nodeNumber `S526  1 a 2 51 ]
 "426
 [v nerdCallback@step step `uc  1 p 1 50 ]
 "440
 } 0
-"281 C:\Users\ianwh\github\CANPAN2/canpan3Inputs.c
+"291 C:\Users\ianwh\github\CANPAN2/canpan3Inputs.c
 [v _sodTRCallback sodTRCallback `(E23132  1 e 1 0 ]
 {
-"282
+"292
 [v sodTRCallback@value value `E22903  1 a 1 51 ]
-"281
+"291
 [v sodTRCallback@step step `uc  1 p 1 50 ]
-"294
+"304
 } 0
-"249 C:\Users\ianwh\github\CANPAN2/canpan3Events.c
+"318 C:\Users\ianwh\github\CANPAN2/canpan3Events.c
 [v _APP_GetEventIndexState APP_GetEventIndexState `(E22903  1 e 1 0 ]
 {
 [v APP_GetEventIndexState@tableIndex tableIndex `uc  1 a 1 wreg ]
-"250
+"319
 [v APP_GetEventIndexState@switchNo switchNo `uc  1 a 1 29 ]
-"249
+"318
 [v APP_GetEventIndexState@tableIndex tableIndex `uc  1 a 1 wreg ]
-"253
+"322
 [v APP_GetEventIndexState@tableIndex tableIndex `uc  1 a 1 28 ]
-"264
-} 0
-"112
-[v _APP_isProducededEvent APP_isProducededEvent `(uc  1 e 1 0 ]
-{
-[v APP_isProducededEvent@tableIndex tableIndex `uc  1 a 1 wreg ]
-"113
-[v APP_isProducededEvent@ev ev `s  1 a 2 26 ]
-"112
-[v APP_isProducededEvent@tableIndex tableIndex `uc  1 a 1 wreg ]
-"115
-[v APP_isProducededEvent@tableIndex tableIndex `uc  1 a 1 25 ]
-"120
+"333
 } 0
 "827 C:\Users\ianwh\github/VLCBlib_PIC/event_teach_simple.c
 [v _numEv numEv `(uc  1 e 1 0 ]
@@ -5009,32 +5013,32 @@ PRODUCER_EV_SLOTS 2
 [v sendMessage2@opc opc `E22565  1 a 1 38 ]
 "1147
 } 0
-"130 C:\Users\ianwh\github\CANPAN2/canpan3Events.c
+"199 C:\Users\ianwh\github\CANPAN2/canpan3Events.c
 [v _APP_processConsumedEvent APP_processConsumedEvent `(E22916  1 e 1 0 ]
 {
 [v APP_processConsumedEvent@tableIndex tableIndex `uc  1 a 1 wreg ]
-"133
+"202
 [v APP_processConsumedEvent@ledNo ledNo `uc  1 a 1 36 ]
-"131
+"200
 [v APP_processConsumedEvent@onOff onOff `uc  1 a 1 35 ]
-"135
+"204
 [v APP_processConsumedEvent@polarity polarity `uc  1 a 1 34 ]
-"134
+"203
 [v APP_processConsumedEvent@flags flags `uc  1 a 1 31 ]
-"132
+"201
 [v APP_processConsumedEvent@ledMode ledMode `uc  1 a 1 30 ]
-"130
+"199
 [v APP_processConsumedEvent@tableIndex tableIndex `uc  1 a 1 wreg ]
 [s S183 Message 9 `uc 1 len 1 0 `E22515 1 opc 1 1 `[7]uc 1 bytes 7 2 ]
 [v APP_processConsumedEvent@m m `*.39S183  1 p 2 24 ]
-"137
+"206
 [v APP_processConsumedEvent@tableIndex tableIndex `uc  1 a 1 29 ]
-"216
+"285
 } 0
-"266 C:\Users\ianwh\github\CANPAN2/canpan3Inputs.c
+"276 C:\Users\ianwh\github\CANPAN2/canpan3Inputs.c
 [v _doSoD doSoD `(v  1 e 1 0 ]
 {
-"268
+"278
 } 0
 "85 C:\Users\ianwh\github/VLCBlib_PIC/timedResponse.c
 [v _startTimedResponse startTimedResponse `(v  1 e 1 0 ]
@@ -5082,8 +5086,8 @@ PRODUCER_EV_SLOTS 2
 "97
 [v pop@ret ret `*.39S183  1 a 2 8 ]
 "96
-[s S2210 MessageQueue 5 `*.39S183 1 messages 2 0 `uc 1 readIndex 1 2 `uc 1 writeIndex 1 3 `uc 1 size 1 4 ]
-[v pop@q q `*.39S2210  1 p 2 1 ]
+[s S2245 MessageQueue 5 `*.39S183 1 messages 2 0 `uc 1 readIndex 1 2 `uc 1 writeIndex 1 3 `uc 1 size 1 4 ]
+[v pop@q q `*.39S2245  1 p 2 1 ]
 "104
 } 0
 "4 C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\memcpy.c
@@ -5156,26 +5160,17 @@ PRODUCER_EV_SLOTS 2
 [v isConsumedEvent@eventIndex eventIndex `uc  1 a 1 28 ]
 "173
 } 0
-"86 C:\Users\ianwh\github\CANPAN2/canpan3Events.c
+"87 C:\Users\ianwh\github\CANPAN2/canpan3Events.c
 [v _APP_isConsumedEvent APP_isConsumedEvent `(uc  1 e 1 0 ]
 {
 [v APP_isConsumedEvent@tableIndex tableIndex `uc  1 a 1 wreg ]
-"87
+"88
 [v APP_isConsumedEvent@ev ev `s  1 a 2 26 ]
-"86
+"87
 [v APP_isConsumedEvent@tableIndex tableIndex `uc  1 a 1 wreg ]
-"89
+"90
 [v APP_isConsumedEvent@tableIndex tableIndex `uc  1 a 1 25 ]
-"105
-} 0
-"811 C:\Users\ianwh\github/VLCBlib_PIC/event_teach_simple.c
-[v _getEv getEv `(s  1 e 2 0 ]
-{
-[v getEv@tableIndex tableIndex `uc  1 a 1 wreg ]
-[v getEv@tableIndex tableIndex `uc  1 a 1 wreg ]
-[v getEv@evNum evNum `uc  1 p 1 13 ]
-[v getEv@tableIndex tableIndex `uc  1 a 1 24 ]
-"819
+"106
 } 0
 "307 C:\Users\ianwh\github/VLCBlib_PIC\vlcb.h
 "156
@@ -5212,51 +5207,81 @@ PRODUCER_EV_SLOTS 2
 [v checkLen@service service `uc  1 p 1 45 ]
 "1108
 } 0
-"273 C:\Users\ianwh\github\CANPAN2/main.c
+"114 C:\Users\ianwh\github\CANPAN2/canpan3Events.c
 [v _APP_preProcessMessage APP_preProcessMessage `(E22916  1 e 1 0 ]
 {
+"116
+[v APP_preProcessMessage@enn enn `us  1 a 2 38 ]
+"115
+[v APP_preProcessMessage@tableIndex tableIndex `uc  1 a 1 40 ]
+"118
+[v APP_preProcessMessage@ev ev `uc  1 a 1 37 ]
+"117
+[v APP_preProcessMessage@switchNo switchNo `uc  1 a 1 36 ]
 [s S183 Message 9 `uc 1 len 1 0 `E22515 1 opc 1 1 `[7]uc 1 bytes 7 2 ]
-[v APP_preProcessMessage@m m `*.39S183  1 p 2 1 ]
-"275
+"114
+[v APP_preProcessMessage@m m `*.39S183  1 p 2 31 ]
+"173
 } 0
-"280
+"181
+[v _APP_isProducedEvent APP_isProducedEvent `(uc  1 e 1 0 ]
+{
+[v APP_isProducedEvent@tableIndex tableIndex `uc  1 a 1 wreg ]
+"182
+[v APP_isProducedEvent@ev ev `s  1 a 2 26 ]
+"181
+[v APP_isProducedEvent@tableIndex tableIndex `uc  1 a 1 wreg ]
+"184
+[v APP_isProducedEvent@tableIndex tableIndex `uc  1 a 1 25 ]
+"189
+} 0
+"811 C:\Users\ianwh\github/VLCBlib_PIC/event_teach_simple.c
+[v _getEv getEv `(s  1 e 2 0 ]
+{
+[v getEv@tableIndex tableIndex `uc  1 a 1 wreg ]
+[v getEv@tableIndex tableIndex `uc  1 a 1 wreg ]
+[v getEv@evNum evNum `uc  1 p 1 13 ]
+[v getEv@tableIndex tableIndex `uc  1 a 1 24 ]
+"819
+} 0
+"272 C:\Users\ianwh\github\CANPAN2/main.c
 [v _APP_postProcessMessage APP_postProcessMessage `(E22916  1 e 1 0 ]
 {
 [s S183 Message 9 `uc 1 len 1 0 `E22515 1 opc 1 1 `[7]uc 1 bytes 7 2 ]
 [v APP_postProcessMessage@m m `*.39S183  1 p 2 1 ]
-"282
+"274
 } 0
-"234
+"233
 [v _loop loop `(v  1 e 1 0 ]
 {
-"252
+"251
 } 0
-"104 C:\Users\ianwh\github\CANPAN2/canpan3Inputs.c
+"107 C:\Users\ianwh\github\CANPAN2/canpan3Inputs.c
 [v _inputScan inputScan `(v  1 e 1 0 ]
 {
 [s S193 . 2 `uc 1 lo 1 0 `uc 1 hi 1 1 ]
+"117
+[u S526 Word 2 `S193 1 bytes 2 0 `us 1 word 2 0 ]
+[v inputScan@producedEventEN producedEventEN `S526  1 a 2 54 ]
+"116
+[v inputScan@producedEventNN producedEventNN `S526  1 a 2 52 ]
+"115
+[v inputScan@buttonNo buttonNo `uc  1 a 1 62 ]
 "114
-[u S523 Word 2 `S193 1 bytes 2 0 `us 1 word 2 0 ]
-[v inputScan@producedEventEN producedEventEN `S523  1 a 2 54 ]
-"113
-[v inputScan@producedEventNN producedEventNN `S523  1 a 2 52 ]
-"111
-[v inputScan@onOff onOff `uc  1 a 1 62 ]
+[v inputScan@onOff onOff `uc  1 a 1 61 ]
 "112
-[v inputScan@buttonNo buttonNo `uc  1 a 1 61 ]
-"109
 [v inputScan@sv sv `uc  1 a 1 60 ]
-"106
+"109
 [v inputScan@i i `uc  1 a 1 59 ]
-"108
+"111
 [v inputScan@tableIndex tableIndex `uc  1 a 1 58 ]
-"105
+"108
 [v inputScan@row row `uc  1 a 1 57 ]
-"110
+"113
 [v inputScan@mode mode `uc  1 a 1 56 ]
-"107
+"110
 [v inputScan@diff diff `uc  1 a 1 51 ]
-"201
+"205
 } 0
 "1181 C:\Users\ianwh\github/VLCBlib_PIC/vlcb.c
 [v _sendMessage5 sendMessage5 `(v  1 e 1 0 ]
@@ -5271,17 +5296,17 @@ PRODUCER_EV_SLOTS 2
 [v sendMessage5@opc opc `E22565  1 a 1 41 ]
 "1183
 } 0
-"247 C:\Users\ianwh\github\CANPAN2/canpan3Inputs.c
+"257 C:\Users\ianwh\github\CANPAN2/canpan3Inputs.c
 [v _findEventForSwitch findEventForSwitch `(uc  1 e 1 0 ]
 {
 [v findEventForSwitch@switchNo switchNo `uc  1 a 1 wreg ]
-"248
-[v findEventForSwitch@tableIndex tableIndex `uc  1 a 1 29 ]
-"247
-[v findEventForSwitch@switchNo switchNo `uc  1 a 1 wreg ]
-"249
-[v findEventForSwitch@switchNo switchNo `uc  1 a 1 28 ]
 "258
+[v findEventForSwitch@tableIndex tableIndex `uc  1 a 1 29 ]
+"257
+[v findEventForSwitch@switchNo switchNo `uc  1 a 1 wreg ]
+"259
+[v findEventForSwitch@switchNo switchNo `uc  1 a 1 28 ]
+"268
 } 0
 "841 C:\Users\ianwh\github/VLCBlib_PIC/event_teach_simple.c
 [v _getEVs getEVs `(uc  1 e 1 0 ]
@@ -5295,30 +5320,30 @@ PRODUCER_EV_SLOTS 2
 [v getEVs@tableIndex tableIndex `uc  1 a 1 22 ]
 "852
 } 0
-"241 C:\Users\ianwh\github\CANPAN2/canpan3Inputs.c
+"251 C:\Users\ianwh\github\CANPAN2/canpan3Inputs.c
 [v _driveColumn driveColumn `(v  1 e 1 0 ]
 {
-"245
+"255
 } 0
-"213
+"223
 [v _canpanSendProducedEvent canpanSendProducedEvent `(v  1 e 1 0 ]
 {
 [v canpanSendProducedEvent@tableIndex tableIndex `uc  1 a 1 wreg ]
 [s S193 . 2 `uc 1 lo 1 0 `uc 1 hi 1 1 ]
-"215
-[u S523 Word 2 `S193 1 bytes 2 0 `us 1 word 2 0 ]
-[v canpanSendProducedEvent@producedEventNN producedEventNN `S523  1 a 2 47 ]
-"216
-[v canpanSendProducedEvent@producedEventEN producedEventEN `S523  1 a 2 45 ]
-"214
+"225
+[u S526 Word 2 `S193 1 bytes 2 0 `us 1 word 2 0 ]
+[v canpanSendProducedEvent@producedEventNN producedEventNN `S526  1 a 2 47 ]
+"226
+[v canpanSendProducedEvent@producedEventEN producedEventEN `S526  1 a 2 45 ]
+"224
 [v canpanSendProducedEvent@opc opc `uc  1 a 1 44 ]
-"213
+"223
 [v canpanSendProducedEvent@tableIndex tableIndex `uc  1 a 1 wreg ]
 [v canpanSendProducedEvent@onOff onOff `uc  1 p 1 41 ]
 [v canpanSendProducedEvent@sv sv `uc  1 p 1 42 ]
-"218
+"228
 [v canpanSendProducedEvent@tableIndex tableIndex `uc  1 a 1 43 ]
-"239
+"249
 } 0
 "1168 C:\Users\ianwh\github/VLCBlib_PIC/vlcb.c
 [v _sendMessage4 sendMessage4 `(v  1 e 1 0 ]
@@ -5423,16 +5448,16 @@ PRODUCER_EV_SLOTS 2
 "81
 [v getNextWriteMessage@wr wr `uc  1 a 1 12 ]
 "80
-[s S2210 MessageQueue 5 `*.39S183 1 messages 2 0 `uc 1 readIndex 1 2 `uc 1 writeIndex 1 3 `uc 1 size 1 4 ]
-[v getNextWriteMessage@q q `*.39S2210  1 p 2 1 ]
+[s S2245 MessageQueue 5 `*.39S183 1 messages 2 0 `uc 1 readIndex 1 2 `uc 1 writeIndex 1 3 `uc 1 size 1 4 ]
+[v getNextWriteMessage@q q `*.39S2245  1 p 2 1 ]
 "87
 } 0
-"221 C:\Users\ianwh\github\CANPAN2/canpan3Events.c
+"290 C:\Users\ianwh\github\CANPAN2/canpan3Events.c
 [v _doFlash doFlash `(v  1 e 1 0 ]
 {
-"222
+"291
 [v doFlash@ledNo ledNo `uc  1 a 1 15 ]
-"247
+"316
 } 0
 "188 C:\Users\ianwh\github\CANPAN2/canpan3Outputs.c
 [v _setLed setLed `(v  1 e 1 0 ]
@@ -5598,17 +5623,17 @@ PRODUCER_EV_SLOTS 2
 [v APP_nvDefault@index index `uc  1 a 1 1 ]
 "57
 } 0
-"151 C:\Users\ianwh\github\CANPAN2/main.c
+"146 C:\Users\ianwh\github\CANPAN2/main.c
 [v _APP_factoryReset APP_factoryReset `(v  1 e 1 0 ]
 {
-"157
+"152
 } 0
-"49 C:\Users\ianwh\github\CANPAN2/canpan3Events.c
+"50 C:\Users\ianwh\github\CANPAN2/canpan3Events.c
 [v _factoryResetGlobalEvents factoryResetGlobalEvents `(v  1 e 1 0 ]
 {
-"50
+"51
 [v factoryResetGlobalEvents@i i `uc  1 a 1 57 ]
-"69
+"70
 } 0
 "719 C:\Users\ianwh\github/VLCBlib_PIC/event_teach_simple.c
 [v _addEvent addEvent `(uc  1 e 1 0 ]
@@ -5675,10 +5700,10 @@ PRODUCER_EV_SLOTS 2
 [v eraseFlashBlock@interruptEnabled interruptEnabled `uc  1 a 1 4 ]
 "360
 } 0
-"266 C:\Users\ianwh\github\CANPAN2/main.c
+"265 C:\Users\ianwh\github\CANPAN2/main.c
 [v _APP_isSuitableTimeToWriteFlash APP_isSuitableTimeToWriteFlash `(E22859  1 e 1 0 ]
 {
-"268
+"267
 } 0
 "208 C:\Users\ianwh\github/VLCBlib_PIC/nvm.c
 [v _EEPROM_Write EEPROM_Write `(uc  1 e 1 0 ]
@@ -5758,10 +5783,10 @@ PRODUCER_EV_SLOTS 2
 [v EEPROM_Read@index index `um  1 p 3 1 ]
 "200
 } 0
-"163 C:\Users\ianwh\github\CANPAN2/main.c
+"158 C:\Users\ianwh\github\CANPAN2/main.c
 [v _APP_testMode APP_testMode `(v  1 e 1 0 ]
 {
-"165
+"160
 } 0
 "121 C:\Users\ianwh\github\CANPAN2/canpan3Outputs.c
 [v _processOutputs processOutputs `IIH(v  1 e 1 0 ]

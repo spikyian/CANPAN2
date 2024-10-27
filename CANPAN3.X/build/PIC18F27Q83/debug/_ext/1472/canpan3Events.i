@@ -38803,6 +38803,7 @@ extern TickValue pbTimer;
 # 40 "../canpan3Events.h"
 extern void initEvents(void);
 extern void doFlash(void);
+extern uint8_t APP_isProducedEvent(uint8_t tableIndex);
 # 43 "../canpan3Events.c" 2
 
 # 1 "../canpan3Outputs.h" 1
@@ -38827,12 +38828,16 @@ extern uint8_t testLed(uint8_t no);
 extern void initInputs(void);
 extern void inputScan(void);
 extern void doSoD(void);
+extern void canpanSetAllSwitchOff(void);
+extern void loadInputs(void);
 
 extern uint8_t outputState[(8*4)];
+extern uint8_t canpanScanReady;
 # 45 "../canpan3Events.c" 2
 
 
 static uint8_t flashToggle;
+uint8_t APP_isProducedEvent(uint8_t tableIndex);
 
 void factoryResetGlobalEvents(void) {
     uint8_t i;
@@ -38842,7 +38847,7 @@ void factoryResetGlobalEvents(void) {
 
         addEvent(nn.word, i, 0, 1, TRUE);
         addEvent(nn.word, i, 1, i, TRUE);
-        addEvent(nn.word, i, 2, 1|0b10000, TRUE);
+        addEvent(nn.word, i, 2, 1|0b00010000, TRUE);
 
         addEvent(nn.word, i, 4, ((uint16_t)1<<(i-1))&0xFF, TRUE);
         addEvent(nn.word, i, 5, ((uint16_t)1<<(i-9))&0xFF, TRUE);
@@ -38863,7 +38868,7 @@ void initEvents(void) {
 uint8_t APP_addEvent(uint16_t nodeNumber, uint16_t eventNumber, uint8_t evNum, uint8_t evVal, Boolean forceOwnNN) {
     return addEvent(nodeNumber, eventNumber, evNum, evVal, forceOwnNN);
 }
-# 86 "../canpan3Events.c"
+# 87 "../canpan3Events.c"
 uint8_t APP_isConsumedEvent(uint8_t tableIndex) {
     int16_t ev;
 
@@ -38882,7 +38887,7 @@ uint8_t APP_isConsumedEvent(uint8_t tableIndex) {
     if (ev < 0) {
         return 0;
     }
-    return (ev & 0b10000);
+    return (ev & 0b00010000);
 }
 
 
@@ -38890,7 +38895,75 @@ uint8_t APP_isConsumedEvent(uint8_t tableIndex) {
 
 
 
-uint8_t APP_isProducededEvent(uint8_t tableIndex) {
+
+Processed APP_preProcessMessage(Message * m) {
+    uint8_t tableIndex;
+    uint16_t enn;
+    uint8_t switchNo;
+    uint8_t ev;
+
+    if (m->len < 5) return NOT_PROCESSED;
+
+    enn = ((uint16_t)m->bytes[0])*256+m->bytes[1];
+
+    switch (m->opc) {
+        case OPC_ASON:
+
+        case OPC_ASON1:
+        case OPC_ASON2:
+        case OPC_ASON3:
+
+  enn = 0;
+
+        case OPC_ACON:
+
+        case OPC_ACON1:
+        case OPC_ACON2:
+        case OPC_ACON3:
+
+            break;
+        case OPC_ASOF:
+
+        case OPC_ASOF1:
+        case OPC_ASOF2:
+        case OPC_ASOF3:
+
+  enn = 0;
+
+        case OPC_ACOF:
+
+        case OPC_ACOF1:
+        case OPC_ACOF2:
+        case OPC_ACOF3:
+
+            break;
+        default:
+            return NOT_PROCESSED;
+    }
+
+
+    tableIndex = findEvent(enn, ((uint16_t)m->bytes[2])*256+m->bytes[3]);
+    if (tableIndex == 0xff) return NOT_PROCESSED;
+    if (!APP_isProducedEvent(tableIndex)) {
+        return NOT_PROCESSED;
+    }
+
+    ev = (uint8_t)getEv(tableIndex, 2);
+    if (ev & 8) {
+        switchNo = (uint8_t)getEv(tableIndex, 1);
+        outputState[switchNo] = !(m->opc & 1);
+        return PROCESSED;
+    }
+    return NOT_PROCESSED;
+}
+
+
+
+
+
+
+
+uint8_t APP_isProducedEvent(uint8_t tableIndex) {
     int16_t ev;
 
     ev = getEv(tableIndex, 0);
@@ -38899,7 +38972,7 @@ uint8_t APP_isProducededEvent(uint8_t tableIndex) {
     }
     return 0;
 }
-# 130 "../canpan3Events.c"
+# 199 "../canpan3Events.c"
 Processed APP_processConsumedEvent(uint8_t tableIndex, Message *m) {
     uint8_t onOff;
     uint8_t ledMode;
@@ -38912,7 +38985,7 @@ Processed APP_processConsumedEvent(uint8_t tableIndex, Message *m) {
 
         return PROCESSED;
     }
-    if (onOff && (evs[0] == 2)) {
+    if (onOff && ((evs[0] == 2)||(evs[0] == 3))) {
         doSoD();
         return PROCESSED;
     }
@@ -38960,11 +39033,11 @@ Processed APP_processConsumedEvent(uint8_t tableIndex, Message *m) {
                 case 0xFD:
                     if (!onOff) {
                         if (polarity) {
-                            clearLed(ledNo);
-                            ledStates[ledNo] = CANPANLED_OFF;
-                        } else {
                             setLed(ledNo);
                             ledStates[ledNo] = CANPANLED_ON;
+                        } else {
+                            clearLed(ledNo);
+                            ledStates[ledNo] = CANPANLED_OFF;
                         }
                     }
                     break;
@@ -39019,19 +39092,24 @@ void doFlash(void) {
     flashToggle = !flashToggle;
 }
 
+
+
+
+
+
 EventState APP_GetEventIndexState(uint8_t tableIndex) {
     uint8_t switchNo;
 
 
-    if ( ! APP_isProducededEvent(tableIndex)) {
+    if ( ! APP_isProducedEvent(tableIndex)) {
         return EVENT_UNKNOWN;
     }
 
     getEVs(tableIndex);
     switchNo = evs[1];
-    if (switchNo >= (8*4)) {
+    if ((switchNo < 1) || (switchNo > (8*4))) {
         return EVENT_UNKNOWN;
     }
 
-    return outputState[switchNo] ? EVENT_ON : EVENT_OFF;
+    return outputState[switchNo-1] ? EVENT_ON : EVENT_OFF;
 }

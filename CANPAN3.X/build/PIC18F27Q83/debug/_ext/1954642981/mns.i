@@ -39080,9 +39080,9 @@ static Processed mnsProcessMessage(Message * m) {
                 }
                 return PROCESSED;
             case OPC_RQNP:
-                sendMessage7(OPC_PARAMS, MANU_MERG, 'y',
+                sendMessage7(OPC_PARAMS, MANU_MERG, 'c',
                         MTYP_CANPAN, 254, 13,
-                        1, 1);
+                        1, 4);
                 return PROCESSED;
             case OPC_RQMN:
                 sendMessage7(OPC_NAME, name[0], name[1], name[2], name[3],
@@ -39495,7 +39495,7 @@ static uint8_t getParameter(uint8_t idx) {
     case PAR_MANU:
         return MANU_MERG;
     case PAR_MINVER:
-        return 'y';
+        return 'c';
     case PAR_MTYP:
         return MTYP_CANPAN;
     case PAR_EVTNUM:
@@ -39505,7 +39505,7 @@ static uint8_t getParameter(uint8_t idx) {
     case PAR_NVNUM:
         return 1;
     case PAR_MAJVER:
-        return 1;
+        return 4;
     case PAR_FLAGS:
         return getParameterFlags();
     case PAR_CPUID:
@@ -39536,7 +39536,7 @@ static uint8_t getParameter(uint8_t idx) {
     case PAR_CPUMAN:
         return CPUM_MICROCHIP;
     case PAR_BETA:
-        return 1;
+        return 104;
     default:
         return 0;
     }

@@ -38979,9 +38979,11 @@ typedef int ptrdiff_t;
 extern void initInputs(void);
 extern void inputScan(void);
 extern void doSoD(void);
-extern void canpanSetAllSwitchOn(void);
+extern void canpanSetAllSwitchOff(void);
+extern void loadInputs(void);
 
 extern uint8_t outputState[(8*4)];
+extern uint8_t canpanScanReady;
 # 24 "../main.c" 2
 
 # 1 "../canpan3Events.h" 1
@@ -38989,7 +38991,7 @@ extern uint8_t outputState[(8*4)];
 extern void initEvents(void);
 extern void doFlash(void);
 # 25 "../main.c" 2
-# 106 "../main.c"
+# 101 "../main.c"
 void __init(void);
 uint8_t checkCBUS( void);
 void ISRHigh(void);
@@ -39062,7 +39064,7 @@ void setup(void) {
 
 
     transport = &canTransport;
-# 189 "../main.c"
+# 184 "../main.c"
     WPUA = 0b00001000;
     WPUB = 0;
     WPUC = 0;
@@ -39093,15 +39095,19 @@ void setup(void) {
 
     nv = (uint8_t)getNV(1);
 
-    if (nv == 0) {
-
-
-    } else if (nv & 1) {
-
-    } else if (! (nv & 2)) {
-
-
-        canpanSetAllSwitchOn();
+    switch (nv) {
+        case 0:
+            loadInputs();
+            break;
+        case 1:
+            canpanScanReady = 1;
+            break;
+        case 2:
+            canpanScanReady = 0;
+            break;
+        case 3:
+            canpanSetAllSwitchOff();
+            break;
     }
 }
 
@@ -39127,16 +39133,9 @@ void loop(void) {
         }
     }
 }
-# 266 "../main.c"
+# 265 "../main.c"
 ValidTime APP_isSuitableTimeToWriteFlash(void){
     return GOOD_TIME;
-}
-
-
-
-
-Processed APP_preProcessMessage(Message * m) {
-    return NOT_PROCESSED;
 }
 
 

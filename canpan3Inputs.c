@@ -42,13 +42,16 @@
 #include "event_teach.h"
 #include "timedResponse.h"
 #include "event_producer.h"
+#include "nvm.h"
 #include "canpan3Events.h"
 
 static uint8_t buttonState[NUM_BUTTON_COLUMNS];
 uint8_t outputState[NUM_BUTTONS];
 
+#define EE_ADDR_SWITCHES    0x0070
+
 static uint8_t column;  // Column number
-static uint8_t ready;   /// indicates if the code has had chance to read all the buttons
+uint8_t canpanScanReady;   /// indicates if the code has had chance to read all the buttons
 
 #define MODE_UNKNOWN    0
 #define MODE_ON_OFF     1
@@ -60,13 +63,14 @@ void driveColumn(void);
 uint8_t findEventForSwitch(uint8_t buttonNo);
 TimedResponseResult sodTRCallback(uint8_t type, uint8_t serviceIndex, uint8_t step);
 void canpanSendProducedEvent(uint8_t tableIndex, uint8_t onOff, uint8_t sv);
+EventState getSwitchEventState(uint8_t switchNo);
 
 /**
  * Initialise the input (buttons) circuitry.
  */
 void initInputs(void) {
     uint8_t i;
-    ready = 0;
+    canpanScanReady = 0;
     // Column drivers
     TRISAbits.TRISA0=0;
     TRISAbits.TRISA1=0;
@@ -89,7 +93,7 @@ void initInputs(void) {
     column = 0;
     driveColumn();
     for (i=0; i<NUM_BUTTONS; i++) {
-        outputState[i] = 0;
+        outputState[i] = 0;     // default 0 but maybe loaded from EEPROM later
     }
     for (i=0; i<NUM_BUTTON_COLUMNS; i++) {
         buttonState[i] = 0;
@@ -131,7 +135,7 @@ void inputScan(void) {
             if (tableIndex != NO_INDEX) {
                 sv = evs[EV_SWITCHSV];
                 // determine the switch mode using the SV event variable
-                mode = MODE_UNKNOWN;
+                mode = MODE_ON_OFF;
                 if (sv & 0b0001) {
                     mode = MODE_ON_OFF;
                 } else if (sv & 0b0100) {
@@ -147,13 +151,13 @@ void inputScan(void) {
 
                     switch(mode) {
                         case MODE_ON_OFF:
-                            if (sv & 0b0010) {   // invert
-                                onOff = ~onOff;
+                            if (sv & SV_POLARITY) {   // invert
+                                onOff = !onOff;
                             }
                             outputState[buttonNo] = onOff;
                             break;
                         case MODE_ONOFF_ONLY:
-                            if (sv & 0b0010) {   // invert
+                            if (sv & SV_POLARITY) {   // invert
                                 if (onOff) {    // don't send ON event
                                     continue;
                                 }
@@ -167,11 +171,14 @@ void inputScan(void) {
                         case MODE_TOGGLE:
                             if (onOff) {
                                 outputState[buttonNo] = ~outputState[buttonNo];
+                            } else {
+                                continue;   // don't react when button is released
                             }
                             onOff = outputState[buttonNo];
                             break;
                     }
-                    if (ready) {
+                    writeNVM(EEPROM_NVM_TYPE, EE_ADDR_SWITCHES + buttonNo, outputState[buttonNo]);
+                    if (canpanScanReady) {
                         // send the event.
                         // when in teach mode we actually send a ARON1 instead of the event
                         if (mode_flags & FLAG_MODE_LEARN) {
@@ -194,19 +201,25 @@ void inputScan(void) {
     column++;
     if (column >= NUM_BUTTON_COLUMNS) {
         // After 1 scan we'll be ready to send events
-        ready = 1;
+        canpanScanReady = 1;
         column=0;
     }
     driveColumn();
 }
 
+
 /**
- * Used at initialisation if NV1 = ALLON
+ * Used at initialisation if NV1 = ALLOFF. Turns off (or on if inverted) all 
+ * the switch output states.
  */
-void canpanSetAllSwitchOn(void) {
+void canpanSetAllSwitchOff(void) {
     uint8_t buttonNo;
+    uint8_t tableIndex;
+    
     for (buttonNo=0; buttonNo<NUM_BUTTONS; buttonNo++) {
-        outputState[buttonNo] = 1;
+        tableIndex = findEventForSwitch(buttonNo);
+        getEVs(tableIndex);
+        outputState[buttonNo] = (evs[EV_SWITCHSV]&SV_POLARITY) ? 1:0;
     }
 }
 
@@ -217,9 +230,9 @@ void canpanSendProducedEvent(uint8_t tableIndex, uint8_t onOff, uint8_t sv) {
     
     producedEventNN.word = getNN(tableIndex);
     producedEventEN.word = getEN(tableIndex);
-    if ((sv & 0b100000) || (producedEventNN.word == 0)) {
+    if ((sv & SV_SHORT) || (producedEventNN.word == 0)) {
         // Short event
-        if (onOff == EVENT_ON) {
+        if (onOff) {
             opc = OPC_ASON;
         } else {
             opc = OPC_ASOF;
@@ -227,7 +240,7 @@ void canpanSendProducedEvent(uint8_t tableIndex, uint8_t onOff, uint8_t sv) {
         producedEventNN.word = nn.word;
     } else {
         // Long event
-        if (onOff == EVENT_ON) {
+        if (onOff) {
             opc = OPC_ACON;
         } else {
             opc = OPC_ACOF;
@@ -248,7 +261,7 @@ uint8_t findEventForSwitch(uint8_t switchNo) {
     uint8_t tableIndex;
     for (tableIndex=0; tableIndex < NUM_EVENTS; tableIndex++) {
         getEVs(tableIndex);
-        if (evs[EV_TYPE] == CANPAN_PRODUCED) {
+        if ((evs[EV_TYPE] == CANPAN_PRODUCED) || (evs[EV_TYPE] == CANPAN_SELF_SOD)) {
             if (evs[EV_SWITCHNO] == switchNo+1) {
                 return tableIndex;
             }
@@ -278,17 +291,38 @@ void doSoD(void) {
  * @param step loops through each event tableIndex
  * @return whether all of the responses have been sent yet.
  */
-TimedResponseResult sodTRCallback(uint8_t type, uint8_t serviceIndex, uint8_t step) {
+TimedResponseResult sodTRCallback(uint8_t type, uint8_t serviceIndex, uint8_t tableIndex) {
     EventState value;
+    uint8_t buttonNo;
 
-    if (step >= NUM_EVENTS) {
+    if (tableIndex >= NUM_EVENTS) {
         return TIMED_RESPONSE_RESULT_FINISHED;
     }
     // The step is used to index through the events 
-    value = APP_GetEventIndexState(step);
+    value = APP_GetEventIndexState(tableIndex);
 
     if (value != EVENT_UNKNOWN) {
-        canpanSendProducedEvent(step, value, evs[EV_SWITCHSV]);
+        canpanSendProducedEvent(tableIndex, value==EVENT_ON, evs[EV_SWITCHSV]);
     }
     return TIMED_RESPONSE_RESULT_NEXT;
+}
+
+
+/**
+ * Load the switch state in from EEPROM
+ */
+void loadInputs(void) {
+    uint8_t tableIndex;
+    uint8_t buttonNo;
+
+    for (tableIndex=0; tableIndex < NUM_EVENTS; tableIndex++) {
+        getEVs(tableIndex);
+        if (APP_isProducedEvent(tableIndex)) {
+            if (evs[EV_SWITCHSV] & SV_TOGGLE) {
+                buttonNo = evs[EV_SWITCHNO] - 1;
+                if (buttonNo < NUM_BUTTONS)
+                outputState[buttonNo] = (uint8_t)readNVM(EEPROM_NVM_TYPE, EE_ADDR_SWITCHES+buttonNo);
+            }
+        }
+    }
 }

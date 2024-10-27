@@ -38814,7 +38814,7 @@ NvValidation APP_nvValidate(uint8_t index, uint8_t value) {
     if (index >= 1) {
         return INVALID;
     }
-    if (value > 2) {
+    if (value > 3) {
         return INVALID;
     }
     return VALID;

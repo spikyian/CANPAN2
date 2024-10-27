@@ -45,6 +45,7 @@
 #include "canpan3Inputs.h"
 
 static uint8_t flashToggle;
+uint8_t APP_isProducedEvent(uint8_t tableIndex);
 
 void factoryResetGlobalEvents(void) {
     uint8_t i;
@@ -88,7 +89,7 @@ uint8_t APP_isConsumedEvent(uint8_t tableIndex) {
     
     ev = getEv(tableIndex, EV_TYPE);
     if (ev < 0) {
-        // TODO If receive an event for a Toggle switch then update our outputState[]
+        // error
         return 0;
     }
     if (ev == CANPAN_CONSUMED) {    // normal consumed event
@@ -103,13 +104,81 @@ uint8_t APP_isConsumedEvent(uint8_t tableIndex) {
     }
     return (ev & SV_COE);       // self consumed event
 }
+
+/**
+ * Special handling when we receive a switch produced event for a toggle switch.
+ * We update the internal toggle state to match that of the event.
+ * 
+ * @param m
+ */
+Processed APP_preProcessMessage(Message * m) {
+    uint8_t tableIndex;
+    uint16_t enn;
+    uint8_t switchNo;
+    uint8_t ev;
+    
+    if (m->len < 5) return NOT_PROCESSED;
+    
+    enn = ((uint16_t)m->bytes[0])*256+m->bytes[1];
+    
+    switch (m->opc) {
+        case OPC_ASON:
+#ifdef HANDLE_DATA_EVENTS
+        case OPC_ASON1:
+        case OPC_ASON2:
+        case OPC_ASON3:
+#endif
+		enn = 0;
+		// fall through
+        case OPC_ACON:
+#ifdef HANDLE_DATA_EVENTS
+        case OPC_ACON1:
+        case OPC_ACON2:
+        case OPC_ACON3:
+#endif
+            break;
+        case OPC_ASOF:
+#ifdef HANDLE_DATA_EVENTS
+        case OPC_ASOF1:
+        case OPC_ASOF2:
+        case OPC_ASOF3:
+#endif
+		enn = 0;
+		// fall through
+        case OPC_ACOF:
+#ifdef HANDLE_DATA_EVENTS
+        case OPC_ACOF1:
+        case OPC_ACOF2:
+        case OPC_ACOF3:
+#endif
+            break;
+        default:
+            return NOT_PROCESSED;
+    }
+    
+    // events only here
+    tableIndex = findEvent(enn, ((uint16_t)m->bytes[2])*256+m->bytes[3]);
+    if (tableIndex == NO_INDEX) return NOT_PROCESSED;
+    if (!APP_isProducedEvent(tableIndex)) { // can we produce this event?
+        return NOT_PROCESSED;
+    }
+    // If receive an event for a Toggle switch then update our outputState[]
+    ev = (uint8_t)getEv(tableIndex, EV_SWITCHSV);
+    if (ev & SV_TOGGLE) {
+        switchNo = (uint8_t)getEv(tableIndex, EV_SWITCHNO);
+        outputState[switchNo] = !(m->opc & 1);  // on or off
+        return PROCESSED;
+    }
+    return NOT_PROCESSED;
+}
+
 /**
  * The CANPAN represents the event type in EV#1. 
  * 
  * @param tableIndex
  * @return 
  */
-uint8_t APP_isProducededEvent(uint8_t tableIndex) {
+uint8_t APP_isProducedEvent(uint8_t tableIndex) {
     int16_t ev;
     
     ev = getEv(tableIndex, EV_TYPE);
@@ -139,7 +208,7 @@ Processed APP_processConsumedEvent(uint8_t tableIndex, Message *m) {
         // something went wrong
         return PROCESSED;
     }
-    if (onOff && (evs[EV_TYPE] == CANPAN_SOD)) {
+    if (onOff && ((evs[EV_TYPE] == CANPAN_SOD)||(evs[EV_TYPE] == CANPAN_SELF_SOD))) {
         doSoD();
         return PROCESSED;
     }
@@ -187,11 +256,11 @@ Processed APP_processConsumedEvent(uint8_t tableIndex, Message *m) {
                 case LM_OFFONLY:
                     if (!onOff) {
                         if (polarity) {
-                            clearLed(ledNo);
-                            ledStates[ledNo] = CANPANLED_OFF;
-                        } else {
                             setLed(ledNo);
                             ledStates[ledNo] = CANPANLED_ON;
+                        } else {
+                            clearLed(ledNo);
+                            ledStates[ledNo] = CANPANLED_OFF;
                         }
                     }
                     break;
@@ -246,19 +315,24 @@ void doFlash(void) {
     flashToggle = !flashToggle;
 }
 
+/**
+ * Gets the current event state of a produced event by table index.
+ * @param tableIndex
+ * @return 
+ */
 EventState APP_GetEventIndexState(uint8_t tableIndex) {
     uint8_t switchNo;
     
     // check this is a produced event
-    if ( ! APP_isProducededEvent(tableIndex)) {
+    if ( ! APP_isProducedEvent(tableIndex)) {
         return EVENT_UNKNOWN;
     }
     // get the switch number
     getEVs(tableIndex);
     switchNo = evs[EV_SWITCHNO];
-    if (switchNo >= NUM_BUTTONS) {
+    if ((switchNo < 1) || (switchNo > NUM_BUTTONS)) {
         return EVENT_UNKNOWN;
     }
     // look at the state
-    return outputState[switchNo] ? EVENT_ON : EVENT_OFF;
+    return outputState[switchNo-1] ? EVENT_ON : EVENT_OFF;
 }

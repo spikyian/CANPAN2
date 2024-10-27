@@ -39,6 +39,7 @@
 
 extern void initEvents(void);
 extern void doFlash(void);
+extern uint8_t APP_isProducedEvent(uint8_t tableIndex);
 
 // EV1 value
 #define CANPAN_CONSUMED 0
@@ -67,7 +68,9 @@ extern void doFlash(void);
 #define SV_ON_ONLY  4
 #define SV_OFF_ONLY 6
 #define SV_TOGGLE   8
-#define SV_COE      0b10000
+#define SV_COE      0b00010000
+#define SV_SHORT    0b00100000
+#define SV_POLARITY 0b00000010 
 
 // EV_LEDMODE values
 #define LM_ONOFF    0xFF

@@ -38979,16 +38979,20 @@ typedef int ptrdiff_t;
 extern void initInputs(void);
 extern void inputScan(void);
 extern void doSoD(void);
+extern void canpanSetAllSwitchOff(void);
+extern void loadInputs(void);
 
 extern uint8_t outputState[(8*4)];
+extern uint8_t canpanScanReady;
 # 24 "../main.c" 2
 
 # 1 "../canpan3Events.h" 1
 # 40 "../canpan3Events.h"
 extern void initEvents(void);
 extern void doFlash(void);
+extern uint8_t APP_isProducedEvent(uint8_t tableIndex);
 # 25 "../main.c" 2
-# 109 "../main.c"
+# 101 "../main.c"
 void __init(void);
 uint8_t checkCBUS( void);
 void ISRHigh(void);
@@ -39057,9 +39061,11 @@ void setup(void) {
 
     uint8_t pu;
 
+    uint8_t nv;
+
 
     transport = &canTransport;
-# 190 "../main.c"
+# 184 "../main.c"
     WPUA = 0b00001000;
     WPUB = 0;
     WPUC = 0;
@@ -39088,17 +39094,26 @@ void setup(void) {
 
     started = FALSE;
 
-    switch(getNV(1)) {
-        case 0:
+    nv = (uint8_t)getNV(1);
 
+    switch (nv) {
+        case 0:
+            loadInputs();
             break;
         case 1:
+            canpanScanReady = 1;
             break;
         case 2:
-
+            canpanScanReady = 0;
+            break;
+        case 3:
+            canpanSetAllSwitchOff();
             break;
     }
 }
+
+
+
 
 void loop(void) {
 
@@ -39113,22 +39128,15 @@ void loop(void) {
             lastInputScanTime.val = tickGet();
         }
 
-        if ((tickGet() - flashTime.val) > 2*(62500/1000)) {
+        if ((tickGet() - flashTime.val) > 2*(62500/2)) {
             doFlash();
             flashTime.val = tickGet();
         }
     }
 }
-# 262 "../main.c"
+# 265 "../main.c"
 ValidTime APP_isSuitableTimeToWriteFlash(void){
     return GOOD_TIME;
-}
-
-
-
-
-Processed APP_preProcessMessage(Message * m) {
-    return NOT_PROCESSED;
 }
 
 
