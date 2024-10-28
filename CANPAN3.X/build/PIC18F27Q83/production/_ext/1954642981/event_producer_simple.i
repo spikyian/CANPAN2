@@ -38783,7 +38783,8 @@ extern const Service eventProducerService;
 # 93 "../../VLCBlib_PIC/event_producer.h"
 extern Boolean sendProducedEvent(Happening h, EventState state);
 extern void deleteHappeningRange(Happening happening, uint8_t number);
-# 103 "../../VLCBlib_PIC/event_producer.h"
+extern void incrementProducerCounter(void);
+# 104 "../../VLCBlib_PIC/event_producer.h"
 extern EventState APP_GetEventState(Happening h);
 
 
@@ -38919,7 +38920,14 @@ static DiagnosticVal * producerGetDiagnostic(uint8_t index) {
     }
     return &(producerDiagnostics[index]);
 }
-# 171 "../../VLCBlib_PIC/event_producer_simple.c"
+
+
+
+
+void incrementProducerCounter() {
+    producerDiagnostics[1].asUint++;
+}
+# 178 "../../VLCBlib_PIC/event_producer_simple.c"
 static uint8_t producerEsdData(uint8_t index) {
     switch (index){
         case 0:

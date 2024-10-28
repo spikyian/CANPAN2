@@ -68,14 +68,14 @@
 #define NO_ACTION           0
 
 #if defined(_18FXXQ83_FAMILY_)
-    #define EVENT_TABLE_ADDRESS               0x1F000
+    #define EVENT_TABLE_ADDRESS               0x1E800
 #endif
 #if defined(_18F66K80_FAMILY_)
     #ifdef __18F25K80
-        #define EVENT_TABLE_ADDRESS               0x6F80      //(AT_NV - sizeof(EventTable)*NUM_EVENTS) Size=256 * 22 = 5632(0x1600) bytes
+        #define EVENT_TABLE_ADDRESS               0x6E00      //(AT_NV - sizeof(EventTable)*NUM_EVENTS) Size=256 * 22 = 5632(0x1600) bytes
     #endif
     #ifdef __18F26K80
-        #define EVENT_TABLE_ADDRESS       0xEF80      //(AT_NV - sizeof(EventTable)*NUM_EVENTS) Size=256 * 22 = 5632(0x1600) bytes   
+        #define EVENT_TABLE_ADDRESS       0xEE00      //(AT_NV - sizeof(EventTable)*NUM_EVENTS) Size=256 * 22 = 5632(0x1600) bytes   
     #endif
 #endif
 

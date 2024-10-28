@@ -38842,7 +38842,8 @@ extern const Service eventProducerService;
 # 93 "../../VLCBlib_PIC\\event_producer.h"
 extern Boolean sendProducedEvent(Happening h, EventState state);
 extern void deleteHappeningRange(Happening happening, uint8_t number);
-# 103 "../../VLCBlib_PIC\\event_producer.h"
+extern void incrementProducerCounter(void);
+# 104 "../../VLCBlib_PIC\\event_producer.h"
 extern EventState APP_GetEventState(Happening h);
 
 
@@ -39066,6 +39067,8 @@ void canpanSendProducedEvent(uint8_t tableIndex, uint8_t onOff, uint8_t sv) {
 
     sendMessage4(opc, producedEventNN.bytes.hi, producedEventNN.bytes.lo,
             producedEventEN.bytes.hi, producedEventEN.bytes.lo);
+
+    incrementProducerCounter();
 }
 
 void driveColumn(void) {
@@ -39096,7 +39099,7 @@ uint8_t findEventForSwitch(uint8_t switchNo) {
 void doSoD(void) {
     startTimedResponse(1, findServiceIndex(SERVICE_ID_PRODUCER), sodTRCallback);
 }
-# 294 "../canpan3Inputs.c"
+# 296 "../canpan3Inputs.c"
 TimedResponseResult sodTRCallback(uint8_t type, uint8_t serviceIndex, uint8_t tableIndex) {
     EventState value;
     uint8_t buttonNo;
