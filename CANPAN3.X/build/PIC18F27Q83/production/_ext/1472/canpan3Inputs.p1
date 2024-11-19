@@ -59,11 +59,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;../../VLCBlib_PIC\mns.h: 135: extern uint8_t mode_flags;
 [v _mode_flags `uc ~T0 @X0 0 e ]
 "180 ../canpan3Inputs.c
-[; ;../canpan3Inputs.c: 180:                     writeNVM(EEPROM_NVM_TYPE, 0x0070 + buttonNo, outputState[buttonNo]);
-[c E22855 0 1 .. ]
-[n E22855 . EEPROM_NVM_TYPE FLASH_NVM_TYPE  ]
+[; ;../canpan3Inputs.c: 180:                     writeNVM(EEPROM_NVM_TYPE, 0x0000 + buttonNo, outputState[buttonNo]);
+[c E22861 0 1 .. ]
+[n E22861 . EEPROM_NVM_TYPE FLASH_NVM_TYPE  ]
 "169 ../../VLCBlib_PIC\nvm.h
-[v _writeNVM `(uc ~T0 @X0 0 ef3`E22855`um`uc ]
+[v _writeNVM `(uc ~T0 @X0 0 ef3`E22861`um`uc ]
 "95 ../../VLCBlib_PIC/event_teach.h
 [v _getNN `(us ~T0 @X0 0 ef1`uc ]
 "96
@@ -99,12 +99,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _LATAbits `VS3105 ~T0 @X0 0 e@1214 ]
 "282 ../canpan3Inputs.c
 [; ;../canpan3Inputs.c: 282:     startTimedResponse(1, findServiceIndex(SERVICE_ID_PRODUCER), sodTRCallback);
-[c E23132 0 1 2 .. ]
-[n E23132 . TIMED_RESPONSE_RESULT_FINISHED TIMED_RESPONSE_RESULT_RETRY TIMED_RESPONSE_RESULT_NEXT  ]
-[v F23144 `(E23132 ~T0 @X0 0 tf3`uc`uc`uc ]
+[c E23138 0 1 2 .. ]
+[n E23138 . TIMED_RESPONSE_RESULT_FINISHED TIMED_RESPONSE_RESULT_RETRY TIMED_RESPONSE_RESULT_NEXT  ]
+[v F23150 `(E23138 ~T0 @X0 0 tf3`uc`uc`uc ]
 "109 ../../VLCBlib_PIC\timedResponse.h
 [; ;../../VLCBlib_PIC\timedResponse.h: 109: extern void startTimedResponse(uint8_t type, uint8_t serviceIndex, TimedResponseResult (*callback)(uint8_t type, uint8_t si, uint8_t step));
-[v _startTimedResponse `(v ~T0 @X0 0 ef3`uc`uc`*F23144 ]
+[v _startTimedResponse `(v ~T0 @X0 0 ef3`uc`uc`*F23150 ]
 "358 ../../VLCBlib_PIC/vlcb.h
 [; ;../../VLCBlib_PIC/vlcb.h: 358: extern uint8_t findServiceIndex(uint8_t id);
 [v _findServiceIndex `(uc ~T0 @X0 0 ef1`uc ]
@@ -114,19 +114,19 @@ Version 4.0 HI-TECH Software Intermediate Code
 [n E22722 VlcbServiceTypes SERVICE_ID_NONE SERVICE_ID_MNS SERVICE_ID_NV SERVICE_ID_CAN SERVICE_ID_OLD_TEACH SERVICE_ID_PRODUCER SERVICE_ID_CONSUMER SERVICE_ID_TEACH SERVICE_ID_CONSUME_OWN_EVENTS SERVICE_ID_EVENTACK SERVICE_ID_BOOT SERVICE_ID_STREAMING  ]
 "64
 [; ;../canpan3Inputs.c: 64: TimedResponseResult sodTRCallback(uint8_t type, uint8_t serviceIndex, uint8_t step);
-[v _sodTRCallback `(E23132 ~T0 @X0 0 ef3`uc`uc`uc ]
+[v _sodTRCallback `(E23138 ~T0 @X0 0 ef3`uc`uc`uc ]
 "297
 [; ;../canpan3Inputs.c: 297:     EventState value;
-[c E22903 255 0 1 .. ]
-[n E22903 . EVENT_UNKNOWN EVENT_OFF EVENT_ON  ]
+[c E22909 255 0 1 .. ]
+[n E22909 . EVENT_UNKNOWN EVENT_OFF EVENT_ON  ]
 "111 ../../VLCBlib_PIC\event_producer.h
 [; ;../../VLCBlib_PIC\event_producer.h: 111: extern EventState APP_GetEventIndexState(uint8_t tableIndex);
-[v _APP_GetEventIndexState `(E22903 ~T0 @X0 0 ef1`uc ]
+[v _APP_GetEventIndexState `(E22909 ~T0 @X0 0 ef1`uc ]
 "42 ../canpan3Events.h
 [; ;../canpan3Events.h: 42: extern uint8_t APP_isProducedEvent(uint8_t tableIndex);
 [v _APP_isProducedEvent `(uc ~T0 @X0 0 ef1`uc ]
 "160 ../../VLCBlib_PIC\nvm.h
-[v _readNVM `(s ~T0 @X0 0 ef2`E22855`um ]
+[v _readNVM `(s ~T0 @X0 0 ef2`E22861`um ]
 "364 C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h
 [; ;C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h: 364: __asm("BOOTREG equ 038h");
 [; <" BOOTREG equ 038h ;# ">
@@ -3823,14 +3823,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;../canpan3Inputs.c: 138:                 mode = 1;
 [e = _mode -> -> 1 `i `uc ]
 "139
-[; ;../canpan3Inputs.c: 139:                 if (sv & 0b0001) {
+[; ;../canpan3Inputs.c: 139:                 if (sv & 1) {
 [e $ ! != & -> _sv `i -> 1 `i -> 0 `i 3245  ]
 {
 "140
 [; ;../canpan3Inputs.c: 140:                     mode = 1;
 [e = _mode -> -> 1 `i `uc ]
 "141
-[; ;../canpan3Inputs.c: 141:                 } else if (sv & 0b0100) {
+[; ;../canpan3Inputs.c: 141:                 } else if (sv & 4) {
 }
 [e $U 3246  ]
 [e :U 3245 ]
@@ -3840,7 +3840,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;../canpan3Inputs.c: 142:                     mode = 2;
 [e = _mode -> -> 2 `i `uc ]
 "143
-[; ;../canpan3Inputs.c: 143:                 } else if (sv & 0b1000) {
+[; ;../canpan3Inputs.c: 143:                 } else if (sv & 8) {
 }
 [e $U 3248  ]
 [e :U 3247 ]
@@ -3979,8 +3979,8 @@ Version 4.0 HI-TECH Software Intermediate Code
  3252 ]
 [e :U 3252 ]
 "180
-[; ;../canpan3Inputs.c: 180:                     writeNVM(EEPROM_NVM_TYPE, 0x0070 + buttonNo, outputState[buttonNo]);
-[e ( _writeNVM (3 , , . `E22855 0 -> -> + -> 112 `i -> _buttonNo `i `m `um *U + &U _outputState * -> _buttonNo `ux -> -> # *U &U _outputState `ui `ux ]
+[; ;../canpan3Inputs.c: 180:                     writeNVM(EEPROM_NVM_TYPE, 0x0000 + buttonNo, outputState[buttonNo]);
+[e ( _writeNVM (3 , , . `E22861 0 -> -> + -> 0 `i -> _buttonNo `i `m `um *U + &U _outputState * -> _buttonNo `ux -> -> # *U &U _outputState `ui `ux ]
 "181
 [; ;../canpan3Inputs.c: 181:                     if (canpanScanReady) {
 [e $ ! != -> _canpanScanReady `i -> 0 `i 3264  ]
@@ -4283,7 +4283,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 "296
 [; ;../canpan3Inputs.c: 296: TimedResponseResult sodTRCallback(uint8_t type, uint8_t serviceIndex, uint8_t tableIndex) {
-[v _sodTRCallback `(E23132 ~T0 @X0 1 ef3`uc`uc`uc ]
+[v _sodTRCallback `(E23138 ~T0 @X0 1 ef3`uc`uc`uc ]
 {
 [e :U _sodTRCallback ]
 [v _type `uc ~T0 @X0 1 r1 ]
@@ -4292,7 +4292,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [f ]
 "297
 [; ;../canpan3Inputs.c: 297:     EventState value;
-[v _value `E22903 ~T0 @X0 1 a ]
+[v _value `E22909 ~T0 @X0 1 a ]
 "298
 [; ;../canpan3Inputs.c: 298:     uint8_t buttonNo;
 [v _buttonNo `uc ~T0 @X0 1 a ]
@@ -4302,7 +4302,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "301
 [; ;../canpan3Inputs.c: 301:         return TIMED_RESPONSE_RESULT_FINISHED;
-[e ) . `E23132 0 ]
+[e ) . `E23138 0 ]
 [e $UE 3287  ]
 "302
 [; ;../canpan3Inputs.c: 302:     }
@@ -4313,18 +4313,18 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = _value ( _APP_GetEventIndexState (1 _tableIndex ]
 "306
 [; ;../canpan3Inputs.c: 306:     if (value != EVENT_UNKNOWN) {
-[e $ ! != -> _value `ui -> . `E22903 0 `ui 3289  ]
+[e $ ! != -> _value `ui -> . `E22909 0 `ui 3289  ]
 {
 "307
 [; ;../canpan3Inputs.c: 307:         canpanSendProducedEvent(tableIndex, value==EVENT_ON, evs[2]);
-[e ( _canpanSendProducedEvent (3 , , _tableIndex -> -> == -> _value `ui -> . `E22903 2 `ui `i `uc *U + &U _evs * -> -> -> 2 `i `ui `ux -> -> # *U &U _evs `ui `ux ]
+[e ( _canpanSendProducedEvent (3 , , _tableIndex -> -> == -> _value `ui -> . `E22909 2 `ui `i `uc *U + &U _evs * -> -> -> 2 `i `ui `ux -> -> # *U &U _evs `ui `ux ]
 "308
 [; ;../canpan3Inputs.c: 308:     }
 }
 [e :U 3289 ]
 "309
 [; ;../canpan3Inputs.c: 309:     return TIMED_RESPONSE_RESULT_NEXT;
-[e ) . `E23132 2 ]
+[e ) . `E23138 2 ]
 [e $UE 3287  ]
 "310
 [; ;../canpan3Inputs.c: 310: }
@@ -4368,8 +4368,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;../canpan3Inputs.c: 325:                 if (buttonNo < (8*4))
 [e $ ! < -> _buttonNo `i * -> 8 `i -> 4 `i 3296  ]
 "326
-[; ;../canpan3Inputs.c: 326:                 outputState[buttonNo] = (uint8_t)readNVM(EEPROM_NVM_TYPE, 0x0070 +buttonNo);
-[e = *U + &U _outputState * -> _buttonNo `ux -> -> # *U &U _outputState `ui `ux -> ( _readNVM (2 , . `E22855 0 -> -> + -> 112 `i -> _buttonNo `i `m `um `uc ]
+[; ;../canpan3Inputs.c: 326:                 outputState[buttonNo] = (uint8_t)readNVM(EEPROM_NVM_TYPE, 0x0000 +buttonNo);
+[e = *U + &U _outputState * -> _buttonNo `ux -> -> # *U &U _outputState `ui `ux -> ( _readNVM (2 , . `E22861 0 -> -> + -> 0 `i -> _buttonNo `i `m `um `uc ]
 [e :U 3296 ]
 "327
 [; ;../canpan3Inputs.c: 327:             }

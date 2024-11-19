@@ -37,7 +37,75 @@
  * 
  */ 
 
+#include <xc.h>
+#include "module.h"
+#include "canpan3Leds.h"
+#include "canpan3Outputs.h"
 
-extern void setLed(uint8_t no);
-extern void clearLed(uint8_t no);
-extern uint8_t testLed(uint8_t no);
+static enum canpan3LedState ledStates[NUM_LEDS];
+static uint8_t flashToggle;
+
+/**
+ * Initialise the LEDs.
+ */
+void initLeds(void) {
+    uint8_t i;
+    
+    for (i=0; i<NUM_LEDS; i++) {
+        ledStates[i] = CANPANLED_OFF;
+    }
+    flashToggle = 0;
+}
+
+/**
+ * Set the specified LED to the given state.
+ * @param led
+ * @param state
+ */
+void setLedState(uint8_t ledNo, enum canpan3LedState state) {
+    ledStates[ledNo] = state;
+    switch (ledStates[ledNo]) {
+        case CANPANLED_ON:
+            setLed(ledNo);
+            break;
+        case CANPANLED_OFF:
+            clearLed(ledNo);
+            break;
+        case CANPANLED_FLASH:
+        case CANPANLED_ANTIFLASH:
+            // flashing states get dealt with by the doFlash function
+            break;
+    }
+    
+}
+
+/**
+ * Call regularly at required flash rate.
+ */
+void doFlash(void) {
+    uint8_t ledNo;
+    
+    for (ledNo=0; ledNo<NUM_LEDS; ledNo++) {
+        switch (ledStates[ledNo]) {
+            case CANPANLED_FLASH:
+                if (flashToggle) {
+                    setLed(ledNo);
+                } else {
+                    clearLed(ledNo);
+                }
+                break;
+            case CANPANLED_ANTIFLASH:
+                if (flashToggle) {
+                    clearLed(ledNo);
+                } else {
+                    setLed(ledNo);
+                }
+                break;
+            case CANPANLED_ON:
+            case CANPANLED_OFF:
+                // these have already been handled in the setter above
+                break;
+        }
+    }
+    flashToggle = !flashToggle;
+}

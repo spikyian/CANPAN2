@@ -38,6 +38,13 @@
  */ 
 
 
-extern void setLed(uint8_t no);
-extern void clearLed(uint8_t no);
-extern uint8_t testLed(uint8_t no);
+enum canpan3LedState {
+    CANPANLED_ON,
+    CANPANLED_OFF,
+    CANPANLED_FLASH,
+    CANPANLED_ANTIFLASH
+};
+
+extern void setLedState(uint8_t led, enum canpan3LedState state);
+
+extern uint8_t outputState[NUM_LEDS];

@@ -1,11 +1,4 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"48 ../canpan3Outputs.c
-[; ;../canpan3Outputs.c: 48: enum canpan3LedState ledStates[(4*8)];
-[c E23091 0 1 2 3 .. ]
-[n E23091 canpan3LedState CANPANLED_ON CANPANLED_OFF CANPANLED_FLASH CANPANLED_ANTIFLASH  ]
-"48 ../canpan3Outputs.h
-[; ;../canpan3Outputs.h: 48: extern uint8_t outputState[(4*8)];
-[v _outputState `uc ~T0 @X0 -> 0 `x e ]
 "2574 C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h
 [; ;C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h: 2574:         unsigned C2OUT :1;
 [s S3116 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
@@ -3714,340 +3707,316 @@ Version 4.0 HI-TECH Software Intermediate Code
 "47
 [; ;../canpan3Outputs.c: 47: unsigned char ledMatrix[4];
 [v _ledMatrix `uc ~T0 @X0 -> 4 `i e ]
-"48
-[; ;../canpan3Outputs.c: 48: enum canpan3LedState ledStates[(4*8)];
-[v _ledStates `E23091 ~T0 @X0 -> 32 `i e ]
-"51
-[; ;../canpan3Outputs.c: 51: void initOutputs(void) {
+"49
+[; ;../canpan3Outputs.c: 49: void initOutputs(void) {
 [v _initOutputs `(v ~T0 @X0 1 ef ]
 {
 [e :U _initOutputs ]
 [f ]
-"52
-[; ;../canpan3Outputs.c: 52:     uint8_t i;
+"50
+[; ;../canpan3Outputs.c: 50:     uint8_t i;
 [v _i `uc ~T0 @X0 1 a ]
-"54
-[; ;../canpan3Outputs.c: 54:     for (i=0; i<(4*8); i++) {
+"52
+[; ;../canpan3Outputs.c: 52:     for (i=0; i< 4; i++) {
 {
 [e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i * -> 4 `i -> 8 `i 3232  ]
+[e $ < -> _i `i -> 4 `i 3232  ]
 [e $U 3233  ]
 [e :U 3232 ]
 {
-"55
-[; ;../canpan3Outputs.c: 55:         ledStates[i] = CANPANLED_OFF;
-[e = *U + &U _ledStates * -> _i `ux -> -> # *U &U _ledStates `ui `ux . `E23091 1 ]
-"56
-[; ;../canpan3Outputs.c: 56:         outputState[i] = 0;
-[e = *U + &U _outputState * -> _i `ux -> -> # *U &U _outputState `ui `ux -> -> 0 `i `uc ]
-"57
-[; ;../canpan3Outputs.c: 57:     }
+"53
+[; ;../canpan3Outputs.c: 53:         ledMatrix[i] = 0;
+[e = *U + &U _ledMatrix * -> _i `ux -> -> # *U &U _ledMatrix `ui `ux -> -> 0 `i `uc ]
+"54
+[; ;../canpan3Outputs.c: 54:     }
 }
 [e ++ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i * -> 4 `i -> 8 `i 3232  ]
+[e $ < -> _i `i -> 4 `i 3232  ]
 [e :U 3233 ]
 }
-"58
-[; ;../canpan3Outputs.c: 58:     for (i=0; i< 4; i++) {
-{
-[e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 4 `i 3235  ]
-[e $U 3236  ]
-[e :U 3235 ]
-{
-"59
-[; ;../canpan3Outputs.c: 59:         ledMatrix[i] = 0;
-[e = *U + &U _ledMatrix * -> _i `ux -> -> # *U &U _ledMatrix `ui `ux -> -> 0 `i `uc ]
-"60
-[; ;../canpan3Outputs.c: 60:     }
-}
-[e ++ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 4 `i 3235  ]
-[e :U 3236 ]
-}
-"61
-[; ;../canpan3Outputs.c: 61:      TRISCbits.TRISC6 = 0;
+"55
+[; ;../canpan3Outputs.c: 55:     TRISCbits.TRISC6 = 0;
 [e = . . _TRISCbits 0 6 -> -> 0 `i `uc ]
-"62
-[; ;../canpan3Outputs.c: 62:     TRISCbits.TRISC7 = 0;
+"56
+[; ;../canpan3Outputs.c: 56:     TRISCbits.TRISC7 = 0;
 [e = . . _TRISCbits 0 7 -> -> 0 `i `uc ]
-"63
-[; ;../canpan3Outputs.c: 63:     TRISBbits.TRISB4 = 0;
+"57
+[; ;../canpan3Outputs.c: 57:     TRISBbits.TRISB4 = 0;
 [e = . . _TRISBbits 0 4 -> -> 0 `i `uc ]
-"64
-[; ;../canpan3Outputs.c: 64:     TRISBbits.TRISB5 = 0;
+"58
+[; ;../canpan3Outputs.c: 58:     TRISBbits.TRISB5 = 0;
 [e = . . _TRISBbits 0 5 -> -> 0 `i `uc ]
-"66
-[; ;../canpan3Outputs.c: 66:     LATBbits.LATB4 = 0;
+"60
+[; ;../canpan3Outputs.c: 60:     LATBbits.LATB4 = 0;
 [e = . . _LATBbits 0 4 -> -> 0 `i `uc ]
-"67
-[; ;../canpan3Outputs.c: 67:     LATBbits.LATB5 = 0;
+"61
+[; ;../canpan3Outputs.c: 61:     LATBbits.LATB5 = 0;
 [e = . . _LATBbits 0 5 -> -> 0 `i `uc ]
-"68
-[; ;../canpan3Outputs.c: 68:     LATCbits.LATC6 = 0;
+"62
+[; ;../canpan3Outputs.c: 62:     LATCbits.LATC6 = 0;
 [e = . . _LATCbits 0 6 -> -> 0 `i `uc ]
-"69
-[; ;../canpan3Outputs.c: 69:     LATCbits.LATC7 = 0;
+"63
+[; ;../canpan3Outputs.c: 63:     LATCbits.LATC7 = 0;
 [e = . . _LATCbits 0 7 -> -> 0 `i `uc ]
-"72
-[; ;../canpan3Outputs.c: 72:     TRISCbits.TRISC2 = 0;
+"66
+[; ;../canpan3Outputs.c: 66:     TRISCbits.TRISC2 = 0;
 [e = . . _TRISCbits 0 2 -> -> 0 `i `uc ]
-"73
-[; ;../canpan3Outputs.c: 73:     LATCbits.LATC2 = 0;
+"67
+[; ;../canpan3Outputs.c: 67:     LATCbits.LATC2 = 0;
 [e = . . _LATCbits 0 2 -> -> 0 `i `uc ]
-"76
-[; ;../canpan3Outputs.c: 76:     TRISCbits.TRISC4 = 0;
+"70
+[; ;../canpan3Outputs.c: 70:     TRISCbits.TRISC4 = 0;
 [e = . . _TRISCbits 0 4 -> -> 0 `i `uc ]
-"77
-[; ;../canpan3Outputs.c: 77:     LATCbits.LATC4 = 0;
+"71
+[; ;../canpan3Outputs.c: 71:     LATCbits.LATC4 = 0;
 [e = . . _LATCbits 0 4 -> -> 0 `i `uc ]
-"80
-[; ;../canpan3Outputs.c: 80:     TRISCbits.TRISC3 = 0;
+"74
+[; ;../canpan3Outputs.c: 74:     TRISCbits.TRISC3 = 0;
 [e = . . _TRISCbits 0 3 -> -> 0 `i `uc ]
-"81
-[; ;../canpan3Outputs.c: 81:     LATCbits.LATC3 = 0;
+"75
+[; ;../canpan3Outputs.c: 75:     LATCbits.LATC3 = 0;
 [e = . . _LATCbits 0 3 -> -> 0 `i `uc ]
-"82
-[; ;../canpan3Outputs.c: 82:     TRISCbits.TRISC5 = 0;
+"76
+[; ;../canpan3Outputs.c: 76:     TRISCbits.TRISC5 = 0;
 [e = . . _TRISCbits 0 5 -> -> 0 `i `uc ]
-"83
-[; ;../canpan3Outputs.c: 83:     LATCbits.LATC5 = 0;
+"77
+[; ;../canpan3Outputs.c: 77:     LATCbits.LATC5 = 0;
 [e = . . _LATCbits 0 5 -> -> 0 `i `uc ]
-"85
-[; ;../canpan3Outputs.c: 85:     SPI1CON0 = 0x03;
+"79
+[; ;../canpan3Outputs.c: 79:     SPI1CON0 = 0x03;
 [e = _SPI1CON0 -> -> 3 `i `uc ]
-"86
-[; ;../canpan3Outputs.c: 86:     SPI1CON1 = 0x44;
+"80
+[; ;../canpan3Outputs.c: 80:     SPI1CON1 = 0x44;
 [e = _SPI1CON1 -> -> 68 `i `uc ]
-"87
-[; ;../canpan3Outputs.c: 87:     SPI1CON2 = 0x02;
+"81
+[; ;../canpan3Outputs.c: 81:     SPI1CON2 = 0x02;
 [e = _SPI1CON2 -> -> 2 `i `uc ]
-"89
-[; ;../canpan3Outputs.c: 89:     SPI1TCNTH=0;
+"83
+[; ;../canpan3Outputs.c: 83:     SPI1TCNTH=0;
 [e = _SPI1TCNTH -> -> 0 `i `uc ]
-"90
-[; ;../canpan3Outputs.c: 90:     SPI1TCNTL=1;
+"84
+[; ;../canpan3Outputs.c: 84:     SPI1TCNTL=1;
 [e = _SPI1TCNTL -> -> 1 `i `uc ]
-"91
-[; ;../canpan3Outputs.c: 91:     SPI1TWIDTH=0;
+"85
+[; ;../canpan3Outputs.c: 85:     SPI1TWIDTH=0;
 [e = _SPI1TWIDTH -> -> 0 `i `uc ]
-"93
-[; ;../canpan3Outputs.c: 93:     SPI1CLK = 0x00;
+"87
+[; ;../canpan3Outputs.c: 87:     SPI1CLK = 0x00;
 [e = _SPI1CLK -> -> 0 `i `uc ]
-"94
-[; ;../canpan3Outputs.c: 94:     SPI1BAUD = 15;
+"88
+[; ;../canpan3Outputs.c: 88:     SPI1BAUD = 15;
 [e = _SPI1BAUD -> -> 15 `i `uc ]
-"97
-[; ;../canpan3Outputs.c: 97:     RC5PPS = 0x32;
+"91
+[; ;../canpan3Outputs.c: 91:     RC5PPS = 0x32;
 [e = _RC5PPS -> -> 50 `i `uc ]
-"98
-[; ;../canpan3Outputs.c: 98:     RC3PPS = 0x31;
+"92
+[; ;../canpan3Outputs.c: 92:     RC3PPS = 0x31;
 [e = _RC3PPS -> -> 49 `i `uc ]
-"99
-[; ;../canpan3Outputs.c: 99:     RC4PPS = 0x33;
+"93
+[; ;../canpan3Outputs.c: 93:     RC4PPS = 0x33;
 [e = _RC4PPS -> -> 51 `i `uc ]
-"102
-[; ;../canpan3Outputs.c: 102:     SPI1CON0bits.EN = 1;
+"96
+[; ;../canpan3Outputs.c: 96:     SPI1CON0bits.EN = 1;
 [e = . . _SPI1CON0bits 0 4 -> -> 1 `i `uc ]
-"105
-[; ;../canpan3Outputs.c: 105:     T2CONbits.CKPS = 5;
+"99
+[; ;../canpan3Outputs.c: 99:     T2CONbits.CKPS = 5;
 [e = . . _T2CONbits 0 1 -> -> 5 `i `uc ]
-"106
-[; ;../canpan3Outputs.c: 106:     T2CONbits.OUTPS = 0;
+"100
+[; ;../canpan3Outputs.c: 100:     T2CONbits.OUTPS = 0;
 [e = . . _T2CONbits 0 0 -> -> 0 `i `uc ]
-"107
-[; ;../canpan3Outputs.c: 107:     T2CLKCON = 1;
+"101
+[; ;../canpan3Outputs.c: 101:     T2CLKCON = 1;
 [e = _T2CLKCON -> -> 1 `i `uc ]
-"108
-[; ;../canpan3Outputs.c: 108:     T2PR = 250;
+"102
+[; ;../canpan3Outputs.c: 102:     T2PR = 250;
 [e = _T2PR -> -> 250 `i `uc ]
-"109
-[; ;../canpan3Outputs.c: 109:     T2HLTbits.MODE = 0;
+"103
+[; ;../canpan3Outputs.c: 103:     T2HLTbits.MODE = 0;
 [e = . . _T2HLTbits 0 0 -> -> 0 `i `uc ]
-"111
-[; ;../canpan3Outputs.c: 111:     PIR3bits.TMR2IF = 0;
+"105
+[; ;../canpan3Outputs.c: 105:     PIR3bits.TMR2IF = 0;
 [e = . . _PIR3bits 0 3 -> -> 0 `i `uc ]
-"112
-[; ;../canpan3Outputs.c: 112:     PIE3bits.TMR2IE = 1;
+"106
+[; ;../canpan3Outputs.c: 106:     PIE3bits.TMR2IE = 1;
 [e = . . _PIE3bits 0 3 -> -> 1 `i `uc ]
-"113
-[; ;../canpan3Outputs.c: 113:     T2CONbits.ON = 1;
+"107
+[; ;../canpan3Outputs.c: 107:     T2CONbits.ON = 1;
 [e = . . _T2CONbits 0 2 -> -> 1 `i `uc ]
-"114
-[; ;../canpan3Outputs.c: 114: }
+"108
+[; ;../canpan3Outputs.c: 108: }
 [e :UE 3231 ]
 }
 [v $root$_processOutputs `(v ~T0 @X0 0 e ]
-"121
-[; ;../canpan3Outputs.c: 121: void __attribute__((picinterrupt(("irq(27), base(0x900)")))) processOutputs(void)
+"115
+[; ;../canpan3Outputs.c: 115: void __attribute__((picinterrupt(("irq(27), base(0x900)")))) processOutputs(void)
 [v _processOutputs `(v ~T1 @X0 1 ef ]
-"123
-[; ;../canpan3Outputs.c: 123: {
+"117
+[; ;../canpan3Outputs.c: 117: {
 {
 [e :U _processOutputs ]
 [f ]
-"124
-[; ;../canpan3Outputs.c: 124:     uint8_t i;
+"118
+[; ;../canpan3Outputs.c: 118:     uint8_t i;
 [v _i `uc ~T0 @X0 1 a ]
-"125
-[; ;../canpan3Outputs.c: 125:     uint8_t cathodes;
+"119
+[; ;../canpan3Outputs.c: 119:     uint8_t cathodes;
 [v _cathodes `uc ~T0 @X0 1 a ]
-"127
-[; ;../canpan3Outputs.c: 127:     if (PIR3bits.TMR2IF) {
-[e $ ! != -> . . _PIR3bits 0 3 `i -> 0 `i 3239  ]
+"121
+[; ;../canpan3Outputs.c: 121:     if (PIR3bits.TMR2IF) {
+[e $ ! != -> . . _PIR3bits 0 3 `i -> 0 `i 3236  ]
 {
-"128
-[; ;../canpan3Outputs.c: 128:         current_row++;
+"122
+[; ;../canpan3Outputs.c: 122:         current_row++;
 [e ++ _current_row -> -> 1 `i `uc ]
-"129
-[; ;../canpan3Outputs.c: 129:         current_row &= 0x3;
+"123
+[; ;../canpan3Outputs.c: 123:         current_row &= 0x3;
 [e =& _current_row -> -> 3 `i `uc ]
-"132
-[; ;../canpan3Outputs.c: 132:         LATCbits.LATC2 = 1;
+"126
+[; ;../canpan3Outputs.c: 126:         LATCbits.LATC2 = 1;
 [e = . . _LATCbits 0 2 -> -> 1 `i `uc ]
-"134
-[; ;../canpan3Outputs.c: 134:         LATBbits.LATB4 = 0;
+"128
+[; ;../canpan3Outputs.c: 128:         LATBbits.LATB4 = 0;
 [e = . . _LATBbits 0 4 -> -> 0 `i `uc ]
-"135
-[; ;../canpan3Outputs.c: 135:         LATBbits.LATB5 = 0;
+"129
+[; ;../canpan3Outputs.c: 129:         LATBbits.LATB5 = 0;
 [e = . . _LATBbits 0 5 -> -> 0 `i `uc ]
-"136
-[; ;../canpan3Outputs.c: 136:         LATCbits.LATC6 = 0;
+"130
+[; ;../canpan3Outputs.c: 130:         LATCbits.LATC6 = 0;
 [e = . . _LATCbits 0 6 -> -> 0 `i `uc ]
-"137
-[; ;../canpan3Outputs.c: 137:         LATCbits.LATC7 = 0;
+"131
+[; ;../canpan3Outputs.c: 131:         LATCbits.LATC7 = 0;
 [e = . . _LATCbits 0 7 -> -> 0 `i `uc ]
-"139
-[; ;../canpan3Outputs.c: 139:         cathodes = ledMatrix[current_row];
+"133
+[; ;../canpan3Outputs.c: 133:         cathodes = ledMatrix[current_row];
 [e = _cathodes *U + &U _ledMatrix * -> _current_row `ux -> -> # *U &U _ledMatrix `ui `ux ]
-"140
-[; ;../canpan3Outputs.c: 140:         SPI1TCNTH=0;
+"134
+[; ;../canpan3Outputs.c: 134:         SPI1TCNTH=0;
 [e = _SPI1TCNTH -> -> 0 `i `uc ]
-"141
-[; ;../canpan3Outputs.c: 141:         SPI1TCNTL=1;
+"135
+[; ;../canpan3Outputs.c: 135:         SPI1TCNTL=1;
 [e = _SPI1TCNTL -> -> 1 `i `uc ]
-"142
-[; ;../canpan3Outputs.c: 142:         SPI1TWIDTH=0;
+"136
+[; ;../canpan3Outputs.c: 136:         SPI1TWIDTH=0;
 [e = _SPI1TWIDTH -> -> 0 `i `uc ]
-"144
-[; ;../canpan3Outputs.c: 144:         SPI1TXB = cathodes;
+"138
+[; ;../canpan3Outputs.c: 138:         SPI1TXB = cathodes;
 [e = _SPI1TXB _cathodes ]
-"152
-[; ;../canpan3Outputs.c: 152:         while (! SPI1STATUSbits.TXBE)
-[e $U 3240  ]
-[e :U 3241 ]
-"153
-[; ;../canpan3Outputs.c: 153:             ;
-[e :U 3240 ]
-"152
-[; ;../canpan3Outputs.c: 152:         while (! SPI1STATUSbits.TXBE)
-[e $ ! != -> . . _SPI1STATUSbits 0 5 `i -> 0 `i 3241  ]
-[e :U 3242 ]
-"160
-[; ;../canpan3Outputs.c: 160:         switch (current_row) {
-[e $U 3244  ]
+"146
+[; ;../canpan3Outputs.c: 146:         while (! SPI1STATUSbits.TXBE)
+[e $U 3237  ]
+[e :U 3238 ]
+"147
+[; ;../canpan3Outputs.c: 147:             ;
+[e :U 3237 ]
+"146
+[; ;../canpan3Outputs.c: 146:         while (! SPI1STATUSbits.TXBE)
+[e $ ! != -> . . _SPI1STATUSbits 0 5 `i -> 0 `i 3238  ]
+[e :U 3239 ]
+"154
+[; ;../canpan3Outputs.c: 154:         switch (current_row) {
+[e $U 3241  ]
 {
-"161
-[; ;../canpan3Outputs.c: 161:             case 0:
-[e :U 3245 ]
-"162
-[; ;../canpan3Outputs.c: 162:                 LATBbits.LATB4 = 1;
+"155
+[; ;../canpan3Outputs.c: 155:             case 0:
+[e :U 3242 ]
+"156
+[; ;../canpan3Outputs.c: 156:                 LATBbits.LATB4 = 1;
 [e = . . _LATBbits 0 4 -> -> 1 `i `uc ]
+"157
+[; ;../canpan3Outputs.c: 157:                 break;
+[e $U 3240  ]
+"158
+[; ;../canpan3Outputs.c: 158:             case 1:
+[e :U 3243 ]
+"159
+[; ;../canpan3Outputs.c: 159:                 LATBbits.LATB5 = 1;
+[e = . . _LATBbits 0 5 -> -> 1 `i `uc ]
+"160
+[; ;../canpan3Outputs.c: 160:                 break;
+[e $U 3240  ]
+"161
+[; ;../canpan3Outputs.c: 161:             case 2:
+[e :U 3244 ]
+"162
+[; ;../canpan3Outputs.c: 162:                 LATCbits.LATC6 = 1;
+[e = . . _LATCbits 0 6 -> -> 1 `i `uc ]
 "163
 [; ;../canpan3Outputs.c: 163:                 break;
-[e $U 3243  ]
+[e $U 3240  ]
 "164
-[; ;../canpan3Outputs.c: 164:             case 1:
-[e :U 3246 ]
+[; ;../canpan3Outputs.c: 164:             case 3:
+[e :U 3245 ]
 "165
-[; ;../canpan3Outputs.c: 165:                 LATBbits.LATB5 = 1;
-[e = . . _LATBbits 0 5 -> -> 1 `i `uc ]
+[; ;../canpan3Outputs.c: 165:                 LATCbits.LATC7 = 1;
+[e = . . _LATCbits 0 7 -> -> 1 `i `uc ]
 "166
 [; ;../canpan3Outputs.c: 166:                 break;
-[e $U 3243  ]
+[e $U 3240  ]
 "167
-[; ;../canpan3Outputs.c: 167:             case 2:
-[e :U 3247 ]
-"168
-[; ;../canpan3Outputs.c: 168:                 LATCbits.LATC6 = 1;
-[e = . . _LATCbits 0 6 -> -> 1 `i `uc ]
-"169
-[; ;../canpan3Outputs.c: 169:                 break;
-[e $U 3243  ]
+[; ;../canpan3Outputs.c: 167:         }
+}
+[e $U 3240  ]
+[e :U 3241 ]
+[e [\ _current_row , $ -> 0 `i 3242
+ , $ -> 1 `i 3243
+ , $ -> 2 `i 3244
+ , $ -> 3 `i 3245
+ 3240 ]
+[e :U 3240 ]
 "170
-[; ;../canpan3Outputs.c: 170:             case 3:
-[e :U 3248 ]
-"171
-[; ;../canpan3Outputs.c: 171:                 LATCbits.LATC7 = 1;
-[e = . . _LATCbits 0 7 -> -> 1 `i `uc ]
-"172
-[; ;../canpan3Outputs.c: 172:                 break;
-[e $U 3243  ]
-"173
-[; ;../canpan3Outputs.c: 173:         }
-}
-[e $U 3243  ]
-[e :U 3244 ]
-[e [\ _current_row , $ -> 0 `i 3245
- , $ -> 1 `i 3246
- , $ -> 2 `i 3247
- , $ -> 3 `i 3248
- 3243 ]
-[e :U 3243 ]
-"176
-[; ;../canpan3Outputs.c: 176:         LATCbits.LATC2 = 0;
+[; ;../canpan3Outputs.c: 170:         LATCbits.LATC2 = 0;
 [e = . . _LATCbits 0 2 -> -> 0 `i `uc ]
-"178
-[; ;../canpan3Outputs.c: 178:         PIR3bits.TMR2IF = 0;
+"172
+[; ;../canpan3Outputs.c: 172:         PIR3bits.TMR2IF = 0;
 [e = . . _PIR3bits 0 3 -> -> 0 `i `uc ]
-"179
-[; ;../canpan3Outputs.c: 179:     }
+"173
+[; ;../canpan3Outputs.c: 173:     }
 }
-[e :U 3239 ]
-"180
-[; ;../canpan3Outputs.c: 180: }
-[e :UE 3238 ]
+[e :U 3236 ]
+"174
+[; ;../canpan3Outputs.c: 174: }
+[e :UE 3235 ]
 }
-"188
-[; ;../canpan3Outputs.c: 188: void setLed(uint8_t no) {
+"182
+[; ;../canpan3Outputs.c: 182: void setLed(uint8_t no) {
 [v _setLed `(v ~T0 @X0 1 ef1`uc ]
 {
 [e :U _setLed ]
 [v _no `uc ~T0 @X0 1 r1 ]
 [f ]
-"189
-[; ;../canpan3Outputs.c: 189:     ledMatrix[no/8] |= (1 << (no%8));
+"183
+[; ;../canpan3Outputs.c: 183:     ledMatrix[no/8] |= (1 << (no%8));
 [e =| *U + &U _ledMatrix * -> -> / -> _no `i -> 8 `i `ui `ux -> -> # *U &U _ledMatrix `ui `ux -> << -> 1 `i % -> _no `i -> 8 `i `uc ]
-"190
-[; ;../canpan3Outputs.c: 190: }
-[e :UE 3249 ]
+"184
+[; ;../canpan3Outputs.c: 184: }
+[e :UE 3246 ]
 }
-"195
-[; ;../canpan3Outputs.c: 195: void clearLed(uint8_t no) {
+"189
+[; ;../canpan3Outputs.c: 189: void clearLed(uint8_t no) {
 [v _clearLed `(v ~T0 @X0 1 ef1`uc ]
 {
 [e :U _clearLed ]
 [v _no `uc ~T0 @X0 1 r1 ]
 [f ]
-"196
-[; ;../canpan3Outputs.c: 196:     ledMatrix[no/8] &= ~(1 << (no%8));
+"190
+[; ;../canpan3Outputs.c: 190:     ledMatrix[no/8] &= ~(1 << (no%8));
 [e =& *U + &U _ledMatrix * -> -> / -> _no `i -> 8 `i `ui `ux -> -> # *U &U _ledMatrix `ui `ux -> ~ << -> 1 `i % -> _no `i -> 8 `i `uc ]
-"197
-[; ;../canpan3Outputs.c: 197: }
-[e :UE 3250 ]
+"191
+[; ;../canpan3Outputs.c: 191: }
+[e :UE 3247 ]
 }
-"204
-[; ;../canpan3Outputs.c: 204: uint8_t testLed(uint8_t no) {
+"198
+[; ;../canpan3Outputs.c: 198: uint8_t testLed(uint8_t no) {
 [v _testLed `(uc ~T0 @X0 1 ef1`uc ]
 {
 [e :U _testLed ]
 [v _no `uc ~T0 @X0 1 r1 ]
 [f ]
-"205
-[; ;../canpan3Outputs.c: 205:     return ledMatrix[no/8] & (1 << (no%8));
+"199
+[; ;../canpan3Outputs.c: 199:     return ledMatrix[no/8] & (1 << (no%8));
 [e ) -> & -> *U + &U _ledMatrix * -> -> / -> _no `i -> 8 `i `ui `ux -> -> # *U &U _ledMatrix `ui `ux `i << -> 1 `i % -> _no `i -> 8 `i `uc ]
-[e $UE 3251  ]
-"206
-[; ;../canpan3Outputs.c: 206: }
-[e :UE 3251 ]
+[e $UE 3248  ]
+"200
+[; ;../canpan3Outputs.c: 200: }
+[e :UE 3248 ]
 }

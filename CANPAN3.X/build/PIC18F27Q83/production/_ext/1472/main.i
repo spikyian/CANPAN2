@@ -38365,6 +38365,17 @@ typedef enum VlcbConsumerEvUsage
   CONSUMER_EV_ACTIONS = 0x01,
   CONSUMER_EV_SLOTS = 0x02,
 } VlcbConsumerEvUsage;
+
+typedef enum VlcbBootloaderType
+{
+
+
+
+  BL_TYPE_Unknown = 0,
+  BL_TYPE_MikeBolton = 1,
+  BL_TYPE_KonradOrlowski = 2,
+  BL_TYPE_IanHogg = 3,
+} VlcbBootloaderType;
 # 39 "../../VLCBlib_PIC/vlcb.h" 2
 
 # 1 "../../VLCBlib_PIC/nvm.h" 1
@@ -38993,7 +39004,7 @@ extern void initEvents(void);
 extern void doFlash(void);
 extern uint8_t APP_isProducedEvent(uint8_t tableIndex);
 # 25 "../main.c" 2
-# 101 "../main.c"
+# 102 "../main.c"
 void __init(void);
 uint8_t checkCBUS( void);
 void ISRHigh(void);
@@ -39004,9 +39015,8 @@ void setType(uint8_t i, uint8_t type);
 void factoryResetEE(void);
 void factoryResetFlash(void);
 void factoryResetGlobalEvents(void);
-
-extern void eventsInit(void);
 extern void initOutputs(void);
+extern void initLeds(void);
 extern void processActions(void);
 extern void processOutputs(void);
 
@@ -39075,8 +39085,8 @@ void setup(void) {
     ANSELC = 0x00;
 
 
-    initEvents();
     initOutputs();
+    initLeds();
     initInputs();
 
 

@@ -38452,6 +38452,17 @@ typedef enum VlcbConsumerEvUsage
   CONSUMER_EV_ACTIONS = 0x01,
   CONSUMER_EV_SLOTS = 0x02,
 } VlcbConsumerEvUsage;
+
+typedef enum VlcbBootloaderType
+{
+
+
+
+  BL_TYPE_Unknown = 0,
+  BL_TYPE_MikeBolton = 1,
+  BL_TYPE_KonradOrlowski = 2,
+  BL_TYPE_IanHogg = 3,
+} VlcbBootloaderType;
 # 39 "../../VLCBlib_PIC/vlcb.h" 2
 
 # 1 "../../VLCBlib_PIC/nvm.h" 1
@@ -38784,7 +38795,9 @@ extern void updateModuleErrorStatus(void);
 extern TickValue pbTimer;
 # 44 "../../VLCBlib_PIC/boot.c" 2
 # 66 "../../VLCBlib_PIC/boot.c"
+static void bootPowerUp(void);
 static Processed bootProcessMessage(Message * m);
+static uint8_t bootEsdData(uint8_t id);
 
 
 
@@ -38794,9 +38807,9 @@ static Processed bootProcessMessage(Message * m);
 
 const Service bootService = {
     SERVICE_ID_BOOT,
-    1,
+    2,
     ((void*)0),
-    ((void*)0),
+    bootPowerUp,
     bootProcessMessage,
     ((void*)0),
 
@@ -38804,7 +38817,7 @@ const Service bootService = {
 
 
 
-    ((void*)0),
+    bootEsdData,
 
 
     ((void*)0)
@@ -38820,7 +38833,7 @@ __asm("PSECT eeprom_data,class=EEDATA");
 __asm("ORG " "0x3FF");
 
 __asm("db 0");
-# 142 "../../VLCBlib_PIC/boot.c"
+# 144 "../../VLCBlib_PIC/boot.c"
 const uint8_t paramBlock[] __attribute__((address(0x820))) = {
     MANU_MERG,
     'c',
@@ -38865,7 +38878,49 @@ const uint8_t paramBlock[] __attribute__((address(0x820))) = {
     ((MANU_MERG+'c'+MTYP_CANPAN+254 +13 +1 +4 +(8) +(8)+CPUM_MICROCHIP+104 +(20)+(0x48)+(0x08)+1 +2 +PB_CAN+P18F27Q83)&0xFF),
     ((MANU_MERG+'c'+MTYP_CANPAN+254 +13 +1 +4 +(8) +(8)+CPUM_MICROCHIP+104 +(20)+(0x48)+(0x08)+1 +2 +PB_CAN+P18F27Q83)>>8)
 };
-# 194 "../../VLCBlib_PIC/boot.c"
+
+
+static const char bl_version[] = { 'B','L','_','V','E','R','S','I','O','N','='};
+static uint8_t bootloaderType;
+static uint8_t bootloaderVersion;
+
+
+
+
+void bootPowerUp(void) {
+    uint24_t a;
+    uint8_t i;
+    uint8_t b;
+    uint8_t found;
+
+    bootloaderType = BL_TYPE_Unknown;
+    bootloaderVersion = 0;
+
+
+    for (a=0; a<0x7FF; a++) {
+        found = 1;
+        for (i=0; i<11; i++) {
+            b = (uint8_t)readNVM(FLASH_NVM_TYPE, a+i);
+            if (b != bl_version[i]) {
+                found = 0;
+                break;
+            } else {
+                found = 1;
+            }
+        }
+        if (found) {
+            bootloaderType = (uint8_t)readNVM(FLASH_NVM_TYPE, a+11);
+            bootloaderVersion = (uint8_t)readNVM(FLASH_NVM_TYPE, a+12);
+            return;
+        }
+    }
+}
+
+
+
+
+
+
 static Processed bootProcessMessage(Message * m) {
 
     if (m->bytes[0] != nn.bytes.hi) return NOT_PROCESSED;
@@ -38884,5 +38939,23 @@ static Processed bootProcessMessage(Message * m) {
             return PROCESSED;
         default:
             return NOT_PROCESSED;
+    }
+}
+
+
+
+
+
+
+uint8_t bootEsdData(uint8_t id) {
+    switch (id) {
+        case 1:
+
+            return bootloaderType;
+        case 2:
+
+            return bootloaderVersion;
+        default:
+            return 0;
     }
 }

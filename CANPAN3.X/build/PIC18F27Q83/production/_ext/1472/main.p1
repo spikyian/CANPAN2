@@ -8,8 +8,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "211
 [u S3228 `ul 1 `S3229 1 `uc -> 4 `i `S3230 1 ]
 [n S3228 _TickValue val byte v word ]
-[v F22992 `(v ~T0 @X0 0 tf ]
-[v F22994 `(v ~T0 @X0 0 tf ]
+[v F22998 `(v ~T0 @X0 0 tf ]
+[v F23000 `(v ~T0 @X0 0 tf ]
 "128 ../main.c
 [; ;../main.c: 128: const Service * const services[] = {
 [c E22515 0 1 2 3 4 5 6 7 8 9 10 12 13 16 17 33 34 35 48 63 64 65 66 67 68 69 70 71 72 73 74 76 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 99 111 112 113 114 115 116 117 118 120 127 128 130 131 132 133 135 142 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 162 171 172 175 176 177 178 179 180 181 182 184 185 189 190 191 192 193 194 199 207 208 209 210 211 212 213 216 217 221 222 223 224 225 226 227 230 231 233 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 164 .. ]
@@ -19,20 +19,20 @@ Version 4.0 HI-TECH Software Intermediate Code
 [n S3221 Message len opc bytes ]
 "128 ../main.c
 [; ;../main.c: 128: const Service * const services[] = {
-[c E22916 0 1 .. ]
-[n E22916 Processed NOT_PROCESSED PROCESSED  ]
-[v F22996 `(E22916 ~T0 @X0 0 tf1`*S3221 ]
-[v F22999 `(v ~T0 @X0 0 tf ]
-[v F23001 `(uc ~T0 @X0 0 tf1`uc ]
+[c E22922 0 1 .. ]
+[n E22922 Processed NOT_PROCESSED PROCESSED  ]
+[v F23002 `(E22922 ~T0 @X0 0 tf1`*S3221 ]
+[v F23005 `(v ~T0 @X0 0 tf ]
+[v F23007 `(uc ~T0 @X0 0 tf1`uc ]
 "159 ../../VLCBlib_PIC\vlcb.h
 [s S3225 `uc 1 `uc 1 ]
 [n S3225 . lo hi ]
 "156
 [u S3224 `us 1 `s 1 `S3225 1 ]
 [n S3224 DiagnosticVal asUint asInt asBytes ]
-[v F23004 `(*S3224 ~T0 @X0 0 tf1`uc ]
+[v F23010 `(*S3224 ~T0 @X0 0 tf1`uc ]
 "307
-[s S3226 `uc 1 `uc 1 `*F22992 1 `*F22994 1 `*F22996 1 `*F22999 1 `*F23001 1 `*F23004 1 ]
+[s S3226 `uc 1 `uc 1 `*F22998 1 `*F23000 1 `*F23002 1 `*F23005 1 `*F23007 1 `*F23010 1 ]
 [n S3226 Service serviceNo version factoryReset powerUp processMessage poll getESDdata getDiagnostic ]
 "85 ../../VLCBlib_PIC\can.h
 [; ;../../VLCBlib_PIC\can.h: 85: extern const Service canService;
@@ -60,21 +60,21 @@ Version 4.0 HI-TECH Software Intermediate Code
 "62 ../../VLCBlib_PIC\event_acknowledge.h
 [; ;../../VLCBlib_PIC\event_acknowledge.h: 62: extern const Service eventAckService;
 [v _eventAckService `CS3226 ~T0 @X0 0 e ]
-"110 ../main.c
-[; ;../main.c: 110: void factoryResetGlobalEvents(void);
+"111 ../main.c
+[; ;../main.c: 111: void factoryResetGlobalEvents(void);
 [v _factoryResetGlobalEvents `(v ~T0 @X0 0 ef ]
 "147 ../../VLCBlib_PIC\nvm.h
 [v _flushFlashBlock `(v ~T0 @X0 0 ef ]
 "172 ../main.c
 [; ;../main.c: 172:     transport = &canTransport;
-[c E23027 0 1 .. ]
-[n E23027 SendResult SEND_FAILED SEND_OK  ]
-[v F23033 `(E23027 ~T0 @X0 0 tf1`*S3221 ]
-[c E23023 0 1 .. ]
-[n E23023 MessageReceived NOT_RECEIVED RECEIVED  ]
-[v F23036 `(E23023 ~T0 @X0 0 tf1`*S3221 ]
+[c E23033 0 1 .. ]
+[n E23033 SendResult SEND_FAILED SEND_OK  ]
+[v F23039 `(E23033 ~T0 @X0 0 tf1`*S3221 ]
+[c E23029 0 1 .. ]
+[n E23029 MessageReceived NOT_RECEIVED RECEIVED  ]
+[v F23042 `(E23029 ~T0 @X0 0 tf1`*S3221 ]
 "430 ../../VLCBlib_PIC\vlcb.h
-[s S3227 `*F23033 1 `*F23036 1 ]
+[s S3227 `*F23039 1 `*F23042 1 ]
 [n S3227 Transport sendMessage receiveMessage ]
 "442
 [v _transport `*CS3227 ~T0 @X0 0 e ]
@@ -99,12 +99,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 "59889
 [; ;C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h: 59889: extern volatile unsigned char ANSELC __attribute__((address(0x410)));
 [v _ANSELC `Vuc ~T0 @X0 0 e@1040 ]
-"40 ../canpan3Events.h
-[; ;../canpan3Events.h: 40: extern void initEvents(void);
-[v _initEvents `(v ~T0 @X0 0 ef ]
-"113 ../main.c
-[; ;../main.c: 113: extern void initOutputs(void);
+"112 ../main.c
+[; ;../main.c: 112: extern void initOutputs(void);
 [v _initOutputs `(v ~T0 @X0 0 ef ]
+"113
+[; ;../main.c: 113: extern void initLeds(void);
+[v _initLeds `(v ~T0 @X0 0 ef ]
 "40 ../canpan3Inputs.h
 [; ;../canpan3Inputs.h: 40: extern void initInputs(void);
 [v _initInputs `(v ~T0 @X0 0 ef ]
@@ -125,8 +125,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _tickGet `(ul ~T0 @X0 0 ef ]
 "210 ../main.c
 [; ;../main.c: 210:     started = FALSE;
-[c E22883 0 1 .. ]
-[n E22883 Boolean FALSE TRUE  ]
+[c E22889 0 1 .. ]
+[n E22889 Boolean FALSE TRUE  ]
 "116 ../../VLCBlib_PIC\nv.h
 [; ;../../VLCBlib_PIC\nv.h: 116: extern int16_t getNV(uint8_t index);
 [v _getNV `(s ~T0 @X0 0 ef1`uc ]
@@ -147,8 +147,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _doFlash `(v ~T0 @X0 0 ef ]
 "265 ../main.c
 [; ;../main.c: 265: ValidTime APP_isSuitableTimeToWriteFlash(void){
-[c E22859 0 1 .. ]
-[n E22859 ValidTime BAD_TIME GOOD_TIME  ]
+[c E22865 0 1 .. ]
+[n E22865 ValidTime BAD_TIME GOOD_TIME  ]
 "364 C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h
 [; ;C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h: 364: __asm("BOOTREG equ 038h");
 [; <" BOOTREG equ 038h ;# ">
@@ -3686,7 +3686,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 "126
 [; ;../main.c: 126: static TickValue flashTime;
 [v _flashTime `S3228 ~T0 @X0 1 s ]
-[v F23252 `*CS3226 ~T0 @X0 1 t ]
+[v F23258 `*CS3226 ~T0 @X0 1 t ]
 "128
 [; ;../main.c: 128: const Service * const services[] = {
 [v _services `C*CS3226 ~T0 @X0 -> 9 `i e ]
@@ -3766,11 +3766,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;../main.c: 189:     ANSELC = 0x00;
 [e = _ANSELC -> -> 0 `i `uc ]
 "192
-[; ;../main.c: 192:     initEvents();
-[e ( _initEvents ..  ]
-"193
-[; ;../main.c: 193:     initOutputs();
+[; ;../main.c: 192:     initOutputs();
 [e ( _initOutputs ..  ]
+"193
+[; ;../main.c: 193:     initLeds();
+[e ( _initLeds ..  ]
 "194
 [; ;../main.c: 194:     initInputs();
 [e ( _initInputs ..  ]
@@ -3794,7 +3794,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = . _flashTime 0 . _startTime 0 ]
 "210
 [; ;../main.c: 210:     started = FALSE;
-[e = _started -> . `E22883 0 `uc ]
+[e = _started -> . `E22889 0 `uc ]
 "212
 [; ;../main.c: 212:     nv = (uint8_t)getNV(1);
 [e = _nv -> ( _getNV (1 -> -> 1 `i `uc `uc ]
@@ -3865,7 +3865,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "236
 [; ;../main.c: 236:         started = TRUE;
-[e = _started -> . `E22883 1 `uc ]
+[e = _started -> . `E22889 1 `uc ]
 "238
 [; ;../main.c: 238:     }
 }
@@ -3912,13 +3912,13 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 "265
 [; ;../main.c: 265: ValidTime APP_isSuitableTimeToWriteFlash(void){
-[v _APP_isSuitableTimeToWriteFlash `(E22859 ~T0 @X0 1 ef ]
+[v _APP_isSuitableTimeToWriteFlash `(E22865 ~T0 @X0 1 ef ]
 {
 [e :U _APP_isSuitableTimeToWriteFlash ]
 [f ]
 "266
 [; ;../main.c: 266:     return GOOD_TIME;
-[e ) . `E22859 1 ]
+[e ) . `E22865 1 ]
 [e $UE 3246  ]
 "267
 [; ;../main.c: 267: }
@@ -3926,14 +3926,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 "272
 [; ;../main.c: 272: Processed APP_postProcessMessage(Message * m) {
-[v _APP_postProcessMessage `(E22916 ~T0 @X0 1 ef1`*S3221 ]
+[v _APP_postProcessMessage `(E22922 ~T0 @X0 1 ef1`*S3221 ]
 {
 [e :U _APP_postProcessMessage ]
 [v _m `*S3221 ~T0 @X0 1 r1 ]
 [f ]
 "273
 [; ;../main.c: 273:     return NOT_PROCESSED;
-[e ) . `E22916 0 ]
+[e ) . `E22922 0 ]
 [e $UE 3247  ]
 "274
 [; ;../main.c: 274: }

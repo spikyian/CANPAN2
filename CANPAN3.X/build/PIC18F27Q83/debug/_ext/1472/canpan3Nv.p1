@@ -1,8 +1,8 @@
 Version 4.0 HI-TECH Software Intermediate Code
 "63 ../canpan3Nv.c
 [; ;../canpan3Nv.c: 63: NvValidation APP_nvValidate(uint8_t index, uint8_t value) {
-[c E23092 0 1 .. ]
-[n E23092 NvValidation INVALID VALID  ]
+[c E23098 0 1 .. ]
+[n E23098 NvValidation INVALID VALID  ]
 "364 C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h
 [; ;C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h: 364: __asm("BOOTREG equ 038h");
 [; <" BOOTREG equ 038h ;# ">
@@ -3566,46 +3566,34 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 "63
 [; ;../canpan3Nv.c: 63: NvValidation APP_nvValidate(uint8_t index, uint8_t value) {
-[v _APP_nvValidate `(E23092 ~T0 @X0 1 ef2`uc`uc ]
+[v _APP_nvValidate `(E23098 ~T0 @X0 1 ef2`uc`uc ]
 {
 [e :U _APP_nvValidate ]
 [v _index `uc ~T0 @X0 1 r1 ]
 [v _value `uc ~T0 @X0 1 r2 ]
 [f ]
 "64
-[; ;../canpan3Nv.c: 64:     if (index >= 1) {
-[e $ ! >= -> _index `i -> 1 `i 3237  ]
+[; ;../canpan3Nv.c: 64:     if (value > 3) {
+[e $ ! > -> _value `i -> 3 `i 3237  ]
 {
 "65
 [; ;../canpan3Nv.c: 65:         return INVALID;
-[e ) . `E23092 0 ]
+[e ) . `E23098 0 ]
 [e $UE 3236  ]
 "66
 [; ;../canpan3Nv.c: 66:     }
 }
 [e :U 3237 ]
 "67
-[; ;../canpan3Nv.c: 67:     if (value > 3) {
-[e $ ! > -> _value `i -> 3 `i 3238  ]
-{
+[; ;../canpan3Nv.c: 67:     return VALID;
+[e ) . `E23098 1 ]
+[e $UE 3236  ]
 "68
-[; ;../canpan3Nv.c: 68:         return INVALID;
-[e ) . `E23092 0 ]
-[e $UE 3236  ]
-"69
-[; ;../canpan3Nv.c: 69:     }
-}
-[e :U 3238 ]
-"70
-[; ;../canpan3Nv.c: 70:     return VALID;
-[e ) . `E23092 1 ]
-[e $UE 3236  ]
-"71
-[; ;../canpan3Nv.c: 71: }
+[; ;../canpan3Nv.c: 68: }
 [e :UE 3236 ]
 }
-"76
-[; ;../canpan3Nv.c: 76: void APP_nvValueChanged(uint8_t index, uint8_t value, uint8_t oldValue) {
+"73
+[; ;../canpan3Nv.c: 73: void APP_nvValueChanged(uint8_t index, uint8_t value, uint8_t oldValue) {
 [v _APP_nvValueChanged `(v ~T0 @X0 1 ef3`uc`uc`uc ]
 {
 [e :U _APP_nvValueChanged ]
@@ -3613,7 +3601,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _value `uc ~T0 @X0 1 r2 ]
 [v _oldValue `uc ~T0 @X0 1 r3 ]
 [f ]
-"77
-[; ;../canpan3Nv.c: 77: }
-[e :UE 3239 ]
+"74
+[; ;../canpan3Nv.c: 74: }
+[e :UE 3238 ]
 }

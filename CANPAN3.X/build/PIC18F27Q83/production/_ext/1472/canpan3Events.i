@@ -38366,6 +38366,17 @@ typedef enum VlcbConsumerEvUsage
   CONSUMER_EV_ACTIONS = 0x01,
   CONSUMER_EV_SLOTS = 0x02,
 } VlcbConsumerEvUsage;
+
+typedef enum VlcbBootloaderType
+{
+
+
+
+  BL_TYPE_Unknown = 0,
+  BL_TYPE_MikeBolton = 1,
+  BL_TYPE_KonradOrlowski = 2,
+  BL_TYPE_IanHogg = 3,
+} VlcbBootloaderType;
 # 39 "../../VLCBlib_PIC/vlcb.h" 2
 
 # 1 "../../VLCBlib_PIC/nvm.h" 1
@@ -38806,8 +38817,8 @@ extern void doFlash(void);
 extern uint8_t APP_isProducedEvent(uint8_t tableIndex);
 # 43 "../canpan3Events.c" 2
 
-# 1 "../canpan3Outputs.h" 1
-# 40 "../canpan3Outputs.h"
+# 1 "../canpan3Leds.h" 1
+# 41 "../canpan3Leds.h"
 enum canpan3LedState {
     CANPANLED_ON,
     CANPANLED_OFF,
@@ -38815,12 +38826,9 @@ enum canpan3LedState {
     CANPANLED_ANTIFLASH
 };
 
-extern enum canpan3LedState ledStates[(4*8)];
-extern uint8_t outputState[(4*8)];
+extern void setLedState(uint8_t led, enum canpan3LedState state);
 
-extern void setLed(uint8_t no);
-extern void clearLed(uint8_t no);
-extern uint8_t testLed(uint8_t no);
+extern uint8_t outputState[(4*8)];
 # 44 "../canpan3Events.c" 2
 
 # 1 "../canpan3Inputs.h" 1
@@ -38836,7 +38844,6 @@ extern uint8_t canpanScanReady;
 # 45 "../canpan3Events.c" 2
 
 
-static uint8_t flashToggle;
 uint8_t APP_isProducedEvent(uint8_t tableIndex);
 
 void factoryResetGlobalEvents(void) {
@@ -38861,14 +38868,10 @@ void factoryResetGlobalEvents(void) {
     }
 }
 
-void initEvents(void) {
-    flashToggle = 0;
-}
-
 uint8_t APP_addEvent(uint16_t nodeNumber, uint16_t eventNumber, uint8_t evNum, uint8_t evVal, Boolean forceOwnNN) {
     return addEvent(nodeNumber, eventNumber, evNum, evVal, forceOwnNN);
 }
-# 87 "../canpan3Events.c"
+# 82 "../canpan3Events.c"
 uint8_t APP_isConsumedEvent(uint8_t tableIndex) {
     int16_t ev;
 
@@ -38972,7 +38975,7 @@ uint8_t APP_isProducedEvent(uint8_t tableIndex) {
     }
     return 0;
 }
-# 199 "../canpan3Events.c"
+# 194 "../canpan3Events.c"
 Processed APP_processConsumedEvent(uint8_t tableIndex, Message *m) {
     uint8_t onOff;
     uint8_t ledMode;
@@ -38997,100 +39000,58 @@ Processed APP_processConsumedEvent(uint8_t tableIndex, Message *m) {
             polarity = evs[8 + ledNo/8]& ((1 << ledNo)%8);
             switch(ledMode) {
                 case 0xFF:
-                    ledStates[ledNo] = polarity ? !onOff : onOff;
                     if (polarity) {
 
                         if (onOff) {
-                            clearLed(ledNo);
-                            ledStates[ledNo] = CANPANLED_OFF;
+                            setLedState(ledNo, CANPANLED_OFF);
                         } else {
-                            setLed(ledNo);
-                            ledStates[ledNo] = CANPANLED_ON;
+                            setLedState(ledNo, CANPANLED_ON);
                         }
 
                     } else {
 
                         if (onOff) {
-                            setLed(ledNo);
-                            ledStates[ledNo] = CANPANLED_ON;
+                            setLedState(ledNo, CANPANLED_ON);
                         } else {
-                            clearLed(ledNo);
-                            ledStates[ledNo] = CANPANLED_OFF;
+                            setLedState(ledNo, CANPANLED_OFF);
                         }
                     }
                     break;
                 case 0xFE:
                     if (onOff) {
                         if (polarity) {
-                            clearLed(ledNo);
-                            ledStates[ledNo] = CANPANLED_OFF;
+                            setLedState(ledNo, CANPANLED_OFF);
                         } else {
-                            setLed(ledNo);
-                            ledStates[ledNo] = CANPANLED_ON;
+                            setLedState(ledNo, CANPANLED_ON);
                         }
                     }
                     break;
                 case 0xFD:
                     if (!onOff) {
                         if (polarity) {
-                            setLed(ledNo);
-                            ledStates[ledNo] = CANPANLED_ON;
+                            setLedState(ledNo, CANPANLED_ON);
                         } else {
-                            clearLed(ledNo);
-                            ledStates[ledNo] = CANPANLED_OFF;
+                            setLedState(ledNo, CANPANLED_OFF);
                         }
                     }
                     break;
                 case 0xF8:
                     if (onOff) {
-                        clearLed(ledNo);
                         if (polarity) {
-                            ledStates[ledNo] = CANPANLED_ANTIFLASH;
+                            setLedState(ledNo, CANPANLED_ANTIFLASH);
                         } else {
-                            ledStates[ledNo] = CANPANLED_FLASH;
+                            setLedState(ledNo, CANPANLED_FLASH);
                         }
                     } else {
-                        clearLed(ledNo);
-                        ledStates[ledNo] = CANPANLED_OFF;
+                        setLedState(ledNo, CANPANLED_OFF);
                     }
                     break;
             }
         }
     }
-
     return PROCESSED;
 }
 
-
-
-
-void doFlash(void) {
-    uint8_t ledNo;
-
-    for (ledNo=0; ledNo<(4*8); ledNo++) {
-        switch (ledStates[ledNo]) {
-            case CANPANLED_FLASH:
-                if (flashToggle) {
-                    setLed(ledNo);
-                } else {
-                    clearLed(ledNo);
-                }
-                break;
-            case CANPANLED_ANTIFLASH:
-                if (flashToggle) {
-                    clearLed(ledNo);
-                } else {
-                    setLed(ledNo);
-                }
-                break;
-            case CANPANLED_ON:
-                break;
-            case CANPANLED_OFF:
-                break;
-        }
-    }
-    flashToggle = !flashToggle;
-}
 
 
 

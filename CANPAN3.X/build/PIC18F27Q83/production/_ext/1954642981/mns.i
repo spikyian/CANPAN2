@@ -38453,6 +38453,17 @@ typedef enum VlcbConsumerEvUsage
   CONSUMER_EV_ACTIONS = 0x01,
   CONSUMER_EV_SLOTS = 0x02,
 } VlcbConsumerEvUsage;
+
+typedef enum VlcbBootloaderType
+{
+
+
+
+  BL_TYPE_Unknown = 0,
+  BL_TYPE_MikeBolton = 1,
+  BL_TYPE_KonradOrlowski = 2,
+  BL_TYPE_IanHogg = 3,
+} VlcbBootloaderType;
 # 39 "../../VLCBlib_PIC/vlcb.h" 2
 
 # 1 "../../VLCBlib_PIC/nvm.h" 1
@@ -38980,8 +38991,8 @@ static uint8_t getParameterFlags(void);
 static void mnsFactoryReset(void) {
     nn.bytes.hi = 0;
     nn.bytes.lo = 0;
-    writeNVM(EEPROM_NVM_TYPE, 0x3FC, nn.bytes.hi);
-    writeNVM(EEPROM_NVM_TYPE, 0x3FC +1, nn.bytes.lo);
+    writeNVM(EEPROM_NVM_TYPE, 0x3FC +1, nn.bytes.hi);
+    writeNVM(EEPROM_NVM_TYPE, 0x3FC, nn.bytes.lo);
 
     last_mode_state = mode_state = MODE_UNINITIALISED;
     writeNVM(EEPROM_NVM_TYPE, 0x3FB, mode_state);
@@ -39000,13 +39011,13 @@ static void mnsPowerUp(void) {
     int temp;
     uint8_t i;
 
-    temp = readNVM(EEPROM_NVM_TYPE, 0x3FC);
+    temp = readNVM(EEPROM_NVM_TYPE, 0x3FC +1);
     if (temp < 0) {
         nn.bytes.hi = 0;
         nn.bytes.lo = 0;
     } else {
         nn.bytes.hi = (uint8_t)temp;
-        temp = readNVM(EEPROM_NVM_TYPE, 0x3FC +1);
+        temp = readNVM(EEPROM_NVM_TYPE, 0x3FC);
         if (temp < 0) {
             nn.bytes.hi = 0;
             nn.bytes.lo = 0;
@@ -39063,8 +39074,8 @@ static Processed mnsProcessMessage(Message * m) {
                 } else {
                     nn.bytes.hi = m->bytes[0];
                     nn.bytes.lo = m->bytes[1];
-                    writeNVM(EEPROM_NVM_TYPE, 0x3FC, nn.bytes.hi);
-                    writeNVM(EEPROM_NVM_TYPE, 0x3FC +1, nn.bytes.lo);
+                    writeNVM(EEPROM_NVM_TYPE, 0x3FC +1, nn.bytes.hi);
+                    writeNVM(EEPROM_NVM_TYPE, 0x3FC, nn.bytes.lo);
 
                     mode_state = MODE_NORMAL;
 
@@ -39258,8 +39269,8 @@ static Processed mnsProcessMessage(Message * m) {
                         sendMessage2(OPC_RQNN, nn.bytes.hi, nn.bytes.lo);
 
                         nn.bytes.lo = nn.bytes.hi = 0;
-                        writeNVM(EEPROM_NVM_TYPE, 0x3FC, nn.bytes.hi);
-                        writeNVM(EEPROM_NVM_TYPE, 0x3FC +1, nn.bytes.lo);
+                        writeNVM(EEPROM_NVM_TYPE, 0x3FC +1, nn.bytes.hi);
+                        writeNVM(EEPROM_NVM_TYPE, 0x3FC, nn.bytes.lo);
 
                         mode_state = MODE_SETUP;
                         setupModePreviousMode = MODE_NORMAL;

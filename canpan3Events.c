@@ -41,10 +41,9 @@
 #include "event_teach.h"
 #include "mns.h"
 #include "canpan3Events.h"
-#include "canpan3Outputs.h"
+#include "canpan3Leds.h"
 #include "canpan3Inputs.h"
 
-static uint8_t flashToggle;
 uint8_t APP_isProducedEvent(uint8_t tableIndex);
 
 void factoryResetGlobalEvents(void) {
@@ -67,10 +66,6 @@ void factoryResetGlobalEvents(void) {
         addEvent(nn.word, i, EV_LEDPOLARITY4, 0, TRUE);
         addEvent(nn.word, i, EV_LEDMODE, LM_ONOFF, TRUE);
     }
-}
-
-void initEvents(void) {
-    flashToggle = 0;
 }
 
 uint8_t APP_addEvent(uint16_t nodeNumber, uint16_t eventNumber, uint8_t evNum, uint8_t evVal, Boolean forceOwnNN) {
@@ -103,6 +98,22 @@ uint8_t APP_isConsumedEvent(uint8_t tableIndex) {
         return 0;
     }
     return (ev & SV_COE);       // self consumed event
+}
+
+/**
+ * The CANPAN represents the event type in EV#1. 
+ * 
+ * @param tableIndex
+ * @return 
+ */
+uint8_t APP_isProducedEvent(uint8_t tableIndex) {
+    int16_t ev;
+    
+    ev = getEv(tableIndex, EV_TYPE);
+    if ((ev == CANPAN_PRODUCED) || (ev == CANPAN_SELF_SOD)) {
+        return 1;
+    }
+    return 0;
 }
 
 /**
@@ -159,33 +170,18 @@ Processed APP_preProcessMessage(Message * m) {
     // events only here
     tableIndex = findEvent(enn, ((uint16_t)m->bytes[2])*256+m->bytes[3]);
     if (tableIndex == NO_INDEX) return NOT_PROCESSED;
-    if (!APP_isProducedEvent(tableIndex)) { // can we produce this event?
-        return NOT_PROCESSED;
-    }
-    // If receive an event for a Toggle switch then update our outputState[]
-    ev = (uint8_t)getEv(tableIndex, EV_SWITCHSV);
-    if (ev & SV_TOGGLE) {
-        switchNo = (uint8_t)getEv(tableIndex, EV_SWITCHNO);
-        outputState[switchNo] = !(m->opc & 1);  // on or off
-        return PROCESSED;
+    if (APP_isProducedEvent(tableIndex)) { // can we produce this event?
+        // If receive an event for a Toggle switch then update our outputState[]
+        ev = (uint8_t)getEv(tableIndex, EV_SWITCHSV);
+        if (ev & SV_TOGGLE) {
+            switchNo = (uint8_t)getEv(tableIndex, EV_SWITCHNO) - 1;
+            if (switchNo < NUM_BUTTONS) {
+                outputState[switchNo] = !(m->opc & 1);  // on or off
+            }
+            return PROCESSED;
+        }
     }
     return NOT_PROCESSED;
-}
-
-/**
- * The CANPAN represents the event type in EV#1. 
- * 
- * @param tableIndex
- * @return 
- */
-uint8_t APP_isProducedEvent(uint8_t tableIndex) {
-    int16_t ev;
-    
-    ev = getEv(tableIndex, EV_TYPE);
-    if ((ev == CANPAN_PRODUCED) || (ev == CANPAN_SELF_SOD)) {
-        return 1;
-    }
-    return 0;
 }
 
 /**
@@ -212,6 +208,7 @@ Processed APP_processConsumedEvent(uint8_t tableIndex, Message *m) {
         doSoD();
         return PROCESSED;
     }
+    // using the EVs and the event on/off state we work out the new LED state
     ledMode = evs[EV_LEDMODE];
     for (ledNo=0; ledNo<NUM_LEDS; ledNo++) {
         flags = evs[EV_LEDFLAGS1 + ledNo/8] & (1 << (ledNo%8));
@@ -220,100 +217,58 @@ Processed APP_processConsumedEvent(uint8_t tableIndex, Message *m) {
             polarity = evs[EV_LEDPOLARITY1 + ledNo/8]& ((1 << ledNo)%8);
             switch(ledMode) {
                 case LM_ONOFF:
-                    ledStates[ledNo] = polarity ? !onOff : onOff;
                     if (polarity) {
                         // inverted
                         if (onOff) {
-                            clearLed(ledNo);
-                            ledStates[ledNo] = CANPANLED_OFF;
+                            setLedState(ledNo, CANPANLED_OFF);
                         } else {
-                            setLed(ledNo);
-                            ledStates[ledNo] = CANPANLED_ON;
+                            setLedState(ledNo, CANPANLED_ON);
                         }
                         
                     } else {
                         // normal
                         if (onOff) {
-                            setLed(ledNo);
-                            ledStates[ledNo] = CANPANLED_ON;
+                            setLedState(ledNo, CANPANLED_ON);
                         } else {
-                            clearLed(ledNo);
-                            ledStates[ledNo] = CANPANLED_OFF;
+                            setLedState(ledNo, CANPANLED_OFF);
                         }
                     }
                     break;
                 case LM_ONONLY:
                     if (onOff) {
                         if (polarity) {
-                            clearLed(ledNo);
-                            ledStates[ledNo] = CANPANLED_OFF;
+                            setLedState(ledNo, CANPANLED_OFF);
                         } else {
-                            setLed(ledNo);
-                            ledStates[ledNo] = CANPANLED_ON;
+                            setLedState(ledNo, CANPANLED_ON);
                         }
                     }
                     break;
                 case LM_OFFONLY:
                     if (!onOff) {
                         if (polarity) {
-                            setLed(ledNo);
-                            ledStates[ledNo] = CANPANLED_ON;
+                            setLedState(ledNo, CANPANLED_ON);
                         } else {
-                            clearLed(ledNo);
-                            ledStates[ledNo] = CANPANLED_OFF;
+                            setLedState(ledNo, CANPANLED_OFF);
                         }
                     }
                     break;
                 case LM_FLASH:
                     if (onOff) {
-                        clearLed(ledNo);
                         if (polarity) {
-                            ledStates[ledNo] = CANPANLED_ANTIFLASH;
+                            setLedState(ledNo, CANPANLED_ANTIFLASH);
                         } else {
-                            ledStates[ledNo] = CANPANLED_FLASH;
+                            setLedState(ledNo, CANPANLED_FLASH);
                         }
                     } else {
-                        clearLed(ledNo);
-                        ledStates[ledNo] = CANPANLED_OFF;
+                        setLedState(ledNo, CANPANLED_OFF);
                     }
                     break;
             }
         }
     }
-    
     return PROCESSED;
 }
 
-/**
- * Call regularly at required flash rate.
- */
-void doFlash(void) {
-    uint8_t ledNo;
-    
-    for (ledNo=0; ledNo<NUM_LEDS; ledNo++) {
-        switch (ledStates[ledNo]) {
-            case CANPANLED_FLASH:
-                if (flashToggle) {
-                    setLed(ledNo);
-                } else {
-                    clearLed(ledNo);
-                }
-                break;
-            case CANPANLED_ANTIFLASH:
-                if (flashToggle) {
-                    clearLed(ledNo);
-                } else {
-                    setLed(ledNo);
-                }
-                break;
-            case CANPANLED_ON:
-                break;
-            case CANPANLED_OFF:
-                break;
-        }
-    }
-    flashToggle = !flashToggle;
-}
 
 /**
  * Gets the current event state of a produced event by table index.

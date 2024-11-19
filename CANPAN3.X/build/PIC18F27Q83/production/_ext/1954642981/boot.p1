@@ -1,21 +1,21 @@
 Version 4.0 HI-TECH Software Intermediate Code
-[v F23042 `(v ~T0 @X0 0 tf ]
-[v F23044 `(v ~T0 @X0 0 tf ]
-"74 ../../VLCBlib_PIC/boot.c
-[; ;../../VLCBlib_PIC/boot.c: 74: const Service bootService = {
+[v F23048 `(v ~T0 @X0 0 tf ]
+[v F23050 `(v ~T0 @X0 0 tf ]
+"76 ../../VLCBlib_PIC/boot.c
+[; ;../../VLCBlib_PIC/boot.c: 76: const Service bootService = {
 [c E22565 0 1 2 3 4 5 6 7 8 9 10 12 13 16 17 33 34 35 48 63 64 65 66 67 68 69 70 71 72 73 74 76 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 99 111 112 113 114 115 116 117 118 120 127 128 130 131 132 133 135 142 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 162 171 172 175 176 177 178 179 180 181 182 184 185 189 190 191 192 193 194 199 207 208 209 210 211 212 213 216 217 221 222 223 224 225 226 227 230 231 233 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 164 .. ]
 [n E22565 VlcbOpCodes OPC_ACK OPC_NAK OPC_HLT OPC_BON OPC_TOF OPC_TON OPC_ESTOP OPC_ARST OPC_RTOF OPC_RTON OPC_RESTP OPC_RSTAT OPC_QNN OPC_RQNP OPC_RQMN OPC_KLOC OPC_QLOC OPC_DKEEP OPC_DBG1 OPC_EXTC OPC_RLOC OPC_QCON OPC_SNN OPC_ALOC OPC_STMOD OPC_PCON OPC_KCON OPC_DSPD OPC_DFLG OPC_DFNON OPC_DFNOF OPC_SSTAT OPC_NNRSM OPC_RQNN OPC_NNREL OPC_NNACK OPC_NNLRN OPC_NNULN OPC_NNCLR OPC_NNEVN OPC_NERD OPC_RQEVN OPC_WRACK OPC_RQDAT OPC_RQDDS OPC_BOOT OPC_ENUM OPC_NNRST OPC_EXTC1 OPC_DFUN OPC_GLOC OPC_ERR OPC_CMDERR OPC_EVNLF OPC_NVRD OPC_NENRD OPC_RQNPN OPC_NUMEV OPC_CANID OPC_MODE OPC_RQSD OPC_EXTC2 OPC_RDCC3 OPC_WCVO OPC_WCVB OPC_QCVS OPC_PCVS OPC_RDGN OPC_NVSETRD OPC_ACON OPC_ACOF OPC_AREQ OPC_ARON OPC_AROF OPC_EVULN OPC_NVSET OPC_NVANS OPC_ASON OPC_ASOF OPC_ASRQ OPC_PARAN OPC_REVAL OPC_ARSON OPC_ARSOF OPC_EXTC3 OPC_RDCC4 OPC_WCVS OPC_HEARTB OPC_SD OPC_GRSP OPC_ACON1 OPC_ACOF1 OPC_REQEV OPC_ARON1 OPC_AROF1 OPC_NEVAL OPC_PNN OPC_ASON1 OPC_ASOF1 OPC_ARSON1 OPC_ARSOF1 OPC_EXTC4 OPC_RDCC5 OPC_WCVOA OPC_CABDAT OPC_DGN OPC_FCLK OPC_ACON2 OPC_ACOF2 OPC_EVLRN OPC_EVANS OPC_ARON2 OPC_AROF2 OPC_ASON2 OPC_ASOF2 OPC_ARSON2 OPC_ARSOF2 OPC_EXTC5 OPC_RDCC6 OPC_PLOC OPC_NAME OPC_STAT OPC_ENACK OPC_ESD OPC_DTXC OPC_PARAMS OPC_ACON3 OPC_ACOF3 OPC_ENRSP OPC_ARON3 OPC_AROF3 OPC_EVLRNI OPC_ACDAT OPC_ARDAT OPC_ASON3 OPC_ASOF3 OPC_DDES OPC_DDRS OPC_DDWS OPC_ARSON3 OPC_ARSOF3 OPC_EXTC6 OPC_VCVS  ]
 "119 ../../VLCBlib_PIC/vlcb.h
 [; ;../../VLCBlib_PIC/vlcb.h: 119: typedef struct Message {
 [s S3224 `uc 1 `E22565 1 `uc -> 7 `i ]
 [n S3224 Message len opc bytes ]
-"74 ../../VLCBlib_PIC/boot.c
-[; ;../../VLCBlib_PIC/boot.c: 74: const Service bootService = {
-[c E22966 0 1 .. ]
-[n E22966 Processed NOT_PROCESSED PROCESSED  ]
-[v F23046 `(E22966 ~T0 @X0 0 tf1`*S3224 ]
-[v F23049 `(v ~T0 @X0 0 tf ]
-[v F23051 `(uc ~T0 @X0 0 tf1`uc ]
+"76 ../../VLCBlib_PIC/boot.c
+[; ;../../VLCBlib_PIC/boot.c: 76: const Service bootService = {
+[c E22972 0 1 .. ]
+[n E22972 Processed NOT_PROCESSED PROCESSED  ]
+[v F23052 `(E22972 ~T0 @X0 0 tf1`*S3224 ]
+[v F23055 `(v ~T0 @X0 0 tf ]
+[v F23057 `(uc ~T0 @X0 0 tf1`uc ]
 "159 ../../VLCBlib_PIC/vlcb.h
 [; ;../../VLCBlib_PIC/vlcb.h: 159:     struct {
 [s S3228 `uc 1 `uc 1 ]
@@ -24,25 +24,29 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;../../VLCBlib_PIC/vlcb.h: 156: typedef union DiagnosticVal {
 [u S3227 `us 1 `s 1 `S3228 1 ]
 [n S3227 DiagnosticVal asUint asInt asBytes ]
-[v F23054 `(*S3227 ~T0 @X0 0 tf1`uc ]
+[v F23060 `(*S3227 ~T0 @X0 0 tf1`uc ]
 "307
 [; ;../../VLCBlib_PIC/vlcb.h: 307: typedef struct Service {
-[s S3229 `uc 1 `uc 1 `*F23042 1 `*F23044 1 `*F23046 1 `*F23049 1 `*F23051 1 `*F23054 1 ]
+[s S3229 `uc 1 `uc 1 `*F23048 1 `*F23050 1 `*F23052 1 `*F23055 1 `*F23057 1 `*F23060 1 ]
 [n S3229 Service serviceNo version factoryReset powerUp processMessage poll getESDdata getDiagnostic ]
-"74 ../../VLCBlib_PIC/boot.c
-[; ;../../VLCBlib_PIC/boot.c: 74: const Service bootService = {
+"76 ../../VLCBlib_PIC/boot.c
+[; ;../../VLCBlib_PIC/boot.c: 76: const Service bootService = {
 [c E22772 0 1 2 3 4 5 6 7 8 9 10 17 .. ]
 [n E22772 VlcbServiceTypes SERVICE_ID_NONE SERVICE_ID_MNS SERVICE_ID_NV SERVICE_ID_CAN SERVICE_ID_OLD_TEACH SERVICE_ID_PRODUCER SERVICE_ID_CONSUMER SERVICE_ID_TEACH SERVICE_ID_CONSUME_OWN_EVENTS SERVICE_ID_EVENTACK SERVICE_ID_BOOT SERVICE_ID_STREAMING  ]
-[v F23102 `(v ~T0 @X0 0 tf ]
-[v F23103 `(v ~T0 @X0 0 tf ]
+[v F23111 `(v ~T0 @X0 0 tf ]
 "66
-[; ;../../VLCBlib_PIC/boot.c: 66: static Processed bootProcessMessage(Message * m);
-[v _bootProcessMessage `(E22966 ~T0 @X0 0 sf1`*S3224 ]
-[v F23106 `(v ~T0 @X0 0 tf ]
-[v F23107 `(uc ~T0 @X0 0 tf1`uc ]
-[v F23109 `(*S3227 ~T0 @X0 0 tf1`uc ]
-"142
-[; ;../../VLCBlib_PIC/boot.c: 142: const uint8_t paramBlock[] __attribute__((address(0x820))) = {
+[; ;../../VLCBlib_PIC/boot.c: 66: static void bootPowerUp(void);
+[v _bootPowerUp `(v ~T0 @X0 0 sf ]
+"67
+[; ;../../VLCBlib_PIC/boot.c: 67: static Processed bootProcessMessage(Message * m);
+[v _bootProcessMessage `(E22972 ~T0 @X0 0 sf1`*S3224 ]
+[v F23115 `(v ~T0 @X0 0 tf ]
+"68
+[; ;../../VLCBlib_PIC/boot.c: 68: static uint8_t bootEsdData(uint8_t id);
+[v _bootEsdData `(uc ~T0 @X0 0 sf1`uc ]
+[v F23118 `(*S3227 ~T0 @X0 0 tf1`uc ]
+"144
+[; ;../../VLCBlib_PIC/boot.c: 144: const uint8_t paramBlock[] __attribute__((address(0x820))) = {
 [c E22432 13 165 44 70 80 250 250 249 248 .. ]
 [n E22432 VlcbManufacturer MANU_DEV MANU_MERG MANU_SPROG MANU_ROCRAIL MANU_SPECTRUM MANU_MERG_VLCB MANU_VLCB MANU_SYSPIXIE MANU_RME  ]
 [c E22443 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 252 255 254 253 252 .. ]
@@ -53,6 +57,17 @@ Version 4.0 HI-TECH Software Intermediate Code
 [n E22833 VlcbBusTypes PB_CAN PB_ETH PB_MIWI PB_USB  ]
 [c E22839 1 2 3 .. ]
 [n E22839 VlcbProcessorManufacturers CPUM_MICROCHIP CPUM_ATMEL CPUM_ARM  ]
+"203
+[; ;../../VLCBlib_PIC/boot.c: 203:     bootloaderType = BL_TYPE_Unknown;
+[c E22905 0 1 2 3 .. ]
+[n E22905 VlcbBootloaderType BL_TYPE_Unknown BL_TYPE_MikeBolton BL_TYPE_KonradOrlowski BL_TYPE_IanHogg  ]
+"210
+[; ;../../VLCBlib_PIC/boot.c: 210:             b = (uint8_t)readNVM(FLASH_NVM_TYPE, a+i);
+[c E22911 0 1 .. ]
+[n E22911 . EEPROM_NVM_TYPE FLASH_NVM_TYPE  ]
+"160 ../../VLCBlib_PIC/nvm.h
+[; ;../../VLCBlib_PIC/nvm.h: 160: extern int16_t readNVM(NVMtype type, uint24_t index);
+[v _readNVM `(s ~T0 @X0 0 ef2`E22911`um ]
 "129 ../../VLCBlib_PIC/vlcb.h
 [; ;../../VLCBlib_PIC/vlcb.h: 129:     struct {
 [s S3226 `uc 1 `uc 1 ]
@@ -64,17 +79,13 @@ Version 4.0 HI-TECH Software Intermediate Code
 "126 ../../VLCBlib_PIC/mns.h
 [; ;../../VLCBlib_PIC/mns.h: 126: extern Word nn;
 [v _nn `S3225 ~T0 @X0 0 e ]
-"202 ../../VLCBlib_PIC/boot.c
-[; ;../../VLCBlib_PIC/boot.c: 202:             if (m->bytes[2] != MODE_BOOT) return NOT_PROCESSED;
+"239 ../../VLCBlib_PIC/boot.c
+[; ;../../VLCBlib_PIC/boot.c: 239:             if (m->bytes[2] != MODE_BOOT) return NOT_PROCESSED;
 [c E22821 255 0 1 8 9 10 11 12 13 14 .. ]
 [n E22821 VlcbModeParams MODE_UNINITIALISED MODE_SETUP MODE_NORMAL MODE_LEARN_ON MODE_LEARN_OFF MODE_EVENT_ACK_ON MODE_EVENT_ACK_OFF MODE_HEARTBEAT_ON MODE_HEARTBEAT_OFF MODE_BOOT  ]
-"207
-[; ;../../VLCBlib_PIC/boot.c: 207:             writeNVM(EEPROM_NVM_TYPE, 0x3FF, 0xFF);
-[c E22905 0 1 .. ]
-[n E22905 . EEPROM_NVM_TYPE FLASH_NVM_TYPE  ]
 "169 ../../VLCBlib_PIC/nvm.h
 [; ;../../VLCBlib_PIC/nvm.h: 169: extern uint8_t writeNVM(NVMtype type, uint24_t index, uint8_t value);
-[v _writeNVM `(uc ~T0 @X0 0 ef3`E22905`um`uc ]
+[v _writeNVM `(uc ~T0 @X0 0 ef3`E22911`um`uc ]
 "364 C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h
 [; ;C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h: 364: __asm("BOOTREG equ 038h");
 [; <" BOOTREG equ 038h ;# ">
@@ -3594,34 +3605,34 @@ Version 4.0 HI-TECH Software Intermediate Code
 "69656
 [; ;C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h: 69656: __asm("TOSU equ 04FFh");
 [; <" TOSU equ 04FFh ;# ">
-"74 ../../VLCBlib_PIC/boot.c
-[; ;../../VLCBlib_PIC/boot.c: 74: const Service bootService = {
+"76 ../../VLCBlib_PIC/boot.c
+[; ;../../VLCBlib_PIC/boot.c: 76: const Service bootService = {
 [v _bootService `CS3229 ~T0 @X0 1 e ]
 [i _bootService
 :U ..
 :U ..
 -> . `E22772 10 `uc
--> -> 1 `i `uc
--> -> -> 0 `i `*v `*F23102
--> -> -> 0 `i `*v `*F23103
+-> -> 2 `i `uc
+-> -> -> 0 `i `*v `*F23111
+&U _bootPowerUp
 &U _bootProcessMessage
--> -> -> 0 `i `*v `*F23106
--> -> -> 0 `i `*v `*F23107
--> -> -> 0 `i `*v `*F23109
+-> -> -> 0 `i `*v `*F23115
+&U _bootEsdData
+-> -> -> 0 `i `*v `*F23118
 ..
 ..
 ]
-"97
-[; ;../../VLCBlib_PIC/boot.c: 97: __asm("PSECT eeprom_data,class=EEDATA");
-[; <" PSECT eeprom_data,class=EEDATA ;# ">
 "99
-[; ;../../VLCBlib_PIC/boot.c: 99: __asm("ORG " "0x3FF");
-[; <" ORG 0x3FF ;# ">
+[; ;../../VLCBlib_PIC/boot.c: 99: __asm("PSECT eeprom_data,class=EEDATA");
+[; <" PSECT eeprom_data,class=EEDATA ;# ">
 "101
-[; ;../../VLCBlib_PIC/boot.c: 101: __asm("db 0");
+[; ;../../VLCBlib_PIC/boot.c: 101: __asm("ORG " "0x3FF");
+[; <" ORG 0x3FF ;# ">
+"103
+[; ;../../VLCBlib_PIC/boot.c: 103: __asm("db 0");
 [; <" db 0 ;# ">
-"142
-[; ;../../VLCBlib_PIC/boot.c: 142: const uint8_t paramBlock[] __attribute__((address(0x820))) = {
+"144
+[; ;../../VLCBlib_PIC/boot.c: 144: const uint8_t paramBlock[] __attribute__((address(0x820))) = {
 [v _paramBlock `Cuc ~T0 @X0 -> 32 `i e@2080 ]
 [i _paramBlock
 :U ..
@@ -3659,68 +3670,241 @@ Version 4.0 HI-TECH Software Intermediate Code
 -> >> + + + + + + + + + + + + + + + + + -> . `E22432 1 `ui -> 99 `ui -> . `E22443 29 `ui -> -> 254 `i `ui -> -> 13 `i `ui -> -> 1 `i `ui -> -> 4 `i `ui -> -> 8 `i `ui -> -> 8 `i `ui -> . `E22839 0 `ui -> -> 104 `i `ui -> -> 20 `i `ui -> -> 72 `i `ui -> -> 8 `i `ui -> -> 1 `i `ui -> -> 2 `i `ui -> . `E22833 0 `ui -> . `E22844 22 `ui -> 8 `i `uc
 ..
 ]
-"194
-[; ;../../VLCBlib_PIC/boot.c: 194: static Processed bootProcessMessage(Message * m) {
-[v _bootProcessMessage `(E22966 ~T0 @X0 1 sf1`*S3224 ]
+"190
+[; ;../../VLCBlib_PIC/boot.c: 190: static const char bl_version[] = { 'B','L','_','V','E','R','S','I','O','N','='};
+[v _bl_version `Cuc ~T0 @X0 -> 11 `i s ]
+[i _bl_version
+:U ..
+-> -> 66 `ui `uc
+-> -> 76 `ui `uc
+-> -> 95 `ui `uc
+-> -> 86 `ui `uc
+-> -> 69 `ui `uc
+-> -> 82 `ui `uc
+-> -> 83 `ui `uc
+-> -> 73 `ui `uc
+-> -> 79 `ui `uc
+-> -> 78 `ui `uc
+-> -> 61 `ui `uc
+..
+]
+"191
+[; ;../../VLCBlib_PIC/boot.c: 191: static uint8_t bootloaderType;
+[v _bootloaderType `uc ~T0 @X0 1 s ]
+"192
+[; ;../../VLCBlib_PIC/boot.c: 192: static uint8_t bootloaderVersion;
+[v _bootloaderVersion `uc ~T0 @X0 1 s ]
+"197
+[; ;../../VLCBlib_PIC/boot.c: 197: void bootPowerUp(void) {
+[v _bootPowerUp `(v ~T0 @X0 1 ef ]
+{
+[e :U _bootPowerUp ]
+[f ]
+"198
+[; ;../../VLCBlib_PIC/boot.c: 198:     uint24_t a;
+[v _a `um ~T0 @X0 1 a ]
+"199
+[; ;../../VLCBlib_PIC/boot.c: 199:     uint8_t i;
+[v _i `uc ~T0 @X0 1 a ]
+"200
+[; ;../../VLCBlib_PIC/boot.c: 200:     uint8_t b;
+[v _b `uc ~T0 @X0 1 a ]
+"201
+[; ;../../VLCBlib_PIC/boot.c: 201:     uint8_t found;
+[v _found `uc ~T0 @X0 1 a ]
+"203
+[; ;../../VLCBlib_PIC/boot.c: 203:     bootloaderType = BL_TYPE_Unknown;
+[e = _bootloaderType -> . `E22905 0 `uc ]
+"204
+[; ;../../VLCBlib_PIC/boot.c: 204:     bootloaderVersion = 0;
+[e = _bootloaderVersion -> -> 0 `i `uc ]
+"207
+[; ;../../VLCBlib_PIC/boot.c: 207:     for (a=0; a<0x7FF; a++) {
+{
+[e = _a -> -> -> 0 `i `m `um ]
+[e $ < _a -> -> -> 2047 `i `m `um 3232  ]
+[e $U 3233  ]
+[e :U 3232 ]
+{
+"208
+[; ;../../VLCBlib_PIC/boot.c: 208:         found = 1;
+[e = _found -> -> 1 `i `uc ]
+"209
+[; ;../../VLCBlib_PIC/boot.c: 209:         for (i=0; i<11; i++) {
+{
+[e = _i -> -> 0 `i `uc ]
+[e $ < -> _i `i -> 11 `i 3235  ]
+[e $U 3236  ]
+[e :U 3235 ]
+{
+"210
+[; ;../../VLCBlib_PIC/boot.c: 210:             b = (uint8_t)readNVM(FLASH_NVM_TYPE, a+i);
+[e = _b -> ( _readNVM (2 , . `E22911 1 + _a -> _i `um `uc ]
+"211
+[; ;../../VLCBlib_PIC/boot.c: 211:             if (b != bl_version[i]) {
+[e $ ! != -> _b `i -> *U + &U _bl_version * -> _i `ux -> -> # *U &U _bl_version `ui `ux `i 3238  ]
+{
+"212
+[; ;../../VLCBlib_PIC/boot.c: 212:                 found = 0;
+[e = _found -> -> 0 `i `uc ]
+"213
+[; ;../../VLCBlib_PIC/boot.c: 213:                 break;
+[e $U 3236  ]
+"214
+[; ;../../VLCBlib_PIC/boot.c: 214:             } else {
+}
+[e $U 3239  ]
+[e :U 3238 ]
+{
+"215
+[; ;../../VLCBlib_PIC/boot.c: 215:                 found = 1;
+[e = _found -> -> 1 `i `uc ]
+"216
+[; ;../../VLCBlib_PIC/boot.c: 216:             }
+}
+[e :U 3239 ]
+"217
+[; ;../../VLCBlib_PIC/boot.c: 217:         }
+}
+[e ++ _i -> -> 1 `i `uc ]
+[e $ < -> _i `i -> 11 `i 3235  ]
+[e :U 3236 ]
+}
+"218
+[; ;../../VLCBlib_PIC/boot.c: 218:         if (found) {
+[e $ ! != -> _found `i -> 0 `i 3240  ]
+{
+"219
+[; ;../../VLCBlib_PIC/boot.c: 219:             bootloaderType = (uint8_t)readNVM(FLASH_NVM_TYPE, a+11);
+[e = _bootloaderType -> ( _readNVM (2 , . `E22911 1 + _a -> -> -> 11 `i `m `um `uc ]
+"220
+[; ;../../VLCBlib_PIC/boot.c: 220:             bootloaderVersion = (uint8_t)readNVM(FLASH_NVM_TYPE, a+12);
+[e = _bootloaderVersion -> ( _readNVM (2 , . `E22911 1 + _a -> -> -> 12 `i `m `um `uc ]
+"221
+[; ;../../VLCBlib_PIC/boot.c: 221:             return;
+[e $UE 3231  ]
+"222
+[; ;../../VLCBlib_PIC/boot.c: 222:         }
+}
+[e :U 3240 ]
+"223
+[; ;../../VLCBlib_PIC/boot.c: 223:     }
+}
+[e ++ _a -> -> -> 1 `i `m `um ]
+[e $ < _a -> -> -> 2047 `i `m `um 3232  ]
+[e :U 3233 ]
+}
+"224
+[; ;../../VLCBlib_PIC/boot.c: 224: }
+[e :UE 3231 ]
+}
+"231
+[; ;../../VLCBlib_PIC/boot.c: 231: static Processed bootProcessMessage(Message * m) {
+[v _bootProcessMessage `(E22972 ~T0 @X0 1 sf1`*S3224 ]
 {
 [e :U _bootProcessMessage ]
 [v _m `*S3224 ~T0 @X0 1 r1 ]
 [f ]
-"196
-[; ;../../VLCBlib_PIC/boot.c: 196:     if (m->bytes[0] != nn.bytes.hi) return NOT_PROCESSED;
-[e $ ! != -> *U + &U . *U _m 2 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux `i -> . . _nn 0 1 `i 3232  ]
-[e ) . `E22966 0 ]
-[e $UE 3231  ]
-[e :U 3232 ]
-"197
-[; ;../../VLCBlib_PIC/boot.c: 197:     if (m->bytes[1] != nn.bytes.lo) return NOT_PROCESSED;
-[e $ ! != -> *U + &U . *U _m 2 * -> -> -> 1 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux `i -> . . _nn 0 0 `i 3233  ]
-[e ) . `E22966 0 ]
-[e $UE 3231  ]
-[e :U 3233 ]
-"199
-[; ;../../VLCBlib_PIC/boot.c: 199:     switch (m->opc) {
-[e $U 3235  ]
+"233
+[; ;../../VLCBlib_PIC/boot.c: 233:     if (m->bytes[0] != nn.bytes.hi) return NOT_PROCESSED;
+[e $ ! != -> *U + &U . *U _m 2 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux `i -> . . _nn 0 1 `i 3242  ]
+[e ) . `E22972 0 ]
+[e $UE 3241  ]
+[e :U 3242 ]
+"234
+[; ;../../VLCBlib_PIC/boot.c: 234:     if (m->bytes[1] != nn.bytes.lo) return NOT_PROCESSED;
+[e $ ! != -> *U + &U . *U _m 2 * -> -> -> 1 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux `i -> . . _nn 0 0 `i 3243  ]
+[e ) . `E22972 0 ]
+[e $UE 3241  ]
+[e :U 3243 ]
+"236
+[; ;../../VLCBlib_PIC/boot.c: 236:     switch (m->opc) {
+[e $U 3245  ]
 {
-"201
-[; ;../../VLCBlib_PIC/boot.c: 201:         case OPC_MODE:
-[e :U 3236 ]
-"202
-[; ;../../VLCBlib_PIC/boot.c: 202:             if (m->bytes[2] != MODE_BOOT) return NOT_PROCESSED;
-[e $ ! != -> *U + &U . *U _m 2 * -> -> -> 2 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux `i -> . `E22821 9 `i 3237  ]
-[e ) . `E22966 0 ]
-[e $UE 3231  ]
-[e :U 3237 ]
-"205
-[; ;../../VLCBlib_PIC/boot.c: 205:         case OPC_BOOT:
-[e :U 3238 ]
-"207
-[; ;../../VLCBlib_PIC/boot.c: 207:             writeNVM(EEPROM_NVM_TYPE, 0x3FF, 0xFF);
-[e ( _writeNVM (3 , , . `E22905 0 -> -> -> 1023 `i `m `um -> -> 255 `i `uc ]
-"208
-[; ;../../VLCBlib_PIC/boot.c: 208:             __asm("reset");
+"238
+[; ;../../VLCBlib_PIC/boot.c: 238:         case OPC_MODE:
+[e :U 3246 ]
+"239
+[; ;../../VLCBlib_PIC/boot.c: 239:             if (m->bytes[2] != MODE_BOOT) return NOT_PROCESSED;
+[e $ ! != -> *U + &U . *U _m 2 * -> -> -> 2 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux `i -> . `E22821 9 `i 3247  ]
+[e ) . `E22972 0 ]
+[e $UE 3241  ]
+[e :U 3247 ]
+"242
+[; ;../../VLCBlib_PIC/boot.c: 242:         case OPC_BOOT:
+[e :U 3248 ]
+"244
+[; ;../../VLCBlib_PIC/boot.c: 244:             writeNVM(EEPROM_NVM_TYPE, 0x3FF, 0xFF);
+[e ( _writeNVM (3 , , . `E22911 0 -> -> -> 1023 `i `m `um -> -> 255 `i `uc ]
+"245
+[; ;../../VLCBlib_PIC/boot.c: 245:             __asm("reset");
 [; <" reset ;# ">
-"209
-[; ;../../VLCBlib_PIC/boot.c: 209:             return PROCESSED;
-[e ) . `E22966 1 ]
-[e $UE 3231  ]
-"210
-[; ;../../VLCBlib_PIC/boot.c: 210:         default:
-[e :U 3239 ]
-"211
-[; ;../../VLCBlib_PIC/boot.c: 211:             return NOT_PROCESSED;
-[e ) . `E22966 0 ]
-[e $UE 3231  ]
-"212
-[; ;../../VLCBlib_PIC/boot.c: 212:     }
+"246
+[; ;../../VLCBlib_PIC/boot.c: 246:             return PROCESSED;
+[e ) . `E22972 1 ]
+[e $UE 3241  ]
+"247
+[; ;../../VLCBlib_PIC/boot.c: 247:         default:
+[e :U 3249 ]
+"248
+[; ;../../VLCBlib_PIC/boot.c: 248:             return NOT_PROCESSED;
+[e ) . `E22972 0 ]
+[e $UE 3241  ]
+"249
+[; ;../../VLCBlib_PIC/boot.c: 249:     }
 }
-[e $U 3234  ]
-[e :U 3235 ]
-[e [\ -> . *U _m 1 `ui , $ -> . `E22565 59 `ui 3236
- , $ -> . `E22565 45 `ui 3238
- 3239 ]
-[e :U 3234 ]
-"213
-[; ;../../VLCBlib_PIC/boot.c: 213: }
-[e :UE 3231 ]
+[e $U 3244  ]
+[e :U 3245 ]
+[e [\ -> . *U _m 1 `ui , $ -> . `E22565 59 `ui 3246
+ , $ -> . `E22565 45 `ui 3248
+ 3249 ]
+[e :U 3244 ]
+"250
+[; ;../../VLCBlib_PIC/boot.c: 250: }
+[e :UE 3241 ]
+}
+"257
+[; ;../../VLCBlib_PIC/boot.c: 257: uint8_t bootEsdData(uint8_t id) {
+[v _bootEsdData `(uc ~T0 @X0 1 ef1`uc ]
+{
+[e :U _bootEsdData ]
+[v _id `uc ~T0 @X0 1 r1 ]
+[f ]
+"258
+[; ;../../VLCBlib_PIC/boot.c: 258:     switch (id) {
+[e $U 3252  ]
+{
+"259
+[; ;../../VLCBlib_PIC/boot.c: 259:         case 1:
+[e :U 3253 ]
+"261
+[; ;../../VLCBlib_PIC/boot.c: 261:             return bootloaderType;
+[e ) _bootloaderType ]
+[e $UE 3250  ]
+"262
+[; ;../../VLCBlib_PIC/boot.c: 262:         case 2:
+[e :U 3254 ]
+"264
+[; ;../../VLCBlib_PIC/boot.c: 264:             return bootloaderVersion;
+[e ) _bootloaderVersion ]
+[e $UE 3250  ]
+"265
+[; ;../../VLCBlib_PIC/boot.c: 265:         default:
+[e :U 3255 ]
+"266
+[; ;../../VLCBlib_PIC/boot.c: 266:             return 0;
+[e ) -> -> 0 `i `uc ]
+[e $UE 3250  ]
+"267
+[; ;../../VLCBlib_PIC/boot.c: 267:     }
+}
+[e $U 3251  ]
+[e :U 3252 ]
+[e [\ _id , $ -> 1 `i 3253
+ , $ -> 2 `i 3254
+ 3255 ]
+[e :U 3251 ]
+"268
+[; ;../../VLCBlib_PIC/boot.c: 268: }
+[e :UE 3250 ]
 }

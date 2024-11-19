@@ -48,7 +48,7 @@
 static uint8_t buttonState[NUM_BUTTON_COLUMNS];
 uint8_t outputState[NUM_BUTTONS];
 
-#define EE_ADDR_SWITCHES    0x0070
+#define EE_ADDR_SWITCHES    0x0000
 
 static uint8_t column;  // Column number
 uint8_t canpanScanReady;   /// indicates if the code has had chance to read all the buttons
@@ -136,11 +136,11 @@ void inputScan(void) {
                 sv = evs[EV_SWITCHSV];
                 // determine the switch mode using the SV event variable
                 mode = MODE_ON_OFF;
-                if (sv & 0b0001) {
+                if (sv & SV_ON_OFF) {
                     mode = MODE_ON_OFF;
-                } else if (sv & 0b0100) {
+                } else if (sv & SV_ON_ONLY) {
                     mode = MODE_ONOFF_ONLY;
-                } else if (sv & 0b1000) {
+                } else if (sv & SV_TOGGLE) {
                     mode = MODE_TOGGLE;
                 }
                 // When in learn mode we'll act as if it is ON/OFF mode to send an ARON1
@@ -170,7 +170,7 @@ void inputScan(void) {
                             break;
                         case MODE_TOGGLE:
                             if (onOff) {
-                                outputState[buttonNo] = ~outputState[buttonNo];
+                                outputState[buttonNo] = ! outputState[buttonNo];
                             } else {
                                 continue;   // don't react when button is released
                             }

@@ -38366,6 +38366,17 @@ typedef enum VlcbConsumerEvUsage
   CONSUMER_EV_ACTIONS = 0x01,
   CONSUMER_EV_SLOTS = 0x02,
 } VlcbConsumerEvUsage;
+
+typedef enum VlcbBootloaderType
+{
+
+
+
+  BL_TYPE_Unknown = 0,
+  BL_TYPE_MikeBolton = 1,
+  BL_TYPE_KonradOrlowski = 2,
+  BL_TYPE_IanHogg = 3,
+} VlcbBootloaderType;
 # 39 "../../VLCBlib_PIC/vlcb.h" 2
 
 # 1 "../../VLCBlib_PIC/nvm.h" 1
@@ -38954,11 +38965,11 @@ void inputScan(void) {
                 sv = evs[2];
 
                 mode = 1;
-                if (sv & 0b0001) {
+                if (sv & 1) {
                     mode = 1;
-                } else if (sv & 0b0100) {
+                } else if (sv & 4) {
                     mode = 2;
-                } else if (sv & 0b1000) {
+                } else if (sv & 8) {
                     mode = 3;
                 }
 
@@ -38995,7 +39006,7 @@ void inputScan(void) {
                             onOff = outputState[buttonNo];
                             break;
                     }
-                    writeNVM(EEPROM_NVM_TYPE, 0x0070 + buttonNo, outputState[buttonNo]);
+                    writeNVM(EEPROM_NVM_TYPE, 0x0000 + buttonNo, outputState[buttonNo]);
                     if (canpanScanReady) {
 
 
@@ -39130,7 +39141,7 @@ void loadInputs(void) {
             if (evs[2] & 8) {
                 buttonNo = evs[1] - 1;
                 if (buttonNo < (8*4))
-                outputState[buttonNo] = (uint8_t)readNVM(EEPROM_NVM_TYPE, 0x0070 +buttonNo);
+                outputState[buttonNo] = (uint8_t)readNVM(EEPROM_NVM_TYPE, 0x0000 +buttonNo);
             }
         }
     }

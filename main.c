@@ -90,6 +90,7 @@
 
 // TODOs
 // * Receipt of event on a toggle switch to update state (Toggle with monitor)
+// * Debounce inputs - if needed
 //
 // Once CANPAN compatible version is released then additional enhancements
 // * Add NVs for LED brightness control
@@ -108,9 +109,8 @@ void setType(uint8_t i, uint8_t type);
 void factoryResetEE(void);
 void factoryResetFlash(void);
 void factoryResetGlobalEvents(void);
-
-extern void eventsInit(void);
 extern void initOutputs(void);
+extern void initLeds(void);
 extern void processActions(void);
 extern void processOutputs(void);
 #if defined(_18F66K80_FAMILY_)
@@ -189,8 +189,8 @@ void setup(void) {
     ANSELC = 0x00;
 #endif
 
-    initEvents();
     initOutputs();
+    initLeds();
     initInputs();
     
     // Lock the PPS

@@ -45,20 +45,14 @@
 
 static unsigned char current_row = 0;
 unsigned char ledMatrix[NUM_LED_ROWS];
-enum canpan3LedState ledStates[NUM_LEDS];
-//uint8_t outputState[NUM_LEDS];
 
 void initOutputs(void) {
     uint8_t i;
     
-    for (i=0; i<NUM_LEDS; i++) {
-        ledStates[i] = CANPANLED_OFF;
-        outputState[i] = 0;
-    }
     for (i=0; i< NUM_LED_ROWS; i++) {
         ledMatrix[i] = 0;
     }
-     TRISCbits.TRISC6 = 0;   // anode driver output
+    TRISCbits.TRISC6 = 0;   // anode driver output
     TRISCbits.TRISC7 = 0;   // anode driver output
     TRISBbits.TRISB4 = 0;   // anode driver output
     TRISBbits.TRISB5 = 0;   // anode driver output

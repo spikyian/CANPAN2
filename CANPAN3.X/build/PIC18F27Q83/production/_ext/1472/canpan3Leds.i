@@ -1,4 +1,4 @@
-# 1 "../canpan3Inputs.c"
+# 1 "../canpan3Leds.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,8 +6,8 @@
 # 1 "<built-in>" 2
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.46\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "../canpan3Inputs.c" 2
-# 39 "../canpan3Inputs.c"
+# 1 "../canpan3Leds.c" 2
+# 40 "../canpan3Leds.c"
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.46\\pic\\include\\xc.h" 1 3
 # 18 "C:\\Program Files\\Microchip\\xc8\\v2.46\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -37671,7 +37671,7 @@ __attribute__((__unsupported__("The READTIMER" "0" "() macro is not available wi
 unsigned char __t1rd16on(void);
 unsigned char __t3rd16on(void);
 # 33 "C:\\Program Files\\Microchip\\xc8\\v2.46\\pic\\include\\xc.h" 2 3
-# 39 "../canpan3Inputs.c" 2
+# 40 "../canpan3Leds.c" 2
 
 # 1 "../module.h" 1
 
@@ -38761,172 +38761,43 @@ extern void leds_powerUp(void);
 extern void leds_poll(void);
 extern void showStatus(StatusDisplay s);
 # 8 "..\\module.h" 2
-# 40 "../canpan3Inputs.c" 2
+# 41 "../canpan3Leds.c" 2
 
-# 1 "../../VLCBlib_PIC\\mns.h" 1
-# 111 "../../VLCBlib_PIC\\mns.h"
-extern const Service mnsService;
-# 126 "../../VLCBlib_PIC\\mns.h"
-extern Word nn;
+# 1 "../canpan3Leds.h" 1
+# 41 "../canpan3Leds.h"
+enum canpan3LedState {
+    CANPANLED_ON,
+    CANPANLED_OFF,
+    CANPANLED_FLASH,
+    CANPANLED_ANTIFLASH
+};
 
+extern void setLedState(uint8_t led, enum canpan3LedState state);
 
+extern uint8_t outputState[(4*8)];
+# 42 "../canpan3Leds.c" 2
 
-extern uint8_t mode_state;
+# 1 "../canpan3Outputs.h" 1
+# 41 "../canpan3Outputs.h"
+extern void setLed(uint8_t no);
+extern void clearLed(uint8_t no);
+extern uint8_t testLed(uint8_t no);
+# 43 "../canpan3Leds.c" 2
 
 
+static enum canpan3LedState ledStates[(4*8)];
+static uint8_t flashToggle;
 
 
-extern uint8_t mode_flags;
 
 
-
-
-
-extern DiagnosticVal mnsDiagnostics[6 +1];
-extern void updateModuleErrorStatus(void);
-
-
-extern TickValue pbTimer;
-# 41 "../canpan3Inputs.c" 2
-
-# 1 "../../VLCBlib_PIC\\event_teach.h" 1
-# 77 "../../VLCBlib_PIC\\event_teach.h"
-extern const Service eventTeachService;
-# 89 "../../VLCBlib_PIC\\event_teach.h"
-extern uint8_t APP_addEvent(uint16_t nodeNumber, uint16_t eventNumber, uint8_t evNum, uint8_t evVal, Boolean forceOwnNN);
-
-extern int16_t getEv(uint8_t tableIndex, uint8_t evIndex);
-extern uint8_t getEVs(uint8_t tableIndex);
-extern uint8_t evs[13];
-extern uint8_t writeEv(uint8_t tableIndex, uint8_t evNum, uint8_t evVal);
-extern uint16_t getNN(uint8_t tableIndex);
-extern uint16_t getEN(uint8_t tableIndex);
-extern uint8_t findEvent(uint16_t nodeNumber, uint16_t eventNumber);
-extern uint8_t addEvent(uint16_t nodeNumber, uint16_t eventNumber, uint8_t evNum, uint8_t evVal, Boolean forceOwnNN);
-# 109 "../../VLCBlib_PIC\\event_teach.h"
-typedef struct {
-    uint16_t NN;
-    uint16_t EN;
-} Event;
-# 42 "../canpan3Inputs.c" 2
-
-# 1 "../../VLCBlib_PIC\\timedResponse.h" 1
-# 86 "../../VLCBlib_PIC\\timedResponse.h"
-typedef enum {
-    TIMED_RESPONSE_RESULT_FINISHED,
-    TIMED_RESPONSE_RESULT_RETRY,
-    TIMED_RESPONSE_RESULT_NEXT
-} TimedResponseResult;
-
-
-
-
-
-typedef TimedResponseResult (* TimedResponseCallback)(uint8_t type, const Service * service, uint8_t step);
-
-
-
-
-extern void initTimedResponse(void);
-
-
-
-
-
-
-
-extern void startTimedResponse(uint8_t type, uint8_t serviceIndex, TimedResponseResult (*callback)(uint8_t type, uint8_t si, uint8_t step));
-
-
-
-
-
-extern void pollTimedResponse(void);
-# 43 "../canpan3Inputs.c" 2
-
-# 1 "../../VLCBlib_PIC\\event_producer.h" 1
-# 79 "../../VLCBlib_PIC\\event_producer.h"
-typedef uint8_t Happening;
-
-
-extern const Service eventProducerService;
-# 93 "../../VLCBlib_PIC\\event_producer.h"
-extern Boolean sendProducedEvent(Happening h, EventState state);
-extern void deleteHappeningRange(Happening happening, uint8_t number);
-extern void incrementProducerCounter(void);
-# 104 "../../VLCBlib_PIC\\event_producer.h"
-extern EventState APP_GetEventState(Happening h);
-
-
-
-
-
-
-extern EventState APP_GetEventIndexState(uint8_t tableIndex);
-# 44 "../canpan3Inputs.c" 2
-
-
-# 1 "../canpan3Events.h" 1
-# 40 "../canpan3Events.h"
-extern void initEvents(void);
-extern void doFlash(void);
-extern uint8_t APP_isProducedEvent(uint8_t tableIndex);
-# 46 "../canpan3Inputs.c" 2
-
-
-static uint8_t buttonState[8];
-uint8_t outputState[(8*4)];
-
-
-
-static uint8_t column;
-uint8_t canpanScanReady;
-
-
-
-
-
-
-
-void driveColumn(void);
-uint8_t findEventForSwitch(uint8_t buttonNo);
-TimedResponseResult sodTRCallback(uint8_t type, uint8_t serviceIndex, uint8_t step);
-void canpanSendProducedEvent(uint8_t tableIndex, uint8_t onOff, uint8_t sv);
-EventState getSwitchEventState(uint8_t switchNo);
-
-
-
-
-void initInputs(void) {
+void initLeds(void) {
     uint8_t i;
-    canpanScanReady = 0;
 
-    TRISAbits.TRISA0=0;
-    TRISAbits.TRISA1=0;
-    TRISAbits.TRISA2=0;
-
-    TRISBbits.TRISB0=1;
-    TRISBbits.TRISB1=1;
-    TRISCbits.TRISC0=1;
-    TRISCbits.TRISC1=1;
-
-
-
-
-
-
-    WPUB = 0b00000011;
-    WPUC = 0b00000011;
-
-
-    column = 0;
-    driveColumn();
-    for (i=0; i<(8*4); i++) {
-        outputState[i] = 0;
+    for (i=0; i<(4*8); i++) {
+        ledStates[i] = CANPANLED_OFF;
     }
-    for (i=0; i<8; i++) {
-        buttonState[i] = 0;
-    }
+    flashToggle = 0;
 }
 
 
@@ -38934,215 +38805,50 @@ void initInputs(void) {
 
 
 
-void inputScan(void) {
-    uint8_t row;
-    uint8_t i;
-    uint8_t diff;
-    uint8_t tableIndex;
-    uint8_t sv;
-    uint8_t mode;
-    uint8_t onOff;
-    uint8_t buttonNo;
-    Word producedEventNN;
-    Word producedEventEN;
-    uint8_t opc;
+void setLedState(uint8_t ledNo, enum canpan3LedState state) {
+    ledStates[ledNo] = state;
+    switch (ledStates[ledNo]) {
+        case CANPANLED_ON:
+            setLed(ledNo);
+            break;
+        case CANPANLED_OFF:
+            clearLed(ledNo);
+            break;
+        case CANPANLED_FLASH:
+        case CANPANLED_ANTIFLASH:
+
+            break;
+    }
+
+}
 
 
 
-    row = (uint8_t)((PORTC & 0x03) << 2);
-    row |= (PORTB & 0x03);
-    diff = row ^ buttonState[column];
 
+void doFlash(void) {
+    uint8_t ledNo;
 
-
-    for (i=0; i<4; i++) {
-        if (diff & (1 << i)) {
-
-            onOff = !!(row & (1 << i));
-            buttonNo = column*4 + i;
-            tableIndex = findEventForSwitch(buttonNo);
-            if (tableIndex != 0xff) {
-                sv = evs[2];
-
-                mode = 1;
-                if (sv & 1) {
-                    mode = 1;
-                } else if (sv & 4) {
-                    mode = 2;
-                } else if (sv & 8) {
-                    mode = 3;
+    for (ledNo=0; ledNo<(4*8); ledNo++) {
+        switch (ledStates[ledNo]) {
+            case CANPANLED_FLASH:
+                if (flashToggle) {
+                    setLed(ledNo);
+                } else {
+                    clearLed(ledNo);
                 }
-
-                if (mode_flags & 1) {
-                    mode = 1;
+                break;
+            case CANPANLED_ANTIFLASH:
+                if (flashToggle) {
+                    clearLed(ledNo);
+                } else {
+                    setLed(ledNo);
                 }
-                if (mode != 0){
+                break;
+            case CANPANLED_ON:
+            case CANPANLED_OFF:
 
-                    switch(mode) {
-                        case 1:
-                            if (sv & 0b00000010) {
-                                onOff = !onOff;
-                            }
-                            outputState[buttonNo] = onOff;
-                            break;
-                        case 2:
-                            if (sv & 0b00000010) {
-                                if (onOff) {
-                                    continue;
-                                }
-                            } else {
-                                if (! onOff) {
-                                    continue;
-                                }
-                            }
-                            outputState[buttonNo] = onOff;
-                            break;
-                        case 3:
-                            if (onOff) {
-                                outputState[buttonNo] = ! outputState[buttonNo];
-                            } else {
-                                continue;
-                            }
-                            onOff = outputState[buttonNo];
-                            break;
-                    }
-                    writeNVM(EEPROM_NVM_TYPE, 0x0000 + buttonNo, outputState[buttonNo]);
-                    if (canpanScanReady) {
-
-
-                        if (mode_flags & 1) {
-                            producedEventNN.word = getNN(tableIndex);
-                            producedEventEN.word = getEN(tableIndex);
-                            sendMessage5(OPC_ARON1, producedEventNN.bytes.hi, producedEventNN.bytes.lo,
-                                    producedEventEN.bytes.hi, producedEventEN.bytes.lo, buttonNo+1);
-                        } else {
-                            canpanSendProducedEvent(tableIndex, onOff, sv);
-                        }
-                    }
-                }
-            }
+                break;
         }
     }
-
-    buttonState[column] = row;
-
-
-    column++;
-    if (column >= 8) {
-
-        canpanScanReady = 1;
-        column=0;
-    }
-    driveColumn();
-}
-
-
-
-
-
-
-void canpanSetAllSwitchOff(void) {
-    uint8_t buttonNo;
-    uint8_t tableIndex;
-
-    for (buttonNo=0; buttonNo<(8*4); buttonNo++) {
-        tableIndex = findEventForSwitch(buttonNo);
-        getEVs(tableIndex);
-        outputState[buttonNo] = (evs[2]&0b00000010) ? 1:0;
-    }
-}
-
-void canpanSendProducedEvent(uint8_t tableIndex, uint8_t onOff, uint8_t sv) {
-    uint8_t opc;
-    Word producedEventNN;
-    Word producedEventEN;
-
-    producedEventNN.word = getNN(tableIndex);
-    producedEventEN.word = getEN(tableIndex);
-    if ((sv & 0b00100000) || (producedEventNN.word == 0)) {
-
-        if (onOff) {
-            opc = OPC_ASON;
-        } else {
-            opc = OPC_ASOF;
-        }
-        producedEventNN.word = nn.word;
-    } else {
-
-        if (onOff) {
-            opc = OPC_ACON;
-        } else {
-            opc = OPC_ACOF;
-        }
-    }
-
-    sendMessage4(opc, producedEventNN.bytes.hi, producedEventNN.bytes.lo,
-            producedEventEN.bytes.hi, producedEventEN.bytes.lo);
-
-    incrementProducerCounter();
-}
-
-void driveColumn(void) {
-    LATAbits.LATA0 = (column & 0x01)?1:0;
-    LATAbits.LATA1 = (column & 0x02)?1:0;
-    LATAbits.LATA2 = (column & 0x04)?1:0;
-}
-
-uint8_t findEventForSwitch(uint8_t switchNo) {
-    uint8_t tableIndex;
-    for (tableIndex=0; tableIndex < 254; tableIndex++) {
-        getEVs(tableIndex);
-        if ((evs[0] == 1) || (evs[0] == 3)) {
-            if (evs[1] == switchNo+1) {
-                return tableIndex;
-            }
-        }
-    }
-    return 0xff;
-}
-
-
-
-
-
-
-
-void doSoD(void) {
-    startTimedResponse(1, findServiceIndex(SERVICE_ID_PRODUCER), sodTRCallback);
-}
-# 296 "../canpan3Inputs.c"
-TimedResponseResult sodTRCallback(uint8_t type, uint8_t serviceIndex, uint8_t tableIndex) {
-    EventState value;
-    uint8_t buttonNo;
-
-    if (tableIndex >= 254) {
-        return TIMED_RESPONSE_RESULT_FINISHED;
-    }
-
-    value = APP_GetEventIndexState(tableIndex);
-
-    if (value != EVENT_UNKNOWN) {
-        canpanSendProducedEvent(tableIndex, value==EVENT_ON, evs[2]);
-    }
-    return TIMED_RESPONSE_RESULT_NEXT;
-}
-
-
-
-
-
-void loadInputs(void) {
-    uint8_t tableIndex;
-    uint8_t buttonNo;
-
-    for (tableIndex=0; tableIndex < 254; tableIndex++) {
-        getEVs(tableIndex);
-        if (APP_isProducedEvent(tableIndex)) {
-            if (evs[2] & 8) {
-                buttonNo = evs[1] - 1;
-                if (buttonNo < (8*4))
-                outputState[buttonNo] = (uint8_t)readNVM(EEPROM_NVM_TYPE, 0x0000 +buttonNo);
-            }
-        }
-    }
+    flashToggle = !flashToggle;
 }

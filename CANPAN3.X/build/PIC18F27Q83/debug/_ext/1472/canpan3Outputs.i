@@ -38366,6 +38366,17 @@ typedef enum VlcbConsumerEvUsage
   CONSUMER_EV_ACTIONS = 0x01,
   CONSUMER_EV_SLOTS = 0x02,
 } VlcbConsumerEvUsage;
+
+typedef enum VlcbBootloaderType
+{
+
+
+
+  BL_TYPE_Unknown = 0,
+  BL_TYPE_MikeBolton = 1,
+  BL_TYPE_KonradOrlowski = 2,
+  BL_TYPE_IanHogg = 3,
+} VlcbBootloaderType;
 # 39 "../../VLCBlib_PIC/vlcb.h" 2
 
 # 1 "../../VLCBlib_PIC/nvm.h" 1
@@ -38753,17 +38764,7 @@ extern void showStatus(StatusDisplay s);
 # 40 "../canpan3Outputs.c" 2
 
 # 1 "../canpan3Outputs.h" 1
-# 40 "../canpan3Outputs.h"
-enum canpan3LedState {
-    CANPANLED_ON,
-    CANPANLED_OFF,
-    CANPANLED_FLASH,
-    CANPANLED_ANTIFLASH
-};
-
-extern enum canpan3LedState ledStates[(4*8)];
-extern uint8_t outputState[(4*8)];
-
+# 41 "../canpan3Outputs.h"
 extern void setLed(uint8_t no);
 extern void clearLed(uint8_t no);
 extern uint8_t testLed(uint8_t no);
@@ -38775,20 +38776,14 @@ extern uint8_t testLed(uint8_t no);
 
 static unsigned char current_row = 0;
 unsigned char ledMatrix[4];
-enum canpan3LedState ledStates[(4*8)];
-
 
 void initOutputs(void) {
     uint8_t i;
 
-    for (i=0; i<(4*8); i++) {
-        ledStates[i] = CANPANLED_OFF;
-        outputState[i] = 0;
-    }
     for (i=0; i< 4; i++) {
         ledMatrix[i] = 0;
     }
-     TRISCbits.TRISC6 = 0;
+    TRISCbits.TRISC6 = 0;
     TRISCbits.TRISC7 = 0;
     TRISBbits.TRISB4 = 0;
     TRISBbits.TRISB5 = 0;

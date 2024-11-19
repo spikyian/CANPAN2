@@ -7,8 +7,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;../../VLCBlib_PIC/vlcb.h: 156: typedef union DiagnosticVal {
 [u S3227 `us 1 `s 1 `S3228 1 ]
 [n S3227 DiagnosticVal asUint asInt asBytes ]
-[v F23042 `(v ~T0 @X0 0 tf ]
-[v F23044 `(v ~T0 @X0 0 tf ]
+[v F23048 `(v ~T0 @X0 0 tf ]
+[v F23050 `(v ~T0 @X0 0 tf ]
 "156 ../../VLCBlib_PIC/event_teach_simple.c
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 156: const Service eventTeachService = {
 [c E22565 0 1 2 3 4 5 6 7 8 9 10 12 13 16 17 33 34 35 48 63 64 65 66 67 68 69 70 71 72 73 74 76 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 99 111 112 113 114 115 116 117 118 120 127 128 130 131 132 133 135 142 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 162 171 172 175 176 177 178 179 180 181 182 184 185 189 190 191 192 193 194 199 207 208 209 210 211 212 213 216 217 221 222 223 224 225 226 227 230 231 233 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 164 .. ]
@@ -19,15 +19,15 @@ Version 4.0 HI-TECH Software Intermediate Code
 [n S3224 Message len opc bytes ]
 "156 ../../VLCBlib_PIC/event_teach_simple.c
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 156: const Service eventTeachService = {
-[c E22966 0 1 .. ]
-[n E22966 Processed NOT_PROCESSED PROCESSED  ]
-[v F23046 `(E22966 ~T0 @X0 0 tf1`*S3224 ]
-[v F23049 `(v ~T0 @X0 0 tf ]
-[v F23051 `(uc ~T0 @X0 0 tf1`uc ]
-[v F23054 `(*S3227 ~T0 @X0 0 tf1`uc ]
+[c E22972 0 1 .. ]
+[n E22972 Processed NOT_PROCESSED PROCESSED  ]
+[v F23052 `(E22972 ~T0 @X0 0 tf1`*S3224 ]
+[v F23055 `(v ~T0 @X0 0 tf ]
+[v F23057 `(uc ~T0 @X0 0 tf1`uc ]
+[v F23060 `(*S3227 ~T0 @X0 0 tf1`uc ]
 "307 ../../VLCBlib_PIC/vlcb.h
 [; ;../../VLCBlib_PIC/vlcb.h: 307: typedef struct Service {
-[s S3229 `uc 1 `uc 1 `*F23042 1 `*F23044 1 `*F23046 1 `*F23049 1 `*F23051 1 `*F23054 1 ]
+[s S3229 `uc 1 `uc 1 `*F23048 1 `*F23050 1 `*F23052 1 `*F23055 1 `*F23057 1 `*F23060 1 ]
 [n S3229 Service serviceNo version factoryReset powerUp processMessage poll getESDdata getDiagnostic ]
 "156 ../../VLCBlib_PIC/event_teach_simple.c
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 156: const Service eventTeachService = {
@@ -41,8 +41,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _teachPowerUp `(v ~T0 @X0 0 sf ]
 "100
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 100: static Processed teachProcessMessage(Message * m);
-[v _teachProcessMessage `(E22966 ~T0 @X0 0 sf1`*S3224 ]
-[v F23231 `(v ~T0 @X0 0 tf ]
+[v _teachProcessMessage `(E22972 ~T0 @X0 0 sf1`*S3224 ]
+[v F23237 `(v ~T0 @X0 0 tf ]
 "101
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 101: static uint8_t teachGetESDdata(uint8_t id);
 [v _teachGetESDdata `(uc ~T0 @X0 0 sf1`uc ]
@@ -57,7 +57,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _mode_flags `uc ~T0 @X0 0 e ]
 "104 ../../VLCBlib_PIC/event_teach_simple.c
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 104: static Processed teachCheckLen(Message * m, uint8_t needed, uint8_t learn);
-[v _teachCheckLen `(E22966 ~T0 @X0 0 sf3`*S3224`uc`uc ]
+[v _teachCheckLen `(E22972 ~T0 @X0 0 sf3`*S3224`uc`uc ]
 "129 ../../VLCBlib_PIC/vlcb.h
 [; ;../../VLCBlib_PIC/vlcb.h: 129:     struct {
 [s S3226 `uc 1 `uc 1 ]
@@ -112,7 +112,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _doReval `(v ~T0 @X0 0 sf2`uc`uc ]
 "103
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 103: Processed checkLen(Message * m, uint8_t needed, uint8_t service);
-[v _checkLen `(E22966 ~T0 @X0 0 ef3`*S3224`uc`uc ]
+[v _checkLen `(E22972 ~T0 @X0 0 ef3`*S3224`uc`uc ]
 "114
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 114: static uint8_t removeTableEntry(uint8_t tableIndex);
 [v _removeTableEntry `(uc ~T0 @X0 0 sf1`uc ]
@@ -121,18 +121,18 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _getEN `(us ~T0 @X0 0 ef1`uc ]
 "417
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 417:     startTimedResponse(2, findServiceIndex(SERVICE_ID_OLD_TEACH), nerdCallback);
-[c E23098 0 1 2 .. ]
-[n E23098 . TIMED_RESPONSE_RESULT_FINISHED TIMED_RESPONSE_RESULT_RETRY TIMED_RESPONSE_RESULT_NEXT  ]
-[v F23110 `(E23098 ~T0 @X0 0 tf3`uc`uc`uc ]
+[c E23104 0 1 2 .. ]
+[n E23104 . TIMED_RESPONSE_RESULT_FINISHED TIMED_RESPONSE_RESULT_RETRY TIMED_RESPONSE_RESULT_NEXT  ]
+[v F23116 `(E23104 ~T0 @X0 0 tf3`uc`uc`uc ]
 "109 ../../VLCBlib_PIC/timedResponse.h
 [; ;../../VLCBlib_PIC/timedResponse.h: 109: extern void startTimedResponse(uint8_t type, uint8_t serviceIndex, TimedResponseResult (*callback)(uint8_t type, uint8_t si, uint8_t step));
-[v _startTimedResponse `(v ~T0 @X0 0 ef3`uc`uc`*F23110 ]
+[v _startTimedResponse `(v ~T0 @X0 0 ef3`uc`uc`*F23116 ]
 "358 ../../VLCBlib_PIC/vlcb.h
 [; ;../../VLCBlib_PIC/vlcb.h: 358: extern uint8_t findServiceIndex(uint8_t id);
 [v _findServiceIndex `(uc ~T0 @X0 0 ef1`uc ]
 "106 ../../VLCBlib_PIC/event_teach_simple.c
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 106: TimedResponseResult nerdCallback(uint8_t type, uint8_t serviceIndex, uint8_t step);
-[v _nerdCallback `(E23098 ~T0 @X0 0 ef3`uc`uc`uc ]
+[v _nerdCallback `(E23104 ~T0 @X0 0 ef3`uc`uc`uc ]
 "108
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 108: uint16_t getNN(uint8_t tableIndex);
 [v _getNN `(us ~T0 @X0 0 ef1`uc ]
@@ -154,11 +154,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 [n E22749 VlcbGrspCodes GRSP_OK GRSP_UNKNOWN_NVM_TYPE GRSP_INVALID_DIAGNOSTIC GRSP_INVALID_SERVICE GRSP_INVALID_COMMAND_PARAMETER GRSP_INVALID_MODE  ]
 "517
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 517:     error = APP_addEvent(nodeNumber, eventNumber, evNum, evVal, FALSE);
-[c E22933 0 1 .. ]
-[n E22933 Boolean FALSE TRUE  ]
+[c E22939 0 1 .. ]
+[n E22939 Boolean FALSE TRUE  ]
 "89 ../../VLCBlib_PIC/event_teach.h
 [; ;../../VLCBlib_PIC/event_teach.h: 89: extern uint8_t APP_addEvent(uint16_t nodeNumber, uint16_t eventNumber, uint8_t evNum, uint8_t evVal, Boolean forceOwnNN);
-[v _APP_addEvent `(uc ~T0 @X0 0 ef5`us`us`uc`uc`E22933 ]
+[v _APP_addEvent `(uc ~T0 @X0 0 ef5`us`us`uc`uc`E22939 ]
 "110 ../../VLCBlib_PIC/event_teach_simple.c
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 110: uint8_t numEv(uint8_t tableIndex);
 [v _numEv `(uc ~T0 @X0 0 ef1`uc ]
@@ -176,14 +176,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _sendMessage6 `(v ~T0 @X0 0 ef7`E22565`uc`uc`uc`uc`uc`uc ]
 "107 ../../VLCBlib_PIC/event_teach_simple.c
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 107: TimedResponseResult reqevCallback(uint8_t type, uint8_t serviceIndex, uint8_t step);
-[v _reqevCallback `(E23098 ~T0 @X0 0 ef3`uc`uc`uc ]
+[v _reqevCallback `(E23104 ~T0 @X0 0 ef3`uc`uc`uc ]
 "696
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 696:     writeNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex + 0, 0x00);
-[c E22905 0 1 .. ]
-[n E22905 . EEPROM_NVM_TYPE FLASH_NVM_TYPE  ]
+[c E22911 0 1 .. ]
+[n E22911 . EEPROM_NVM_TYPE FLASH_NVM_TYPE  ]
 "169 ../../VLCBlib_PIC/nvm.h
 [; ;../../VLCBlib_PIC/nvm.h: 169: extern uint8_t writeNVM(NVMtype type, uint24_t index, uint8_t value);
-[v _writeNVM `(uc ~T0 @X0 0 ef3`E22905`um`uc ]
+[v _writeNVM `(uc ~T0 @X0 0 ef3`E22911`um`uc ]
 "109 ../../VLCBlib_PIC/event_teach.h
 [; ;../../VLCBlib_PIC/event_teach.h: 109: typedef struct {
 [s S3231 `us 1 `us 1 ]
@@ -196,7 +196,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _writeEv `(uc ~T0 @X0 0 ef3`uc`uc`uc ]
 "160 ../../VLCBlib_PIC/nvm.h
 [; ;../../VLCBlib_PIC/nvm.h: 160: extern int16_t readNVM(NVMtype type, uint24_t index);
-[v _readNVM `(s ~T0 @X0 0 ef2`E22905`um ]
+[v _readNVM `(s ~T0 @X0 0 ef2`E22911`um ]
 "364 C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h
 [; ;C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h: 364: __asm("BOOTREG equ 038h");
 [; <" BOOTREG equ 038h ;# ">
@@ -3730,7 +3730,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 &U _teachFactoryReset
 &U _teachPowerUp
 &U _teachProcessMessage
--> -> -> 0 `i `*v `*F23231
+-> -> -> 0 `i `*v `*F23237
 &U _teachGetESDdata
 &U _teachGetDiagnostic
 ..
@@ -3788,7 +3788,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 "209
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 209: static Processed teachProcessMessage(Message* m) {
-[v _teachProcessMessage `(E22966 ~T0 @X0 1 sf1`*S3224 ]
+[v _teachProcessMessage `(E22972 ~T0 @X0 1 sf1`*S3224 ]
 {
 [e :U _teachProcessMessage ]
 [v _m `*S3224 ~T0 @X0 1 r1 ]
@@ -3802,8 +3802,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 3240 ]
 "213
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 213:             if (teachCheckLen(m, 3, 0) == PROCESSED) return PROCESSED;
-[e $ ! == -> ( _teachCheckLen (3 , , _m -> -> 3 `i `uc -> -> 0 `i `uc `ui -> . `E22966 1 `ui 3241  ]
-[e ) . `E22966 1 ]
+[e $ ! == -> ( _teachCheckLen (3 , , _m -> -> 3 `i `uc -> -> 0 `i `uc `ui -> . `E22972 1 `ui 3241  ]
+[e ) . `E22972 1 ]
 [e $UE 3237  ]
 [e :U 3241 ]
 "214
@@ -3828,15 +3828,15 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 3243 ]
 "219
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 219:             return PROCESSED;
-[e ) . `E22966 1 ]
+[e ) . `E22972 1 ]
 [e $UE 3237  ]
 "221
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 221:         case OPC_MODE:
 [e :U 3244 ]
 "222
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 222:             if (teachCheckLen(m, 4, 0) == PROCESSED) return PROCESSED;
-[e $ ! == -> ( _teachCheckLen (3 , , _m -> -> 4 `i `uc -> -> 0 `i `uc `ui -> . `E22966 1 `ui 3245  ]
-[e ) . `E22966 1 ]
+[e $ ! == -> ( _teachCheckLen (3 , , _m -> -> 4 `i `uc -> -> 0 `i `uc `ui -> . `E22972 1 `ui 3245  ]
+[e ) . `E22972 1 ]
 [e $UE 3237  ]
 [e :U 3245 ]
 "223
@@ -3852,7 +3852,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e =| _mode_flags -> -> 1 `i `uc ]
 "227
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 227:                     return PROCESSED;
-[e ) . `E22966 1 ]
+[e ) . `E22972 1 ]
 [e $UE 3237  ]
 "228
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 228:                 } else if (m->bytes[2] == MODE_LEARN_OFF) {
@@ -3866,7 +3866,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e =& _mode_flags -> ~ -> 1 `i `uc ]
 "231
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 231:                     return PROCESSED;
-[e ) . `E22966 1 ]
+[e ) . `E22972 1 ]
 [e $UE 3237  ]
 "232
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 232:                 }
@@ -3888,21 +3888,21 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 3250 ]
 "237
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 237:             return NOT_PROCESSED;
-[e ) . `E22966 0 ]
+[e ) . `E22972 0 ]
 [e $UE 3237  ]
 "240
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 240:         case OPC_EVLRN:
 [e :U 3251 ]
 "241
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 241:             if (teachCheckLen(m, 7, 1) == PROCESSED) {
-[e $ ! == -> ( _teachCheckLen (3 , , _m -> -> 7 `i `uc -> -> 1 `i `uc `ui -> . `E22966 1 `ui 3252  ]
+[e $ ! == -> ( _teachCheckLen (3 , , _m -> -> 7 `i `uc -> -> 1 `i `uc `ui -> . `E22972 1 `ui 3252  ]
 {
 "242
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 242:                 sendMessage3(OPC_CMDERR, nn.bytes.hi, nn.bytes.lo, CMDERR_INV_CMD);
 [e ( _sendMessage3 (4 , , , . `E22565 52 . . _nn 0 1 . . _nn 0 0 -> . `E22734 0 `uc ]
 "244
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 244:                 return PROCESSED;
-[e ) . `E22966 1 ]
+[e ) . `E22972 1 ]
 [e $UE 3237  ]
 "245
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 245:             }
@@ -3911,7 +3911,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 "246
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 246:             if (! (mode_flags & 1)) return PROCESSED;
 [e $ ! ! != & -> _mode_flags `i -> 1 `i -> 0 `i 3253  ]
-[e ) . `E22966 1 ]
+[e ) . `E22972 1 ]
 [e $UE 3237  ]
 [e :U 3253 ]
 "248
@@ -3919,21 +3919,21 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _doEvlrn (4 , , , -> | -> -> << -> *U + &U . *U _m 2 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux `i -> 8 `i `us `ui -> *U + &U . *U _m 2 * -> -> -> 1 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux `ui `us -> | -> -> << -> *U + &U . *U _m 2 * -> -> -> 2 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux `i -> 8 `i `us `ui -> *U + &U . *U _m 2 * -> -> -> 3 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux `ui `us *U + &U . *U _m 2 * -> -> -> 4 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux *U + &U . *U _m 2 * -> -> -> 5 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux ]
 "249
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 249:             return PROCESSED;
-[e ) . `E22966 1 ]
+[e ) . `E22972 1 ]
 [e $UE 3237  ]
 "250
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 250:         case OPC_EVULN:
 [e :U 3254 ]
 "251
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 251:             if (teachCheckLen(m, 5, 1) == PROCESSED) return PROCESSED;
-[e $ ! == -> ( _teachCheckLen (3 , , _m -> -> 5 `i `uc -> -> 1 `i `uc `ui -> . `E22966 1 `ui 3255  ]
-[e ) . `E22966 1 ]
+[e $ ! == -> ( _teachCheckLen (3 , , _m -> -> 5 `i `uc -> -> 1 `i `uc `ui -> . `E22972 1 `ui 3255  ]
+[e ) . `E22972 1 ]
 [e $UE 3237  ]
 [e :U 3255 ]
 "252
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 252:             if (! (mode_flags & 1)) return PROCESSED;
 [e $ ! ! != & -> _mode_flags `i -> 1 `i -> 0 `i 3256  ]
-[e ) . `E22966 1 ]
+[e ) . `E22972 1 ]
 [e $UE 3237  ]
 [e :U 3256 ]
 "254
@@ -3941,21 +3941,21 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _doEvuln (2 , -> | -> -> << -> *U + &U . *U _m 2 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux `i -> 8 `i `us `ui -> *U + &U . *U _m 2 * -> -> -> 1 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux `ui `us -> | -> -> << -> *U + &U . *U _m 2 * -> -> -> 2 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux `i -> 8 `i `us `ui -> *U + &U . *U _m 2 * -> -> -> 3 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux `ui `us ]
 "255
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 255:             return PROCESSED;
-[e ) . `E22966 1 ]
+[e ) . `E22972 1 ]
 [e $UE 3237  ]
 "256
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 256:         case OPC_REQEV:
 [e :U 3257 ]
 "257
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 257:             if (teachCheckLen(m, 6, 1) == PROCESSED) return PROCESSED;
-[e $ ! == -> ( _teachCheckLen (3 , , _m -> -> 6 `i `uc -> -> 1 `i `uc `ui -> . `E22966 1 `ui 3258  ]
-[e ) . `E22966 1 ]
+[e $ ! == -> ( _teachCheckLen (3 , , _m -> -> 6 `i `uc -> -> 1 `i `uc `ui -> . `E22972 1 `ui 3258  ]
+[e ) . `E22972 1 ]
 [e $UE 3237  ]
 [e :U 3258 ]
 "258
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 258:             if (! (mode_flags & 1)) return PROCESSED;
 [e $ ! ! != & -> _mode_flags `i -> 1 `i -> 0 `i 3259  ]
-[e ) . `E22966 1 ]
+[e ) . `E22972 1 ]
 [e $UE 3237  ]
 [e :U 3259 ]
 "260
@@ -3963,21 +3963,21 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _doReqev (3 , , -> | -> -> << -> *U + &U . *U _m 2 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux `i -> 8 `i `us `ui -> *U + &U . *U _m 2 * -> -> -> 1 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux `ui `us -> | -> -> << -> *U + &U . *U _m 2 * -> -> -> 2 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux `i -> 8 `i `us `ui -> *U + &U . *U _m 2 * -> -> -> 3 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux `ui `us *U + &U . *U _m 2 * -> -> -> 4 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux ]
 "261
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 261:             return PROCESSED;
-[e ) . `E22966 1 ]
+[e ) . `E22972 1 ]
 [e $UE 3237  ]
 "263
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 263:         case OPC_NNULN:
 [e :U 3260 ]
 "264
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 264:             if (teachCheckLen(m, 3, 0) == PROCESSED) return PROCESSED;
-[e $ ! == -> ( _teachCheckLen (3 , , _m -> -> 3 `i `uc -> -> 0 `i `uc `ui -> . `E22966 1 `ui 3261  ]
-[e ) . `E22966 1 ]
+[e $ ! == -> ( _teachCheckLen (3 , , _m -> -> 3 `i `uc -> -> 0 `i `uc `ui -> . `E22972 1 `ui 3261  ]
+[e ) . `E22972 1 ]
 [e $UE 3237  ]
 [e :U 3261 ]
 "265
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 265:             if ((m->bytes[0] != nn.bytes.hi) || (m->bytes[1] != nn.bytes.lo)) return PROCESSED;
 [e $ ! || != -> *U + &U . *U _m 2 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux `i -> . . _nn 0 1 `i != -> *U + &U . *U _m 2 * -> -> -> 1 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux `i -> . . _nn 0 0 `i 3262  ]
-[e ) . `E22966 1 ]
+[e ) . `E22972 1 ]
 [e $UE 3237  ]
 [e :U 3262 ]
 "267
@@ -3985,21 +3985,21 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e =& _mode_flags -> ~ -> 1 `i `uc ]
 "268
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 268:             return PROCESSED;
-[e ) . `E22966 1 ]
+[e ) . `E22972 1 ]
 [e $UE 3237  ]
 "269
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 269:         case OPC_NNCLR:
 [e :U 3263 ]
 "270
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 270:             if (teachCheckLen(m, 3, 1) == PROCESSED) return PROCESSED;
-[e $ ! == -> ( _teachCheckLen (3 , , _m -> -> 3 `i `uc -> -> 1 `i `uc `ui -> . `E22966 1 `ui 3264  ]
-[e ) . `E22966 1 ]
+[e $ ! == -> ( _teachCheckLen (3 , , _m -> -> 3 `i `uc -> -> 1 `i `uc `ui -> . `E22972 1 `ui 3264  ]
+[e ) . `E22972 1 ]
 [e $UE 3237  ]
 [e :U 3264 ]
 "271
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 271:             if ((m->bytes[0] != nn.bytes.hi) || (m->bytes[1] != nn.bytes.lo)) return PROCESSED;
 [e $ ! || != -> *U + &U . *U _m 2 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux `i -> . . _nn 0 1 `i != -> *U + &U . *U _m 2 * -> -> -> 1 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux `i -> . . _nn 0 0 `i 3265  ]
-[e ) . `E22966 1 ]
+[e ) . `E22972 1 ]
 [e $UE 3237  ]
 [e :U 3265 ]
 "273
@@ -4014,7 +4014,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _sendMessage5 (4 , , , , , . `E22565 89 . . _nn 0 1 . . _nn 0 0 -> . `E22565 38 `uc -> . `E22772 4 `uc -> . `E22734 1 `uc ]
 "278
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 278:                 return PROCESSED;
-[e ) . `E22966 1 ]
+[e ) . `E22972 1 ]
 [e $UE 3237  ]
 "279
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 279:             }
@@ -4031,14 +4031,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 3267 ]
 "284
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 284:             if (teachCheckLen(m, 3, 0) == PROCESSED) return PROCESSED;
-[e $ ! == -> ( _teachCheckLen (3 , , _m -> -> 3 `i `uc -> -> 0 `i `uc `ui -> . `E22966 1 `ui 3268  ]
-[e ) . `E22966 1 ]
+[e $ ! == -> ( _teachCheckLen (3 , , _m -> -> 3 `i `uc -> -> 0 `i `uc `ui -> . `E22972 1 `ui 3268  ]
+[e ) . `E22972 1 ]
 [e $UE 3237  ]
 [e :U 3268 ]
 "285
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 285:             if ((m->bytes[0] != nn.bytes.hi) || (m->bytes[1] != nn.bytes.lo)) return PROCESSED;
 [e $ ! || != -> *U + &U . *U _m 2 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux `i -> . . _nn 0 1 `i != -> *U + &U . *U _m 2 * -> -> -> 1 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux `i -> . . _nn 0 0 `i 3269  ]
-[e ) . `E22966 1 ]
+[e ) . `E22972 1 ]
 [e $UE 3237  ]
 [e :U 3269 ]
 "287
@@ -4046,21 +4046,21 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _doNerd ..  ]
 "288
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 288:             return PROCESSED;
-[e ) . `E22966 1 ]
+[e ) . `E22972 1 ]
 [e $UE 3237  ]
 "289
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 289:         case OPC_NNEVN:
 [e :U 3270 ]
 "290
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 290:             if (teachCheckLen(m, 3, 0) == PROCESSED) return PROCESSED;
-[e $ ! == -> ( _teachCheckLen (3 , , _m -> -> 3 `i `uc -> -> 0 `i `uc `ui -> . `E22966 1 `ui 3271  ]
-[e ) . `E22966 1 ]
+[e $ ! == -> ( _teachCheckLen (3 , , _m -> -> 3 `i `uc -> -> 0 `i `uc `ui -> . `E22972 1 `ui 3271  ]
+[e ) . `E22972 1 ]
 [e $UE 3237  ]
 [e :U 3271 ]
 "291
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 291:             if ((m->bytes[0] != nn.bytes.hi) || (m->bytes[1] != nn.bytes.lo)) return PROCESSED;
 [e $ ! || != -> *U + &U . *U _m 2 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux `i -> . . _nn 0 1 `i != -> *U + &U . *U _m 2 * -> -> -> 1 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux `i -> . . _nn 0 0 `i 3272  ]
-[e ) . `E22966 1 ]
+[e ) . `E22972 1 ]
 [e $UE 3237  ]
 [e :U 3272 ]
 "293
@@ -4068,21 +4068,21 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _doNnevn ..  ]
 "294
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 294:             return PROCESSED;
-[e ) . `E22966 1 ]
+[e ) . `E22972 1 ]
 [e $UE 3237  ]
 "295
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 295:         case OPC_RQEVN:
 [e :U 3273 ]
 "296
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 296:             if (teachCheckLen(m, 3, 0) == PROCESSED) return PROCESSED;
-[e $ ! == -> ( _teachCheckLen (3 , , _m -> -> 3 `i `uc -> -> 0 `i `uc `ui -> . `E22966 1 `ui 3274  ]
-[e ) . `E22966 1 ]
+[e $ ! == -> ( _teachCheckLen (3 , , _m -> -> 3 `i `uc -> -> 0 `i `uc `ui -> . `E22972 1 `ui 3274  ]
+[e ) . `E22972 1 ]
 [e $UE 3237  ]
 [e :U 3274 ]
 "297
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 297:             if ((m->bytes[0] != nn.bytes.hi) || (m->bytes[1] != nn.bytes.lo)) return PROCESSED;
 [e $ ! || != -> *U + &U . *U _m 2 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux `i -> . . _nn 0 1 `i != -> *U + &U . *U _m 2 * -> -> -> 1 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux `i -> . . _nn 0 0 `i 3275  ]
-[e ) . `E22966 1 ]
+[e ) . `E22972 1 ]
 [e $UE 3237  ]
 [e :U 3275 ]
 "299
@@ -4090,21 +4090,21 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _doRqevn ..  ]
 "300
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 300:             return PROCESSED;
-[e ) . `E22966 1 ]
+[e ) . `E22972 1 ]
 [e $UE 3237  ]
 "301
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 301:         case OPC_NENRD:
 [e :U 3276 ]
 "302
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 302:             if (teachCheckLen(m, 4, 0) == PROCESSED) return PROCESSED;
-[e $ ! == -> ( _teachCheckLen (3 , , _m -> -> 4 `i `uc -> -> 0 `i `uc `ui -> . `E22966 1 `ui 3277  ]
-[e ) . `E22966 1 ]
+[e $ ! == -> ( _teachCheckLen (3 , , _m -> -> 4 `i `uc -> -> 0 `i `uc `ui -> . `E22972 1 `ui 3277  ]
+[e ) . `E22972 1 ]
 [e $UE 3237  ]
 [e :U 3277 ]
 "303
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 303:             if ((m->bytes[0] != nn.bytes.hi) || (m->bytes[1] != nn.bytes.lo)) return PROCESSED;
 [e $ ! || != -> *U + &U . *U _m 2 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux `i -> . . _nn 0 1 `i != -> *U + &U . *U _m 2 * -> -> -> 1 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux `i -> . . _nn 0 0 `i 3278  ]
-[e ) . `E22966 1 ]
+[e ) . `E22972 1 ]
 [e $UE 3237  ]
 [e :U 3278 ]
 "305
@@ -4112,21 +4112,21 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _doNenrd (1 *U + &U . *U _m 2 * -> -> -> 2 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux ]
 "306
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 306:             return PROCESSED;
-[e ) . `E22966 1 ]
+[e ) . `E22972 1 ]
 [e $UE 3237  ]
 "307
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 307:         case OPC_REVAL:
 [e :U 3279 ]
 "308
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 308:             if (teachCheckLen(m, 5, 0) == PROCESSED) return PROCESSED;
-[e $ ! == -> ( _teachCheckLen (3 , , _m -> -> 5 `i `uc -> -> 0 `i `uc `ui -> . `E22966 1 `ui 3280  ]
-[e ) . `E22966 1 ]
+[e $ ! == -> ( _teachCheckLen (3 , , _m -> -> 5 `i `uc -> -> 0 `i `uc `ui -> . `E22972 1 `ui 3280  ]
+[e ) . `E22972 1 ]
 [e $UE 3237  ]
 [e :U 3280 ]
 "309
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 309:             if ((m->bytes[0] != nn.bytes.hi) || (m->bytes[1] != nn.bytes.lo)) return PROCESSED;
 [e $ ! || != -> *U + &U . *U _m 2 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux `i -> . . _nn 0 1 `i != -> *U + &U . *U _m 2 * -> -> -> 1 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux `i -> . . _nn 0 0 `i 3281  ]
-[e ) . `E22966 1 ]
+[e ) . `E22972 1 ]
 [e $UE 3237  ]
 [e :U 3281 ]
 "311
@@ -4134,15 +4134,15 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _doReval (2 , *U + &U . *U _m 2 * -> -> -> 2 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux *U + &U . *U _m 2 * -> -> -> 3 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux ]
 "312
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 312:             return PROCESSED;
-[e ) . `E22966 1 ]
+[e ) . `E22972 1 ]
 [e $UE 3237  ]
 "313
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 313:         case OPC_EVLRNI:
 [e :U 3282 ]
 "314
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 314:             if (teachCheckLen(m, 8, 1) == PROCESSED) return PROCESSED;
-[e $ ! == -> ( _teachCheckLen (3 , , _m -> -> 8 `i `uc -> -> 1 `i `uc `ui -> . `E22966 1 `ui 3283  ]
-[e ) . `E22966 1 ]
+[e $ ! == -> ( _teachCheckLen (3 , , _m -> -> 8 `i `uc -> -> 1 `i `uc `ui -> . `E22972 1 `ui 3283  ]
+[e ) . `E22972 1 ]
 [e $UE 3237  ]
 [e :U 3283 ]
 "316
@@ -4150,7 +4150,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _doEvlrn (4 , , , -> | -> -> << -> *U + &U . *U _m 2 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux `i -> 8 `i `us `ui -> *U + &U . *U _m 2 * -> -> -> 1 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux `ui `us -> | -> -> << -> *U + &U . *U _m 2 * -> -> -> 2 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux `i -> 8 `i `us `ui -> *U + &U . *U _m 2 * -> -> -> 3 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux `ui `us *U + &U . *U _m 2 * -> -> -> 5 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux *U + &U . *U _m 2 * -> -> -> 6 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux ]
 "317
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 317:             return PROCESSED;
-[e ) . `E22966 1 ]
+[e ) . `E22972 1 ]
 [e $UE 3237  ]
 "318
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 318:         default:
@@ -4180,7 +4180,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 3238 ]
 "321
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 321:     return NOT_PROCESSED;
-[e ) . `E22966 0 ]
+[e ) . `E22972 0 ]
 [e $UE 3237  ]
 "322
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 322: }
@@ -4188,7 +4188,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 "331
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 331: static Processed teachCheckLen(Message * m, uint8_t needed, uint8_t learn) {
-[v _teachCheckLen `(E22966 ~T0 @X0 1 sf3`*S3224`uc`uc ]
+[v _teachCheckLen `(E22972 ~T0 @X0 1 sf3`*S3224`uc`uc ]
 {
 [e :U _teachCheckLen ]
 [v _m `*S3224 ~T0 @X0 1 r1 ]
@@ -4216,7 +4216,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 3288 ]
 "342
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 342:             return PROCESSED;
-[e ) . `E22966 1 ]
+[e ) . `E22972 1 ]
 [e $UE 3285  ]
 "343
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 343:         }
@@ -4224,7 +4224,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 3287 ]
 "344
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 344:         return NOT_PROCESSED;
-[e ) . `E22966 0 ]
+[e ) . `E22972 0 ]
 [e $UE 3285  ]
 "345
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 345:     }
@@ -4402,7 +4402,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 "427
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 427: TimedResponseResult nerdCallback(uint8_t type, uint8_t serviceIndex, uint8_t step){
-[v _nerdCallback `(E23098 ~T0 @X0 1 ef3`uc`uc`uc ]
+[v _nerdCallback `(E23104 ~T0 @X0 1 ef3`uc`uc`uc ]
 {
 [e :U _nerdCallback ]
 [v _type `uc ~T0 @X0 1 r1 ]
@@ -4419,7 +4419,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "431
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 431:         return TIMED_RESPONSE_RESULT_FINISHED;
-[e ) . `E23098 0 ]
+[e ) . `E23104 0 ]
 [e $UE 3307  ]
 "432
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 432:     }
@@ -4444,7 +4444,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 3309 ]
 "440
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 440:     return TIMED_RESPONSE_RESULT_NEXT;
-[e ) . `E23098 2 ]
+[e ) . `E23104 2 ]
 [e $UE 3307  ]
 "441
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 441: }
@@ -4603,7 +4603,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 3319 ]
 "517
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 517:     error = APP_addEvent(nodeNumber, eventNumber, evNum, evVal, FALSE);
-[e = _error ( _APP_addEvent (4 , , , , _nodeNumber _eventNumber _evNum _evVal . `E22933 0 ]
+[e = _error ( _APP_addEvent (4 , , , , _nodeNumber _eventNumber _evNum _evVal . `E22939 0 ]
 "518
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 518:     if (error) {
 [e $ ! != -> _error `i -> 0 `i 3320  ]
@@ -4862,7 +4862,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 "650
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 650: TimedResponseResult reqevCallback(uint8_t tableIndex, uint8_t serviceIndex, uint8_t step){
-[v _reqevCallback `(E23098 ~T0 @X0 1 ef3`uc`uc`uc ]
+[v _reqevCallback `(E23104 ~T0 @X0 1 ef3`uc`uc`uc ]
 {
 [e :U _reqevCallback ]
 [v _tableIndex `uc ~T0 @X0 1 r1 ]
@@ -4886,7 +4886,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "657
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 657:         return TIMED_RESPONSE_RESULT_FINISHED;
-[e ) . `E23098 0 ]
+[e ) . `E23104 0 ]
 [e $UE 3334  ]
 "658
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 658:     }
@@ -4914,7 +4914,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 3336 ]
 "666
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 666:     return TIMED_RESPONSE_RESULT_NEXT;
-[e ) . `E23098 2 ]
+[e ) . `E23104 2 ]
 [e $UE 3334  ]
 "667
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 667: }
@@ -4958,19 +4958,19 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _i `uc ~T0 @X0 1 a ]
 "696
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 696:     writeNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex + 0, 0x00);
-[e ( _writeNVM (3 , , . `E22905 1 -> + + -> 124928 `l -> * + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui -> _tableIndex `ui `l -> -> 0 `i `l `um -> -> 0 `i `uc ]
+[e ( _writeNVM (3 , , . `E22911 1 -> + + -> 124928 `l -> * + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui -> _tableIndex `ui `l -> -> 0 `i `l `um -> -> 0 `i `uc ]
 "697
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 697:     writeNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex + 1, 0x00);
-[e ( _writeNVM (3 , , . `E22905 1 -> + + -> 124928 `l -> * + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui -> _tableIndex `ui `l -> -> 1 `i `l `um -> -> 0 `i `uc ]
+[e ( _writeNVM (3 , , . `E22911 1 -> + + -> 124928 `l -> * + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui -> _tableIndex `ui `l -> -> 1 `i `l `um -> -> 0 `i `uc ]
 "698
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 698:     writeNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex + 2, 0x00);
-[e ( _writeNVM (3 , , . `E22905 1 -> + + -> 124928 `l -> * + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui -> _tableIndex `ui `l -> -> 2 `i `l `um -> -> 0 `i `uc ]
+[e ( _writeNVM (3 , , . `E22911 1 -> + + -> 124928 `l -> * + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui -> _tableIndex `ui `l -> -> 2 `i `l `um -> -> 0 `i `uc ]
 "699
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 699:     writeNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex + 3, 0x00);
-[e ( _writeNVM (3 , , . `E22905 1 -> + + -> 124928 `l -> * + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui -> _tableIndex `ui `l -> -> 3 `i `l `um -> -> 0 `i `uc ]
+[e ( _writeNVM (3 , , . `E22911 1 -> + + -> 124928 `l -> * + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui -> _tableIndex `ui `l -> -> 3 `i `l `um -> -> 0 `i `uc ]
 "700
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 700:     writeNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex + 4, 0x00);
-[e ( _writeNVM (3 , , . `E22905 1 -> + + -> 124928 `l -> * + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui -> _tableIndex `ui `l -> -> 4 `i `l `um -> -> 0 `i `uc ]
+[e ( _writeNVM (3 , , . `E22911 1 -> + + -> 124928 `l -> * + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui -> _tableIndex `ui `l -> -> 4 `i `l `um -> -> 0 `i `uc ]
 "702
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 702:     for (i=0; i<13; i++) {
 {
@@ -4981,7 +4981,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "703
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 703:         writeNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex + (5 + i), 0x00);
-[e ( _writeNVM (3 , , . `E22905 1 -> + + -> 124928 `l -> * + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui -> _tableIndex `ui `l -> + -> 5 `i -> _i `i `l `um -> -> 0 `i `uc ]
+[e ( _writeNVM (3 , , . `E22911 1 -> + + -> 124928 `l -> * + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui -> _tableIndex `ui `l -> + -> 5 `i -> _i `i `l `um -> -> 0 `i `uc ]
 "704
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 704:     }
 }
@@ -5002,14 +5002,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 "723
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 723: uint8_t addEvent(uint16_t nodeNumber, uint16_t eventNumber, uint8_t evNum, uint8_t evVal, Boolean forceOwnNN) {
-[v _addEvent `(uc ~T0 @X0 1 ef5`us`us`uc`uc`E22933 ]
+[v _addEvent `(uc ~T0 @X0 1 ef5`us`us`uc`uc`E22939 ]
 {
 [e :U _addEvent ]
 [v _nodeNumber `us ~T0 @X0 1 r1 ]
 [v _eventNumber `us ~T0 @X0 1 r2 ]
 [v _evNum `uc ~T0 @X0 1 r3 ]
 [v _evVal `uc ~T0 @X0 1 r4 ]
-[v _forceOwnNN `E22933 ~T0 @X0 1 r5 ]
+[v _forceOwnNN `E22939 ~T0 @X0 1 r5 ]
 [f ]
 "724
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 724:     uint8_t tableIndex;
@@ -5048,23 +5048,23 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _e `uc ~T0 @X0 1 a ]
 "736
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 736:                 writeNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex+1, nodeNumber&0xFF);
-[e ( _writeNVM (3 , , . `E22905 1 -> + + -> 124928 `l -> * + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui -> _tableIndex `ui `l -> -> 1 `i `l `um -> & -> _nodeNumber `ui -> -> 255 `i `ui `uc ]
+[e ( _writeNVM (3 , , . `E22911 1 -> + + -> 124928 `l -> * + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui -> _tableIndex `ui `l -> -> 1 `i `l `um -> & -> _nodeNumber `ui -> -> 255 `i `ui `uc ]
 "737
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 737:                 writeNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex+0, nodeNumber>>8);
-[e ( _writeNVM (3 , , . `E22905 1 -> + + -> 124928 `l -> * + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui -> _tableIndex `ui `l -> -> 0 `i `l `um -> >> -> _nodeNumber `ui -> 8 `i `uc ]
+[e ( _writeNVM (3 , , . `E22911 1 -> + + -> 124928 `l -> * + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui -> _tableIndex `ui `l -> -> 0 `i `l `um -> >> -> _nodeNumber `ui -> 8 `i `uc ]
 "738
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 738:                 writeNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex+3, eventNumber&0xFF);
-[e ( _writeNVM (3 , , . `E22905 1 -> + + -> 124928 `l -> * + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui -> _tableIndex `ui `l -> -> 3 `i `l `um -> & -> _eventNumber `ui -> -> 255 `i `ui `uc ]
+[e ( _writeNVM (3 , , . `E22911 1 -> + + -> 124928 `l -> * + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui -> _tableIndex `ui `l -> -> 3 `i `l `um -> & -> _eventNumber `ui -> -> 255 `i `ui `uc ]
 "739
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 739:                 writeNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex+2, eventNumber>>8);
-[e ( _writeNVM (3 , , . `E22905 1 -> + + -> 124928 `l -> * + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui -> _tableIndex `ui `l -> -> 2 `i `l `um -> >> -> _eventNumber `ui -> 8 `i `uc ]
+[e ( _writeNVM (3 , , . `E22911 1 -> + + -> 124928 `l -> * + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui -> _tableIndex `ui `l -> -> 2 `i `l `um -> >> -> _eventNumber `ui -> 8 `i `uc ]
 "740
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 740:                 if (forceOwnNN) {
 [e $ ! != -> _forceOwnNN `ui -> -> 0 `i `ui 3349  ]
 {
 "741
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 741:                     writeNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex+4, 1);
-[e ( _writeNVM (3 , , . `E22905 1 -> + + -> 124928 `l -> * + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui -> _tableIndex `ui `l -> -> 4 `i `l `um -> -> 1 `i `uc ]
+[e ( _writeNVM (3 , , . `E22911 1 -> + + -> 124928 `l -> * + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui -> _tableIndex `ui `l -> -> 4 `i `l `um -> -> 1 `i `uc ]
 "742
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 742:                 } else {
 }
@@ -5073,7 +5073,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "743
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 743:                     writeNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex+4, 0);
-[e ( _writeNVM (3 , , . `E22905 1 -> + + -> 124928 `l -> * + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui -> _tableIndex `ui `l -> -> 4 `i `l `um -> -> 0 `i `uc ]
+[e ( _writeNVM (3 , , . `E22911 1 -> + + -> 124928 `l -> * + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui -> _tableIndex `ui `l -> -> 4 `i `l `um -> -> 0 `i `uc ]
 "744
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 744:                 }
 }
@@ -5088,7 +5088,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "746
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 746:                     writeNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex+5 +e, 0);
-[e ( _writeNVM (3 , , . `E22905 1 -> + + + -> 124928 `l -> * + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui -> _tableIndex `ui `l -> -> 5 `i `l -> _e `l `um -> -> 0 `i `uc ]
+[e ( _writeNVM (3 , , . `E22911 1 -> + + + -> 124928 `l -> * + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui -> _tableIndex `ui `l -> -> 5 `i `l -> _e `l `um -> -> 0 `i `uc ]
 "747
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 747:                 }
 }
@@ -5248,7 +5248,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 3364 ]
 "804
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 804:     writeNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex+5 +evNum, evVal);
-[e ( _writeNVM (3 , , . `E22905 1 -> + + + -> 124928 `l -> * + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui -> _tableIndex `ui `l -> -> 5 `i `l -> _evNum `l `um _evVal ]
+[e ( _writeNVM (3 , , . `E22911 1 -> + + + -> 124928 `l -> * + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui -> _tableIndex `ui `l -> -> 5 `i `l -> _evNum `l `um _evVal ]
 "805
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 805:     return 0;
 [e ) -> -> 0 `i `uc ]
@@ -5291,7 +5291,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 3367 ]
 "822
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 822:     return (uint8_t)readNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex+5 +evNum);
-[e ) -> -> ( _readNVM (2 , . `E22905 1 -> + + + -> 124928 `l -> * + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui -> _tableIndex `ui `l -> -> 5 `i `l -> _evNum `l `um `uc `s ]
+[e ) -> -> ( _readNVM (2 , . `E22911 1 -> + + + -> 124928 `l -> * + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui -> _tableIndex `ui `l -> -> 5 `i `l -> _evNum `l `um `uc `s ]
 [e $UE 3365  ]
 "823
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 823: }
@@ -5347,7 +5347,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "853
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 853:         evs[evIdx] = (uint8_t)readNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex+5 +evIdx);
-[e = *U + &U _evs * -> _evIdx `ux -> -> # *U &U _evs `ui `ux -> ( _readNVM (2 , . `E22905 1 -> + + + -> 124928 `l -> * + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui -> _tableIndex `ui `l -> -> 5 `i `l -> _evIdx `l `um `uc ]
+[e = *U + &U _evs * -> _evIdx `ux -> -> # *U &U _evs `ui `ux -> ( _readNVM (2 , . `E22911 1 -> + + + -> 124928 `l -> * + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui -> _tableIndex `ui `l -> -> 5 `i `l -> _evIdx `l `um `uc ]
 "854
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 854:     }
 }
@@ -5393,7 +5393,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 3375 ]
 "873
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 873:     flags = (uint8_t)readNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex+4);
-[e = _flags -> ( _readNVM (2 , . `E22905 1 -> + + -> 124928 `l -> * + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui -> _tableIndex `ui `l -> -> 4 `i `l `um `uc ]
+[e = _flags -> ( _readNVM (2 , . `E22911 1 -> + + -> 124928 `l -> * + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui -> _tableIndex `ui `l -> -> 4 `i `l `um `uc ]
 "874
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 874:     if (flags & 1) {
 [e $ ! != & -> _flags `i -> 1 `i -> 0 `i 3376  ]
@@ -5408,10 +5408,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 3376 ]
 "877
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 877:     lo = (uint8_t)readNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex+1);
-[e = _lo -> -> ( _readNVM (2 , . `E22905 1 -> + + -> 124928 `l -> * + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui -> _tableIndex `ui `l -> -> 1 `i `l `um `uc `us ]
+[e = _lo -> -> ( _readNVM (2 , . `E22911 1 -> + + -> 124928 `l -> * + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui -> _tableIndex `ui `l -> -> 1 `i `l `um `uc `us ]
 "878
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 878:     hi = (uint8_t)readNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex+0);
-[e = _hi -> -> ( _readNVM (2 , . `E22905 1 -> + + -> 124928 `l -> * + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui -> _tableIndex `ui `l -> -> 0 `i `l `um `uc `us ]
+[e = _hi -> -> ( _readNVM (2 , . `E22911 1 -> + + -> 124928 `l -> * + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui -> _tableIndex `ui `l -> -> 0 `i `l `um `uc `us ]
 "879
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 879:     return lo | (hi << 8);
 [e ) -> | -> _lo `ui << -> _hi `ui -> 8 `i `us ]
@@ -5435,10 +5435,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _lo `us ~T0 @X0 1 a ]
 "893
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 893:     lo = (uint8_t)readNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex+3);
-[e = _lo -> -> ( _readNVM (2 , . `E22905 1 -> + + -> 124928 `l -> * + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui -> _tableIndex `ui `l -> -> 3 `i `l `um `uc `us ]
+[e = _lo -> -> ( _readNVM (2 , . `E22911 1 -> + + -> 124928 `l -> * + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui -> _tableIndex `ui `l -> -> 3 `i `l `um `uc `us ]
 "894
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 894:     hi = (uint8_t)readNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex+2);
-[e = _hi -> -> ( _readNVM (2 , . `E22905 1 -> + + -> 124928 `l -> * + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui -> _tableIndex `ui `l -> -> 2 `i `l `um `uc `us ]
+[e = _hi -> -> ( _readNVM (2 , . `E22911 1 -> + + -> 124928 `l -> * + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui -> _tableIndex `ui `l -> -> 2 `i `l `um `uc `us ]
 "895
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 895:     return lo | (hi << 8);
 [e ) -> | -> _lo `ui << -> _hi `ui -> 8 `i `us ]

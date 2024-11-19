@@ -38452,6 +38452,17 @@ typedef enum VlcbConsumerEvUsage
   CONSUMER_EV_ACTIONS = 0x01,
   CONSUMER_EV_SLOTS = 0x02,
 } VlcbConsumerEvUsage;
+
+typedef enum VlcbBootloaderType
+{
+
+
+
+  BL_TYPE_Unknown = 0,
+  BL_TYPE_MikeBolton = 1,
+  BL_TYPE_KonradOrlowski = 2,
+  BL_TYPE_IanHogg = 3,
+} VlcbBootloaderType;
 # 39 "../../VLCBlib_PIC/vlcb.h" 2
 
 # 1 "../../VLCBlib_PIC/nvm.h" 1
@@ -38905,7 +38916,7 @@ uint8_t isConsumedEvent(uint8_t eventIndex) {
 
 
 static DiagnosticVal * consumerGetDiagnostic(uint8_t index) {
-    if ((index<1) || (index>1)) {
+    if (index > 1) {
         return ((void*)0);
     }
     return &(consumerDiagnostics[index-1]);

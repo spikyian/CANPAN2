@@ -38452,6 +38452,17 @@ typedef enum VlcbConsumerEvUsage
   CONSUMER_EV_ACTIONS = 0x01,
   CONSUMER_EV_SLOTS = 0x02,
 } VlcbConsumerEvUsage;
+
+typedef enum VlcbBootloaderType
+{
+
+
+
+  BL_TYPE_Unknown = 0,
+  BL_TYPE_MikeBolton = 1,
+  BL_TYPE_KonradOrlowski = 2,
+  BL_TYPE_IanHogg = 3,
+} VlcbBootloaderType;
 # 39 "../../VLCBlib_PIC/vlcb.h" 2
 
 # 1 "../../VLCBlib_PIC/nvm.h" 1
@@ -38781,7 +38792,7 @@ extern void updateModuleErrorStatus(void);
 
 extern TickValue pbTimer;
 # 79 "../../VLCBlib_PIC/nvm.c" 2
-# 122 "../../VLCBlib_PIC/nvm.c"
+# 130 "../../VLCBlib_PIC/nvm.c"
 static union
 {
     uint8_t asByte;
@@ -38799,10 +38810,10 @@ static union
  flash_data_t * flashBuffer = (flash_data_t *)(0x3700U);
 
 static flash_address_t flashBlock;
-# 148 "../../VLCBlib_PIC/nvm.c"
+# 156 "../../VLCBlib_PIC/nvm.c"
 void initRomOps(void) {
     flashFlags.asByte = 0;
-    flashBlock = 0x0000;
+    flashBlock = 0x0700;
 
     TBLPTRU = 0;
 
@@ -38816,7 +38827,7 @@ void initRomOps(void) {
 
 
 eeprom_data_t EEPROM_Read(eeprom_address_t index) {
-# 183 "../../VLCBlib_PIC/nvm.c"
+# 191 "../../VLCBlib_PIC/nvm.c"
     while (NVMCON0bits.GO)
         ;
 
@@ -38846,7 +38857,7 @@ uint8_t EEPROM_Write(eeprom_address_t index, eeprom_data_t value) {
     uint8_t interruptEnabled;
     interruptEnabled = (INTCON0bits.GIE);
     do {
-# 237 "../../VLCBlib_PIC/nvm.c"
+# 245 "../../VLCBlib_PIC/nvm.c"
         while (NVMCON0bits.GO)
             ;
 
@@ -38876,7 +38887,7 @@ uint8_t EEPROM_Write(eeprom_address_t index, eeprom_data_t value) {
         }
 
 
-        NVMCON1bits.NVMCMD = 0x00;
+        NVMCON1bits.NVMCMD = 0x07;
 
 
         if (EEPROM_Read(index) == value) {
@@ -38889,14 +38900,14 @@ uint8_t EEPROM_Write(eeprom_address_t index, eeprom_data_t value) {
     } while (1);
     return GRSP_OK;
 }
-# 287 "../../VLCBlib_PIC/nvm.c"
+# 295 "../../VLCBlib_PIC/nvm.c"
 static flash_data_t FLASH_Read(flash_address_t address) {
 
     if ((address&(~((flash_address_t)(256U)-1))) == flashBlock) {
 
         return flashBuffer[(address&((256U)-1))];
     } else {
-# 301 "../../VLCBlib_PIC/nvm.c"
+# 309 "../../VLCBlib_PIC/nvm.c"
         TBLPTRU = (uint8_t) (address >> 16);
         TBLPTRH = (uint8_t) (address >> 8);
         TBLPTRL = (uint8_t) address;
@@ -38920,7 +38931,7 @@ void eraseFlashBlock(void) {
         ;
 
     interruptEnabled = (INTCON0bits.GIE);
-# 341 "../../VLCBlib_PIC/nvm.c"
+# 349 "../../VLCBlib_PIC/nvm.c"
     while (NVMCON0bits.GO)
         ;
 
@@ -38935,7 +38946,7 @@ void eraseFlashBlock(void) {
     NVMCON0bits.GO = 1;
     while (NVMCON0bits.GO)
         ;
-    NVMCON1bits.NVMCMD = 0x00;
+    NVMCON1bits.NVMCMD = 0x07;
 
     if (interruptEnabled) {
         {INTCON0bits.GIE = 1;};
@@ -38968,7 +38979,7 @@ void flushFlashBlock(void) {
 
     interruptEnabled = (INTCON0bits.GIE);
     {INTCON0bits.GIE = 0;};
-# 413 "../../VLCBlib_PIC/nvm.c"
+# 421 "../../VLCBlib_PIC/nvm.c"
     while (NVMCON0bits.GO)
         ;
 
@@ -38985,7 +38996,7 @@ void flushFlashBlock(void) {
     while (NVMCON0bits.GO)
 
         ;
-    NVMCON1bits.NVMCMD = 0x00;
+    NVMCON1bits.NVMCMD = 0x07;
 
 
     if (interruptEnabled) {
@@ -38998,7 +39009,7 @@ void flushFlashBlock(void) {
 
 
 void loadFlashBlock(void) {
-# 456 "../../VLCBlib_PIC/nvm.c"
+# 464 "../../VLCBlib_PIC/nvm.c"
     while (NVMCON0bits.GO)
         ;
 
@@ -39009,14 +39020,14 @@ void loadFlashBlock(void) {
     NVMCON0bits.GO = 1;
     while (NVMCON0bits.GO)
         ;
-    NVMCON1bits.NVMCMD = 0x00;
+    NVMCON1bits.NVMCMD = 0x07;
 
     flashFlags.asByte = 0;
 }
-# 479 "../../VLCBlib_PIC/nvm.c"
+# 487 "../../VLCBlib_PIC/nvm.c"
 uint8_t FLASH_Write(flash_address_t index, flash_data_t value) {
     uint8_t oldValue;
-# 495 "../../VLCBlib_PIC/nvm.c"
+# 503 "../../VLCBlib_PIC/nvm.c"
     if ((index&(~((flash_address_t)(256U)-1))) != flashBlock) {
         if (flashBlock != 0) {
 
@@ -39039,7 +39050,7 @@ uint8_t FLASH_Write(flash_address_t index, flash_data_t value) {
     }
     return GRSP_OK;
 }
-# 525 "../../VLCBlib_PIC/nvm.c"
+# 533 "../../VLCBlib_PIC/nvm.c"
 uint8_t writeNVM(NVMtype type, uint24_t index, uint8_t value) {
     switch(type) {
         case EEPROM_NVM_TYPE:
