@@ -38999,7 +38999,7 @@ void inputScan(void) {
                             break;
                         case 3:
                             if (onOff) {
-                                outputState[buttonNo] = ~outputState[buttonNo];
+                                outputState[buttonNo] = ! outputState[buttonNo];
                             } else {
                                 continue;
                             }
@@ -39113,7 +39113,7 @@ void doSoD(void) {
 # 296 "../canpan3Inputs.c"
 TimedResponseResult sodTRCallback(uint8_t type, uint8_t serviceIndex, uint8_t tableIndex) {
     EventState value;
-    uint8_t buttonNo;
+    uint8_t sv;
 
     if (tableIndex >= 254) {
         return TIMED_RESPONSE_RESULT_FINISHED;
@@ -39122,7 +39122,10 @@ TimedResponseResult sodTRCallback(uint8_t type, uint8_t serviceIndex, uint8_t ta
     value = APP_GetEventIndexState(tableIndex);
 
     if (value != EVENT_UNKNOWN) {
-        canpanSendProducedEvent(tableIndex, value==EVENT_ON, evs[2]);
+        sv = evs[2];
+        if (!(sv & 0b00000100)) {
+            canpanSendProducedEvent(tableIndex, value==EVENT_ON, evs[2]);
+        }
     }
     return TIMED_RESPONSE_RESULT_NEXT;
 }

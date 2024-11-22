@@ -4013,8 +4013,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $ ! != -> _flags `i -> 0 `i 3275  ]
 {
 "217
-[; ;../canpan3Events.c: 217:             polarity = evs[8 + ledNo/8]& ((1 << ledNo)%8);
-[e = _polarity -> & -> *U + &U _evs * -> -> + -> 8 `i / -> _ledNo `i -> 8 `i `ui `ux -> -> # *U &U _evs `ui `ux `i % << -> 1 `i -> _ledNo `i -> 8 `i `uc ]
+[; ;../canpan3Events.c: 217:             polarity = evs[8 + ledNo/8]& (1 << (ledNo%8));
+[e = _polarity -> & -> *U + &U _evs * -> -> + -> 8 `i / -> _ledNo `i -> 8 `i `ui `ux -> -> # *U &U _evs `ui `ux `i << -> 1 `i % -> _ledNo `i -> 8 `i `uc ]
 "218
 [; ;../canpan3Events.c: 218:             switch(ledMode) {
 [e $U 3277  ]

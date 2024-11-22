@@ -177,7 +177,7 @@ GOOD_TIME 1
 FALSE 0
 TRUE 1
 ]
-"109
+"125
 [e E22515 VlcbOpCodes `uc
 OPC_ACK 0
 OPC_NAK 1
@@ -327,14 +327,14 @@ OPC_VCVS 164
 NOT_PROCESSED 0
 PROCESSED 1
 ]
-"221
+"223
 [e E23142 canpan3LedState `uc
 CANPANLED_ON 0
 CANPANLED_OFF 1
 CANPANLED_FLASH 2
 CANPANLED_ANTIFLASH 3
 ]
-"276
+"278
 [e E22909 . `uc
 EVENT_UNKNOWN 255
 EVENT_OFF 0
@@ -3385,12 +3385,12 @@ CANPANLED_ANTIFLASH 3
 "82
 [v _APP_isConsumedEvent APP_isConsumedEvent `(uc  1 e 1 0 ]
 "109
-[v _APP_preProcessMessage APP_preProcessMessage `(E22922  1 e 1 0 ]
-"176
 [v _APP_isProducedEvent APP_isProducedEvent `(uc  1 e 1 0 ]
-"194
+"125
+[v _APP_preProcessMessage APP_preProcessMessage `(E22922  1 e 1 0 ]
+"195
 [v _APP_processConsumedEvent APP_processConsumedEvent `(E22922  1 e 1 0 ]
-"276
+"278
 [v _APP_GetEventIndexState APP_GetEventIndexState `(E22909  1 e 1 0 ]
 "71 C:\Users\ianwh\github\CANPAN2/canpan3Inputs.c
 [v _initInputs initInputs `(v  1 e 1 0 ]
@@ -3408,7 +3408,7 @@ CANPANLED_ANTIFLASH 3
 [v _doSoD doSoD `(v  1 e 1 0 ]
 "296
 [v _sodTRCallback sodTRCallback `(E23138  1 e 1 0 ]
-"316
+"319
 [v _loadInputs loadInputs `(v  1 e 1 0 ]
 "51 C:\Users\ianwh\github\CANPAN2/canpan3Leds.c
 [v _initLeds initLeds `(v  1 e 1 0 ]
@@ -3500,8 +3500,8 @@ CANPANLED_ANTIFLASH 3
 "160
 [v _rxBuffers rxBuffers `[8]S183  1 s 72 rxBuffers ]
 "161
-[s S2258 MessageQueue 5 `*.39S183 1 messages 2 0 `uc 1 readIndex 1 2 `uc 1 writeIndex 1 3 `uc 1 size 1 4 ]
-[v _rxQueue rxQueue `S2258  1 s 5 rxQueue ]
+[s S2254 MessageQueue 5 `*.39S183 1 messages 2 0 `uc 1 readIndex 1 2 `uc 1 writeIndex 1 3 `uc 1 size 1 4 ]
+[v _rxQueue rxQueue `S2254  1 s 5 rxQueue ]
 [s S24 TickBytes 4 `uc 1 b0 1 0 `uc 1 b1 1 1 `uc 1 b2 1 2 `uc 1 b3 1 3 ]
 "172
 [s S29 TickWords 4 `us 1 w0 2 0 `us 1 w1 2 2 ]
@@ -3571,12 +3571,12 @@ CANPANLED_ANTIFLASH 3
 [v _nvService nvService `CS201  1 e 20 0 ]
 "107
 [v _nvCache nvCache `[2]uc  1 s 2 nvCache ]
-[s S5549 . 1 `uc 1 writeNeeded 1 0 :1:0 
+[s S5545 . 1 `uc 1 writeNeeded 1 0 :1:0 
 `uc 1 eraseNeeded 1 0 :1:1 
 ]
 "137 C:\Users\ianwh\github/VLCBlib_PIC/nvm.c
-[u S5552 . 1 `uc 1 asByte 1 0 `S5549 1 . 1 0 ]
-[v _flashFlags flashFlags `S5552  1 s 1 flashFlags ]
+[u S5548 . 1 `uc 1 asByte 1 0 `S5545 1 . 1 0 ]
+[v _flashFlags flashFlags `S5548  1 s 1 flashFlags ]
 "146
 [v _flashBlock flashBlock `um  1 s 3 flashBlock ]
 "60 C:\Users\ianwh\github/VLCBlib_PIC/statusLeds2.c
@@ -3640,7 +3640,7 @@ CANPANLED_ANTIFLASH 3
 [v _flashTime flashTime `S32  1 s 4 flashTime ]
 "128
 [v _services services `C[9]*.32CS201  1 e 18 0 ]
-[s S2462 . 1 `uc 1 SWIE 1 0 :1:0 
+[s S2458 . 1 `uc 1 SWIE 1 0 :1:0 
 `uc 1 HLVDIE 1 0 :1:1 
 `uc 1 OSFIE 1 0 :1:2 
 `uc 1 CSWIE 1 0 :1:3 
@@ -3650,9 +3650,9 @@ CANPANLED_ANTIFLASH 3
 `uc 1 IOCIE 1 0 :1:7 
 ]
 "305 C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h
-[u S2471 . 1 `S2462 1 . 1 0 ]
-[v _PIE0bits PIE0bits `VES2471  1 e 1 @1182 ]
-[s S1460 . 1 `uc 1 SPI1RXIE 1 0 :1:0 
+[u S2467 . 1 `S2458 1 . 1 0 ]
+[v _PIE0bits PIE0bits `VES2467  1 e 1 @1182 ]
+[s S1456 . 1 `uc 1 SPI1RXIE 1 0 :1:0 
 `uc 1 SPI1TXIE 1 0 :1:1 
 `uc 1 SPI1IE 1 0 :1:2 
 `uc 1 TMR2IE 1 0 :1:3 
@@ -3662,26 +3662,26 @@ CANPANLED_ANTIFLASH 3
 `uc 1 TMR0IE 1 0 :1:7 
 ]
 "499
-[u S1469 . 1 `S1460 1 . 1 0 ]
-[v _PIE3bits PIE3bits `VES1469  1 e 1 @1185 ]
-[s S5572 . 1 `uc 1 GO 1 0 :1:0 
+[u S1465 . 1 `S1456 1 . 1 0 ]
+[v _PIE3bits PIE3bits `VES1465  1 e 1 @1185 ]
+[s S5568 . 1 `uc 1 GO 1 0 :1:0 
 ]
 "598
-[s S5574 . 1 `uc 1 NOT_DONE 1 0 :1:0 
+[s S5570 . 1 `uc 1 NOT_DONE 1 0 :1:0 
 ]
-[s S5576 . 1 `uc 1 nDONE 1 0 :1:0 
+[s S5572 . 1 `uc 1 nDONE 1 0 :1:0 
 ]
-[u S5578 . 1 `S5572 1 . 1 0 `S5574 1 . 1 0 `S5576 1 . 1 0 ]
-[v _NVMCON0bits NVMCON0bits `VES5578  1 e 1 @64 ]
-[s S5556 . 1 `uc 1 CMD 1 0 :3:0 
+[u S5574 . 1 `S5568 1 . 1 0 `S5570 1 . 1 0 `S5572 1 . 1 0 ]
+[v _NVMCON0bits NVMCON0bits `VES5574  1 e 1 @64 ]
+[s S5552 . 1 `uc 1 CMD 1 0 :3:0 
 `uc 1 . 1 0 :4:3 
 `uc 1 WRERR 1 0 :1:7 
 ]
 "633
-[s S5560 . 1 `uc 1 NVMCMD 1 0 :3:0 
+[s S5556 . 1 `uc 1 NVMCMD 1 0 :3:0 
 ]
-[u S5562 . 1 `S5556 1 . 1 0 `S5560 1 . 1 0 ]
-[v _NVMCON1bits NVMCON1bits `VES5562  1 e 1 @65 ]
+[u S5558 . 1 `S5552 1 . 1 0 `S5556 1 . 1 0 ]
+[v _NVMCON1bits NVMCON1bits `VES5558  1 e 1 @65 ]
 "653
 [v _NVMLOCK NVMLOCK `VEuc  1 e 1 @66 ]
 "674
@@ -3694,7 +3694,7 @@ CANPANLED_ANTIFLASH 3
 [v _NVMADRU NVMADRU `VEuc  1 e 1 @69 ]
 "887
 [v _NVMDATL NVMDATL `VEuc  1 e 1 @70 ]
-[s S2407 . 1 `uc 1 SWIF 1 0 :1:0 
+[s S2403 . 1 `uc 1 SWIF 1 0 :1:0 
 `uc 1 HLVDIF 1 0 :1:1 
 `uc 1 OSFIF 1 0 :1:2 
 `uc 1 CSWIF 1 0 :1:3 
@@ -3704,9 +3704,9 @@ CANPANLED_ANTIFLASH 3
 `uc 1 IOCIF 1 0 :1:7 
 ]
 "1290
-[u S2416 . 1 `S2407 1 . 1 0 ]
-[v _PIR0bits PIR0bits `VES2416  1 e 1 @1198 ]
-[s S1439 . 1 `uc 1 SPI1RXIF 1 0 :1:0 
+[u S2412 . 1 `S2403 1 . 1 0 ]
+[v _PIR0bits PIR0bits `VES2412  1 e 1 @1198 ]
+[s S1435 . 1 `uc 1 SPI1RXIF 1 0 :1:0 
 `uc 1 SPI1TXIF 1 0 :1:1 
 `uc 1 SPI1IF 1 0 :1:2 
 `uc 1 TMR2IF 1 0 :1:3 
@@ -3716,9 +3716,9 @@ CANPANLED_ANTIFLASH 3
 `uc 1 TMR0IF 1 0 :1:7 
 ]
 "1484
-[u S1448 . 1 `S1439 1 . 1 0 ]
-[v _PIR3bits PIR3bits `VES1448  1 e 1 @1201 ]
-[s S1045 . 1 `uc 1 LATA0 1 0 :1:0 
+[u S1444 . 1 `S1435 1 . 1 0 ]
+[v _PIR3bits PIR3bits `VES1444  1 e 1 @1201 ]
+[s S1041 . 1 `uc 1 LATA0 1 0 :1:0 
 `uc 1 LATA1 1 0 :1:1 
 `uc 1 LATA2 1 0 :1:2 
 `uc 1 LATA3 1 0 :1:3 
@@ -3728,9 +3728,9 @@ CANPANLED_ANTIFLASH 3
 `uc 1 LATA7 1 0 :1:7 
 ]
 "2275
-[u S1054 . 1 `S1045 1 . 1 0 ]
-[v _LATAbits LATAbits `VES1054  1 e 1 @1214 ]
-[s S1250 . 1 `uc 1 LATB0 1 0 :1:0 
+[u S1050 . 1 `S1041 1 . 1 0 ]
+[v _LATAbits LATAbits `VES1050  1 e 1 @1214 ]
+[s S1246 . 1 `uc 1 LATB0 1 0 :1:0 
 `uc 1 LATB1 1 0 :1:1 
 `uc 1 LATB2 1 0 :1:2 
 `uc 1 LATB3 1 0 :1:3 
@@ -3740,9 +3740,9 @@ CANPANLED_ANTIFLASH 3
 `uc 1 LATB7 1 0 :1:7 
 ]
 "2337
-[u S1259 . 1 `S1250 1 . 1 0 ]
-[v _LATBbits LATBbits `VES1259  1 e 1 @1215 ]
-[s S1271 . 1 `uc 1 LATC0 1 0 :1:0 
+[u S1255 . 1 `S1246 1 . 1 0 ]
+[v _LATBbits LATBbits `VES1255  1 e 1 @1215 ]
+[s S1267 . 1 `uc 1 LATC0 1 0 :1:0 
 `uc 1 LATC1 1 0 :1:1 
 `uc 1 LATC2 1 0 :1:2 
 `uc 1 LATC3 1 0 :1:3 
@@ -3752,9 +3752,9 @@ CANPANLED_ANTIFLASH 3
 `uc 1 LATC7 1 0 :1:7 
 ]
 "2399
-[u S1280 . 1 `S1271 1 . 1 0 ]
-[v _LATCbits LATCbits `VES1280  1 e 1 @1216 ]
-[s S765 . 1 `uc 1 TRISA0 1 0 :1:0 
+[u S1276 . 1 `S1267 1 . 1 0 ]
+[v _LATCbits LATCbits `VES1276  1 e 1 @1216 ]
+[s S761 . 1 `uc 1 TRISA0 1 0 :1:0 
 `uc 1 TRISA1 1 0 :1:1 
 `uc 1 TRISA2 1 0 :1:2 
 `uc 1 TRISA3 1 0 :1:3 
@@ -3764,9 +3764,9 @@ CANPANLED_ANTIFLASH 3
 `uc 1 TRISA7 1 0 :1:7 
 ]
 "2461
-[u S774 . 1 `S765 1 . 1 0 ]
-[v _TRISAbits TRISAbits `VES774  1 e 1 @1222 ]
-[s S786 . 1 `uc 1 TRISB0 1 0 :1:0 
+[u S770 . 1 `S761 1 . 1 0 ]
+[v _TRISAbits TRISAbits `VES770  1 e 1 @1222 ]
+[s S782 . 1 `uc 1 TRISB0 1 0 :1:0 
 `uc 1 TRISB1 1 0 :1:1 
 `uc 1 TRISB2 1 0 :1:2 
 `uc 1 TRISB3 1 0 :1:3 
@@ -3776,9 +3776,9 @@ CANPANLED_ANTIFLASH 3
 `uc 1 TRISB7 1 0 :1:7 
 ]
 "2523
-[u S795 . 1 `S786 1 . 1 0 ]
-[v _TRISBbits TRISBbits `VES795  1 e 1 @1223 ]
-[s S807 . 1 `uc 1 TRISC0 1 0 :1:0 
+[u S791 . 1 `S782 1 . 1 0 ]
+[v _TRISBbits TRISBbits `VES791  1 e 1 @1223 ]
+[s S803 . 1 `uc 1 TRISC0 1 0 :1:0 
 `uc 1 TRISC1 1 0 :1:1 
 `uc 1 TRISC2 1 0 :1:2 
 `uc 1 TRISC3 1 0 :1:3 
@@ -3788,9 +3788,9 @@ CANPANLED_ANTIFLASH 3
 `uc 1 TRISC7 1 0 :1:7 
 ]
 "2585
-[u S816 . 1 `S807 1 . 1 0 ]
-[v _TRISCbits TRISCbits `VES816  1 e 1 @1224 ]
-[s S5019 . 1 `uc 1 RA0 1 0 :1:0 
+[u S812 . 1 `S803 1 . 1 0 ]
+[v _TRISCbits TRISCbits `VES812  1 e 1 @1224 ]
+[s S5015 . 1 `uc 1 RA0 1 0 :1:0 
 `uc 1 RA1 1 0 :1:1 
 `uc 1 RA2 1 0 :1:2 
 `uc 1 RA3 1 0 :1:3 
@@ -3800,8 +3800,8 @@ CANPANLED_ANTIFLASH 3
 `uc 1 RA7 1 0 :1:7 
 ]
 "2668
-[u S5028 . 1 `S5019 1 . 1 0 ]
-[v _PORTAbits PORTAbits `VES5028  1 e 1 @1230 ]
+[u S5024 . 1 `S5015 1 . 1 0 ]
+[v _PORTAbits PORTAbits `VES5024  1 e 1 @1230 ]
 "2713
 [v _PORTB PORTB `VEuc  1 e 1 @1231 ]
 "2775
@@ -3828,21 +3828,21 @@ CANPANLED_ANTIFLASH 3
 [v _SPI1TCNTH SPI1TCNTH `VEuc  1 e 1 @131 ]
 "3681
 [v _SPI1CON0 SPI1CON0 `VEuc  1 e 1 @132 ]
-[s S1303 . 1 `uc 1 BMODE 1 0 :1:0 
+[s S1299 . 1 `uc 1 BMODE 1 0 :1:0 
 `uc 1 MST 1 0 :1:1 
 `uc 1 LSBF 1 0 :1:2 
 `uc 1 . 1 0 :4:3 
 `uc 1 EN 1 0 :1:7 
 ]
 "3702
-[s S1309 . 1 `uc 1 SPI1BMODE 1 0 :1:0 
+[s S1305 . 1 `uc 1 SPI1BMODE 1 0 :1:0 
 `uc 1 SPI1MST 1 0 :1:1 
 `uc 1 SPI1LSBF 1 0 :1:2 
 `uc 1 . 1 0 :4:3 
 `uc 1 SPI1SPIEN 1 0 :1:7 
 ]
-[u S1315 . 1 `S1303 1 . 1 0 `S1309 1 . 1 0 ]
-[v _SPI1CON0bits SPI1CON0bits `VES1315  1 e 1 @132 ]
+[u S1311 . 1 `S1299 1 . 1 0 `S1305 1 . 1 0 ]
+[v _SPI1CON0bits SPI1CON0bits `VES1311  1 e 1 @132 ]
 "3747
 [v _SPI1CON1 SPI1CON1 `VEuc  1 e 1 @133 ]
 "3794
@@ -3855,7 +3855,7 @@ CANPANLED_ANTIFLASH 3
 [v _SPI1CON2 SPI1CON2 `VEuc  1 e 1 @134 ]
 "3863
 [v _TBLPTRU TBLPTRU `VEuc  1 e 1 @1272 ]
-[s S1482 . 1 `uc 1 RXBF 1 0 :1:0 
+[s S1478 . 1 `uc 1 RXBF 1 0 :1:0 
 `uc 1 . 1 0 :1:1 
 `uc 1 CLRBF 1 0 :1:2 
 `uc 1 RXRE 1 0 :1:3 
@@ -3865,7 +3865,7 @@ CANPANLED_ANTIFLASH 3
 `uc 1 TXWE 1 0 :1:7 
 ]
 "3954
-[s S1491 . 1 `uc 1 SPI1RXBF 1 0 :1:0 
+[s S1487 . 1 `uc 1 SPI1RXBF 1 0 :1:0 
 `uc 1 . 1 0 :1:1 
 `uc 1 SPI1CLRBF 1 0 :1:2 
 `uc 1 SPI1RXRE 1 0 :1:3 
@@ -3874,19 +3874,19 @@ CANPANLED_ANTIFLASH 3
 `uc 1 . 1 0 :1:6 
 `uc 1 SPI1TXWE 1 0 :1:7 
 ]
-[u S1500 . 1 `S1482 1 . 1 0 `S1491 1 . 1 0 ]
-[v _SPI1STATUSbits SPI1STATUSbits `VES1500  1 e 1 @135 ]
+[u S1496 . 1 `S1478 1 . 1 0 `S1487 1 . 1 0 ]
+[v _SPI1STATUSbits SPI1STATUSbits `VES1496  1 e 1 @135 ]
 "4009
 [v _SPI1TWIDTH SPI1TWIDTH `VEuc  1 e 1 @136 ]
 "4049
 [v _SPI1BAUD SPI1BAUD `VEuc  1 e 1 @137 ]
 "4303
 [v _SPI1CLK SPI1CLK `VEuc  1 e 1 @140 ]
-[s S6301 . 1 `uc 1 NDIV 1 0 :4:0 
+[s S6297 . 1 `uc 1 NDIV 1 0 :4:0 
 `uc 1 NOSC 1 0 :3:4 
 ]
 "5357
-[s S6304 . 1 `uc 1 NDIV0 1 0 :1:0 
+[s S6300 . 1 `uc 1 NDIV0 1 0 :1:0 
 `uc 1 NDIV1 1 0 :1:1 
 `uc 1 NDIV2 1 0 :1:2 
 `uc 1 NDIV3 1 0 :1:3 
@@ -3894,13 +3894,13 @@ CANPANLED_ANTIFLASH 3
 `uc 1 NOSC1 1 0 :1:5 
 `uc 1 NOSC2 1 0 :1:6 
 ]
-[u S6312 . 1 `S6301 1 . 1 0 `S6304 1 . 1 0 ]
-[v _OSCCON1bits OSCCON1bits `VES6312  1 e 1 @173 ]
+[u S6308 . 1 `S6297 1 . 1 0 `S6300 1 . 1 0 ]
+[v _OSCCON1bits OSCCON1bits `VES6308  1 e 1 @173 ]
 "8945
 [v _C1CONL C1CONL `VEuc  1 e 1 @256 ]
 "9004
 [v _C1CONH C1CONH `VEuc  1 e 1 @257 ]
-[s S2301 . 1 `uc 1 WAKFIL 1 0 :1:0 
+[s S2297 . 1 `uc 1 WAKFIL 1 0 :1:0 
 `uc 1 WFT 1 0 :2:1 
 `uc 1 BUSY 1 0 :1:3 
 `uc 1 . 1 0 :1:4 
@@ -3909,15 +3909,15 @@ CANPANLED_ANTIFLASH 3
 `uc 1 ON 1 0 :1:7 
 ]
 "9025
-[s S2309 . 1 `uc 1 . 1 0 :1:0 
+[s S2305 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 WFT0 1 0 :1:1 
 `uc 1 WFT1 1 0 :1:2 
 ]
-[u S2313 . 1 `S2301 1 . 1 0 `S2309 1 . 1 0 ]
-[v _C1CONHbits C1CONHbits `VES2313  1 e 1 @257 ]
+[u S2309 . 1 `S2297 1 . 1 0 `S2305 1 . 1 0 ]
+[v _C1CONHbits C1CONHbits `VES2309  1 e 1 @257 ]
 "9070
 [v _C1CONU C1CONU `VEuc  1 e 1 @258 ]
-[s S2823 . 1 `uc 1 RTXAT 1 0 :1:0 
+[s S2819 . 1 `uc 1 RTXAT 1 0 :1:0 
 `uc 1 ESIGM 1 0 :1:1 
 `uc 1 SERR2LOM 1 0 :1:2 
 `uc 1 STEF 1 0 :1:3 
@@ -3925,21 +3925,21 @@ CANPANLED_ANTIFLASH 3
 `uc 1 OPMOD 1 0 :3:5 
 ]
 "9091
-[s S2830 . 1 `uc 1 . 1 0 :5:0 
+[s S2826 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 OPMOD0 1 0 :1:5 
 `uc 1 OPMOD1 1 0 :1:6 
 `uc 1 OPMOD2 1 0 :1:7 
 ]
-[u S2835 . 1 `S2823 1 . 1 0 `S2830 1 . 1 0 ]
-[v _C1CONUbits C1CONUbits `VES2835  1 e 1 @258 ]
+[u S2831 . 1 `S2819 1 . 1 0 `S2826 1 . 1 0 ]
+[v _C1CONUbits C1CONUbits `VES2831  1 e 1 @258 ]
 "9141
 [v _C1CONT C1CONT `VEuc  1 e 1 @259 ]
-[s S2793 . 1 `uc 1 REQOP 1 0 :3:0 
+[s S2789 . 1 `uc 1 REQOP 1 0 :3:0 
 `uc 1 ABAT 1 0 :1:3 
 `uc 1 TXBWS 1 0 :4:4 
 ]
 "9163
-[s S2797 . 1 `uc 1 REQOP0 1 0 :1:0 
+[s S2793 . 1 `uc 1 REQOP0 1 0 :1:0 
 `uc 1 REQOP1 1 0 :1:1 
 `uc 1 REQOP2 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
@@ -3948,8 +3948,8 @@ CANPANLED_ANTIFLASH 3
 `uc 1 TXBWS2 1 0 :1:6 
 `uc 1 TXBWS3 1 0 :1:7 
 ]
-[u S2806 . 1 `S2793 1 . 1 0 `S2797 1 . 1 0 ]
-[v _C1CONTbits C1CONTbits `VES2806  1 e 1 @259 ]
+[u S2802 . 1 `S2789 1 . 1 0 `S2793 1 . 1 0 ]
+[v _C1CONTbits C1CONTbits `VES2802  1 e 1 @259 ]
 "9218
 [v _C1NBTCFGL C1NBTCFGL `VEuc  1 e 1 @260 ]
 "9282
@@ -3958,7 +3958,7 @@ CANPANLED_ANTIFLASH 3
 [v _C1NBTCFGU C1NBTCFGU `VEuc  1 e 1 @262 ]
 "9416
 [v _C1NBTCFGT C1NBTCFGT `VEuc  1 e 1 @263 ]
-[s S2504 . 1 `uc 1 . 1 0 :2:0 
+[s S2500 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 TXATIF 1 0 :1:2 
 `uc 1 RXOVIF 1 0 :1:3 
 `uc 1 SERRIF 1 0 :1:4 
@@ -3967,18 +3967,18 @@ CANPANLED_ANTIFLASH 3
 `uc 1 IVMIF 1 0 :1:7 
 ]
 "10420
-[u S2512 . 1 `S2504 1 . 1 0 ]
-[v _C1INTHbits C1INTHbits `VES2512  1 e 1 @285 ]
-[s S2428 . 1 `uc 1 TXIE 1 0 :1:0 
+[u S2508 . 1 `S2500 1 . 1 0 ]
+[v _C1INTHbits C1INTHbits `VES2508  1 e 1 @285 ]
+[s S2424 . 1 `uc 1 TXIE 1 0 :1:0 
 `uc 1 RXIE 1 0 :1:1 
 `uc 1 TBCIE 1 0 :1:2 
 `uc 1 MODIE 1 0 :1:3 
 `uc 1 TEFIE 1 0 :1:4 
 ]
 "10469
-[u S2434 . 1 `S2428 1 . 1 0 ]
-[v _C1INTUbits C1INTUbits `VES2434  1 e 1 @286 ]
-[s S2443 . 1 `uc 1 . 1 0 :2:0 
+[u S2430 . 1 `S2424 1 . 1 0 ]
+[v _C1INTUbits C1INTUbits `VES2430  1 e 1 @286 ]
+[s S2439 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 TXATIE 1 0 :1:2 
 `uc 1 RXOVIE 1 0 :1:3 
 `uc 1 SERRIE 1 0 :1:4 
@@ -3987,14 +3987,14 @@ CANPANLED_ANTIFLASH 3
 `uc 1 IVMIE 1 0 :1:7 
 ]
 "10515
-[u S2451 . 1 `S2443 1 . 1 0 ]
-[v _C1INTTbits C1INTTbits `VES2451  1 e 1 @287 ]
+[u S2447 . 1 `S2439 1 . 1 0 ]
+[v _C1INTTbits C1INTTbits `VES2447  1 e 1 @287 ]
 "12117
 [v _C1TRECU C1TRECU `VEuc  1 e 1 @310 ]
-[s S2627 . 1 `uc 1 NRERRCNT 1 0 :8:0 
+[s S2623 . 1 `uc 1 NRERRCNT 1 0 :8:0 
 ]
 "12194
-[s S2629 . 1 `uc 1 NRERRCNT0 1 0 :1:0 
+[s S2625 . 1 `uc 1 NRERRCNT0 1 0 :1:0 
 `uc 1 NRERRCNT1 1 0 :1:1 
 `uc 1 NRERRCNT2 1 0 :1:2 
 `uc 1 NRERRCNT3 1 0 :1:3 
@@ -4003,12 +4003,12 @@ CANPANLED_ANTIFLASH 3
 `uc 1 NRERRCNT6 1 0 :1:6 
 `uc 1 NRERRCNT7 1 0 :1:7 
 ]
-[u S2638 . 1 `S2627 1 . 1 0 `S2629 1 . 1 0 ]
-[v _C1BDIAG0Lbits C1BDIAG0Lbits `VES2638  1 e 1 @312 ]
-[s S2601 . 1 `uc 1 NTERRCNT 1 0 :8:0 
+[u S2634 . 1 `S2623 1 . 1 0 `S2625 1 . 1 0 ]
+[v _C1BDIAG0Lbits C1BDIAG0Lbits `VES2634  1 e 1 @312 ]
+[s S2597 . 1 `uc 1 NTERRCNT 1 0 :8:0 
 ]
 "12264
-[s S2603 . 1 `uc 1 NTERRCNT0 1 0 :1:0 
+[s S2599 . 1 `uc 1 NTERRCNT0 1 0 :1:0 
 `uc 1 NTERRCNT1 1 0 :1:1 
 `uc 1 NTERRCNT2 1 0 :1:2 
 `uc 1 NTERRCNT3 1 0 :1:3 
@@ -4017,8 +4017,8 @@ CANPANLED_ANTIFLASH 3
 `uc 1 NTERRCNT6 1 0 :1:6 
 `uc 1 NTERRCNT7 1 0 :1:7 
 ]
-[u S2612 . 1 `S2601 1 . 1 0 `S2603 1 . 1 0 ]
-[v _C1BDIAG0Hbits C1BDIAG0Hbits `VES2612  1 e 1 @313 ]
+[u S2608 . 1 `S2597 1 . 1 0 `S2599 1 . 1 0 ]
+[v _C1BDIAG0Hbits C1BDIAG0Hbits `VES2608  1 e 1 @313 ]
 "13015
 [v _C1FIFOBA C1FIFOBA `VEul  1 e 4 @332 ]
 "13302
@@ -4035,18 +4035,18 @@ CANPANLED_ANTIFLASH 3
 [v _C1FIFOCON1L C1FIFOCON1L `VEuc  1 e 1 @348 ]
 "13971
 [v _C1FIFOCON1H C1FIFOCON1H `VEuc  1 e 1 @349 ]
-[s S2524 . 1 `uc 1 UINC 1 0 :1:0 
+[s S2520 . 1 `uc 1 UINC 1 0 :1:0 
 `uc 1 TXREQ 1 0 :1:1 
 `uc 1 FRESET 1 0 :1:2 
 ]
 "13983
-[u S2528 . 1 `S2524 1 . 1 0 ]
-[v _C1FIFOCON1Hbits C1FIFOCON1Hbits `VES2528  1 e 1 @349 ]
+[u S2524 . 1 `S2520 1 . 1 0 ]
+[v _C1FIFOCON1Hbits C1FIFOCON1Hbits `VES2524  1 e 1 @349 ]
 "14003
 [v _C1FIFOCON1U C1FIFOCON1U `VEuc  1 e 1 @350 ]
 "14073
 [v _C1FIFOCON1T C1FIFOCON1T `VEuc  1 e 1 @351 ]
-[s S2483 . 1 `uc 1 TFNRFNIF 1 0 :1:0 
+[s S2479 . 1 `uc 1 TFNRFNIF 1 0 :1:0 
 `uc 1 TFHRFHIF 1 0 :1:1 
 `uc 1 TFERFFIF 1 0 :1:2 
 `uc 1 RXOVIF 1 0 :1:3 
@@ -4056,8 +4056,8 @@ CANPANLED_ANTIFLASH 3
 `uc 1 TXABT 1 0 :1:7 
 ]
 "14149
-[u S2492 . 1 `S2483 1 . 1 0 ]
-[v _C1FIFOSTA1Lbits C1FIFOSTA1Lbits `VES2492  1 e 1 @352 ]
+[u S2488 . 1 `S2479 1 . 1 0 ]
+[v _C1FIFOSTA1Lbits C1FIFOSTA1Lbits `VES2488  1 e 1 @352 ]
 "14260
 [v _C1FIFOUA1 C1FIFOUA1 `VEul  1 e 4 @356 ]
 "14554
@@ -4069,18 +4069,18 @@ CANPANLED_ANTIFLASH 3
 "14718
 [v _C1FIFOCON2T C1FIFOCON2T `VEuc  1 e 1 @363 ]
 "14794
-[v _C1FIFOSTA2Lbits C1FIFOSTA2Lbits `VES2492  1 e 1 @364 ]
-[s S2675 . 1 `uc 1 FIFOCI 1 0 :5:0 
+[v _C1FIFOSTA2Lbits C1FIFOSTA2Lbits `VES2488  1 e 1 @364 ]
+[s S2671 . 1 `uc 1 FIFOCI 1 0 :5:0 
 ]
 "14856
-[s S2677 . 1 `uc 1 FIFOCI0 1 0 :1:0 
+[s S2673 . 1 `uc 1 FIFOCI0 1 0 :1:0 
 `uc 1 FIFOCI1 1 0 :1:1 
 `uc 1 FIFOCI2 1 0 :1:2 
 `uc 1 FIFOCI3 1 0 :1:3 
 `uc 1 FIFOCI4 1 0 :1:4 
 ]
-[u S2683 . 1 `S2675 1 . 1 0 `S2677 1 . 1 0 ]
-[v _C1FIFOSTA2Hbits C1FIFOSTA2Hbits `VES2683  1 e 1 @365 ]
+[u S2679 . 1 `S2671 1 . 1 0 `S2673 1 . 1 0 ]
+[v _C1FIFOSTA2Hbits C1FIFOSTA2Hbits `VES2679  1 e 1 @365 ]
 "14905
 [v _C1FIFOUA2 C1FIFOUA2 `VEul  1 e 4 @368 ]
 "15199
@@ -4088,7 +4088,7 @@ CANPANLED_ANTIFLASH 3
 "15261
 [v _C1FIFOCON3H C1FIFOCON3H `VEuc  1 e 1 @373 ]
 "15273
-[v _C1FIFOCON3Hbits C1FIFOCON3Hbits `VES2528  1 e 1 @373 ]
+[v _C1FIFOCON3Hbits C1FIFOCON3Hbits `VES2524  1 e 1 @373 ]
 "15293
 [v _C1FIFOCON3U C1FIFOCON3U `VEuc  1 e 1 @374 ]
 "15305
@@ -4100,9 +4100,9 @@ CANPANLED_ANTIFLASH 3
 "15363
 [v _C1FIFOCON3T C1FIFOCON3T `VEuc  1 e 1 @375 ]
 "15439
-[v _C1FIFOSTA3Lbits C1FIFOSTA3Lbits `VES2492  1 e 1 @376 ]
+[v _C1FIFOSTA3Lbits C1FIFOSTA3Lbits `VES2488  1 e 1 @376 ]
 "15501
-[v _C1FIFOSTA3Hbits C1FIFOSTA3Hbits `VES2683  1 e 1 @377 ]
+[v _C1FIFOSTA3Hbits C1FIFOSTA3Hbits `VES2679  1 e 1 @377 ]
 "15550
 [v _C1FIFOUA3 C1FIFOUA3 `VEul  1 e 4 @380 ]
 "15837
@@ -4137,43 +4137,43 @@ CANPANLED_ANTIFLASH 3
 [v _TMR0L TMR0L `VEuc  1 e 1 @792 ]
 "38243
 [v _TMR0H TMR0H `VEuc  1 e 1 @793 ]
-[s S5847 . 1 `uc 1 OUTPS 1 0 :4:0 
+[s S5843 . 1 `uc 1 OUTPS 1 0 :4:0 
 `uc 1 MD16 1 0 :1:4 
 `uc 1 OUT 1 0 :1:5 
 `uc 1 . 1 0 :1:6 
 `uc 1 EN 1 0 :1:7 
 ]
 "38531
-[s S5853 . 1 `uc 1 T0OUTPS 1 0 :4:0 
+[s S5849 . 1 `uc 1 T0OUTPS 1 0 :4:0 
 `uc 1 T0MD16 1 0 :1:4 
 `uc 1 T0OUT 1 0 :1:5 
 `uc 1 . 1 0 :1:6 
 `uc 1 T0EN 1 0 :1:7 
 ]
 "38531
-[s S5859 . 1 `uc 1 OUTPS0 1 0 :1:0 
+[s S5855 . 1 `uc 1 OUTPS0 1 0 :1:0 
 `uc 1 OUTPS1 1 0 :1:1 
 `uc 1 OUTPS2 1 0 :1:2 
 `uc 1 OUTPS3 1 0 :1:3 
 `uc 1 T016BIT 1 0 :1:4 
 ]
 "38531
-[s S5865 . 1 `uc 1 T0OUTPS0 1 0 :1:0 
+[s S5861 . 1 `uc 1 T0OUTPS0 1 0 :1:0 
 `uc 1 T0OUTPS1 1 0 :1:1 
 `uc 1 T0OUTPS2 1 0 :1:2 
 `uc 1 T0OUTPS3 1 0 :1:3 
 ]
 "38531
-[u S5870 . 1 `S5847 1 . 1 0 `S5853 1 . 1 0 `S5859 1 . 1 0 `S5865 1 . 1 0 ]
+[u S5866 . 1 `S5843 1 . 1 0 `S5849 1 . 1 0 `S5855 1 . 1 0 `S5861 1 . 1 0 ]
 "38531
 "38531
-[v _T0CON0bits T0CON0bits `VES5870  1 e 1 @794 ]
-[s S5789 . 1 `uc 1 CKPS 1 0 :4:0 
+[v _T0CON0bits T0CON0bits `VES5866  1 e 1 @794 ]
+[s S5785 . 1 `uc 1 CKPS 1 0 :4:0 
 `uc 1 ASYNC 1 0 :1:4 
 `uc 1 CS 1 0 :3:5 
 ]
 "38658
-[s S5793 . 1 `uc 1 CKPS0 1 0 :1:0 
+[s S5789 . 1 `uc 1 CKPS0 1 0 :1:0 
 `uc 1 CKPS1 1 0 :1:1 
 `uc 1 CKPS2 1 0 :1:2 
 `uc 1 CKPS3 1 0 :1:3 
@@ -4183,12 +4183,12 @@ CANPANLED_ANTIFLASH 3
 `uc 1 CS2 1 0 :1:7 
 ]
 "38658
-[s S5802 . 1 `uc 1 T0CKPS 1 0 :4:0 
+[s S5798 . 1 `uc 1 T0CKPS 1 0 :4:0 
 `uc 1 . 1 0 :1:4 
 `uc 1 T0CS 1 0 :3:5 
 ]
 "38658
-[s S5806 . 1 `uc 1 T0CKPS0 1 0 :1:0 
+[s S5802 . 1 `uc 1 T0CKPS0 1 0 :1:0 
 `uc 1 T0CKPS1 1 0 :1:1 
 `uc 1 T0CKPS2 1 0 :1:2 
 `uc 1 T0CKPS3 1 0 :1:3 
@@ -4198,23 +4198,23 @@ CANPANLED_ANTIFLASH 3
 `uc 1 T0CS2 1 0 :1:7 
 ]
 "38658
-[u S5815 . 1 `S5789 1 . 1 0 `S5793 1 . 1 0 `S5802 1 . 1 0 `S5806 1 . 1 0 ]
+[u S5811 . 1 `S5785 1 . 1 0 `S5789 1 . 1 0 `S5798 1 . 1 0 `S5802 1 . 1 0 ]
 "38658
 "38658
-[v _T0CON1bits T0CON1bits `VES5815  1 e 1 @795 ]
+[v _T0CON1bits T0CON1bits `VES5811  1 e 1 @795 ]
 "39968
 [v _T2PR T2PR `VEuc  1 e 1 @803 ]
-[s S1331 . 1 `uc 1 OUTPS 1 0 :4:0 
+[s S1327 . 1 `uc 1 OUTPS 1 0 :4:0 
 `uc 1 CKPS 1 0 :3:4 
 `uc 1 ON 1 0 :1:7 
 ]
 "40042
-[s S1335 . 1 `uc 1 T2OUTPS 1 0 :4:0 
+[s S1331 . 1 `uc 1 T2OUTPS 1 0 :4:0 
 `uc 1 T2CKPS 1 0 :3:4 
 `uc 1 T2ON 1 0 :1:7 
 ]
 "40042
-[s S1339 . 1 `uc 1 T2OUTPS0 1 0 :1:0 
+[s S1335 . 1 `uc 1 T2OUTPS0 1 0 :1:0 
 `uc 1 T2OUTPS1 1 0 :1:1 
 `uc 1 T2OUTPS2 1 0 :1:2 
 `uc 1 T2OUTPS3 1 0 :1:3 
@@ -4223,7 +4223,7 @@ CANPANLED_ANTIFLASH 3
 `uc 1 T2CKPS2 1 0 :1:6 
 ]
 "40042
-[s S1347 . 1 `uc 1 OUTPS0 1 0 :1:0 
+[s S1343 . 1 `uc 1 OUTPS0 1 0 :1:0 
 `uc 1 OUTPS1 1 0 :1:1 
 `uc 1 OUTPS2 1 0 :1:2 
 `uc 1 OUTPS3 1 0 :1:3 
@@ -4233,43 +4233,43 @@ CANPANLED_ANTIFLASH 3
 `uc 1 TMR2ON 1 0 :1:7 
 ]
 "40042
-[u S1356 . 1 `S1331 1 . 1 0 `S1335 1 . 1 0 `S1339 1 . 1 0 `S1347 1 . 1 0 ]
+[u S1352 . 1 `S1327 1 . 1 0 `S1331 1 . 1 0 `S1335 1 . 1 0 `S1343 1 . 1 0 ]
 "40042
 "40042
-[v _T2CONbits T2CONbits `VES1356  1 e 1 @804 ]
-[s S1389 . 1 `uc 1 MODE 1 0 :5:0 
+[v _T2CONbits T2CONbits `VES1352  1 e 1 @804 ]
+[s S1385 . 1 `uc 1 MODE 1 0 :5:0 
 `uc 1 CKSYNC 1 0 :1:5 
 `uc 1 CKPOL 1 0 :1:6 
 `uc 1 PSYNC 1 0 :1:7 
 ]
 "40185
-[s S1394 . 1 `uc 1 MODE0 1 0 :1:0 
+[s S1390 . 1 `uc 1 MODE0 1 0 :1:0 
 `uc 1 MODE1 1 0 :1:1 
 `uc 1 MODE2 1 0 :1:2 
 `uc 1 MODE3 1 0 :1:3 
 `uc 1 MODE4 1 0 :1:4 
 ]
 "40185
-[s S1400 . 1 `uc 1 T2MODE 1 0 :5:0 
+[s S1396 . 1 `uc 1 T2MODE 1 0 :5:0 
 `uc 1 T2CKSYNC 1 0 :1:5 
 `uc 1 T2CKPOL 1 0 :1:6 
 `uc 1 T2PSYNC 1 0 :1:7 
 ]
 "40185
-[s S1405 . 1 `uc 1 T2MODE0 1 0 :1:0 
+[s S1401 . 1 `uc 1 T2MODE0 1 0 :1:0 
 `uc 1 T2MODE1 1 0 :1:1 
 `uc 1 T2MODE2 1 0 :1:2 
 `uc 1 T2MODE3 1 0 :1:3 
 `uc 1 T2MODE4 1 0 :1:4 
 ]
 "40185
-[u S1411 . 1 `S1389 1 . 1 0 `S1394 1 . 1 0 `S1400 1 . 1 0 `S1405 1 . 1 0 ]
+[u S1407 . 1 `S1385 1 . 1 0 `S1390 1 . 1 0 `S1396 1 . 1 0 `S1401 1 . 1 0 ]
 "40185
 "40185
-[v _T2HLTbits T2HLTbits `VES1411  1 e 1 @805 ]
+[v _T2HLTbits T2HLTbits `VES1407  1 e 1 @805 ]
 "40280
 [v _T2CLKCON T2CLKCON `VEuc  1 e 1 @806 ]
-[s S2386 . 1 `uc 1 SWIP 1 0 :1:0 
+[s S2382 . 1 `uc 1 SWIP 1 0 :1:0 
 `uc 1 HLVDIP 1 0 :1:1 
 `uc 1 OSFIP 1 0 :1:2 
 `uc 1 CSWIP 1 0 :1:3 
@@ -4279,10 +4279,10 @@ CANPANLED_ANTIFLASH 3
 `uc 1 IOCIP 1 0 :1:7 
 ]
 "47364
-[u S2395 . 1 `S2386 1 . 1 0 ]
+[u S2391 . 1 `S2382 1 . 1 0 ]
 "47364
 "47364
-[v _IPR0bits IPR0bits `VES2395  1 e 1 @866 ]
+[v _IPR0bits IPR0bits `VES2391  1 e 1 @866 ]
 "47665
 [v _IPR5 IPR5 `VEuc  1 e 1 @871 ]
 "58897
@@ -4299,13 +4299,13 @@ CANPANLED_ANTIFLASH 3
 [v _WPUC WPUC `VEuc  1 e 1 @1041 ]
 "63210
 [v _IVTLOCK IVTLOCK `VEuc  1 e 1 @1113 ]
-[s S6331 . 1 `uc 1 IVTLOCKED 1 0 :1:0 
+[s S6327 . 1 `uc 1 IVTLOCKED 1 0 :1:0 
 ]
 "63220
-[u S6333 . 1 `S6331 1 . 1 0 ]
+[u S6329 . 1 `S6327 1 . 1 0 ]
 "63220
 "63220
-[v _IVTLOCKbits IVTLOCKbits `VES6333  1 e 1 @1113 ]
+[v _IVTLOCKbits IVTLOCKbits `VES6329  1 e 1 @1113 ]
 "63416
 [v _IVTBASEL IVTBASEL `VEuc  1 e 1 @1117 ]
 "63478
@@ -4324,14 +4324,14 @@ CANPANLED_ANTIFLASH 3
 [v setup@nv nv `uc  1 a 1 32 ]
 "228
 } 0
-"316 C:\Users\ianwh\github\CANPAN2/canpan3Inputs.c
+"319 C:\Users\ianwh\github\CANPAN2/canpan3Inputs.c
 [v _loadInputs loadInputs `(v  1 e 1 0 ]
 {
-"317
+"320
 [v loadInputs@tableIndex tableIndex `uc  1 a 1 29 ]
-"318
+"321
 [v loadInputs@buttonNo buttonNo `uc  1 a 1 28 ]
-"330
+"333
 } 0
 "49 C:\Users\ianwh\github\CANPAN2/canpan3Outputs.c
 [v _initOutputs initOutputs `(v  1 e 1 0 ]
@@ -4794,22 +4794,24 @@ CANPANLED_ANTIFLASH 3
 [v _sodTRCallback sodTRCallback `(E23138  1 e 1 0 ]
 {
 "297
-[v sodTRCallback@value value `E22909  1 a 1 51 ]
+[v sodTRCallback@value value `E22909  1 a 1 52 ]
+"298
+[v sodTRCallback@sv sv `uc  1 a 1 51 ]
 "296
 [v sodTRCallback@tableIndex tableIndex `uc  1 p 1 50 ]
-"310
+"313
 } 0
-"276 C:\Users\ianwh\github\CANPAN2/canpan3Events.c
+"278 C:\Users\ianwh\github\CANPAN2/canpan3Events.c
 [v _APP_GetEventIndexState APP_GetEventIndexState `(E22909  1 e 1 0 ]
 {
 [v APP_GetEventIndexState@tableIndex tableIndex `uc  1 a 1 wreg ]
-"277
+"279
 [v APP_GetEventIndexState@switchNo switchNo `uc  1 a 1 29 ]
-"276
+"278
 [v APP_GetEventIndexState@tableIndex tableIndex `uc  1 a 1 wreg ]
-"280
+"282
 [v APP_GetEventIndexState@tableIndex tableIndex `uc  1 a 1 28 ]
-"291
+"293
 } 0
 "831 C:\Users\ianwh\github/VLCBlib_PIC/event_teach_simple.c
 [v _numEv numEv `(uc  1 e 1 0 ]
@@ -5056,27 +5058,27 @@ CANPANLED_ANTIFLASH 3
 [v sendMessage2@opc opc `E22565  1 a 1 38 ]
 "1147
 } 0
-"194 C:\Users\ianwh\github\CANPAN2/canpan3Events.c
+"195 C:\Users\ianwh\github\CANPAN2/canpan3Events.c
 [v _APP_processConsumedEvent APP_processConsumedEvent `(E22922  1 e 1 0 ]
 {
 [v APP_processConsumedEvent@tableIndex tableIndex `uc  1 a 1 wreg ]
-"197
-[v APP_processConsumedEvent@ledNo ledNo `uc  1 a 1 34 ]
-"195
-[v APP_processConsumedEvent@onOff onOff `uc  1 a 1 33 ]
-"199
-[v APP_processConsumedEvent@polarity polarity `uc  1 a 1 32 ]
 "198
-[v APP_processConsumedEvent@flags flags `uc  1 a 1 31 ]
+[v APP_processConsumedEvent@ledNo ledNo `uc  1 a 1 34 ]
 "196
+[v APP_processConsumedEvent@onOff onOff `uc  1 a 1 33 ]
+"200
+[v APP_processConsumedEvent@polarity polarity `uc  1 a 1 32 ]
+"199
+[v APP_processConsumedEvent@flags flags `uc  1 a 1 31 ]
+"197
 [v APP_processConsumedEvent@ledMode ledMode `uc  1 a 1 30 ]
-"194
+"195
 [v APP_processConsumedEvent@tableIndex tableIndex `uc  1 a 1 wreg ]
 [s S183 Message 9 `uc 1 len 1 0 `E22515 1 opc 1 1 `[7]uc 1 bytes 7 2 ]
 [v APP_processConsumedEvent@m m `*.39S183  1 p 2 24 ]
-"201
+"202
 [v APP_processConsumedEvent@tableIndex tableIndex `uc  1 a 1 29 ]
-"268
+"270
 } 0
 "65 C:\Users\ianwh\github\CANPAN2/canpan3Leds.c
 [v _setLedState setLedState `(v  1 e 1 0 ]
@@ -5138,8 +5140,8 @@ CANPANLED_ANTIFLASH 3
 "97
 [v pop@ret ret `*.39S183  1 a 2 8 ]
 "96
-[s S2258 MessageQueue 5 `*.39S183 1 messages 2 0 `uc 1 readIndex 1 2 `uc 1 writeIndex 1 3 `uc 1 size 1 4 ]
-[v pop@q q `*.39S2258  1 p 2 1 ]
+[s S2254 MessageQueue 5 `*.39S183 1 messages 2 0 `uc 1 readIndex 1 2 `uc 1 writeIndex 1 3 `uc 1 size 1 4 ]
+[v pop@q q `*.39S2254  1 p 2 1 ]
 "104
 } 0
 "4 C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\memcpy.c
@@ -5259,33 +5261,33 @@ CANPANLED_ANTIFLASH 3
 [v checkLen@service service `uc  1 p 1 45 ]
 "1108
 } 0
-"109 C:\Users\ianwh\github\CANPAN2/canpan3Events.c
+"125 C:\Users\ianwh\github\CANPAN2/canpan3Events.c
 [v _APP_preProcessMessage APP_preProcessMessage `(E22922  1 e 1 0 ]
 {
-"111
-[v APP_preProcessMessage@enn enn `us  1 a 2 38 ]
-"110
+"127
+[v APP_preProcessMessage@enn enn `us  1 a 2 37 ]
+"126
 [v APP_preProcessMessage@tableIndex tableIndex `uc  1 a 1 40 ]
-"113
-[v APP_preProcessMessage@ev ev `uc  1 a 1 37 ]
-"112
-[v APP_preProcessMessage@switchNo switchNo `uc  1 a 1 36 ]
+"128
+[v APP_preProcessMessage@switchNo switchNo `uc  1 a 1 39 ]
+"129
+[v APP_preProcessMessage@ev ev `uc  1 a 1 36 ]
 [s S183 Message 9 `uc 1 len 1 0 `E22515 1 opc 1 1 `[7]uc 1 bytes 7 2 ]
-"109
+"125
 [v APP_preProcessMessage@m m `*.39S183  1 p 2 31 ]
-"168
+"185
 } 0
-"176
+"109
 [v _APP_isProducedEvent APP_isProducedEvent `(uc  1 e 1 0 ]
 {
 [v APP_isProducedEvent@tableIndex tableIndex `uc  1 a 1 wreg ]
-"177
+"110
 [v APP_isProducedEvent@ev ev `s  1 a 2 26 ]
-"176
+"109
 [v APP_isProducedEvent@tableIndex tableIndex `uc  1 a 1 wreg ]
-"179
+"112
 [v APP_isProducedEvent@tableIndex tableIndex `uc  1 a 1 25 ]
-"184
+"117
 } 0
 "815 C:\Users\ianwh\github/VLCBlib_PIC/event_teach_simple.c
 [v _getEv getEv `(s  1 e 2 0 ]
@@ -5500,8 +5502,8 @@ CANPANLED_ANTIFLASH 3
 "81
 [v getNextWriteMessage@wr wr `uc  1 a 1 12 ]
 "80
-[s S2258 MessageQueue 5 `*.39S183 1 messages 2 0 `uc 1 readIndex 1 2 `uc 1 writeIndex 1 3 `uc 1 size 1 4 ]
-[v getNextWriteMessage@q q `*.39S2258  1 p 2 1 ]
+[s S2254 MessageQueue 5 `*.39S183 1 messages 2 0 `uc 1 readIndex 1 2 `uc 1 writeIndex 1 3 `uc 1 size 1 4 ]
+[v getNextWriteMessage@q q `*.39S2254  1 p 2 1 ]
 "87
 } 0
 "167 C:\Users\ianwh\github/VLCBlib_PIC/event_producer_simple.c

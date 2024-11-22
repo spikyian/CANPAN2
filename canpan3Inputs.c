@@ -295,16 +295,19 @@ void doSoD(void) {
  */
 TimedResponseResult sodTRCallback(uint8_t type, uint8_t serviceIndex, uint8_t tableIndex) {
     EventState value;
-    uint8_t buttonNo;
+    uint8_t sv;
 
     if (tableIndex >= NUM_EVENTS) {
         return TIMED_RESPONSE_RESULT_FINISHED;
     }
     // The step is used to index through the events 
     value = APP_GetEventIndexState(tableIndex);
-
+    
     if (value != EVENT_UNKNOWN) {
-        canpanSendProducedEvent(tableIndex, value==EVENT_ON, evs[EV_SWITCHSV]);
+        sv = evs[EV_SWITCHSV];
+        if (!(sv & SV_ONLY)) { // Don't send ON ONLY nor OFF ONLY
+            canpanSendProducedEvent(tableIndex, value==EVENT_ON, evs[EV_SWITCHSV]);
+        }
     }
     return TIMED_RESPONSE_RESULT_NEXT;
 }

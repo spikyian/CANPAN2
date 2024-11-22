@@ -214,7 +214,7 @@ Processed APP_processConsumedEvent(uint8_t tableIndex, Message *m) {
         flags = evs[EV_LEDFLAGS1 + ledNo/8] & (1 << (ledNo%8));
         if (flags) {
             // this LED is impacted
-            polarity = evs[EV_LEDPOLARITY1 + ledNo/8]& ((1 << ledNo)%8);
+            polarity = evs[EV_LEDPOLARITY1 + ledNo/8]& (1 << (ledNo%8));
             switch(ledMode) {
                 case LM_ONOFF:
                     if (polarity) {

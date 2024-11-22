@@ -38899,6 +38899,22 @@ uint8_t APP_isConsumedEvent(uint8_t tableIndex) {
 
 
 
+uint8_t APP_isProducedEvent(uint8_t tableIndex) {
+    int16_t ev;
+
+    ev = getEv(tableIndex, 0);
+    if ((ev == 1) || (ev == 3)) {
+        return 1;
+    }
+    return 0;
+}
+
+
+
+
+
+
+
 Processed APP_preProcessMessage(Message * m) {
     uint8_t tableIndex;
     uint16_t enn;
@@ -38947,35 +38963,20 @@ Processed APP_preProcessMessage(Message * m) {
 
     tableIndex = findEvent(enn, ((uint16_t)m->bytes[2])*256+m->bytes[3]);
     if (tableIndex == 0xff) return NOT_PROCESSED;
-    if (!APP_isProducedEvent(tableIndex)) {
-        return NOT_PROCESSED;
-    }
+    if (APP_isProducedEvent(tableIndex)) {
 
-    ev = (uint8_t)getEv(tableIndex, 2);
-    if (ev & 8) {
-        switchNo = (uint8_t)getEv(tableIndex, 1);
-        outputState[switchNo] = !(m->opc & 1);
-        return PROCESSED;
+        ev = (uint8_t)getEv(tableIndex, 2);
+        if (ev & 8) {
+            switchNo = (uint8_t)getEv(tableIndex, 1) - 1;
+            if (switchNo < (8*4)) {
+                outputState[switchNo] = !(m->opc & 1);
+            }
+            return PROCESSED;
+        }
     }
     return NOT_PROCESSED;
 }
-
-
-
-
-
-
-
-uint8_t APP_isProducedEvent(uint8_t tableIndex) {
-    int16_t ev;
-
-    ev = getEv(tableIndex, 0);
-    if ((ev == 1) || (ev == 3)) {
-        return 1;
-    }
-    return 0;
-}
-# 194 "../canpan3Events.c"
+# 195 "../canpan3Events.c"
 Processed APP_processConsumedEvent(uint8_t tableIndex, Message *m) {
     uint8_t onOff;
     uint8_t ledMode;
@@ -38992,12 +38993,13 @@ Processed APP_processConsumedEvent(uint8_t tableIndex, Message *m) {
         doSoD();
         return PROCESSED;
     }
+
     ledMode = evs[12];
     for (ledNo=0; ledNo<(4*8); ledNo++) {
         flags = evs[4 + ledNo/8] & (1 << (ledNo%8));
         if (flags) {
 
-            polarity = evs[8 + ledNo/8]& ((1 << ledNo)%8);
+            polarity = evs[8 + ledNo/8]& (1 << (ledNo%8));
             switch(ledMode) {
                 case 0xFF:
                     if (polarity) {
