@@ -39396,7 +39396,7 @@ uint8_t addEvent(uint16_t nodeNumber, uint16_t eventNumber, uint8_t evNum, uint8
                 } else {
                     writeNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex+4, 0);
                 }
-                for (e = 0; e < (sizeof(Event) + 1 + 13); e++) {
+                for (e = 0; e < 13; e++) {
                     writeNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex+5 +e, 0);
                 }
                 error = 0;

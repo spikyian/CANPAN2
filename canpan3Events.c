@@ -178,7 +178,7 @@ Processed APP_preProcessMessage(Message * m) {
             if (switchNo < NUM_BUTTONS) {
                 outputState[switchNo] = !(m->opc & 1);  // on or off
             }
-            return PROCESSED;
+            return NOT_PROCESSED;   // Not processed as we want service to handle the event
         }
     }
     return NOT_PROCESSED;

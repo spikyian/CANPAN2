@@ -38971,7 +38971,7 @@ Processed APP_preProcessMessage(Message * m) {
             if (switchNo < (8*4)) {
                 outputState[switchNo] = !(m->opc & 1);
             }
-            return PROCESSED;
+            return NOT_PROCESSED;
         }
     }
     return NOT_PROCESSED;

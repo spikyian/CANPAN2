@@ -39548,7 +39548,7 @@ static uint8_t getParameter(uint8_t idx) {
     case PAR_CPUMAN:
         return CPUM_MICROCHIP;
     case PAR_BETA:
-        return 104;
+        return 106;
     default:
         return 0;
     }

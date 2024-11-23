@@ -247,6 +247,7 @@ void canpanSendProducedEvent(uint8_t tableIndex, uint8_t onOff, uint8_t sv) {
         }
     }
 
+
     sendMessage4(opc, producedEventNN.bytes.hi, producedEventNN.bytes.lo, 
             producedEventEN.bytes.hi, producedEventEN.bytes.lo);
 

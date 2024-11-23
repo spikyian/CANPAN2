@@ -3922,8 +3922,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 [e :U 3268 ]
 "181
-[; ;../canpan3Events.c: 181:             return PROCESSED;
-[e ) . `E22922 1 ]
+[; ;../canpan3Events.c: 181:             return NOT_PROCESSED;
+[e ) . `E22922 0 ]
 [e $UE 3244  ]
 "182
 [; ;../canpan3Events.c: 182:         }

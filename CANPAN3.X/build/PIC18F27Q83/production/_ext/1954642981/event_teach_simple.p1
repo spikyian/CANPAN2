@@ -5079,10 +5079,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 [e :U 3350 ]
 "745
-[; ;../../VLCBlib_PIC/event_teach_simple.c: 745:                 for (e = 0; e < (sizeof(Event) + 1 + 13); e++) {
+[; ;../../VLCBlib_PIC/event_teach_simple.c: 745:                 for (e = 0; e < 13; e++) {
 {
 [e = _e -> -> 0 `i `uc ]
-[e $ < -> _e `ui + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui 3351  ]
+[e $ < -> _e `i -> 13 `i 3351  ]
 [e $U 3352  ]
 [e :U 3351 ]
 {
@@ -5093,7 +5093,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 747:                 }
 }
 [e ++ _e -> -> 1 `i `uc ]
-[e $ < -> _e `ui + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui 3351  ]
+[e $ < -> _e `i -> 13 `i 3351  ]
 [e :U 3352 ]
 }
 "748

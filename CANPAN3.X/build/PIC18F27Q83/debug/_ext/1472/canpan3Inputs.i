@@ -39076,6 +39076,7 @@ void canpanSendProducedEvent(uint8_t tableIndex, uint8_t onOff, uint8_t sv) {
         }
     }
 
+
     sendMessage4(opc, producedEventNN.bytes.hi, producedEventNN.bytes.lo,
             producedEventEN.bytes.hi, producedEventEN.bytes.lo);
 
@@ -39110,10 +39111,10 @@ uint8_t findEventForSwitch(uint8_t switchNo) {
 void doSoD(void) {
     startTimedResponse(1, findServiceIndex(SERVICE_ID_PRODUCER), sodTRCallback);
 }
-# 296 "../canpan3Inputs.c"
+# 297 "../canpan3Inputs.c"
 TimedResponseResult sodTRCallback(uint8_t type, uint8_t serviceIndex, uint8_t tableIndex) {
     EventState value;
-    uint8_t buttonNo;
+    uint8_t sv;
 
     if (tableIndex >= 254) {
         return TIMED_RESPONSE_RESULT_FINISHED;
@@ -39122,7 +39123,10 @@ TimedResponseResult sodTRCallback(uint8_t type, uint8_t serviceIndex, uint8_t ta
     value = APP_GetEventIndexState(tableIndex);
 
     if (value != EVENT_UNKNOWN) {
-        canpanSendProducedEvent(tableIndex, value==EVENT_ON, evs[2]);
+        sv = evs[2];
+        if (!(sv & 0b00000100)) {
+            canpanSendProducedEvent(tableIndex, value==EVENT_ON, evs[2]);
+        }
     }
     return TIMED_RESPONSE_RESULT_NEXT;
 }
