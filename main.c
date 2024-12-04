@@ -144,11 +144,16 @@ const Service * const services[] = {
  * Also called as a result of a NNRSM request.
  */
 void APP_factoryReset(void) {
-    uint8_t io;
+    uint8_t sw;
     
     factoryResetGlobalEvents();
 
     flushFlashBlock();
+    
+    // Write the EEPROM for the toggle switch inputs
+    for (sw=0; sw < NUM_BUTTONS; sw++) {
+        writeNVM(EEPROM_NVM_TYPE, EE_ADDR_SWITCHES+sw, 0);
+    }
 }
 
 /**
@@ -243,7 +248,7 @@ void loop(void) {
             lastInputScanTime.val = tickGet();
         }
         
-        if (tickTimeSince(flashTime) > 2*HALF_SECOND) {
+        if (tickTimeSince(flashTime) > HALF_SECOND) {
             doFlash();    // update flashing LEDs
             flashTime.val = tickGet();
         }

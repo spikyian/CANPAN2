@@ -38526,7 +38526,7 @@ extern uint8_t writeNVM(NVMtype type, uint24_t index, uint8_t value);
 
 extern ValidTime APP_isSuitableTimeToWriteFlash(void);
 # 40 "../../VLCBlib_PIC/vlcb.h" 2
-# 91 "../../VLCBlib_PIC/vlcb.h"
+# 83 "../../VLCBlib_PIC/vlcb.h"
 typedef enum Priority {
     pLOW=0,
     pNORMAL=1,
@@ -38581,7 +38581,7 @@ typedef enum {
     EVENT_OFF=0,
     EVENT_ON=1
 } EventState;
-# 156 "../../VLCBlib_PIC/vlcb.h"
+# 148 "../../VLCBlib_PIC/vlcb.h"
 typedef union DiagnosticVal {
     uint16_t asUint;
     int16_t asInt;
@@ -38614,7 +38614,7 @@ typedef enum Mode_state {
 
 
 extern const Priority priorities[256];
-# 198 "../../VLCBlib_PIC/vlcb.h"
+# 190 "../../VLCBlib_PIC/vlcb.h"
 extern Processed checkLen(Message * m, uint8_t needed, uint8_t service);
 
 
@@ -38657,17 +38657,17 @@ void sendMessage2(VlcbOpCodes opc, uint8_t data1, uint8_t data2);
 
 
 void sendMessage3(VlcbOpCodes opc, uint8_t data1, uint8_t data2, uint8_t data3);
-# 248 "../../VLCBlib_PIC/vlcb.h"
+# 240 "../../VLCBlib_PIC/vlcb.h"
 void sendMessage4(VlcbOpCodes opc, uint8_t data1, uint8_t data2, uint8_t data3, uint8_t data4);
-# 258 "../../VLCBlib_PIC/vlcb.h"
+# 250 "../../VLCBlib_PIC/vlcb.h"
 void sendMessage5(VlcbOpCodes opc, uint8_t data1, uint8_t data2, uint8_t data3, uint8_t data4, uint8_t data5);
-# 269 "../../VLCBlib_PIC/vlcb.h"
+# 261 "../../VLCBlib_PIC/vlcb.h"
 void sendMessage6(VlcbOpCodes opc, uint8_t data1, uint8_t data2, uint8_t data3, uint8_t data4, uint8_t data5, uint8_t data6);
-# 281 "../../VLCBlib_PIC/vlcb.h"
+# 273 "../../VLCBlib_PIC/vlcb.h"
 void sendMessage7(VlcbOpCodes opc, uint8_t data1, uint8_t data2, uint8_t data3, uint8_t data4, uint8_t data5, uint8_t data6, uint8_t data7);
-# 294 "../../VLCBlib_PIC/vlcb.h"
+# 286 "../../VLCBlib_PIC/vlcb.h"
 void sendMessage(VlcbOpCodes opc, uint8_t len, uint8_t data1, uint8_t data2, uint8_t data3, uint8_t data4, uint8_t data5, uint8_t data6, uint8_t data7);
-# 307 "../../VLCBlib_PIC/vlcb.h"
+# 299 "../../VLCBlib_PIC/vlcb.h"
 typedef struct Service {
     uint8_t serviceNo;
     uint8_t version;
@@ -38727,9 +38727,9 @@ extern uint8_t findServiceIndex(uint8_t id);
 
 
 extern void factoryReset(void);
-# 397 "../../VLCBlib_PIC/vlcb.h"
+# 389 "../../VLCBlib_PIC/vlcb.h"
 extern void APP_highIsr(void);
-# 407 "../../VLCBlib_PIC/vlcb.h"
+# 399 "../../VLCBlib_PIC/vlcb.h"
 extern void APP_lowIsr(void);
 
 
@@ -38757,9 +38757,9 @@ typedef struct Transport {
     SendResult (* sendMessage)(Message * m);
     MessageReceived (* receiveMessage)(Message * m);
 } Transport;
-# 442 "../../VLCBlib_PIC/vlcb.h"
+# 434 "../../VLCBlib_PIC/vlcb.h"
 extern const Transport * transport;
-# 455 "../../VLCBlib_PIC/vlcb.h"
+# 447 "../../VLCBlib_PIC/vlcb.h"
 extern ValidTime APP_isSuitableTimeToWriteFlash(void);
 # 53 "../../VLCBlib_PIC/event_teach_simple.c" 2
 
@@ -38863,7 +38863,6 @@ static uint8_t tableIndexToEvtIdx(uint8_t tableIndex);
 uint8_t findEvent(uint16_t nodeNumber, uint16_t eventNumber);
 static uint8_t removeTableEntry(uint8_t tableIndex);
 uint8_t removeEvent(uint16_t nodeNumber, uint16_t eventNumber);
-void checkRemoveTableEntry(uint8_t tableIndex);
 static void doNnclr(void);
 static void doNerd(void);
 static void doNnevn(void);
@@ -38880,7 +38879,11 @@ static DiagnosticVal * teachGetDiagnostic(uint8_t code);
 
 
 static DiagnosticVal teachDiagnostics[1 +1];
-# 156 "../../VLCBlib_PIC/event_teach_simple.c"
+
+
+
+uint8_t errno;
+# 158 "../../VLCBlib_PIC/event_teach_simple.c"
 const Service eventTeachService = {
     SERVICE_ID_OLD_TEACH,
     1,
@@ -38899,7 +38902,7 @@ const Service eventTeachService = {
     teachGetDiagnostic,
 
 };
-# 182 "../../VLCBlib_PIC/event_teach_simple.c"
+# 184 "../../VLCBlib_PIC/event_teach_simple.c"
 static void teachFactoryReset(void) {
     clearAllEvents();
 }
@@ -38917,9 +38920,10 @@ static void teachPowerUp(void) {
     }
     teachDiagnostics[0x00].asUint = 1;
 
+    errno = 0;
     mode_flags &= ~1;
 }
-# 209 "../../VLCBlib_PIC/event_teach_simple.c"
+# 212 "../../VLCBlib_PIC/event_teach_simple.c"
 static Processed teachProcessMessage(Message* m) {
     switch(m->opc) {
 
@@ -39034,7 +39038,7 @@ static Processed teachProcessMessage(Message* m) {
     }
     return NOT_PROCESSED;
 }
-# 331 "../../VLCBlib_PIC/event_teach_simple.c"
+# 334 "../../VLCBlib_PIC/event_teach_simple.c"
 static Processed teachCheckLen(Message * m, uint8_t needed, uint8_t learn) {
     if (learn) {
 
@@ -39066,14 +39070,14 @@ static uint8_t teachGetESDdata(uint8_t id) {
         default: return 0;
     }
 }
-# 370 "../../VLCBlib_PIC/event_teach_simple.c"
+# 373 "../../VLCBlib_PIC/event_teach_simple.c"
 static DiagnosticVal * teachGetDiagnostic(uint8_t index) {
     if (index > 1) {
         return ((void*)0);
     }
     return &(teachDiagnostics[index]);
 }
-# 385 "../../VLCBlib_PIC/event_teach_simple.c"
+# 388 "../../VLCBlib_PIC/event_teach_simple.c"
 static void clearAllEvents(void) {
     uint8_t tableIndex;
 
@@ -39108,7 +39112,7 @@ static void doNnevn(void) {
 static void doNerd(void) {
     startTimedResponse(2, findServiceIndex(SERVICE_ID_OLD_TEACH), nerdCallback);
 }
-# 427 "../../VLCBlib_PIC/event_teach_simple.c"
+# 430 "../../VLCBlib_PIC/event_teach_simple.c"
 TimedResponseResult nerdCallback(uint8_t type, uint8_t serviceIndex, uint8_t step){
     Word nodeNumber, eventNumber;
 
@@ -39179,9 +39183,9 @@ static void doNnclr(void) {
     sendMessage5(OPC_GRSP, nn.bytes.hi, nn.bytes.lo, OPC_NNCLR, SERVICE_ID_OLD_TEACH, GRSP_OK);
 
 }
-# 507 "../../VLCBlib_PIC/event_teach_simple.c"
+# 510 "../../VLCBlib_PIC/event_teach_simple.c"
 static void doEvlrn(uint16_t nodeNumber, uint16_t eventNumber, uint8_t evNum, uint8_t evVal) {
-    uint8_t error;
+
     evNum--;
     if (evNum >= 13) {
         sendMessage3(OPC_CMDERR, nn.bytes.hi, nn.bytes.lo, CMDERR_INV_EV_IDX);
@@ -39190,12 +39194,12 @@ static void doEvlrn(uint16_t nodeNumber, uint16_t eventNumber, uint8_t evNum, ui
 
         return;
     }
-    error = APP_addEvent(nodeNumber, eventNumber, evNum, evVal, FALSE);
-    if (error) {
+    APP_addEvent(nodeNumber, eventNumber, evNum, evVal, FALSE);
+    if (errno) {
 
-        sendMessage3(OPC_CMDERR, nn.bytes.hi, nn.bytes.lo, error);
+        sendMessage3(OPC_CMDERR, nn.bytes.hi, nn.bytes.lo, errno);
 
-        sendMessage5(OPC_GRSP, nn.bytes.hi, nn.bytes.lo, OPC_EVLRN, SERVICE_ID_OLD_TEACH, error);
+        sendMessage5(OPC_GRSP, nn.bytes.hi, nn.bytes.lo, OPC_EVLRN, SERVICE_ID_OLD_TEACH, errno);
 
         return;
     }
@@ -39341,7 +39345,7 @@ TimedResponseResult reqevCallback(uint8_t tableIndex, uint8_t serviceIndex, uint
     }
     return TIMED_RESPONSE_RESULT_NEXT;
 }
-# 677 "../../VLCBlib_PIC/event_teach_simple.c"
+# 680 "../../VLCBlib_PIC/event_teach_simple.c"
 uint8_t removeEvent(uint16_t nodeNumber, uint16_t eventNumber) {
 
     uint8_t tableIndex = findEvent(nodeNumber, eventNumber);
@@ -39373,14 +39377,14 @@ static uint8_t removeTableEntry(uint8_t tableIndex) {
     flushFlashBlock();
     return 0;
 }
-# 723 "../../VLCBlib_PIC/event_teach_simple.c"
+# 726 "../../VLCBlib_PIC/event_teach_simple.c"
 uint8_t addEvent(uint16_t nodeNumber, uint16_t eventNumber, uint8_t evNum, uint8_t evVal, Boolean forceOwnNN) {
     uint8_t tableIndex;
-    uint8_t error;
+
 
     tableIndex = findEvent(nodeNumber, eventNumber);
     if (tableIndex == 0xff) {
-        error = 1;
+        errno = CMDERR_TOO_MANY_EVENTS;
 
         for (tableIndex=0; tableIndex<254; tableIndex++) {
             uint16_t en = getEN(tableIndex);
@@ -39399,24 +39403,25 @@ uint8_t addEvent(uint16_t nodeNumber, uint16_t eventNumber, uint8_t evNum, uint8
                 for (e = 0; e < 13; e++) {
                     writeNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex+5 +e, 0);
                 }
-                error = 0;
+                errno = 0;
                 break;
             }
         }
-        if (error) {
-            return CMDERR_TOO_MANY_EVENTS;
+        if (errno) {
+            return 0xff;
         }
     }
 
     if (writeEv(tableIndex, evNum, evVal)) {
 
-        return CMDERR_INV_EV_IDX;
+        errno = CMDERR_INV_EV_IDX;
+        return 0xff;
     }
 
     flushFlashBlock();
-    return 0;
+    return tableIndex;
 }
-# 773 "../../VLCBlib_PIC/event_teach_simple.c"
+# 777 "../../VLCBlib_PIC/event_teach_simple.c"
 uint8_t findEvent(uint16_t nodeNumber, uint16_t eventNumber) {
     uint8_t tableIndex;
     for (tableIndex=0; tableIndex < 254; tableIndex++) {
@@ -39430,7 +39435,7 @@ uint8_t findEvent(uint16_t nodeNumber, uint16_t eventNumber) {
     }
     return 0xff;
 }
-# 795 "../../VLCBlib_PIC/event_teach_simple.c"
+# 799 "../../VLCBlib_PIC/event_teach_simple.c"
 uint8_t writeEv(uint8_t tableIndex, uint8_t evNum, uint8_t evVal) {
     if (evNum >= 13) {
         return CMDERR_INV_EV_IDX;
@@ -39443,7 +39448,7 @@ uint8_t writeEv(uint8_t tableIndex, uint8_t evNum, uint8_t evVal) {
     writeNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex+5 +evNum, evVal);
     return 0;
 }
-# 815 "../../VLCBlib_PIC/event_teach_simple.c"
+# 819 "../../VLCBlib_PIC/event_teach_simple.c"
 int16_t getEv(uint8_t tableIndex, uint8_t evNum) {
     if (tableIndex >= 254) {
         return CMDERR_INV_EN_IDX;
@@ -39486,7 +39491,7 @@ uint8_t getEVs(uint8_t tableIndex) {
     }
     return 0;
 }
-# 865 "../../VLCBlib_PIC/event_teach_simple.c"
+# 869 "../../VLCBlib_PIC/event_teach_simple.c"
 uint16_t getNN(uint8_t tableIndex) {
     uint16_t hi;
     uint16_t lo;
@@ -39503,7 +39508,7 @@ uint16_t getNN(uint8_t tableIndex) {
     hi = (uint8_t)readNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex+0);
     return lo | (hi << 8);
 }
-# 889 "../../VLCBlib_PIC/event_teach_simple.c"
+# 893 "../../VLCBlib_PIC/event_teach_simple.c"
 uint16_t getEN(uint8_t tableIndex) {
     uint16_t hi;
     uint16_t lo;
@@ -39512,7 +39517,7 @@ uint16_t getEN(uint8_t tableIndex) {
     hi = (uint8_t)readNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex+2);
     return lo | (hi << 8);
 }
-# 911 "../../VLCBlib_PIC/event_teach_simple.c"
+# 915 "../../VLCBlib_PIC/event_teach_simple.c"
 static uint8_t evtIdxToTableIndex(uint8_t evtIdx) {
     return evtIdx - 1;
 }

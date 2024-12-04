@@ -44,32 +44,87 @@
 #include "canpan3Leds.h"
 #include "canpan3Inputs.h"
 
+// forward declarations
+void checkDefaultEvents(void);
+
 uint8_t APP_isProducedEvent(uint8_t tableIndex);
+uint8_t switch2Event[NUM_BUTTONS]; // Quick access from a switch number to an event
 
 void factoryResetGlobalEvents(void) {
-    uint8_t i;
+    uint8_t sw;
 
     // set up the default switch/button events
-    for (i=1; i<= NUM_BUTTONS; i++) {
-        // write 3 EVs for the buttons/switches produced events
-        addEvent(nn.word, i, EV_TYPE, CANPAN_PRODUCED, TRUE);
-        addEvent(nn.word, i, EV_SWITCHNO, i, TRUE);
-        addEvent(nn.word, i, EV_SWITCHSV, SV_ON_OFF|SV_COE, TRUE);
-        // write the EVs so that these default events also turn on an LED for testing
-        addEvent(nn.word, i, EV_LEDFLAGS1, ((uint16_t)1<<(i-1))&0xFF, TRUE);
-        addEvent(nn.word, i, EV_LEDFLAGS2, ((uint16_t)1<<(i-9))&0xFF, TRUE);
-        addEvent(nn.word, i, EV_LEDFLAGS3, ((uint16_t)1<<(i-17))&0xFF, TRUE);
-        addEvent(nn.word, i, EV_LEDFLAGS4, ((uint16_t)1<<(i-25))&0xFF, TRUE);
-        addEvent(nn.word, i, EV_LEDPOLARITY1, 0, TRUE);
-        addEvent(nn.word, i, EV_LEDPOLARITY2, 0, TRUE);
-        addEvent(nn.word, i, EV_LEDPOLARITY3, 0, TRUE);
-        addEvent(nn.word, i, EV_LEDPOLARITY4, 0, TRUE);
-        addEvent(nn.word, i, EV_LEDMODE, LM_ONOFF, TRUE);
-    }
+    checkDefaultEvents();
 }
 
-uint8_t APP_addEvent(uint16_t nodeNumber, uint16_t eventNumber, uint8_t evNum, uint8_t evVal, Boolean forceOwnNN) {
-    return addEvent(nodeNumber, eventNumber, evNum, evVal, forceOwnNN);
+/***************************** copied from event_teach_simple.c ***************/
+/*
+ * Each row in the event table consists of:
+ * Event + flags + ev[PARAM_NUM_EV_EVENT] i.e. a total of 5 + PARAM_NUM_EV_EVENT bytes 
+ */
+
+#define EVENTTABLE_WIDTH (sizeof(Event) + 1 + PARAM_NUM_EV_EVENT)
+#define EVENTTABLE_OFFSET_NNH   0
+#define EVENTTABLE_OFFSET_NNL   1
+#define EVENTTABLE_OFFSET_ENH   2
+#define EVENTTABLE_OFFSET_ENL   3
+#define EVENTTABLE_OFFSET_FLAGS 4
+#define EVENTTABLE_OFFSET_EVS   5
+// The flags
+#define EVENT_FLAG_DEFAULT      1
+
+/** Errno for error number. */
+extern uint8_t errno;
+/******************************************************************************/
+
+/**
+ * Create and add a default event for the switch.
+ * 
+ * @param sw switch number 1..32
+ * @return event table index
+ */
+uint8_t addDefaultEvent(uint8_t sw) {
+    addEvent(nn.word, sw, EV_TYPE, CANPAN_PRODUCED, TRUE);
+    addEvent(nn.word, sw, EV_SWITCHNO, sw, TRUE);
+    addEvent(nn.word, sw, EV_SWITCHSV, SV_TOGGLE | SV_COE, TRUE);
+    // write the EVs so that these default events also turn on an LED for testing
+    addEvent(nn.word, sw, EV_LEDFLAGS1, ((uint16_t)1<<(sw-1))&0xFF, TRUE);
+    addEvent(nn.word, sw, EV_LEDFLAGS2, ((uint16_t)1<<(sw-9))&0xFF, TRUE);
+    addEvent(nn.word, sw, EV_LEDFLAGS3, ((uint16_t)1<<(sw-17))&0xFF, TRUE);
+    addEvent(nn.word, sw, EV_LEDFLAGS4, ((uint16_t)1<<(sw-25))&0xFF, TRUE);
+    addEvent(nn.word, sw, EV_LEDPOLARITY1, 0, TRUE);
+    addEvent(nn.word, sw, EV_LEDPOLARITY2, 0, TRUE);
+    addEvent(nn.word, sw, EV_LEDPOLARITY3, 0, TRUE);
+    addEvent(nn.word, sw, EV_LEDPOLARITY4, 0, TRUE);
+    return addEvent(nn.word, sw, EV_LEDMODE, LM_ONOFF, TRUE);
+}
+
+/**
+ * Check that each switch has an event and create one if not present.
+ * Also update the quick access lookup table.
+ */
+void checkDefaultEvents(void) {
+    uint8_t sw;
+    int16_t swNo;
+    uint8_t i;
+    // zero out the lookup first
+    
+    for (sw=0; sw < NUM_BUTTONS; sw++) {
+        switch2Event[sw] = NO_INDEX;
+    }
+    // Add in the events
+    for (i=0; i<NUM_EVENTS; i++) {
+        swNo = getEv(i, EV_SWITCHNO);
+        if ((swNo >0) && ( swNo <= NUM_BUTTONS)) {
+            switch2Event[swNo-1] = i;
+        }
+    }
+    // Now create any missing default events
+    for (sw=1; sw <= NUM_BUTTONS; sw++) {
+        if (switch2Event[sw-1] == NO_INDEX) {
+            switch2Event[sw-1] = addDefaultEvent(sw);
+        }
+    }
 }
 
 /**
@@ -87,17 +142,18 @@ uint8_t APP_isConsumedEvent(uint8_t tableIndex) {
         // error
         return 0;
     }
-    if (ev == CANPAN_CONSUMED) {    // normal consumed event
-        return 1;
-    }
+
     if ((ev == CANPAN_SOD)||(ev == CANPAN_SELF_SOD)) {    // SoD consumed event
         return 1;
     }
-    ev = getEv(tableIndex, EV_SWITCHSV);
-    if (ev < 0) {
-        return 0;
-    }
-    return (ev & SV_COE);       // self consumed event
+    ev = getEv(tableIndex, EV_LEDFLAGS1);
+    if (ev) return 1;
+    ev = getEv(tableIndex, EV_LEDFLAGS2);
+    if (ev) return 1;
+    ev = getEv(tableIndex, EV_LEDFLAGS3);
+    if (ev) return 1;
+    ev = getEv(tableIndex, EV_LEDFLAGS4);
+    return ev != 0;
 }
 
 /**
@@ -109,8 +165,8 @@ uint8_t APP_isConsumedEvent(uint8_t tableIndex) {
 uint8_t APP_isProducedEvent(uint8_t tableIndex) {
     int16_t ev;
     
-    ev = getEv(tableIndex, EV_TYPE);
-    if ((ev == CANPAN_PRODUCED) || (ev == CANPAN_SELF_SOD)) {
+    ev = getEv(tableIndex, EV_SWITCHNO);
+    if ((ev > 0) && (ev <= NUM_BUTTONS)) {
         return 1;
     }
     return 0;
@@ -127,11 +183,30 @@ Processed APP_preProcessMessage(Message * m) {
     uint16_t enn;
     uint8_t switchNo;
     uint8_t ev;
+
+    if (mode_flags & FLAG_MODE_LEARN) {
+        /* Now for add/delete update the switch2Event table */
+        switch (m->opc) {
+            case OPC_NNCLR:
+            case OPC_EVULN:
+            case OPC_EVLRN:
+            case OPC_EVLRNI:
+                /* Opcodes which add/delete events */
+                errno = GRSP_OK;
+                if (eventTeachService.processMessage(m) == PROCESSED) {
+                    // add any missing switch events and update the switch2Event table
+                    checkDefaultEvents();
+                    return PROCESSED;
+                }
+                // fall through
+            default:
+                break;
+        }
+    }
     
-    if (m->len < 5) return NOT_PROCESSED;
-    
+    /* Now check for incoming events which match a toggle switch event. */
+    if (m->len < 5) return NOT_PROCESSED;  
     enn = ((uint16_t)m->bytes[0])*256+m->bytes[1];
-    
     switch (m->opc) {
         case OPC_ASON:
 #ifdef HANDLE_DATA_EVENTS
@@ -184,6 +259,140 @@ Processed APP_preProcessMessage(Message * m) {
     return NOT_PROCESSED;
 }
 
+
+uint8_t APP_addEvent(uint16_t nodeNumber, uint16_t eventNumber, uint8_t evNum, uint8_t evVal, Boolean forceOwnNN) {
+    uint8_t tableIndex;
+    uint8_t oti;
+    uint8_t switchNo;
+    uint8_t prevSwitchNo;
+    uint8_t leds;
+    
+    if (evNum == EV_SWITCHNO) {
+        switchNo = evVal;
+        tableIndex = findEvent(nodeNumber, eventNumber);
+        if (tableIndex != NO_INDEX) {
+            // event found
+            getEVs(tableIndex);
+            prevSwitchNo = evs[EV_SWITCHNO];
+            if (prevSwitchNo > NUM_BUTTONS) {
+                prevSwitchNo = 0;
+            }
+            // Any LEDs associated with this event?
+            leds = evs[EV_LEDFLAGS1] | evs[EV_LEDFLAGS2] | evs[EV_LEDFLAGS3] | evs[EV_LEDFLAGS4];
+        }
+        /*
+         * Processing of switch events follows the following table
+         * 
+         * Row	New_EV2	Prev_EV2	EventId   LEDs	Note	Change
+            1	0	    0           Found	  Yes           No change
+            2	0	    0           Found	  No            Invalid event ? remove
+            3	0	    -           Not found -             Create new event?
+            4	0	    Valid       Found	  Yes           EV2=0 & create new default event for old EV2
+            5	0	    Valid       Found	  No            replace this event with default event for old EV2
+            6	0	    -           Not found -             Create new event?
+            7	Valid	0           Found	  Yes           EV2=new, switch2Event[new]?EV2=0. 
+            8	Valid	0           Found	  No    This old event should not be present	
+            9	Valid	-           Not found -             New event, EV2=new, switch2Event[new]?EV2=0. 
+            10	Valid	Match       Found	  Yes           No change
+            11	Valid	Match       Found	  No            No change
+            12	Valid	Match       Found	  Yes           EV2=new, create default EV2=old, switch2Event[old]?EV2=created. 
+            13	Valid	Match       Found	  No            EV2=new, create default EV2=old
+         */
+        if ((switchNo > 0) && (switchNo <= NUM_BUTTONS)) {   
+            // valid new switch, ROWS 7~13
+            // find any previous event
+            if (tableIndex != NO_INDEX) {
+                if (prevSwitchNo == 0) {
+                    if (leds) {
+                        // ROW7
+                        oti = switch2Event[switchNo-1];
+                        if (oti != NO_INDEX) {
+                            writeEv(oti, EV_SWITCHNO, 0);
+                        } else {
+                            // should never happen
+                        }
+                        // continue to process normally now
+                    } else {
+                        // ROW8
+                        // shouldn't get here as this would have been an invalid event
+                        // continue to fix
+                    }
+                } else {
+                    if (switchNo == prevSwitchNo) {
+                        // ROW10, ROW11
+                        // No change to EV2
+                        // do nothing
+                        // Send a WRACK - difference from CBUS
+                        return PROCESSED;
+                    } else {
+                        // ROW12, ROW13
+                        // Here we are changing the switch associated with this event
+                        // We should just be able to create a new default event for the prevSwitchEvent
+                        // and then continue to allow this EV2 to be written for the event.
+                        // BUT what if this event is a default event for a switch.
+                        // It would be very complicated to permit this so just return an error instead.
+                        errno = CMDERR_INV_EV_VALUE;
+                        return PROCESSED;
+                    }
+                }
+            } else {
+                // ROW9
+                oti = switch2Event[switchNo-1];
+                if (oti != NO_INDEX) {
+                    writeEv(oti, EV_SWITCHNO, 0);
+                } else {
+                    // should never happen
+                }
+                // continue to process normally now
+            }
+        } else {
+            // invalid new switch value specified, ROWS 1~6
+            // force switchNo to zero
+            switchNo = 0;
+            evVal = 0;
+
+            if (tableIndex != NO_INDEX) {
+                // matches an existing event
+                if (prevSwitchNo == 0) {
+                    if (leds) {
+                        // ROW1
+                        // do nothing
+                        return PROCESSED;
+                    } else {
+                        // ROW2
+                        // this is an invalid event with no switches and no LEDs
+                        // remove it
+                        writeNVM(EVENT_TABLE_NVM_TYPE, EVENT_TABLE_ADDRESS + EVENTTABLE_WIDTH*tableIndex+EVENTTABLE_OFFSET_ENL, 0);
+                        writeNVM(EVENT_TABLE_NVM_TYPE, EVENT_TABLE_ADDRESS + EVENTTABLE_WIDTH*tableIndex+EVENTTABLE_OFFSET_ENH, 0);
+                        return PROCESSED;
+                    }
+                } else {
+                    // existing event had a valid switch
+                    // Test if this is a default event and don't allow if it is
+                    if (readNVM(EVENT_TABLE_NVM_TYPE, EVENT_TABLE_ADDRESS + EVENTTABLE_WIDTH*tableIndex+EVENTTABLE_OFFSET_FLAGS) && EVENT_FLAG_DEFAULT) {
+                        errno = CMDERR_INV_EV_VALUE;
+                        return PROCESSED;
+                    }
+                    if (leds) {
+                        // ROW4
+                        // let standard processing write EV2=0 and create a new default event
+                    } else {
+                        // ROW5
+                        // delete this event and let standard processing write EV2=0 and create a new default event
+                        writeNVM(EVENT_TABLE_NVM_TYPE, EVENT_TABLE_ADDRESS + EVENTTABLE_WIDTH*tableIndex+EVENTTABLE_OFFSET_ENL, 0);
+                        writeNVM(EVENT_TABLE_NVM_TYPE, EVENT_TABLE_ADDRESS + EVENTTABLE_WIDTH*tableIndex+EVENTTABLE_OFFSET_ENH, 0);
+                    }
+                }
+            } else {
+                // doesn't match an existing event
+                // ROW3, ROW6
+                // Let normal handling create this event, not associated with a switch
+            }
+        }
+    }
+    return addEvent(nodeNumber, eventNumber, evNum, evVal, forceOwnNN);
+}
+
 /**
  * Update the ledStates array for all the LEDs impacted by the event according 
  * to the event's EVs.
@@ -206,7 +415,6 @@ Processed APP_processConsumedEvent(uint8_t tableIndex, Message *m) {
     }
     if (onOff && ((evs[EV_TYPE] == CANPAN_SOD)||(evs[EV_TYPE] == CANPAN_SELF_SOD))) {
         doSoD();
-        return PROCESSED;
     }
     // using the EVs and the event on/off state we work out the new LED state
     ledMode = evs[EV_LEDMODE];

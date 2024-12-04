@@ -72,12 +72,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 "653
 [; ;C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h: 653: extern volatile unsigned char NVMLOCK __attribute__((address(0x042)));
 [v _NVMLOCK `Vuc ~T0 @X0 0 e@66 ]
-"159 ../../VLCBlib_PIC/vlcb.h
-[; ;../../VLCBlib_PIC/vlcb.h: 159:     struct {
+"151 ../../VLCBlib_PIC/vlcb.h
+[; ;../../VLCBlib_PIC/vlcb.h: 151:     struct {
 [s S3228 `uc 1 `uc 1 ]
 [n S3228 . lo hi ]
-"156
-[; ;../../VLCBlib_PIC/vlcb.h: 156: typedef union DiagnosticVal {
+"148
+[; ;../../VLCBlib_PIC/vlcb.h: 148: typedef union DiagnosticVal {
 [u S3227 `us 1 `s 1 `S3228 1 ]
 [n S3227 DiagnosticVal asUint asInt asBytes ]
 "141 ../../VLCBlib_PIC/mns.h
@@ -100,8 +100,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;../../VLCBlib_PIC/nvm.c: 328:     while (! APP_isSuitableTimeToWriteFlash())
 [c E22915 0 1 .. ]
 [n E22915 ValidTime BAD_TIME GOOD_TIME  ]
-"455 ../../VLCBlib_PIC/vlcb.h
-[; ;../../VLCBlib_PIC/vlcb.h: 455: extern ValidTime APP_isSuitableTimeToWriteFlash(void);
+"447 ../../VLCBlib_PIC/vlcb.h
+[; ;../../VLCBlib_PIC/vlcb.h: 447: extern ValidTime APP_isSuitableTimeToWriteFlash(void);
 [v _APP_isSuitableTimeToWriteFlash `(E22915 ~T0 @X0 0 ef ]
 "674 C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h
 [; ;C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h: 674: extern volatile __uint24 NVMADR __attribute__((address(0x043)));

@@ -14,7 +14,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;../main.c: 128: const Service * const services[] = {
 [c E22515 0 1 2 3 4 5 6 7 8 9 10 12 13 16 17 33 34 35 48 63 64 65 66 67 68 69 70 71 72 73 74 76 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 99 111 112 113 114 115 116 117 118 120 127 128 130 131 132 133 135 142 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 162 171 172 175 176 177 178 179 180 181 182 184 185 189 190 191 192 193 194 199 207 208 209 210 211 212 213 216 217 221 222 223 224 225 226 227 230 231 233 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 164 .. ]
 [n E22515 VlcbOpCodes OPC_ACK OPC_NAK OPC_HLT OPC_BON OPC_TOF OPC_TON OPC_ESTOP OPC_ARST OPC_RTOF OPC_RTON OPC_RESTP OPC_RSTAT OPC_QNN OPC_RQNP OPC_RQMN OPC_KLOC OPC_QLOC OPC_DKEEP OPC_DBG1 OPC_EXTC OPC_RLOC OPC_QCON OPC_SNN OPC_ALOC OPC_STMOD OPC_PCON OPC_KCON OPC_DSPD OPC_DFLG OPC_DFNON OPC_DFNOF OPC_SSTAT OPC_NNRSM OPC_RQNN OPC_NNREL OPC_NNACK OPC_NNLRN OPC_NNULN OPC_NNCLR OPC_NNEVN OPC_NERD OPC_RQEVN OPC_WRACK OPC_RQDAT OPC_RQDDS OPC_BOOT OPC_ENUM OPC_NNRST OPC_EXTC1 OPC_DFUN OPC_GLOC OPC_ERR OPC_CMDERR OPC_EVNLF OPC_NVRD OPC_NENRD OPC_RQNPN OPC_NUMEV OPC_CANID OPC_MODE OPC_RQSD OPC_EXTC2 OPC_RDCC3 OPC_WCVO OPC_WCVB OPC_QCVS OPC_PCVS OPC_RDGN OPC_NVSETRD OPC_ACON OPC_ACOF OPC_AREQ OPC_ARON OPC_AROF OPC_EVULN OPC_NVSET OPC_NVANS OPC_ASON OPC_ASOF OPC_ASRQ OPC_PARAN OPC_REVAL OPC_ARSON OPC_ARSOF OPC_EXTC3 OPC_RDCC4 OPC_WCVS OPC_HEARTB OPC_SD OPC_GRSP OPC_ACON1 OPC_ACOF1 OPC_REQEV OPC_ARON1 OPC_AROF1 OPC_NEVAL OPC_PNN OPC_ASON1 OPC_ASOF1 OPC_ARSON1 OPC_ARSOF1 OPC_EXTC4 OPC_RDCC5 OPC_WCVOA OPC_CABDAT OPC_DGN OPC_FCLK OPC_ACON2 OPC_ACOF2 OPC_EVLRN OPC_EVANS OPC_ARON2 OPC_AROF2 OPC_ASON2 OPC_ASOF2 OPC_ARSON2 OPC_ARSOF2 OPC_EXTC5 OPC_RDCC6 OPC_PLOC OPC_NAME OPC_STAT OPC_ENACK OPC_ESD OPC_DTXC OPC_PARAMS OPC_ACON3 OPC_ACOF3 OPC_ENRSP OPC_ARON3 OPC_AROF3 OPC_EVLRNI OPC_ACDAT OPC_ARDAT OPC_ASON3 OPC_ASOF3 OPC_DDES OPC_DDRS OPC_DDWS OPC_ARSON3 OPC_ARSOF3 OPC_EXTC6 OPC_VCVS  ]
-"119 ../../VLCBlib_PIC\vlcb.h
+"111 ../../VLCBlib_PIC\vlcb.h
 [s S3221 `uc 1 `E22515 1 `uc -> 7 `i ]
 [n S3221 Message len opc bytes ]
 "128 ../main.c
@@ -24,14 +24,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v F23002 `(E22922 ~T0 @X0 0 tf1`*S3221 ]
 [v F23005 `(v ~T0 @X0 0 tf ]
 [v F23007 `(uc ~T0 @X0 0 tf1`uc ]
-"159 ../../VLCBlib_PIC\vlcb.h
+"151 ../../VLCBlib_PIC\vlcb.h
 [s S3225 `uc 1 `uc 1 ]
 [n S3225 . lo hi ]
-"156
+"148
 [u S3224 `us 1 `s 1 `S3225 1 ]
 [n S3224 DiagnosticVal asUint asInt asBytes ]
 [v F23010 `(*S3224 ~T0 @X0 0 tf1`uc ]
-"307
+"299
 [s S3226 `uc 1 `uc 1 `*F22998 1 `*F23000 1 `*F23002 1 `*F23005 1 `*F23007 1 `*F23010 1 ]
 [n S3226 Service serviceNo version factoryReset powerUp processMessage poll getESDdata getDiagnostic ]
 "85 ../../VLCBlib_PIC\can.h
@@ -65,18 +65,24 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _factoryResetGlobalEvents `(v ~T0 @X0 0 ef ]
 "147 ../../VLCBlib_PIC\nvm.h
 [v _flushFlashBlock `(v ~T0 @X0 0 ef ]
-"172 ../main.c
-[; ;../main.c: 172:     transport = &canTransport;
+"155 ../main.c
+[; ;../main.c: 155:         writeNVM(EEPROM_NVM_TYPE, 0x0000 +sw, 0);
+[c E22861 0 1 .. ]
+[n E22861 . EEPROM_NVM_TYPE FLASH_NVM_TYPE  ]
+"169 ../../VLCBlib_PIC\nvm.h
+[v _writeNVM `(uc ~T0 @X0 0 ef3`E22861`um`uc ]
+"177 ../main.c
+[; ;../main.c: 177:     transport = &canTransport;
 [c E23033 0 1 .. ]
 [n E23033 SendResult SEND_FAILED SEND_OK  ]
 [v F23039 `(E23033 ~T0 @X0 0 tf1`*S3221 ]
 [c E23029 0 1 .. ]
 [n E23029 MessageReceived NOT_RECEIVED RECEIVED  ]
 [v F23042 `(E23029 ~T0 @X0 0 tf1`*S3221 ]
-"430 ../../VLCBlib_PIC\vlcb.h
+"422 ../../VLCBlib_PIC\vlcb.h
 [s S3227 `*F23039 1 `*F23042 1 ]
 [n S3227 Transport sendMessage receiveMessage ]
-"442
+"434
 [v _transport `*CS3227 ~T0 @X0 0 e ]
 "89 ../../VLCBlib_PIC\can.h
 [; ;../../VLCBlib_PIC\can.h: 89: extern const Transport canTransport;
@@ -105,8 +111,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "113
 [; ;../main.c: 113: extern void initLeds(void);
 [v _initLeds `(v ~T0 @X0 0 ef ]
-"40 ../canpan3Inputs.h
-[; ;../canpan3Inputs.h: 40: extern void initInputs(void);
+"43 ../canpan3Inputs.h
+[; ;../canpan3Inputs.h: 43: extern void initInputs(void);
 [v _initInputs `(v ~T0 @X0 0 ef ]
 "2864 C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h
 [s S3128 :1 `uc 1 :1 `uc 1 :1 `uc 1 :2 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
@@ -123,30 +129,30 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _INTCON0bits `VS3127 ~T0 @X0 0 e@1238 ]
 "244 ../../VLCBlib_PIC\ticktime.h
 [v _tickGet `(ul ~T0 @X0 0 ef ]
-"210 ../main.c
-[; ;../main.c: 210:     started = FALSE;
+"215 ../main.c
+[; ;../main.c: 215:     started = FALSE;
 [c E22889 0 1 .. ]
 [n E22889 Boolean FALSE TRUE  ]
 "116 ../../VLCBlib_PIC\nv.h
 [; ;../../VLCBlib_PIC\nv.h: 116: extern int16_t getNV(uint8_t index);
 [v _getNV `(s ~T0 @X0 0 ef1`uc ]
-"44 ../canpan3Inputs.h
-[; ;../canpan3Inputs.h: 44: extern void loadInputs(void);
+"47 ../canpan3Inputs.h
+[; ;../canpan3Inputs.h: 47: extern void loadInputs(void);
 [v _loadInputs `(v ~T0 @X0 0 ef ]
-"47
-[; ;../canpan3Inputs.h: 47: extern uint8_t canpanScanReady;
+"50
+[; ;../canpan3Inputs.h: 50: extern uint8_t canpanScanReady;
 [v _canpanScanReady `uc ~T0 @X0 0 e ]
-"43
-[; ;../canpan3Inputs.h: 43: extern void canpanSetAllSwitchOff(void);
+"46
+[; ;../canpan3Inputs.h: 46: extern void canpanSetAllSwitchOff(void);
 [v _canpanSetAllSwitchOff `(v ~T0 @X0 0 ef ]
-"41
-[; ;../canpan3Inputs.h: 41: extern void inputScan(void);
+"44
+[; ;../canpan3Inputs.h: 44: extern void inputScan(void);
 [v _inputScan `(v ~T0 @X0 0 ef ]
 "41 ../canpan3Events.h
 [; ;../canpan3Events.h: 41: extern void doFlash(void);
 [v _doFlash `(v ~T0 @X0 0 ef ]
-"265 ../main.c
-[; ;../main.c: 265: ValidTime APP_isSuitableTimeToWriteFlash(void){
+"270 ../main.c
+[; ;../main.c: 270: ValidTime APP_isSuitableTimeToWriteFlash(void){
 [c E22865 0 1 .. ]
 [n E22865 ValidTime BAD_TIME GOOD_TIME  ]
 "364 C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h
@@ -3710,232 +3716,250 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U _APP_factoryReset ]
 [f ]
 "147
-[; ;../main.c: 147:     uint8_t io;
-[v _io `uc ~T0 @X0 1 a ]
+[; ;../main.c: 147:     uint8_t sw;
+[v _sw `uc ~T0 @X0 1 a ]
 "149
 [; ;../main.c: 149:     factoryResetGlobalEvents();
 [e ( _factoryResetGlobalEvents ..  ]
 "151
 [; ;../main.c: 151:     flushFlashBlock();
 [e ( _flushFlashBlock ..  ]
-"152
-[; ;../main.c: 152: }
+"154
+[; ;../main.c: 154:     for (sw=0; sw < (8*4); sw++) {
+{
+[e = _sw -> -> 0 `i `uc ]
+[e $ < -> _sw `i * -> 8 `i -> 4 `i 3233  ]
+[e $U 3234  ]
+[e :U 3233 ]
+{
+"155
+[; ;../main.c: 155:         writeNVM(EEPROM_NVM_TYPE, 0x0000 +sw, 0);
+[e ( _writeNVM (3 , , . `E22861 0 -> -> + -> 0 `i -> _sw `i `m `um -> -> 0 `i `uc ]
+"156
+[; ;../main.c: 156:     }
+}
+[e ++ _sw -> -> 1 `i `uc ]
+[e $ < -> _sw `i * -> 8 `i -> 4 `i 3233  ]
+[e :U 3234 ]
+}
+"157
+[; ;../main.c: 157: }
 [e :UE 3232 ]
 }
-"158
-[; ;../main.c: 158: void APP_testMode(void) {
+"163
+[; ;../main.c: 163: void APP_testMode(void) {
 [v _APP_testMode `(v ~T0 @X0 1 ef ]
 {
 [e :U _APP_testMode ]
 [f ]
-"160
-[; ;../main.c: 160: }
-[e :UE 3233 ]
-}
 "165
-[; ;../main.c: 165: void setup(void) {
+[; ;../main.c: 165: }
+[e :UE 3236 ]
+}
+"170
+[; ;../main.c: 170: void setup(void) {
 [v _setup `(v ~T0 @X0 1 ef ]
 {
 [e :U _setup ]
 [f ]
-"167
-[; ;../main.c: 167:     uint8_t pu;
-[v _pu `uc ~T0 @X0 1 a ]
-"169
-[; ;../main.c: 169:     uint8_t nv;
-[v _nv `uc ~T0 @X0 1 a ]
 "172
-[; ;../main.c: 172:     transport = &canTransport;
+[; ;../main.c: 172:     uint8_t pu;
+[v _pu `uc ~T0 @X0 1 a ]
+"174
+[; ;../main.c: 174:     uint8_t nv;
+[v _nv `uc ~T0 @X0 1 a ]
+"177
+[; ;../main.c: 177:     transport = &canTransport;
 [e = _transport &U _canTransport ]
-"184
-[; ;../main.c: 184:     WPUA = 0b00001000;
-[e = _WPUA -> -> 8 `i `uc ]
-"185
-[; ;../main.c: 185:     WPUB = 0;
-[e = _WPUB -> -> 0 `i `uc ]
-"186
-[; ;../main.c: 186:     WPUC = 0;
-[e = _WPUC -> -> 0 `i `uc ]
-"187
-[; ;../main.c: 187:     ANSELA = 0x00;
-[e = _ANSELA -> -> 0 `i `uc ]
-"188
-[; ;../main.c: 188:     ANSELB = 0x00;
-[e = _ANSELB -> -> 0 `i `uc ]
 "189
-[; ;../main.c: 189:     ANSELC = 0x00;
-[e = _ANSELC -> -> 0 `i `uc ]
+[; ;../main.c: 189:     WPUA = 0b00001000;
+[e = _WPUA -> -> 8 `i `uc ]
+"190
+[; ;../main.c: 190:     WPUB = 0;
+[e = _WPUB -> -> 0 `i `uc ]
+"191
+[; ;../main.c: 191:     WPUC = 0;
+[e = _WPUC -> -> 0 `i `uc ]
 "192
-[; ;../main.c: 192:     initOutputs();
-[e ( _initOutputs ..  ]
+[; ;../main.c: 192:     ANSELA = 0x00;
+[e = _ANSELA -> -> 0 `i `uc ]
 "193
-[; ;../main.c: 193:     initLeds();
-[e ( _initLeds ..  ]
+[; ;../main.c: 193:     ANSELB = 0x00;
+[e = _ANSELB -> -> 0 `i `uc ]
 "194
-[; ;../main.c: 194:     initInputs();
+[; ;../main.c: 194:     ANSELC = 0x00;
+[e = _ANSELC -> -> 0 `i `uc ]
+"197
+[; ;../main.c: 197:     initOutputs();
+[e ( _initOutputs ..  ]
+"198
+[; ;../main.c: 198:     initLeds();
+[e ( _initLeds ..  ]
+"199
+[; ;../main.c: 199:     initInputs();
 [e ( _initInputs ..  ]
-"202
-[; ;../main.c: 202:     (INTCON0bits.GIE = 1);
-[e = . . _INTCON0bits 0 6 -> -> 1 `i `uc ]
-"204
-[; ;../main.c: 204:     startTime.val = tickGet();
-[e = . _startTime 0 ( _tickGet ..  ]
-"205
-[; ;../main.c: 205:     lastServoStartTime.val = startTime.val;
-[e = . _lastServoStartTime 0 . _startTime 0 ]
-"206
-[; ;../main.c: 206:     lastInputScanTime.val = startTime.val;
-[e = . _lastInputScanTime 0 . _startTime 0 ]
 "207
-[; ;../main.c: 207:     lastActionPollTime.val = startTime.val;
-[e = . _lastActionPollTime 0 . _startTime 0 ]
-"208
-[; ;../main.c: 208:     flashTime.val = startTime.val;
-[e = . _flashTime 0 . _startTime 0 ]
+[; ;../main.c: 207:     (INTCON0bits.GIE = 1);
+[e = . . _INTCON0bits 0 6 -> -> 1 `i `uc ]
+"209
+[; ;../main.c: 209:     startTime.val = tickGet();
+[e = . _startTime 0 ( _tickGet ..  ]
 "210
-[; ;../main.c: 210:     started = FALSE;
-[e = _started -> . `E22889 0 `uc ]
+[; ;../main.c: 210:     lastServoStartTime.val = startTime.val;
+[e = . _lastServoStartTime 0 . _startTime 0 ]
+"211
+[; ;../main.c: 211:     lastInputScanTime.val = startTime.val;
+[e = . _lastInputScanTime 0 . _startTime 0 ]
 "212
-[; ;../main.c: 212:     nv = (uint8_t)getNV(1);
-[e = _nv -> ( _getNV (1 -> -> 1 `i `uc `uc ]
-"214
-[; ;../main.c: 214:     switch (nv) {
-[e $U 3236  ]
-{
+[; ;../main.c: 212:     lastActionPollTime.val = startTime.val;
+[e = . _lastActionPollTime 0 . _startTime 0 ]
+"213
+[; ;../main.c: 213:     flashTime.val = startTime.val;
+[e = . _flashTime 0 . _startTime 0 ]
 "215
-[; ;../main.c: 215:         case 0:
-[e :U 3237 ]
-"216
-[; ;../main.c: 216:             loadInputs();
-[e ( _loadInputs ..  ]
+[; ;../main.c: 215:     started = FALSE;
+[e = _started -> . `E22889 0 `uc ]
 "217
-[; ;../main.c: 217:             break;
-[e $U 3235  ]
-"218
-[; ;../main.c: 218:         case 1:
-[e :U 3238 ]
+[; ;../main.c: 217:     nv = (uint8_t)getNV(1);
+[e = _nv -> ( _getNV (1 -> -> 1 `i `uc `uc ]
 "219
-[; ;../main.c: 219:             canpanScanReady = 1;
-[e = _canpanScanReady -> -> 1 `i `uc ]
+[; ;../main.c: 219:     switch (nv) {
+[e $U 3239  ]
+{
 "220
-[; ;../main.c: 220:             break;
-[e $U 3235  ]
-"221
-[; ;../main.c: 221:         case 2:
-[e :U 3239 ]
-"222
-[; ;../main.c: 222:             canpanScanReady = 0;
-[e = _canpanScanReady -> -> 0 `i `uc ]
-"223
-[; ;../main.c: 223:             break;
-[e $U 3235  ]
-"224
-[; ;../main.c: 224:         case 3:
+[; ;../main.c: 220:         case 0:
 [e :U 3240 ]
+"221
+[; ;../main.c: 221:             loadInputs();
+[e ( _loadInputs ..  ]
+"222
+[; ;../main.c: 222:             break;
+[e $U 3238  ]
+"223
+[; ;../main.c: 223:         case 1:
+[e :U 3241 ]
+"224
+[; ;../main.c: 224:             canpanScanReady = 1;
+[e = _canpanScanReady -> -> 1 `i `uc ]
 "225
-[; ;../main.c: 225:             canpanSetAllSwitchOff();
-[e ( _canpanSetAllSwitchOff ..  ]
+[; ;../main.c: 225:             break;
+[e $U 3238  ]
 "226
-[; ;../main.c: 226:             break;
-[e $U 3235  ]
+[; ;../main.c: 226:         case 2:
+[e :U 3242 ]
 "227
-[; ;../main.c: 227:     }
-}
-[e $U 3235  ]
-[e :U 3236 ]
-[e [\ _nv , $ -> 0 `i 3237
- , $ -> 1 `i 3238
- , $ -> 2 `i 3239
- , $ -> 3 `i 3240
- 3235 ]
-[e :U 3235 ]
+[; ;../main.c: 227:             canpanScanReady = 0;
+[e = _canpanScanReady -> -> 0 `i `uc ]
 "228
-[; ;../main.c: 228: }
-[e :UE 3234 ]
+[; ;../main.c: 228:             break;
+[e $U 3238  ]
+"229
+[; ;../main.c: 229:         case 3:
+[e :U 3243 ]
+"230
+[; ;../main.c: 230:             canpanSetAllSwitchOff();
+[e ( _canpanSetAllSwitchOff ..  ]
+"231
+[; ;../main.c: 231:             break;
+[e $U 3238  ]
+"232
+[; ;../main.c: 232:     }
 }
+[e $U 3238  ]
+[e :U 3239 ]
+[e [\ _nv , $ -> 0 `i 3240
+ , $ -> 1 `i 3241
+ , $ -> 2 `i 3242
+ , $ -> 3 `i 3243
+ 3238 ]
+[e :U 3238 ]
 "233
-[; ;../main.c: 233: void loop(void) {
+[; ;../main.c: 233: }
+[e :UE 3237 ]
+}
+"238
+[; ;../main.c: 238: void loop(void) {
 [v _loop `(v ~T0 @X0 1 ef ]
 {
 [e :U _loop ]
 [f ]
-"235
-[; ;../main.c: 235:     if (!started && ((tickGet() - startTime.val) > (62500*2))) {
-[e $ ! && ! != -> _started `i -> 0 `i > - ( _tickGet ..  . _startTime 0 -> * -> 62500 `l -> -> 2 `i `l `ul 3242  ]
-{
-"236
-[; ;../main.c: 236:         started = TRUE;
-[e = _started -> . `E22889 1 `uc ]
-"238
-[; ;../main.c: 238:     }
-}
-[e :U 3242 ]
 "240
-[; ;../main.c: 240:     if (started) {
-[e $ ! != -> _started `i -> 0 `i 3243  ]
+[; ;../main.c: 240:     if (!started && ((tickGet() - startTime.val) > (62500*2))) {
+[e $ ! && ! != -> _started `i -> 0 `i > - ( _tickGet ..  . _startTime 0 -> * -> 62500 `l -> -> 2 `i `l `ul 3245  ]
 {
 "241
-[; ;../main.c: 241:         if ((tickGet() - lastInputScanTime.val) > 2*(62500/1000)) {
-[e $ ! > - ( _tickGet ..  . _lastInputScanTime 0 -> * -> -> 2 `i `l / -> 62500 `l -> -> 1000 `i `l `ul 3244  ]
-{
-"242
-[; ;../main.c: 242:             inputScan();
-[e ( _inputScan ..  ]
+[; ;../main.c: 241:         started = TRUE;
+[e = _started -> . `E22889 1 `uc ]
 "243
-[; ;../main.c: 243:             lastInputScanTime.val = tickGet();
-[e = . _lastInputScanTime 0 ( _tickGet ..  ]
-"244
-[; ;../main.c: 244:         }
+[; ;../main.c: 243:     }
 }
-[e :U 3244 ]
+[e :U 3245 ]
+"245
+[; ;../main.c: 245:     if (started) {
+[e $ ! != -> _started `i -> 0 `i 3246  ]
+{
 "246
-[; ;../main.c: 246:         if ((tickGet() - flashTime.val) > 2*(62500/2)) {
-[e $ ! > - ( _tickGet ..  . _flashTime 0 -> * -> -> 2 `i `l / -> 62500 `l -> -> 2 `i `l `ul 3245  ]
+[; ;../main.c: 246:         if ((tickGet() - lastInputScanTime.val) > 2*(62500/1000)) {
+[e $ ! > - ( _tickGet ..  . _lastInputScanTime 0 -> * -> -> 2 `i `l / -> 62500 `l -> -> 1000 `i `l `ul 3247  ]
 {
 "247
-[; ;../main.c: 247:             doFlash();
-[e ( _doFlash ..  ]
+[; ;../main.c: 247:             inputScan();
+[e ( _inputScan ..  ]
 "248
-[; ;../main.c: 248:             flashTime.val = tickGet();
-[e = . _flashTime 0 ( _tickGet ..  ]
+[; ;../main.c: 248:             lastInputScanTime.val = tickGet();
+[e = . _lastInputScanTime 0 ( _tickGet ..  ]
 "249
 [; ;../main.c: 249:         }
 }
-[e :U 3245 ]
-"250
-[; ;../main.c: 250:     }
-}
-[e :U 3243 ]
+[e :U 3247 ]
 "251
-[; ;../main.c: 251: }
-[e :UE 3241 ]
+[; ;../main.c: 251:         if ((tickGet() - flashTime.val) > (62500/2)) {
+[e $ ! > - ( _tickGet ..  . _flashTime 0 -> / -> 62500 `l -> -> 2 `i `l `ul 3248  ]
+{
+"252
+[; ;../main.c: 252:             doFlash();
+[e ( _doFlash ..  ]
+"253
+[; ;../main.c: 253:             flashTime.val = tickGet();
+[e = . _flashTime 0 ( _tickGet ..  ]
+"254
+[; ;../main.c: 254:         }
 }
-"265
-[; ;../main.c: 265: ValidTime APP_isSuitableTimeToWriteFlash(void){
+[e :U 3248 ]
+"255
+[; ;../main.c: 255:     }
+}
+[e :U 3246 ]
+"256
+[; ;../main.c: 256: }
+[e :UE 3244 ]
+}
+"270
+[; ;../main.c: 270: ValidTime APP_isSuitableTimeToWriteFlash(void){
 [v _APP_isSuitableTimeToWriteFlash `(E22865 ~T0 @X0 1 ef ]
 {
 [e :U _APP_isSuitableTimeToWriteFlash ]
 [f ]
-"266
-[; ;../main.c: 266:     return GOOD_TIME;
+"271
+[; ;../main.c: 271:     return GOOD_TIME;
 [e ) . `E22865 1 ]
-[e $UE 3246  ]
-"267
-[; ;../main.c: 267: }
-[e :UE 3246 ]
-}
+[e $UE 3249  ]
 "272
-[; ;../main.c: 272: Processed APP_postProcessMessage(Message * m) {
+[; ;../main.c: 272: }
+[e :UE 3249 ]
+}
+"277
+[; ;../main.c: 277: Processed APP_postProcessMessage(Message * m) {
 [v _APP_postProcessMessage `(E22922 ~T0 @X0 1 ef1`*S3221 ]
 {
 [e :U _APP_postProcessMessage ]
 [v _m `*S3221 ~T0 @X0 1 r1 ]
 [f ]
-"273
-[; ;../main.c: 273:     return NOT_PROCESSED;
+"278
+[; ;../main.c: 278:     return NOT_PROCESSED;
 [e ) . `E22922 0 ]
-[e $UE 3247  ]
-"274
-[; ;../main.c: 274: }
-[e :UE 3247 ]
+[e $UE 3250  ]
+"279
+[; ;../main.c: 279: }
+[e :UE 3250 ]
 }

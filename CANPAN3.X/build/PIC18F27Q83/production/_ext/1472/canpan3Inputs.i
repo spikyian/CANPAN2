@@ -38440,7 +38440,7 @@ extern uint8_t writeNVM(NVMtype type, uint24_t index, uint8_t value);
 
 extern ValidTime APP_isSuitableTimeToWriteFlash(void);
 # 40 "../../VLCBlib_PIC/vlcb.h" 2
-# 91 "../../VLCBlib_PIC/vlcb.h"
+# 83 "../../VLCBlib_PIC/vlcb.h"
 typedef enum Priority {
     pLOW=0,
     pNORMAL=1,
@@ -38495,7 +38495,7 @@ typedef enum {
     EVENT_OFF=0,
     EVENT_ON=1
 } EventState;
-# 156 "../../VLCBlib_PIC/vlcb.h"
+# 148 "../../VLCBlib_PIC/vlcb.h"
 typedef union DiagnosticVal {
     uint16_t asUint;
     int16_t asInt;
@@ -38528,7 +38528,7 @@ typedef enum Mode_state {
 
 
 extern const Priority priorities[256];
-# 198 "../../VLCBlib_PIC/vlcb.h"
+# 190 "../../VLCBlib_PIC/vlcb.h"
 extern Processed checkLen(Message * m, uint8_t needed, uint8_t service);
 
 
@@ -38571,17 +38571,17 @@ void sendMessage2(VlcbOpCodes opc, uint8_t data1, uint8_t data2);
 
 
 void sendMessage3(VlcbOpCodes opc, uint8_t data1, uint8_t data2, uint8_t data3);
-# 248 "../../VLCBlib_PIC/vlcb.h"
+# 240 "../../VLCBlib_PIC/vlcb.h"
 void sendMessage4(VlcbOpCodes opc, uint8_t data1, uint8_t data2, uint8_t data3, uint8_t data4);
-# 258 "../../VLCBlib_PIC/vlcb.h"
+# 250 "../../VLCBlib_PIC/vlcb.h"
 void sendMessage5(VlcbOpCodes opc, uint8_t data1, uint8_t data2, uint8_t data3, uint8_t data4, uint8_t data5);
-# 269 "../../VLCBlib_PIC/vlcb.h"
+# 261 "../../VLCBlib_PIC/vlcb.h"
 void sendMessage6(VlcbOpCodes opc, uint8_t data1, uint8_t data2, uint8_t data3, uint8_t data4, uint8_t data5, uint8_t data6);
-# 281 "../../VLCBlib_PIC/vlcb.h"
+# 273 "../../VLCBlib_PIC/vlcb.h"
 void sendMessage7(VlcbOpCodes opc, uint8_t data1, uint8_t data2, uint8_t data3, uint8_t data4, uint8_t data5, uint8_t data6, uint8_t data7);
-# 294 "../../VLCBlib_PIC/vlcb.h"
+# 286 "../../VLCBlib_PIC/vlcb.h"
 void sendMessage(VlcbOpCodes opc, uint8_t len, uint8_t data1, uint8_t data2, uint8_t data3, uint8_t data4, uint8_t data5, uint8_t data6, uint8_t data7);
-# 307 "../../VLCBlib_PIC/vlcb.h"
+# 299 "../../VLCBlib_PIC/vlcb.h"
 typedef struct Service {
     uint8_t serviceNo;
     uint8_t version;
@@ -38641,9 +38641,9 @@ extern uint8_t findServiceIndex(uint8_t id);
 
 
 extern void factoryReset(void);
-# 397 "../../VLCBlib_PIC/vlcb.h"
+# 389 "../../VLCBlib_PIC/vlcb.h"
 extern void APP_highIsr(void);
-# 407 "../../VLCBlib_PIC/vlcb.h"
+# 399 "../../VLCBlib_PIC/vlcb.h"
 extern void APP_lowIsr(void);
 
 
@@ -38671,9 +38671,9 @@ typedef struct Transport {
     SendResult (* sendMessage)(Message * m);
     MessageReceived (* receiveMessage)(Message * m);
 } Transport;
-# 442 "../../VLCBlib_PIC/vlcb.h"
+# 434 "../../VLCBlib_PIC/vlcb.h"
 extern const Transport * transport;
-# 455 "../../VLCBlib_PIC/vlcb.h"
+# 447 "../../VLCBlib_PIC/vlcb.h"
 extern ValidTime APP_isSuitableTimeToWriteFlash(void);
 # 42 "../../VLCBlib_PIC\\statusLeds.h" 2
 
@@ -38873,14 +38873,25 @@ extern void doFlash(void);
 extern uint8_t APP_isProducedEvent(uint8_t tableIndex);
 # 46 "../canpan3Inputs.c" 2
 
+# 1 "../canpan3Inputs.h" 1
+# 43 "../canpan3Inputs.h"
+extern void initInputs(void);
+extern void inputScan(void);
+extern void doSoD(void);
+extern void canpanSetAllSwitchOff(void);
+extern void loadInputs(void);
+
+extern uint8_t outputState[(8*4)];
+extern uint8_t canpanScanReady;
+# 47 "../canpan3Inputs.c" 2
+
 
 static uint8_t buttonState[8];
 uint8_t outputState[(8*4)];
 
-
-
 static uint8_t column;
 uint8_t canpanScanReady;
+extern uint8_t switch2Event[(8*4)];
 
 
 
@@ -38960,62 +38971,59 @@ void inputScan(void) {
 
             onOff = !!(row & (1 << i));
             buttonNo = column*4 + i;
-            tableIndex = findEventForSwitch(buttonNo);
-            if (tableIndex != 0xff) {
-                sv = evs[2];
+            if (mode_flags & 1) {
 
-                mode = 1;
-                if (sv & 1) {
+                sendMessage5(OPC_ARON1, nn.bytes.hi, nn.bytes.lo, 0, 0, buttonNo+1);
+            } else {
+                tableIndex = findEventForSwitch(buttonNo);
+                if (tableIndex != 0xff) {
+                    sv = evs[2];
+
                     mode = 1;
-                } else if (sv & 4) {
-                    mode = 2;
-                } else if (sv & 8) {
-                    mode = 3;
-                }
-
-                if (mode_flags & 1) {
-                    mode = 1;
-                }
-                if (mode != 0){
-
-                    switch(mode) {
-                        case 1:
-                            if (sv & 0b00000010) {
-                                onOff = !onOff;
-                            }
-                            outputState[buttonNo] = onOff;
-                            break;
-                        case 2:
-                            if (sv & 0b00000010) {
-                                if (onOff) {
-                                    continue;
-                                }
-                            } else {
-                                if (! onOff) {
-                                    continue;
-                                }
-                            }
-                            outputState[buttonNo] = onOff;
-                            break;
-                        case 3:
-                            if (onOff) {
-                                outputState[buttonNo] = ! outputState[buttonNo];
-                            } else {
-                                continue;
-                            }
-                            onOff = outputState[buttonNo];
-                            break;
+                    if (sv & 1) {
+                        mode = 1;
+                    } else if (sv & 4) {
+                        mode = 2;
+                    } else if (sv & 8) {
+                        mode = 3;
                     }
-                    writeNVM(EEPROM_NVM_TYPE, 0x0000 + buttonNo, outputState[buttonNo]);
-                    if (canpanScanReady) {
 
+                    if (mode_flags & 1) {
+                        mode = 1;
+                    }
+                    if (mode != 0){
 
-                        if (mode_flags & 1) {
-                            producedEventNN.word = getNN(tableIndex);
-                            producedEventEN.word = getEN(tableIndex);
-                            sendMessage5(OPC_ARON1, producedEventNN.bytes.hi, producedEventNN.bytes.lo,
-                                    producedEventEN.bytes.hi, producedEventEN.bytes.lo, buttonNo+1);
-                        } else {
+                        switch(mode) {
+                            case 1:
+                                if (sv & 0b00000010) {
+                                    onOff = !onOff;
+                                }
+                                outputState[buttonNo] = onOff;
+                                break;
+                            case 2:
+                                if (sv & 0b00000010) {
+                                    if (onOff) {
+                                        continue;
+                                    }
+                                } else {
+                                    if (! onOff) {
+                                        continue;
+                                    }
+                                }
+                                outputState[buttonNo] = onOff;
+                                break;
+                            case 3:
+                                if (onOff) {
+                                    outputState[buttonNo] = ! outputState[buttonNo];
+                                } else {
+                                    continue;
+                                }
+                                onOff = outputState[buttonNo];
+                                break;
+                        }
+                        writeNVM(EEPROM_NVM_TYPE, 0x0000 + buttonNo, outputState[buttonNo]);
+                        if (canpanScanReady) {
+
                             canpanSendProducedEvent(tableIndex, onOff, sv);
                         }
                     }
@@ -39059,7 +39067,7 @@ void canpanSendProducedEvent(uint8_t tableIndex, uint8_t onOff, uint8_t sv) {
 
     producedEventNN.word = getNN(tableIndex);
     producedEventEN.word = getEN(tableIndex);
-    if ((sv & 0b00100000) || (producedEventNN.word == 0)) {
+    if (producedEventNN.word == 0) {
 
         if (onOff) {
             opc = OPC_ASON;
@@ -39076,7 +39084,6 @@ void canpanSendProducedEvent(uint8_t tableIndex, uint8_t onOff, uint8_t sv) {
         }
     }
 
-
     sendMessage4(opc, producedEventNN.bytes.hi, producedEventNN.bytes.lo,
             producedEventEN.bytes.hi, producedEventEN.bytes.lo);
 
@@ -39089,17 +39096,14 @@ void driveColumn(void) {
     LATAbits.LATA2 = (column & 0x04)?1:0;
 }
 
+
+
+
+
+
+
 uint8_t findEventForSwitch(uint8_t switchNo) {
-    uint8_t tableIndex;
-    for (tableIndex=0; tableIndex < 254; tableIndex++) {
-        getEVs(tableIndex);
-        if ((evs[0] == 1) || (evs[0] == 3)) {
-            if (evs[1] == switchNo+1) {
-                return tableIndex;
-            }
-        }
-    }
-    return 0xff;
+    return switch2Event[switchNo];
 }
 
 
@@ -39111,7 +39115,7 @@ uint8_t findEventForSwitch(uint8_t switchNo) {
 void doSoD(void) {
     startTimedResponse(1, findServiceIndex(SERVICE_ID_PRODUCER), sodTRCallback);
 }
-# 297 "../canpan3Inputs.c"
+# 290 "../canpan3Inputs.c"
 TimedResponseResult sodTRCallback(uint8_t type, uint8_t serviceIndex, uint8_t tableIndex) {
     EventState value;
     uint8_t sv;

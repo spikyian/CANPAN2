@@ -44,14 +44,14 @@
 #include "event_producer.h"
 #include "nvm.h"
 #include "canpan3Events.h"
+#include "canpan3Inputs.h"
 
 static uint8_t buttonState[NUM_BUTTON_COLUMNS];
 uint8_t outputState[NUM_BUTTONS];
 
-#define EE_ADDR_SWITCHES    0x0000
-
 static uint8_t column;  // Column number
 uint8_t canpanScanReady;   /// indicates if the code has had chance to read all the buttons
+extern uint8_t switch2Event[NUM_BUTTONS];
 
 #define MODE_UNKNOWN    0
 #define MODE_ON_OFF     1
@@ -131,62 +131,60 @@ void inputScan(void) {
             // has this particular switch changed?
             onOff = !!(row & (1 << i));
             buttonNo = column*NUM_BUTTON_ROWS + i;
-            tableIndex = findEventForSwitch(buttonNo);
-            if (tableIndex != NO_INDEX) {
-                sv = evs[EV_SWITCHSV];
-                // determine the switch mode using the SV event variable
-                mode = MODE_ON_OFF;
-                if (sv & SV_ON_OFF) {
+            if (mode_flags & FLAG_MODE_LEARN) {
+                // when in teach mode we actually send a ARON1 instead of the event
+                sendMessage5(OPC_ARON1, nn.bytes.hi, nn.bytes.lo, 0, 0, buttonNo+1);
+            } else {
+                tableIndex = findEventForSwitch(buttonNo);
+                if (tableIndex != NO_INDEX) {
+                    getEVs(tableIndex);
+                    sv = evs[EV_SWITCHSV];
+                    // determine the switch mode using the SV event variable
                     mode = MODE_ON_OFF;
-                } else if (sv & SV_ON_ONLY) {
-                    mode = MODE_ONOFF_ONLY;
-                } else if (sv & SV_TOGGLE) {
-                    mode = MODE_TOGGLE;
-                }
-                // When in learn mode we'll act as if it is ON/OFF mode to send an ARON1
-                if (mode_flags & FLAG_MODE_LEARN) {
-                    mode = MODE_ON_OFF;
-                }
-                if (mode != MODE_UNKNOWN){
-
-                    switch(mode) {
-                        case MODE_ON_OFF:
-                            if (sv & SV_POLARITY) {   // invert
-                                onOff = !onOff;
-                            }
-                            outputState[buttonNo] = onOff;
-                            break;
-                        case MODE_ONOFF_ONLY:
-                            if (sv & SV_POLARITY) {   // invert
-                                if (onOff) {    // don't send ON event
-                                    continue;
-                                }
-                            } else {
-                                if (! onOff) {
-                                    continue;   // don't send OFF event
-                                }
-                            }
-                            outputState[buttonNo] = onOff;
-                            break;
-                        case MODE_TOGGLE:
-                            if (onOff) {
-                                outputState[buttonNo] = ! outputState[buttonNo];
-                            } else {
-                                continue;   // don't react when button is released
-                            }
-                            onOff = outputState[buttonNo];
-                            break;
+                    if (sv & SV_ON_OFF) {
+                        mode = MODE_ON_OFF;
+                    } else if (sv & SV_ON_ONLY) {
+                        mode = MODE_ONOFF_ONLY;
+                    } else if (sv & SV_TOGGLE) {
+                        mode = MODE_TOGGLE;
                     }
-                    writeNVM(EEPROM_NVM_TYPE, EE_ADDR_SWITCHES + buttonNo, outputState[buttonNo]);
-                    if (canpanScanReady) {
-                        // send the event.
-                        // when in teach mode we actually send a ARON1 instead of the event
-                        if (mode_flags & FLAG_MODE_LEARN) {
-                            producedEventNN.word = getNN(tableIndex);
-                            producedEventEN.word = getEN(tableIndex);
-                            sendMessage5(OPC_ARON1, producedEventNN.bytes.hi, producedEventNN.bytes.lo, 
-                                    producedEventEN.bytes.hi, producedEventEN.bytes.lo, buttonNo+1);
-                        } else {    
+                    // When in learn mode we'll act as if it is ON/OFF mode to send an ARON1
+                    if (mode_flags & FLAG_MODE_LEARN) {
+                        mode = MODE_ON_OFF;
+                    }
+                    if (mode != MODE_UNKNOWN){
+
+                        switch(mode) {
+                            case MODE_ON_OFF:
+                                if (sv & SV_POLARITY) {   // invert
+                                    onOff = !onOff;
+                                }
+                                outputState[buttonNo] = onOff;
+                                break;
+                            case MODE_ONOFF_ONLY:
+                                if (sv & SV_POLARITY) {   // invert
+                                    if (onOff) {    // don't send ON event
+                                        continue;
+                                    }
+                                } else {
+                                    if (! onOff) {
+                                        continue;   // don't send OFF event
+                                    }
+                                }
+                                outputState[buttonNo] = onOff;
+                                break;
+                            case MODE_TOGGLE:
+                                if (onOff) {
+                                    outputState[buttonNo] = ! outputState[buttonNo];
+                                } else {
+                                    continue;   // don't react when button is released
+                                }
+                                onOff = outputState[buttonNo];
+                                break;
+                        }
+                        writeNVM(EEPROM_NVM_TYPE, EE_ADDR_SWITCHES + buttonNo, outputState[buttonNo]);
+                        if (canpanScanReady) {
+                            // send the event.
                             canpanSendProducedEvent(tableIndex, onOff, sv);
                         }
                     }
@@ -230,7 +228,7 @@ void canpanSendProducedEvent(uint8_t tableIndex, uint8_t onOff, uint8_t sv) {
     
     producedEventNN.word = getNN(tableIndex);
     producedEventEN.word = getEN(tableIndex);
-    if ((sv & SV_SHORT) || (producedEventNN.word == 0)) {
+    if (producedEventNN.word == 0) {
         // Short event
         if (onOff) {
             opc = OPC_ASON;
@@ -247,7 +245,6 @@ void canpanSendProducedEvent(uint8_t tableIndex, uint8_t onOff, uint8_t sv) {
         }
     }
 
-
     sendMessage4(opc, producedEventNN.bytes.hi, producedEventNN.bytes.lo, 
             producedEventEN.bytes.hi, producedEventEN.bytes.lo);
 
@@ -260,17 +257,14 @@ void driveColumn(void) {
     LATAbits.LATA2 = (column & 0x04)?1:0;
 }
 
+/**
+ * Get the table index for the switch number (0..NUM_BUTTONS-1).
+ * Uses the quick lookup table switch2Event which is maintained in canpan3Events.c
+ * @param switchNo
+ * @return 
+ */
 uint8_t findEventForSwitch(uint8_t switchNo) {
-    uint8_t tableIndex;
-    for (tableIndex=0; tableIndex < NUM_EVENTS; tableIndex++) {
-        getEVs(tableIndex);
-        if ((evs[EV_TYPE] == CANPAN_PRODUCED) || (evs[EV_TYPE] == CANPAN_SELF_SOD)) {
-            if (evs[EV_SWITCHNO] == switchNo+1) {
-                return tableIndex;
-            }
-        }
-    }
-    return NO_INDEX;
+    return switch2Event[switchNo];
 }
 
 /**

@@ -37,6 +37,9 @@
  * 
  */ 
 
+/** location in EEPROM where the toggle switch state is stored. */
+#define EE_ADDR_SWITCHES    0x0000
+
 extern void initInputs(void);
 extern void inputScan(void);
 extern void doSoD(void);
