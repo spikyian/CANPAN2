@@ -193,12 +193,9 @@ Processed APP_preProcessMessage(Message * m) {
             case OPC_EVLRNI:
                 /* Opcodes which add/delete events */
                 errno = GRSP_OK;
-                if (eventTeachService.processMessage(m) == PROCESSED) {
-                    // add any missing switch events and update the switch2Event table
-                    checkDefaultEvents();
-                    return PROCESSED;
-                }
-                // fall through
+                eventTeachService.processMessage(m);
+                checkDefaultEvents();
+                return PROCESSED;
             default:
                 break;
         }

@@ -341,12 +341,12 @@ GRSP_INVALID_SERVICE 252
 GRSP_INVALID_COMMAND_PARAMETER 251
 GRSP_INVALID_MODE 250
 ]
-"336
+"333
 [e E22861 . `uc
 EEPROM_NVM_TYPE 0
 FLASH_NVM_TYPE 1
 ]
-"337
+"334
 [e E22684 VlcbCmdErrs `uc
 CMDERR_INV_CMD 1
 CMDERR_NOT_LRN 2
@@ -362,14 +362,14 @@ CMDERR_INV_EV_VALUE 11
 CMDERR_INV_NV_VALUE 12
 CMDERR_LRN_OTHER 13
 ]
-"437
+"434
 [e E23146 canpan3LedState `uc
 CANPANLED_ON 0
 CANPANLED_OFF 1
 CANPANLED_FLASH 2
 CANPANLED_ANTIFLASH 3
 ]
-"492
+"489
 [e E22909 . `uc
 EVENT_UNKNOWN 255
 EVENT_OFF 0
@@ -3434,11 +3434,11 @@ CANPANLED_ANTIFLASH 3
 [v _APP_isProducedEvent APP_isProducedEvent `(uc  1 e 1 0 ]
 "181
 [v _APP_preProcessMessage APP_preProcessMessage `(E22922  1 e 1 0 ]
-"263
+"260
 [v _APP_addEvent APP_addEvent `(uc  1 e 1 0 ]
-"410
+"407
 [v _APP_processConsumedEvent APP_processConsumedEvent `(E22922  1 e 1 0 ]
-"492
+"489
 [v _APP_GetEventIndexState APP_GetEventIndexState `(E22909  1 e 1 0 ]
 "71 C:\Users\ianwh\github\CANPAN2/canpan3Inputs.c
 [v _initInputs initInputs `(v  1 e 1 0 ]
@@ -4744,7 +4744,7 @@ CANPANLED_ANTIFLASH 3
 [s S183 Message 9 `uc 1 len 1 0 `E22515 1 opc 1 1 `[7]uc 1 bytes 7 2 ]
 "181
 [v APP_preProcessMessage@m m `*.39S183  1 p 2 92 ]
-"260
+"257
 } 0
 "114 C:\Users\ianwh\github/VLCBlib_PIC/event_producer_simple.c
 [v _producerProcessMessage producerProcessMessage `(E22922  1 s 1 producerProcessMessage ]
@@ -4960,38 +4960,38 @@ CANPANLED_ANTIFLASH 3
 [v doEvlrn@evVal evVal `uc  1 p 1 82 ]
 "547
 } 0
-"263 C:\Users\ianwh\github\CANPAN2/canpan3Events.c
+"260 C:\Users\ianwh\github\CANPAN2/canpan3Events.c
 [v _APP_addEvent APP_addEvent `(uc  1 e 1 0 ]
 {
-"264
+"261
 [v APP_addEvent@tableIndex tableIndex `uc  1 a 1 76 ]
-"266
-[v APP_addEvent@switchNo switchNo `uc  1 a 1 75 ]
-"267
-[v APP_addEvent@prevSwitchNo prevSwitchNo `uc  1 a 1 74 ]
-"265
-[v APP_addEvent@oti oti `uc  1 a 1 73 ]
-"268
-[v APP_addEvent@leds leds `uc  1 a 1 72 ]
 "263
+[v APP_addEvent@switchNo switchNo `uc  1 a 1 75 ]
+"264
+[v APP_addEvent@prevSwitchNo prevSwitchNo `uc  1 a 1 74 ]
+"262
+[v APP_addEvent@oti oti `uc  1 a 1 73 ]
+"265
+[v APP_addEvent@leds leds `uc  1 a 1 72 ]
+"260
 [v APP_addEvent@nodeNumber nodeNumber `us  1 p 2 62 ]
 [v APP_addEvent@eventNumber eventNumber `us  1 p 2 64 ]
 [v APP_addEvent@evNum evNum `uc  1 p 1 66 ]
 [v APP_addEvent@evVal evVal `uc  1 p 1 67 ]
 [v APP_addEvent@forceOwnNN forceOwnNN `E22889  1 p 1 68 ]
-"400
+"397
 } 0
-"492
+"489
 [v _APP_GetEventIndexState APP_GetEventIndexState `(E22909  1 e 1 0 ]
 {
 [v APP_GetEventIndexState@tableIndex tableIndex `uc  1 a 1 wreg ]
-"493
+"490
 [v APP_GetEventIndexState@switchNo switchNo `uc  1 a 1 28 ]
-"492
+"489
 [v APP_GetEventIndexState@tableIndex tableIndex `uc  1 a 1 wreg ]
-"496
+"493
 [v APP_GetEventIndexState@tableIndex tableIndex `uc  1 a 1 27 ]
-"507
+"504
 } 0
 "165
 [v _APP_isProducedEvent APP_isProducedEvent `(uc  1 e 1 0 ]
@@ -5230,27 +5230,27 @@ CANPANLED_ANTIFLASH 3
 [v getParameterFlags@flags flags `uc  1 a 1 4 ]
 "610
 } 0
-"410 C:\Users\ianwh\github\CANPAN2/canpan3Events.c
+"407 C:\Users\ianwh\github\CANPAN2/canpan3Events.c
 [v _APP_processConsumedEvent APP_processConsumedEvent `(E22922  1 e 1 0 ]
 {
 [v APP_processConsumedEvent@tableIndex tableIndex `uc  1 a 1 wreg ]
-"413
-[v APP_processConsumedEvent@ledNo ledNo `uc  1 a 1 33 ]
-"411
-[v APP_processConsumedEvent@onOff onOff `uc  1 a 1 32 ]
-"415
-[v APP_processConsumedEvent@polarity polarity `uc  1 a 1 31 ]
-"414
-[v APP_processConsumedEvent@flags flags `uc  1 a 1 30 ]
-"412
-[v APP_processConsumedEvent@ledMode ledMode `uc  1 a 1 29 ]
 "410
+[v APP_processConsumedEvent@ledNo ledNo `uc  1 a 1 33 ]
+"408
+[v APP_processConsumedEvent@onOff onOff `uc  1 a 1 32 ]
+"412
+[v APP_processConsumedEvent@polarity polarity `uc  1 a 1 31 ]
+"411
+[v APP_processConsumedEvent@flags flags `uc  1 a 1 30 ]
+"409
+[v APP_processConsumedEvent@ledMode ledMode `uc  1 a 1 29 ]
+"407
 [v APP_processConsumedEvent@tableIndex tableIndex `uc  1 a 1 wreg ]
 [s S183 Message 9 `uc 1 len 1 0 `E22515 1 opc 1 1 `[7]uc 1 bytes 7 2 ]
 [v APP_processConsumedEvent@m m `*.39S183  1 p 2 23 ]
-"417
+"414
 [v APP_processConsumedEvent@tableIndex tableIndex `uc  1 a 1 28 ]
-"484
+"481
 } 0
 "65 C:\Users\ianwh\github\CANPAN2/canpan3Leds.c
 [v _setLedState setLedState `(v  1 e 1 0 ]
