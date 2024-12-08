@@ -38777,7 +38777,16 @@ extern uint16_t getNN(uint8_t tableIndex);
 extern uint16_t getEN(uint8_t tableIndex);
 extern uint8_t findEvent(uint16_t nodeNumber, uint16_t eventNumber);
 extern uint8_t addEvent(uint16_t nodeNumber, uint16_t eventNumber, uint8_t evNum, uint8_t evVal, Boolean forceOwnNN);
-# 109 "../../VLCBlib_PIC\\event_teach.h"
+
+
+extern void rebuildHashtable(void);
+extern uint8_t getHash(uint16_t nodeNumber, uint16_t eventNumber);
+
+
+
+
+
+
 typedef struct {
     uint16_t NN;
     uint16_t EN;
@@ -38856,7 +38865,9 @@ void factoryResetGlobalEvents(void) {
 
     checkDefaultEvents();
 }
-# 83 "../canpan3Events.c"
+# 77 "../canpan3Events.c"
+extern uint8_t errno;
+# 86 "../canpan3Events.c"
 uint8_t addDefaultEvent(uint8_t sw) {
     addEvent(nn.word, sw, 0, 1, TRUE);
     addEvent(nn.word, sw, 1, sw, TRUE);
@@ -38900,14 +38911,7 @@ void checkDefaultEvents(void) {
         }
     }
 }
-
-uint8_t APP_addEvent(uint16_t nodeNumber, uint16_t eventNumber, uint8_t evNum, uint8_t evVal, Boolean forceOwnNN) {
-
-
-
-    return addEvent(nodeNumber, eventNumber, evNum, evVal, forceOwnNN);
-}
-# 141 "../canpan3Events.c"
+# 137 "../canpan3Events.c"
 uint8_t APP_isConsumedEvent(uint8_t tableIndex) {
     int16_t ev;
 
@@ -38954,186 +38958,27 @@ uint8_t APP_isProducedEvent(uint8_t tableIndex) {
 
 Processed APP_preProcessMessage(Message * m) {
     uint8_t tableIndex;
-    uint8_t oti;
     uint16_t enn;
     uint8_t switchNo;
     uint8_t ev;
-    uint8_t prevSwitchNo;
-    uint8_t nnl, nnh, enl, enh;
-    uint8_t leds;
 
     if (mode_flags & 1) {
 
-        if ((m->opc == OPC_EVLRN) || (m->opc == OPC_EVLRNI)) {
-
-            switchNo = 0;
-            if (m->opc == OPC_EVLRN) {
-
-                if (m->bytes[4] == 1) {
-                    switchNo = m->bytes[5];
-                }
-            } else {
-
-                if (m->bytes[5] == 1) {
-                    switchNo = m->bytes[6];
-                }
-            }
-# 229 "../canpan3Events.c"
-            nnh = m->bytes[0];
-            nnl = m->bytes[1];
-            enh = m->bytes[2];
-            enl = m->bytes[3];
-            tableIndex = findEvent(nnh*256+nnl, enh*256+enl);
-            if (tableIndex != 0xff) {
-
-                getEVs(tableIndex);
-                prevSwitchNo = evs[1];
-                if (prevSwitchNo > (8*4)) {
-                    prevSwitchNo = 0;
-                }
-
-                leds = evs[4] | evs[5] | evs[6] | evs[7];
-            }
-
-            if ((switchNo > 0) && (switchNo <= (8*4))) {
-
-
-                if (tableIndex != 0xff) {
-                    if (prevSwitchNo == 0) {
-                        if (leds) {
-
-                            oti = switch2Event[switchNo-1];
-                            if (oti != 0xff) {
-                                writeEv(oti, 1, 0);
-                            } else {
-
-                            }
-
-                        } else {
-
-
-
-                        }
-                    } else {
-                        if (switchNo == prevSwitchNo) {
-
-
-
-
-                            sendMessage2(OPC_WRACK, nn.bytes.hi, nn.bytes.lo);
-                            if (m->opc == OPC_EVLRN) {
-                                sendMessage5(OPC_GRSP, nn.bytes.hi, nn.bytes.lo, OPC_EVLRN, SERVICE_ID_OLD_TEACH, GRSP_OK);
-                            } else {
-                                sendMessage5(OPC_GRSP, nn.bytes.hi, nn.bytes.lo, OPC_EVLRNI, SERVICE_ID_OLD_TEACH, GRSP_OK);
-                            }
-                            return PROCESSED;
-                        } else {
-
-
-
-
-
-
-                            sendMessage3(OPC_CMDERR, nn.bytes.hi, nn.bytes.lo, CMDERR_INV_EV_VALUE);
-                            if (m->opc == OPC_EVLRN) {
-                                sendMessage5(OPC_GRSP, nn.bytes.hi, nn.bytes.lo, OPC_EVLRN, SERVICE_ID_OLD_TEACH, CMDERR_INV_EV_VALUE);
-                            } else {
-                                sendMessage5(OPC_GRSP, nn.bytes.hi, nn.bytes.lo, OPC_EVLRNI, SERVICE_ID_OLD_TEACH, CMDERR_INV_EV_VALUE);
-                            }
-                            return PROCESSED;
-                        }
-                    }
-                } else {
-
-                    oti = switch2Event[switchNo-1];
-                    if (oti != 0xff) {
-                        writeEv(oti, 1, 0);
-                    } else {
-
-                    }
-
-                }
-            } else {
-
-
-                switchNo = 0;
-                if (m->opc == OPC_EVLRN) {
-                    m->bytes[5] = 0;
-                } else {
-                    m->bytes[6] = 0;
-                }
-
-                if (tableIndex != 0xff) {
-
-                    if (prevSwitchNo == 0) {
-                        if (leds) {
-
-
-
-                            sendMessage2(OPC_WRACK, nn.bytes.hi, nn.bytes.lo);
-                            if (m->opc == OPC_EVLRN) {
-                                sendMessage5(OPC_GRSP, nn.bytes.hi, nn.bytes.lo, OPC_EVLRN, SERVICE_ID_OLD_TEACH, GRSP_OK);
-                            } else {
-                                sendMessage5(OPC_GRSP, nn.bytes.hi, nn.bytes.lo, OPC_EVLRNI, SERVICE_ID_OLD_TEACH, GRSP_OK);
-                            }
-                            return PROCESSED;
-                        } else {
-
-
-
-                            writeNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex+3, 0);
-                            writeNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex+2, 0);
-                            sendMessage2(OPC_WRACK, nn.bytes.hi, nn.bytes.lo);
-                            if (m->opc == OPC_EVLRN) {
-                                sendMessage5(OPC_GRSP, nn.bytes.hi, nn.bytes.lo, OPC_EVLRN, SERVICE_ID_OLD_TEACH, GRSP_OK);
-                            } else {
-                                sendMessage5(OPC_GRSP, nn.bytes.hi, nn.bytes.lo, OPC_EVLRNI, SERVICE_ID_OLD_TEACH, GRSP_OK);
-                            }
-                            return PROCESSED;
-                        }
-                    } else {
-
-                        if (leds) {
-
-
-                        } else {
-
-
-                            writeNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex+3, 0);
-                            writeNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex+2, 0);
-                        }
-                    }
-                } else {
-
-
-
-                }
-            }
-        }
-
         switch (m->opc) {
             case OPC_NNCLR:
-                if (m->len < 3) return PROCESSED;
-                if ((m->bytes[0] != nn.bytes.hi) || (m->bytes[1] != nn.bytes.lo)) return PROCESSED;
-
             case OPC_EVULN:
             case OPC_EVLRN:
             case OPC_EVLRNI:
 
+                errno = GRSP_OK;
                 if (eventTeachService.processMessage(m) == PROCESSED) {
 
                     checkDefaultEvents();
-                    sendMessage2(OPC_WRACK, nn.bytes.hi, nn.bytes.lo);
-                    if (m->opc == OPC_EVLRN) {
-                        sendMessage5(OPC_GRSP, nn.bytes.hi, nn.bytes.lo, OPC_EVLRN, SERVICE_ID_OLD_TEACH, GRSP_OK);
-                    } else {
-                        sendMessage5(OPC_GRSP, nn.bytes.hi, nn.bytes.lo, OPC_EVLRNI, SERVICE_ID_OLD_TEACH, GRSP_OK);
-                    }
                     return PROCESSED;
                 }
 
             default:
-                return NOT_PROCESSED;
+                break;
         }
     }
 
@@ -39191,7 +39036,125 @@ Processed APP_preProcessMessage(Message * m) {
     }
     return NOT_PROCESSED;
 }
-# 450 "../canpan3Events.c"
+
+
+uint8_t APP_addEvent(uint16_t nodeNumber, uint16_t eventNumber, uint8_t evNum, uint8_t evVal, Boolean forceOwnNN) {
+    uint8_t tableIndex;
+    uint8_t oti;
+    uint8_t switchNo;
+    uint8_t prevSwitchNo;
+    uint8_t leds;
+
+    if (evNum == 1) {
+        switchNo = evVal;
+        tableIndex = findEvent(nodeNumber, eventNumber);
+        if (tableIndex != 0xff) {
+
+            getEVs(tableIndex);
+            prevSwitchNo = evs[1];
+            if (prevSwitchNo > (8*4)) {
+                prevSwitchNo = 0;
+            }
+
+            leds = evs[4] | evs[5] | evs[6] | evs[7];
+        }
+# 306 "../canpan3Events.c"
+        if ((switchNo > 0) && (switchNo <= (8*4))) {
+
+
+            if (tableIndex != 0xff) {
+                if (prevSwitchNo == 0) {
+                    if (leds) {
+
+                        oti = switch2Event[switchNo-1];
+                        if (oti != 0xff) {
+                            writeEv(oti, 1, 0);
+                        } else {
+
+                        }
+
+                    } else {
+
+
+
+                    }
+                } else {
+                    if (switchNo == prevSwitchNo) {
+
+
+
+
+                        return PROCESSED;
+                    } else {
+
+
+
+                        if (readNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex+4) && 1) {
+                            errno = CMDERR_INV_EV_VALUE;
+                            return PROCESSED;
+                        }
+
+
+                    }
+                }
+            } else {
+
+                oti = switch2Event[switchNo-1];
+                if (oti != 0xff) {
+                    writeEv(oti, 1, 0);
+                } else {
+
+                }
+
+            }
+        } else {
+
+
+            switchNo = 0;
+            evVal = 0;
+
+            if (tableIndex != 0xff) {
+
+                if (prevSwitchNo == 0) {
+                    if (leds) {
+
+
+                        return PROCESSED;
+                    } else {
+
+
+
+                        writeNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex+3, 0);
+                        writeNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex+2, 0);
+                        return PROCESSED;
+                    }
+                } else {
+
+
+                    if (readNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex+4) && 1) {
+                        errno = CMDERR_INV_EV_VALUE;
+                        return PROCESSED;
+                    }
+                    if (leds) {
+
+
+                    } else {
+
+
+                        writeNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex+3, 0);
+                        writeNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex+2, 0);
+                    }
+                }
+            } else {
+
+
+
+            }
+        }
+    }
+    return addEvent(nodeNumber, eventNumber, evNum, evVal, forceOwnNN);
+}
+# 410 "../canpan3Events.c"
 Processed APP_processConsumedEvent(uint8_t tableIndex, Message *m) {
     uint8_t onOff;
     uint8_t ledMode;

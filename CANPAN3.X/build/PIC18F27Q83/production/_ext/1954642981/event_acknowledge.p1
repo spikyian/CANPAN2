@@ -33,15 +33,15 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;../../VLCBlib_PIC/event_acknowledge.c: 73: const Service eventAckService = {
 [c E22772 0 1 2 3 4 5 6 7 8 9 10 17 .. ]
 [n E22772 VlcbServiceTypes SERVICE_ID_NONE SERVICE_ID_MNS SERVICE_ID_NV SERVICE_ID_CAN SERVICE_ID_OLD_TEACH SERVICE_ID_PRODUCER SERVICE_ID_CONSUMER SERVICE_ID_TEACH SERVICE_ID_CONSUME_OWN_EVENTS SERVICE_ID_EVENTACK SERVICE_ID_BOOT SERVICE_ID_STREAMING  ]
-[v F23151 `(v ~T0 @X0 0 tf ]
+[v F23155 `(v ~T0 @X0 0 tf ]
 "57
 [; ;../../VLCBlib_PIC/event_acknowledge.c: 57: static void ackPowerUp(void);
 [v _ackPowerUp `(v ~T0 @X0 0 sf ]
 "58
 [; ;../../VLCBlib_PIC/event_acknowledge.c: 58: static Processed ackEventProcessMessage(Message * m);
 [v _ackEventProcessMessage `(E22972 ~T0 @X0 0 sf1`*S3224 ]
-[v F23155 `(v ~T0 @X0 0 tf ]
-[v F23156 `(uc ~T0 @X0 0 tf1`uc ]
+[v F23159 `(v ~T0 @X0 0 tf ]
+[v F23160 `(uc ~T0 @X0 0 tf1`uc ]
 "61
 [; ;../../VLCBlib_PIC/event_acknowledge.c: 61: static DiagnosticVal * ackGetDiagnostic(uint8_t code);
 [v _ackGetDiagnostic `(*S3227 ~T0 @X0 0 sf1`uc ]
@@ -3611,11 +3611,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 :U ..
 -> . `E22772 9 `uc
 -> -> 1 `i `uc
--> -> -> 0 `i `*v `*F23151
+-> -> -> 0 `i `*v `*F23155
 &U _ackPowerUp
 &U _ackEventProcessMessage
--> -> -> 0 `i `*v `*F23155
--> -> -> 0 `i `*v `*F23156
+-> -> -> 0 `i `*v `*F23159
+-> -> -> 0 `i `*v `*F23160
 &U _ackGetDiagnostic
 ..
 ..

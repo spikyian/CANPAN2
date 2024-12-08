@@ -3573,8 +3573,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _value `uc ~T0 @X0 1 r2 ]
 [f ]
 "64
-[; ;../canpan3Nv.c: 64:     if (value > 3) {
-[e $ ! > -> _value `i -> 3 `i 3237  ]
+[; ;../canpan3Nv.c: 64:     if ((index == 1) &&(value > 3)) {
+[e $ ! && == -> _index `i -> 1 `i > -> _value `i -> 3 `i 3237  ]
 {
 "65
 [; ;../canpan3Nv.c: 65:         return INVALID;

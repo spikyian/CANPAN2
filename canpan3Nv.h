@@ -38,10 +38,12 @@
  */ 
 
 // The possible NVs
-#define NV_STARTUP  1
+#define NV_STARTUP          1
+#define NV_BRIGHTNESS       2   // 32 entries 2..33
 
 // The possible NV_STARTUP values
 #define NV_STARTUP_RESTORE  0
 #define NV_STARTUP_NOTHING  1
 #define NV_STARTUP_SCAN     2
 #define NV_STARTUP_ALLOFF   3
+

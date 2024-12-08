@@ -31,6 +31,9 @@
  */
 /**
  *	The CANPAN program.
+ * This handles driving the LED outputs.
+ * TMR0 is already used by Ticktime, here TMR2 is used to strobe through the 
+ * row/columns of the LED matrix and TMR1 is used for the LED brightness control.
  *
  * @author Ian Hogg 
  * @date October 2024
@@ -45,6 +48,7 @@
 
 static unsigned char current_row = 0;
 unsigned char ledMatrix[NUM_LED_ROWS];
+static uint8_t cathodes;
 
 void initOutputs(void) {
     uint8_t i;
@@ -99,7 +103,7 @@ void initOutputs(void) {
     T2CONbits.CKPS = 5;     // clock prescalar 1:32
     T2CONbits.OUTPS = 0;    // clock postscalar 1:1
     T2CLKCON = 1;           // Fosc/4 clock source
-    T2PR = 250;             // duration
+    T2PR = 16;              // duration
     T2HLTbits.MODE = 0;     // free run mode
     
     PIR3bits.TMR2IF = 0;    // no outstanding interrupt
@@ -107,7 +111,7 @@ void initOutputs(void) {
     T2CONbits.ON = 1;       // enable timer
 }
 
-// Called every 2ms
+// Called every 2ms/NUM_BRIGHTNESS_LEVELS i.e. 125us
 #if defined(_18F66K80_FAMILY_)
 void outputIsr(void) 
 #endif
@@ -116,12 +120,12 @@ void __interrupt(irq(IRQ_TMR2), base(IVT_BASE)) processOutputs(void)
 #endif
 {
     uint8_t i;
-    uint8_t cathodes;
-    
+    uint8_t changed = 0;
+
     if (PIR3bits.TMR2IF) {
         current_row++;
         current_row &= 0x3;
-        
+
         // disable the cathode driver
         LATCbits.LATC2 = 1; // OE
         // also turn the anodes off
@@ -134,18 +138,14 @@ void __interrupt(irq(IRQ_TMR2), base(IVT_BASE)) processOutputs(void)
         SPI1TCNTH=0;     // 1 byte
         SPI1TCNTL=1;     // 1 byte
         SPI1TWIDTH=0;   // 8 bits
-        
+
         SPI1TXB = cathodes; // do the write and send the data
 
         // wait for data to be sent and latched to form the anode outputs
         // This takes quite a few cycles but we have to ensure the cathodes have the
         // right data before turning on the anodes otherwise we don't get a clean display.
-        //while (SPI1CON2bits.BUSY)
-        //while (! SPI1INTFbits.SRMTIF)
-        //while (SPI1INTFbits.TCZIF)
         while (! SPI1STATUSbits.TXBE)
             ;
-        
         // It can take up to 365ns for the TLC5917 outputs to output correct data (LE to OUT)
         // This is 5 instruction cycles (5 * 62.5 ns)
         // following code before enabling the cathodes is more than 5 instructions
@@ -165,14 +165,13 @@ void __interrupt(irq(IRQ_TMR2), base(IVT_BASE)) processOutputs(void)
                 LATCbits.LATC7 = 1;
                 break;
         }
-        
+
         // enable the cathode driver
         LATCbits.LATC2 = 0; //OE 
         // clear the timer interrupt flag ready for next timer expiry
         PIR3bits.TMR2IF = 0;
     }
 }
-
 
 
 /**

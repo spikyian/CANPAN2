@@ -38782,7 +38782,16 @@ extern uint16_t getNN(uint8_t tableIndex);
 extern uint16_t getEN(uint8_t tableIndex);
 extern uint8_t findEvent(uint16_t nodeNumber, uint16_t eventNumber);
 extern uint8_t addEvent(uint16_t nodeNumber, uint16_t eventNumber, uint8_t evNum, uint8_t evVal, Boolean forceOwnNN);
-# 109 "../../VLCBlib_PIC/event_teach.h"
+
+
+extern void rebuildHashtable(void);
+extern uint8_t getHash(uint16_t nodeNumber, uint16_t eventNumber);
+
+
+
+
+
+
 typedef struct {
     uint16_t NN;
     uint16_t EN;

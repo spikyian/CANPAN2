@@ -7,7 +7,7 @@
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.46\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
 # 1 "../canpan3Outputs.c" 2
-# 39 "../canpan3Outputs.c"
+# 42 "../canpan3Outputs.c"
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.46\\pic\\include\\xc.h" 1 3
 # 18 "C:\\Program Files\\Microchip\\xc8\\v2.46\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -37671,7 +37671,7 @@ __attribute__((__unsupported__("The READTIMER" "0" "() macro is not available wi
 unsigned char __t1rd16on(void);
 unsigned char __t3rd16on(void);
 # 33 "C:\\Program Files\\Microchip\\xc8\\v2.46\\pic\\include\\xc.h" 2 3
-# 39 "../canpan3Outputs.c" 2
+# 42 "../canpan3Outputs.c" 2
 
 # 1 "../module.h" 1
 
@@ -38761,14 +38761,14 @@ extern void leds_powerUp(void);
 extern void leds_poll(void);
 extern void showStatus(StatusDisplay s);
 # 8 "..\\module.h" 2
-# 40 "../canpan3Outputs.c" 2
+# 43 "../canpan3Outputs.c" 2
 
 # 1 "../canpan3Outputs.h" 1
 # 41 "../canpan3Outputs.h"
 extern void setLed(uint8_t no);
 extern void clearLed(uint8_t no);
 extern uint8_t testLed(uint8_t no);
-# 41 "../canpan3Outputs.c" 2
+# 44 "../canpan3Outputs.c" 2
 
 
 
@@ -38776,6 +38776,7 @@ extern uint8_t testLed(uint8_t no);
 
 static unsigned char current_row = 0;
 unsigned char ledMatrix[4];
+static uint8_t cathodes;
 
 void initOutputs(void) {
     uint8_t i;
@@ -38830,7 +38831,7 @@ void initOutputs(void) {
     T2CONbits.CKPS = 5;
     T2CONbits.OUTPS = 0;
     T2CLKCON = 1;
-    T2PR = 250;
+    T2PR = 16;
     T2HLTbits.MODE = 0;
 
     PIR3bits.TMR2IF = 0;
@@ -38847,7 +38848,7 @@ void __attribute__((picinterrupt(("irq(27), base(0x900)")))) processOutputs(void
 
 {
     uint8_t i;
-    uint8_t cathodes;
+    uint8_t changed = 0;
 
     if (PIR3bits.TMR2IF) {
         current_row++;
@@ -38871,12 +38872,8 @@ void __attribute__((picinterrupt(("irq(27), base(0x900)")))) processOutputs(void
 
 
 
-
-
-
         while (! SPI1STATUSbits.TXBE)
             ;
-
 
 
 
@@ -38903,7 +38900,6 @@ void __attribute__((picinterrupt(("irq(27), base(0x900)")))) processOutputs(void
         PIR3bits.TMR2IF = 0;
     }
 }
-
 
 
 

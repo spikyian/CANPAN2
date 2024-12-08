@@ -33,14 +33,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;../../VLCBlib_PIC/event_consumer_simple.c: 72: const Service eventConsumerService = {
 [c E22772 0 1 2 3 4 5 6 7 8 9 10 17 .. ]
 [n E22772 VlcbServiceTypes SERVICE_ID_NONE SERVICE_ID_MNS SERVICE_ID_NV SERVICE_ID_CAN SERVICE_ID_OLD_TEACH SERVICE_ID_PRODUCER SERVICE_ID_CONSUMER SERVICE_ID_TEACH SERVICE_ID_CONSUME_OWN_EVENTS SERVICE_ID_EVENTACK SERVICE_ID_BOOT SERVICE_ID_STREAMING  ]
-[v F23148 `(v ~T0 @X0 0 tf ]
+[v F23152 `(v ~T0 @X0 0 tf ]
 "58
 [; ;../../VLCBlib_PIC/event_consumer_simple.c: 58: static void consumerPowerUp(void);
 [v _consumerPowerUp `(v ~T0 @X0 0 sf ]
 "59
 [; ;../../VLCBlib_PIC/event_consumer_simple.c: 59: static Processed consumerProcessMessage(Message * m);
 [v _consumerProcessMessage `(E22972 ~T0 @X0 0 sf1`*S3224 ]
-[v F23152 `(v ~T0 @X0 0 tf ]
+[v F23156 `(v ~T0 @X0 0 tf ]
 "61
 [; ;../../VLCBlib_PIC/event_consumer_simple.c: 61: static uint8_t consumerEsdData(uint8_t index);
 [v _consumerEsdData `(uc ~T0 @X0 0 sf1`uc ]
@@ -3593,10 +3593,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 :U ..
 -> . `E22772 6 `uc
 -> -> 1 `i `uc
--> -> -> 0 `i `*v `*F23148
+-> -> -> 0 `i `*v `*F23152
 &U _consumerPowerUp
 &U _consumerProcessMessage
--> -> -> 0 `i `*v `*F23152
+-> -> -> 0 `i `*v `*F23156
 &U _consumerEsdData
 &U _consumerGetDiagnostic
 ..

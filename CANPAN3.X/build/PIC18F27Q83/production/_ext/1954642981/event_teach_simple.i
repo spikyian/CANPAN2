@@ -38838,7 +38838,16 @@ extern uint16_t getNN(uint8_t tableIndex);
 extern uint16_t getEN(uint8_t tableIndex);
 extern uint8_t findEvent(uint16_t nodeNumber, uint16_t eventNumber);
 extern uint8_t addEvent(uint16_t nodeNumber, uint16_t eventNumber, uint8_t evNum, uint8_t evVal, Boolean forceOwnNN);
-# 109 "../../VLCBlib_PIC/event_teach.h"
+
+
+extern void rebuildHashtable(void);
+extern uint8_t getHash(uint16_t nodeNumber, uint16_t eventNumber);
+
+
+
+
+
+
 typedef struct {
     uint16_t NN;
     uint16_t EN;
@@ -38883,7 +38892,10 @@ static DiagnosticVal teachDiagnostics[1 +1];
 
 
 uint8_t errno;
-# 158 "../../VLCBlib_PIC/event_teach_simple.c"
+
+
+uint8_t eventChains[32][20];
+# 162 "../../VLCBlib_PIC/event_teach_simple.c"
 const Service eventTeachService = {
     SERVICE_ID_OLD_TEACH,
     1,
@@ -38902,7 +38914,7 @@ const Service eventTeachService = {
     teachGetDiagnostic,
 
 };
-# 184 "../../VLCBlib_PIC/event_teach_simple.c"
+# 188 "../../VLCBlib_PIC/event_teach_simple.c"
 static void teachFactoryReset(void) {
     clearAllEvents();
 }
@@ -38914,6 +38926,9 @@ static void teachPowerUp(void) {
     uint8_t i;
 
 
+    rebuildHashtable();
+
+
 
     for (i=1; i<= 1; i++) {
         teachDiagnostics[i].asUint = 0;
@@ -38923,7 +38938,7 @@ static void teachPowerUp(void) {
     errno = 0;
     mode_flags &= ~1;
 }
-# 212 "../../VLCBlib_PIC/event_teach_simple.c"
+# 219 "../../VLCBlib_PIC/event_teach_simple.c"
 static Processed teachProcessMessage(Message* m) {
     switch(m->opc) {
 
@@ -39038,7 +39053,7 @@ static Processed teachProcessMessage(Message* m) {
     }
     return NOT_PROCESSED;
 }
-# 334 "../../VLCBlib_PIC/event_teach_simple.c"
+# 341 "../../VLCBlib_PIC/event_teach_simple.c"
 static Processed teachCheckLen(Message * m, uint8_t needed, uint8_t learn) {
     if (learn) {
 
@@ -39070,20 +39085,23 @@ static uint8_t teachGetESDdata(uint8_t id) {
         default: return 0;
     }
 }
-# 373 "../../VLCBlib_PIC/event_teach_simple.c"
+# 380 "../../VLCBlib_PIC/event_teach_simple.c"
 static DiagnosticVal * teachGetDiagnostic(uint8_t index) {
     if (index > 1) {
         return ((void*)0);
     }
     return &(teachDiagnostics[index]);
 }
-# 388 "../../VLCBlib_PIC/event_teach_simple.c"
+# 395 "../../VLCBlib_PIC/event_teach_simple.c"
 static void clearAllEvents(void) {
     uint8_t tableIndex;
 
     for (tableIndex=0; tableIndex<254; tableIndex++) {
         removeTableEntry(tableIndex);
     }
+
+    rebuildHashtable();
+
 }
 
 
@@ -39112,7 +39130,7 @@ static void doNnevn(void) {
 static void doNerd(void) {
     startTimedResponse(2, findServiceIndex(SERVICE_ID_OLD_TEACH), nerdCallback);
 }
-# 430 "../../VLCBlib_PIC/event_teach_simple.c"
+# 440 "../../VLCBlib_PIC/event_teach_simple.c"
 TimedResponseResult nerdCallback(uint8_t type, uint8_t serviceIndex, uint8_t step){
     Word nodeNumber, eventNumber;
 
@@ -39183,9 +39201,9 @@ static void doNnclr(void) {
     sendMessage5(OPC_GRSP, nn.bytes.hi, nn.bytes.lo, OPC_NNCLR, SERVICE_ID_OLD_TEACH, GRSP_OK);
 
 }
-# 510 "../../VLCBlib_PIC/event_teach_simple.c"
+# 520 "../../VLCBlib_PIC/event_teach_simple.c"
 static void doEvlrn(uint16_t nodeNumber, uint16_t eventNumber, uint8_t evNum, uint8_t evVal) {
-    uint8_t error;
+
     evNum--;
     if (evNum >= 13) {
         sendMessage3(OPC_CMDERR, nn.bytes.hi, nn.bytes.lo, CMDERR_INV_EV_IDX);
@@ -39197,9 +39215,9 @@ static void doEvlrn(uint16_t nodeNumber, uint16_t eventNumber, uint8_t evNum, ui
     APP_addEvent(nodeNumber, eventNumber, evNum, evVal, FALSE);
     if (errno) {
 
-        sendMessage3(OPC_CMDERR, nn.bytes.hi, nn.bytes.lo, error);
+        sendMessage3(OPC_CMDERR, nn.bytes.hi, nn.bytes.lo, errno);
 
-        sendMessage5(OPC_GRSP, nn.bytes.hi, nn.bytes.lo, OPC_EVLRN, SERVICE_ID_OLD_TEACH, error);
+        sendMessage5(OPC_GRSP, nn.bytes.hi, nn.bytes.lo, OPC_EVLRN, SERVICE_ID_OLD_TEACH, errno);
 
         return;
     }
@@ -39345,7 +39363,7 @@ TimedResponseResult reqevCallback(uint8_t tableIndex, uint8_t serviceIndex, uint
     }
     return TIMED_RESPONSE_RESULT_NEXT;
 }
-# 680 "../../VLCBlib_PIC/event_teach_simple.c"
+# 690 "../../VLCBlib_PIC/event_teach_simple.c"
 uint8_t removeEvent(uint16_t nodeNumber, uint16_t eventNumber) {
 
     uint8_t tableIndex = findEvent(nodeNumber, eventNumber);
@@ -39375,9 +39393,12 @@ static uint8_t removeTableEntry(uint8_t tableIndex) {
         writeNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex + (5 + i), 0x00);
     }
     flushFlashBlock();
+
+    rebuildHashtable();
+
     return 0;
 }
-# 726 "../../VLCBlib_PIC/event_teach_simple.c"
+# 739 "../../VLCBlib_PIC/event_teach_simple.c"
 uint8_t addEvent(uint16_t nodeNumber, uint16_t eventNumber, uint8_t evNum, uint8_t evVal, Boolean forceOwnNN) {
     uint8_t tableIndex;
 
@@ -39419,23 +39440,30 @@ uint8_t addEvent(uint16_t nodeNumber, uint16_t eventNumber, uint8_t evNum, uint8
     }
 
     flushFlashBlock();
+
+    rebuildHashtable();
+
     return tableIndex;
 }
-# 777 "../../VLCBlib_PIC/event_teach_simple.c"
+# 793 "../../VLCBlib_PIC/event_teach_simple.c"
 uint8_t findEvent(uint16_t nodeNumber, uint16_t eventNumber) {
-    uint8_t tableIndex;
-    for (tableIndex=0; tableIndex < 254; tableIndex++) {
-        uint16_t b = getEN(tableIndex);
-        if (b == eventNumber) {
-            b = getNN(tableIndex);
-            if (b == nodeNumber) {
-                return tableIndex;
-            }
+
+    uint8_t hash = getHash(nodeNumber, eventNumber);
+    uint8_t chainIdx;
+    for (chainIdx=0; chainIdx<20; chainIdx++) {
+        uint8_t tableIndex = eventChains[hash][chainIdx];
+        uint16_t nn, en;
+        if (tableIndex == 0xff) return 0xff;
+        nn = getNN(tableIndex);
+        en = getEN(tableIndex);
+        if ((nn == nodeNumber) && (en == eventNumber)) {
+            return tableIndex;
         }
     }
+# 819 "../../VLCBlib_PIC/event_teach_simple.c"
     return 0xff;
 }
-# 799 "../../VLCBlib_PIC/event_teach_simple.c"
+# 830 "../../VLCBlib_PIC/event_teach_simple.c"
 uint8_t writeEv(uint8_t tableIndex, uint8_t evNum, uint8_t evVal) {
     if (evNum >= 13) {
         return CMDERR_INV_EV_IDX;
@@ -39448,7 +39476,7 @@ uint8_t writeEv(uint8_t tableIndex, uint8_t evNum, uint8_t evVal) {
     writeNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex+5 +evNum, evVal);
     return 0;
 }
-# 819 "../../VLCBlib_PIC/event_teach_simple.c"
+# 850 "../../VLCBlib_PIC/event_teach_simple.c"
 int16_t getEv(uint8_t tableIndex, uint8_t evNum) {
     if (tableIndex >= 254) {
         return CMDERR_INV_EN_IDX;
@@ -39491,7 +39519,7 @@ uint8_t getEVs(uint8_t tableIndex) {
     }
     return 0;
 }
-# 869 "../../VLCBlib_PIC/event_teach_simple.c"
+# 900 "../../VLCBlib_PIC/event_teach_simple.c"
 uint16_t getNN(uint8_t tableIndex) {
     uint16_t hi;
     uint16_t lo;
@@ -39508,7 +39536,7 @@ uint16_t getNN(uint8_t tableIndex) {
     hi = (uint8_t)readNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex+0);
     return lo | (hi << 8);
 }
-# 893 "../../VLCBlib_PIC/event_teach_simple.c"
+# 924 "../../VLCBlib_PIC/event_teach_simple.c"
 uint16_t getEN(uint8_t tableIndex) {
     uint16_t hi;
     uint16_t lo;
@@ -39517,7 +39545,7 @@ uint16_t getEN(uint8_t tableIndex) {
     hi = (uint8_t)readNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex+2);
     return lo | (hi << 8);
 }
-# 915 "../../VLCBlib_PIC/event_teach_simple.c"
+# 946 "../../VLCBlib_PIC/event_teach_simple.c"
 static uint8_t evtIdxToTableIndex(uint8_t evtIdx) {
     return evtIdx - 1;
 }
@@ -39530,4 +39558,48 @@ static uint8_t evtIdxToTableIndex(uint8_t evtIdx) {
 
 static uint8_t tableIndexToEvtIdx(uint8_t tableIndex) {
     return tableIndex + 1;
+}
+# 978 "../../VLCBlib_PIC/event_teach_simple.c"
+uint8_t getHash(uint16_t nn, uint16_t en) {
+    uint8_t hash;
+
+    hash = (uint8_t)(nn ^ (nn >> 8U));
+    hash = (uint8_t)(7U*hash + (en ^ (en>>8U)));
+
+    hash %= 32;
+    return hash;
+}
+
+
+
+
+
+void rebuildHashtable(void) {
+
+    uint8_t hash;
+    uint8_t chainIdx;
+    uint8_t tableIndex;
+    int a;
+
+    for (hash=0; hash<32; hash++) {
+        for (chainIdx=0; chainIdx < 20; chainIdx++) {
+            eventChains[hash][chainIdx] = 0xff;
+        }
+    }
+
+    for (tableIndex=0; tableIndex<254; tableIndex++) {
+        if (getEN(tableIndex) != 0) {
+            int16_t ev;
+
+
+            hash = getHash(getNN(tableIndex), getEN(tableIndex));
+            for (chainIdx=0; chainIdx<20; chainIdx++) {
+                if (eventChains[hash][chainIdx] == 0xff) {
+
+                    eventChains[hash][chainIdx] = tableIndex;
+                    break;
+                }
+            }
+        }
+    }
 }

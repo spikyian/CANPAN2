@@ -283,20 +283,25 @@ uint8_t APP_addEvent(uint16_t nodeNumber, uint16_t eventNumber, uint8_t evNum, u
         /*
          * Processing of switch events follows the following table
          * 
-         * Row	New_EV2	Prev_EV2	EventId   LEDs	Note	Change
-            1	0	    0           Found	  Yes           No change
-            2	0	    0           Found	  No            Invalid event ? remove
-            3	0	    -           Not found -             Create new event?
-            4	0	    Valid       Found	  Yes           EV2=0 & create new default event for old EV2
-            5	0	    Valid       Found	  No            replace this event with default event for old EV2
-            6	0	    -           Not found -             Create new event?
-            7	Valid	0           Found	  Yes           EV2=new, switch2Event[new]?EV2=0. 
-            8	Valid	0           Found	  No    This old event should not be present	
-            9	Valid	-           Not found -             New event, EV2=new, switch2Event[new]?EV2=0. 
-            10	Valid	Match       Found	  Yes           No change
-            11	Valid	Match       Found	  No            No change
-            12	Valid	Match       Found	  Yes           EV2=new, create default EV2=old, switch2Event[old]?EV2=created. 
-            13	Valid	Match       Found	  No            EV2=new, create default EV2=old
+         * Row	New_EV2	Prev_EV2	EventId   Default   LEDs	Change
+            1	0	    0           Found               Yes     No change
+            2	0	    0           Found               No      Invalid event remove
+            3	0	    -           Not found           -       Create new event
+            4   0       Valid       Found     Yes       Yes     Error
+            4	0	    Valid       Found     No        Yes     EV2=0 & create new default event for old EV2
+            5   0       Valid       Found     Yes       No      Error
+            5	0	    Valid       Found     No        No      replace this event with default event for old EV2
+            6	0	    -           Not found           -       Create new event
+            7	Valid	0           Found               Yes     EV2=new, switch2Event[new]?EV2=0. 
+            8	Valid	0           Found               No      Invalid event remove	
+            9	Valid	-           Not found           -       New event, EV2=new, switch2Event[new]?EV2=0. 
+            10	Valid	Match       Found               Yes     No change
+            11	Valid	Match       Found               No      No change
+            12	Valid	Match       Found     Yes       Yes     Error
+            12	Valid	Match       Found     No        Yes     EV2=new, create default EV2=old, switch2Event[old]?EV2=created. 
+            13	Valid	Match       Found     Yes       No      Error
+            13	Valid	Match       Found     No        No      EV2=new, create default EV2=old
+         * 
          */
         if ((switchNo > 0) && (switchNo <= NUM_BUTTONS)) {   
             // valid new switch, ROWS 7~13
@@ -326,13 +331,14 @@ uint8_t APP_addEvent(uint16_t nodeNumber, uint16_t eventNumber, uint8_t evNum, u
                         return PROCESSED;
                     } else {
                         // ROW12, ROW13
-                        // Here we are changing the switch associated with this event
-                        // We should just be able to create a new default event for the prevSwitchEvent
+                        // Here we are changing the switch associated with this event.
+                        // Test if this is a default event and don't allow if it is
+                        if (readNVM(EVENT_TABLE_NVM_TYPE, EVENT_TABLE_ADDRESS + EVENTTABLE_WIDTH*tableIndex+EVENTTABLE_OFFSET_FLAGS) && EVENT_FLAG_DEFAULT) {
+                            errno = CMDERR_INV_EV_VALUE;
+                            return PROCESSED;
+                        }
+                        // Now we can just create a new default event for the prevSwitchEvent
                         // and then continue to allow this EV2 to be written for the event.
-                        // BUT what if this event is a default event for a switch.
-                        // It would be very complicated to permit this so just return an error instead.
-                        errno = CMDERR_INV_EV_VALUE;
-                        return PROCESSED;
                     }
                 }
             } else {

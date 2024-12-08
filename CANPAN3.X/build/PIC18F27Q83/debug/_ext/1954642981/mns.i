@@ -38868,7 +38868,16 @@ extern uint16_t getNN(uint8_t tableIndex);
 extern uint16_t getEN(uint8_t tableIndex);
 extern uint8_t findEvent(uint16_t nodeNumber, uint16_t eventNumber);
 extern uint8_t addEvent(uint16_t nodeNumber, uint16_t eventNumber, uint8_t evNum, uint8_t evVal, Boolean forceOwnNN);
-# 109 "../../VLCBlib_PIC/event_teach.h"
+
+
+extern void rebuildHashtable(void);
+extern uint8_t getHash(uint16_t nodeNumber, uint16_t eventNumber);
+
+
+
+
+
+
 typedef struct {
     uint16_t NN;
     uint16_t EN;
@@ -38881,11 +38890,11 @@ typedef uint8_t Happening;
 
 
 extern const Service eventProducerService;
-# 93 "../../VLCBlib_PIC/event_producer.h"
+# 95 "../../VLCBlib_PIC/event_producer.h"
 extern Boolean sendProducedEvent(Happening h, EventState state);
 extern void deleteHappeningRange(Happening happening, uint8_t number);
 extern void incrementProducerCounter(void);
-# 104 "../../VLCBlib_PIC/event_producer.h"
+# 106 "../../VLCBlib_PIC/event_producer.h"
 extern EventState APP_GetEventState(Happening h);
 
 
@@ -38899,7 +38908,7 @@ extern EventState APP_GetEventIndexState(uint8_t tableIndex);
 Boolean sendProducedEvent(Happening happening, EventState onOff);
 
 
-
+extern void rebuildHashtable(void);
 
 void setLEDsByMode(void);
 
@@ -39085,7 +39094,7 @@ static Processed mnsProcessMessage(Message * m) {
                     mode_state = MODE_NORMAL;
 
 
-
+                    rebuildHashtable();
 
 
                     sendMessage2(OPC_NNACK, nn.bytes.hi, nn.bytes.lo);

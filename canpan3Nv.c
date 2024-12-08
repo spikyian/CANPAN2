@@ -61,7 +61,7 @@ uint8_t APP_nvDefault(uint8_t index) {
  * We currently only validate the TYPE.
  */
 NvValidation APP_nvValidate(uint8_t index, uint8_t value)  {
-    if (value > 3) {
+    if ((index == NV_STARTUP) &&(value > 3)) {
         return INVALID;
     }
     return VALID;

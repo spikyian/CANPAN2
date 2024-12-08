@@ -38777,7 +38777,16 @@ extern uint16_t getNN(uint8_t tableIndex);
 extern uint16_t getEN(uint8_t tableIndex);
 extern uint8_t findEvent(uint16_t nodeNumber, uint16_t eventNumber);
 extern uint8_t addEvent(uint16_t nodeNumber, uint16_t eventNumber, uint8_t evNum, uint8_t evVal, Boolean forceOwnNN);
-# 109 "../../VLCBlib_PIC\\event_teach.h"
+
+
+extern void rebuildHashtable(void);
+extern uint8_t getHash(uint16_t nodeNumber, uint16_t eventNumber);
+
+
+
+
+
+
 typedef struct {
     uint16_t NN;
     uint16_t EN;
@@ -39049,7 +39058,7 @@ uint8_t APP_addEvent(uint16_t nodeNumber, uint16_t eventNumber, uint8_t evNum, u
 
             leds = evs[4] | evs[5] | evs[6] | evs[7];
         }
-# 301 "../canpan3Events.c"
+# 306 "../canpan3Events.c"
         if ((switchNo > 0) && (switchNo <= (8*4))) {
 
 
@@ -39080,11 +39089,12 @@ uint8_t APP_addEvent(uint16_t nodeNumber, uint16_t eventNumber, uint8_t evNum, u
 
 
 
+                        if (readNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex+4) && 1) {
+                            errno = CMDERR_INV_EV_VALUE;
+                            return PROCESSED;
+                        }
 
 
-
-                        errno = CMDERR_INV_EV_VALUE;
-                        return PROCESSED;
                     }
                 }
             } else {
@@ -39144,7 +39154,7 @@ uint8_t APP_addEvent(uint16_t nodeNumber, uint16_t eventNumber, uint8_t evNum, u
     }
     return addEvent(nodeNumber, eventNumber, evNum, evVal, forceOwnNN);
 }
-# 404 "../canpan3Events.c"
+# 410 "../canpan3Events.c"
 Processed APP_processConsumedEvent(uint8_t tableIndex, Message *m) {
     uint8_t onOff;
     uint8_t ledMode;
