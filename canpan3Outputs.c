@@ -104,11 +104,11 @@ void initOutputs(void) {
     // ready
     SPI1CON0bits.EN = 1;
    
-    // Set up TMR2 to generate interrupt every 2ms
-    T2CONbits.CKPS = 0;     // clock prescalar 1:1
+    // Set up TMR2 to generate interrupt every 78.12us which gives a 50Hz refresh
+    T2CONbits.CKPS = 5;     // clock prescalar 1:1
     T2CONbits.OUTPS = 0;    // clock postscalar 1:1
     T2CLKCON = 1;           // Fosc/4 clock source
-    T2PR = 16;              // duration
+    T2PR = 39;              // duration
     T2HLTbits.MODE = 0;     // free run mode
     
     PIR3bits.TMR2IF = 0;    // no outstanding interrupt
@@ -116,7 +116,7 @@ void initOutputs(void) {
     T2CONbits.ON = 1;       // enable timer
 }
 
-// Called every 2ms/NUM_BRIGHTNESS_LEVELS i.e. 125us
+// Called every 2ms/NUM_BRIGHTNESS_LEVELS i.e. 78us
 #if defined(_18F66K80_FAMILY_)
 void outputIsr(void) 
 #endif
