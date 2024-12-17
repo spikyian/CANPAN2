@@ -39153,7 +39153,7 @@ void loop(void) {
             lastInputScanTime.val = tickGet();
         }
 
-        if ((tickGet() - flashTime.val) > (62500/2)) {
+        if ((tickGet() - flashTime.val) > 1000*getNV(2)) {
             doFlash();
             flashTime.val = tickGet();
         }

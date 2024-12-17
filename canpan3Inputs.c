@@ -57,6 +57,8 @@ extern uint8_t switch2Event[NUM_BUTTONS];
 #define MODE_ON_OFF     1
 #define MODE_ONOFF_ONLY 2
 #define MODE_TOGGLE     3
+#define MODE_PAIR       4   // Odd switches
+#define MODE_PAIRED     5   // Even switches
 
 // forward declarations
 void driveColumn(void);

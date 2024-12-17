@@ -248,7 +248,7 @@ void loop(void) {
             lastInputScanTime.val = tickGet();
         }
         
-        if (tickTimeSince(flashTime) > HALF_SECOND) {
+        if (tickTimeSince(flashTime) > 1000*getNV(NV_FLASHRATE)) {
             doFlash();    // update flashing LEDs
             flashTime.val = tickGet();
         }

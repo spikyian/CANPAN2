@@ -38770,6 +38770,45 @@ extern void clearLed(uint8_t no);
 extern uint8_t testLed(uint8_t no);
 # 44 "../canpan3Outputs.c" 2
 
+# 1 "../canpan3Nv.h" 1
+# 45 "../canpan3Outputs.c" 2
+
+# 1 "../../VLCBlib_PIC\\nv.h" 1
+# 86 "../../VLCBlib_PIC\\nv.h"
+extern const Service nvService;
+
+
+
+
+typedef enum NvValidation {
+    INVALID=0,
+    VALID=1
+} NvValidation;
+# 103 "../../VLCBlib_PIC\\nv.h"
+extern NvValidation APP_nvValidate(uint8_t index, uint8_t value);
+# 116 "../../VLCBlib_PIC\\nv.h"
+extern int16_t getNV(uint8_t index);
+
+
+
+
+
+
+extern void saveNV(uint8_t index, uint8_t value);
+
+
+
+
+
+
+
+extern uint8_t setNV(uint8_t index, uint8_t value);
+
+
+
+extern void loadNvCache(void);
+# 46 "../canpan3Outputs.c" 2
+
 
 
 
@@ -38777,6 +38816,9 @@ extern uint8_t testLed(uint8_t no);
 static unsigned char current_row = 0;
 unsigned char ledMatrix[4];
 static uint8_t cathodes;
+
+
+static uint8_t brightness = 0;
 
 void initOutputs(void) {
     uint8_t i;
@@ -38828,7 +38870,7 @@ void initOutputs(void) {
     SPI1CON0bits.EN = 1;
 
 
-    T2CONbits.CKPS = 5;
+    T2CONbits.CKPS = 0;
     T2CONbits.OUTPS = 0;
     T2CLKCON = 1;
     T2PR = 16;
@@ -38848,54 +38890,76 @@ void __attribute__((picinterrupt(("irq(27), base(0x900)")))) processOutputs(void
 
 {
     uint8_t i;
-    uint8_t changed = 0;
 
     if (PIR3bits.TMR2IF) {
-        current_row++;
-        current_row &= 0x3;
+        if (brightness == 0) {
+            current_row++;
+            current_row &= 0x3;
 
 
-        LATCbits.LATC2 = 1;
+            LATCbits.LATC2 = 1;
 
-        LATBbits.LATB4 = 0;
-        LATBbits.LATB5 = 0;
-        LATCbits.LATC6 = 0;
-        LATCbits.LATC7 = 0;
+            LATBbits.LATB4 = 0;
+            LATBbits.LATB5 = 0;
+            LATCbits.LATC6 = 0;
+            LATCbits.LATC7 = 0;
 
-        cathodes = ledMatrix[current_row];
-        SPI1TCNTH=0;
-        SPI1TCNTL=1;
-        SPI1TWIDTH=0;
+            cathodes = ledMatrix[current_row];
+            SPI1TCNTH=0;
+            SPI1TCNTL=1;
+            SPI1TWIDTH=0;
 
-        SPI1TXB = cathodes;
-
-
-
-
-        while (! SPI1STATUSbits.TXBE)
-            ;
+            SPI1TXB = cathodes;
 
 
 
 
+            while (! SPI1STATUSbits.TXBE)
+                ;
 
-        switch (current_row) {
-            case 0:
-                LATBbits.LATB4 = 1;
-                break;
-            case 1:
-                LATBbits.LATB5 = 1;
-                break;
-            case 2:
-                LATCbits.LATC6 = 1;
-                break;
-            case 3:
-                LATCbits.LATC7 = 1;
-                break;
+
+
+
+
+            switch (current_row) {
+                case 0:
+                    LATBbits.LATB4 = 1;
+                    break;
+                case 1:
+                    LATBbits.LATB5 = 1;
+                    break;
+                case 2:
+                    LATCbits.LATC6 = 1;
+                    break;
+                case 3:
+                    LATCbits.LATC7 = 1;
+                    break;
+            }
+
+
+            LATCbits.LATC2 = 0;
+        } else {
+
+            LATCbits.LATC2 = 1;
+
+            for (i=0; i<8; i++) {
+                if (brightness > getNV(current_row*8 + i +3)) {
+                    cathodes &= ~(1 << i);
+                }
+            }
+
+            SPI1TXB = cathodes;
+
+
+            while (! SPI1STATUSbits.TXBE)
+                ;
+
+            LATCbits.LATC2 = 0;
         }
-
-
-        LATCbits.LATC2 = 0;
+        brightness++;
+        if (brightness == 32) {
+            brightness = 0;
+        }
 
         PIR3bits.TMR2IF = 0;
     }

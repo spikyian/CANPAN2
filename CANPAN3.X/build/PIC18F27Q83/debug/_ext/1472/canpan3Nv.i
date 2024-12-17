@@ -38807,12 +38807,12 @@ extern void loadNvCache(void);
 
 
 uint8_t APP_nvDefault(uint8_t index) {
-    if (index < 1) {
+    if (index < 33) {
 
-        switch(index) {
-            case 1:
+        if (index == 1)
                 return 0;
-        }
+        if (index =< (2 + (4*8)))
+                return 0xFF;
     }
     return 0;
 }
@@ -38822,7 +38822,7 @@ uint8_t APP_nvDefault(uint8_t index) {
 
 
 NvValidation APP_nvValidate(uint8_t index, uint8_t value) {
-    if (value > 3) {
+    if ((index == 1) &&(value > 3)) {
         return INVALID;
     }
     return VALID;

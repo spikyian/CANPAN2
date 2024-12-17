@@ -4061,7 +4061,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 3252 ]
 "393
 [; ;../../VLCBlib_PIC/mns.c: 393:                 sendMessage7(OPC_PARAMS, MANU_MERG, 'c',
-[e ( _sendMessage7 (4 , , , , , , , . `E22565 125 -> . `E22432 1 `uc -> -> 99 `ui `uc -> . `E22443 29 `uc -> -> 254 `i `uc -> -> 13 `i `uc -> -> 1 `i `uc -> -> 4 `i `uc ]
+[e ( _sendMessage7 (4 , , , , , , , . `E22565 125 -> . `E22432 1 `uc -> -> 99 `ui `uc -> . `E22443 29 `uc -> -> 254 `i `uc -> -> 13 `i `uc -> -> 33 `i `uc -> -> 4 `i `uc ]
 "396
 [; ;../../VLCBlib_PIC/mns.c: 396:                 return PROCESSED;
 [e ) . `E22972 1 ]
@@ -4938,8 +4938,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $ ! == -> ! != -> . . _PORTAbits 0 3 `i -> 0 `i `i -> 0 `i 3332  ]
 {
 "702
-[; ;../../VLCBlib_PIC/mns.c: 702:                 if (((tickGet() - pbTimer.val) > 62500) && ((tickGet() - pbTimer.val) < 2*62500)) {
-[e $ ! && > - ( _tickGet ..  . _pbTimer 0 -> -> 62500 `l `ul < - ( _tickGet ..  . _pbTimer 0 -> * -> -> 2 `i `l -> 62500 `l `ul 3333  ]
+[; ;../../VLCBlib_PIC/mns.c: 702:                 if (((tickGet() - pbTimer.val) > (62500/10)) && ((tickGet() - pbTimer.val) < 2*62500)) {
+[e $ ! && > - ( _tickGet ..  . _pbTimer 0 -> / -> 62500 `l -> -> 10 `i `l `ul < - ( _tickGet ..  . _pbTimer 0 -> * -> -> 2 `i `l -> 62500 `l `ul 3333  ]
 {
 "704
 [; ;../../VLCBlib_PIC/mns.c: 704:                     mode_state = setupModePreviousMode;
@@ -5012,8 +5012,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $ ! == -> ! != -> . . _PORTAbits 0 3 `i -> 0 `i `i -> 0 `i 3338  ]
 {
 "729
-[; ;../../VLCBlib_PIC/mns.c: 729:                 if (pbWasPushed && ((tickGet() - pbTimer.val) > 1*62500) && ((tickGet() - pbTimer.val) < 2*62500)) {
-[e $ ! && && != -> _pbWasPushed `i -> 0 `i > - ( _tickGet ..  . _pbTimer 0 -> * -> -> 1 `i `l -> 62500 `l `ul < - ( _tickGet ..  . _pbTimer 0 -> * -> -> 2 `i `l -> 62500 `l `ul 3339  ]
+[; ;../../VLCBlib_PIC/mns.c: 729:                 if (pbWasPushed && ((tickGet() - pbTimer.val) > (62500/10)) && ((tickGet() - pbTimer.val) < 2*62500)) {
+[e $ ! && && != -> _pbWasPushed `i -> 0 `i > - ( _tickGet ..  . _pbTimer 0 -> / -> 62500 `l -> -> 10 `i `l `ul < - ( _tickGet ..  . _pbTimer 0 -> * -> -> 2 `i `l -> 62500 `l `ul 3339  ]
 {
 "731
 [; ;../../VLCBlib_PIC/mns.c: 731:                     previousNN.word = nn.word;
@@ -5237,8 +5237,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;../../VLCBlib_PIC/mns.c: 831:     case PAR_NVNUM:
 [e :U 3360 ]
 "832
-[; ;../../VLCBlib_PIC/mns.c: 832:         return 1;
-[e ) -> -> 1 `i `uc ]
+[; ;../../VLCBlib_PIC/mns.c: 832:         return 33;
+[e ) -> -> 33 `i `uc ]
 [e $UE 3351  ]
 "833
 [; ;../../VLCBlib_PIC/mns.c: 833:     case PAR_MAJVER:
@@ -5347,8 +5347,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;../../VLCBlib_PIC/mns.c: 864:     case PAR_BETA:
 [e :U 3375 ]
 "865
-[; ;../../VLCBlib_PIC/mns.c: 865:         return 108;
-[e ) -> -> 108 `i `uc ]
+[; ;../../VLCBlib_PIC/mns.c: 865:         return 110;
+[e ) -> -> 110 `i `uc ]
 [e $UE 3351  ]
 "866
 [; ;../../VLCBlib_PIC/mns.c: 866:     default:

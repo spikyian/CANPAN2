@@ -25,7 +25,7 @@
 //
 // NV service
 //
-#define NV_NUM          1
+#define NV_NUM          66
 #define NV_ADDRESS      0x200
 #define NV_NVM_TYPE     EEPROM_NVM_TYPE
 

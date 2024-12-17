@@ -3913,8 +3913,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 [e :U 3247 ]
 "251
-[; ;../main.c: 251:         if ((tickGet() - flashTime.val) > (62500/2)) {
-[e $ ! > - ( _tickGet ..  . _flashTime 0 -> / -> 62500 `l -> -> 2 `i `l `ul 3248  ]
+[; ;../main.c: 251:         if ((tickGet() - flashTime.val) > 1000*getNV(2)) {
+[e $ ! > - ( _tickGet ..  . _flashTime 0 -> -> * -> 1000 `i -> ( _getNV (1 -> -> 2 `i `uc `i `l `ul 3248  ]
 {
 "252
 [; ;../main.c: 252:             doFlash();

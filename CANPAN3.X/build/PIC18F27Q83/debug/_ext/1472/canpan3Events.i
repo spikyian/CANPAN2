@@ -38971,12 +38971,9 @@ Processed APP_preProcessMessage(Message * m) {
             case OPC_EVLRNI:
 
                 errno = GRSP_OK;
-                if (eventTeachService.processMessage(m) == PROCESSED) {
-
-                    checkDefaultEvents();
-                    return PROCESSED;
-                }
-
+                eventTeachService.processMessage(m);
+                checkDefaultEvents();
+                return PROCESSED;
             default:
                 break;
         }
@@ -39058,7 +39055,7 @@ uint8_t APP_addEvent(uint16_t nodeNumber, uint16_t eventNumber, uint8_t evNum, u
 
             leds = evs[4] | evs[5] | evs[6] | evs[7];
         }
-# 306 "../canpan3Events.c"
+# 303 "../canpan3Events.c"
         if ((switchNo > 0) && (switchNo <= (8*4))) {
 
 
@@ -39154,7 +39151,7 @@ uint8_t APP_addEvent(uint16_t nodeNumber, uint16_t eventNumber, uint8_t evNum, u
     }
     return addEvent(nodeNumber, eventNumber, evNum, evVal, forceOwnNN);
 }
-# 410 "../canpan3Events.c"
+# 407 "../canpan3Events.c"
 Processed APP_processConsumedEvent(uint8_t tableIndex, Message *m) {
     uint8_t onOff;
     uint8_t ledMode;

@@ -39108,7 +39108,7 @@ static Processed mnsProcessMessage(Message * m) {
             case OPC_RQNP:
                 sendMessage7(OPC_PARAMS, MANU_MERG, 'c',
                         MTYP_CANPAN, 254, 13,
-                        1, 4);
+                        33, 4);
                 return PROCESSED;
             case OPC_RQMN:
                 sendMessage7(OPC_NAME, name[0], name[1], name[2], name[3],
@@ -39415,7 +39415,7 @@ static void mnsPoll(void) {
             if ((!(PORTAbits.RA3)) == 0) {
 
 
-                if (((tickGet() - pbTimer.val) > 62500) && ((tickGet() - pbTimer.val) < 2*62500)) {
+                if (((tickGet() - pbTimer.val) > (62500/10)) && ((tickGet() - pbTimer.val) < 2*62500)) {
 
                     mode_state = setupModePreviousMode;
                     if (mode_state == MODE_NORMAL) {
@@ -39442,7 +39442,7 @@ static void mnsPoll(void) {
 
             if ((!(PORTAbits.RA3)) == 0) {
 
-                if (pbWasPushed && ((tickGet() - pbTimer.val) > 1*62500) && ((tickGet() - pbTimer.val) < 2*62500)) {
+                if (pbWasPushed && ((tickGet() - pbTimer.val) > (62500/10)) && ((tickGet() - pbTimer.val) < 2*62500)) {
 
                     previousNN.word = nn.word;
                     nn.bytes.lo = nn.bytes.hi = 0;
@@ -39519,7 +39519,7 @@ static uint8_t getParameter(uint8_t idx) {
     case PAR_EVNUM:
         return 13;
     case PAR_NVNUM:
-        return 1;
+        return 33;
     case PAR_MAJVER:
         return 4;
     case PAR_FLAGS:
@@ -39552,7 +39552,7 @@ static uint8_t getParameter(uint8_t idx) {
     case PAR_CPUMAN:
         return CPUM_MICROCHIP;
     case PAR_BETA:
-        return 108;
+        return 110;
     default:
         return 0;
     }

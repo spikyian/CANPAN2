@@ -39,7 +39,9 @@
 
 // The possible NVs
 #define NV_STARTUP          1
-#define NV_BRIGHTNESS       2   // 32 entries 2..33
+#define NV_FLASHRATE        2
+#define NV_BRIGHTNESS       3   // 32 entries 3..34
+#define NV_SWITCHMODE       35   // 32 entries 35..66
 
 // The possible NV_STARTUP values
 #define NV_STARTUP_RESTORE  0
