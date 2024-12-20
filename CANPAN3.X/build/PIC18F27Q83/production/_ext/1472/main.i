@@ -39013,7 +39013,17 @@ extern void initEvents(void);
 extern void doFlash(void);
 extern uint8_t APP_isProducedEvent(uint8_t tableIndex);
 # 25 "../main.c" 2
-# 102 "../main.c"
+
+# 1 "../canpan3Outputs.h" 1
+# 40 "../canpan3Outputs.h"
+extern void initOutputs(void);
+extern void pollOutputs(void);
+
+extern void setLed(uint8_t no);
+extern void clearLed(uint8_t no);
+extern uint8_t testLed(uint8_t no);
+# 26 "../main.c" 2
+# 103 "../main.c"
 void __init(void);
 uint8_t checkCBUS( void);
 void ISRHigh(void);
@@ -39024,7 +39034,6 @@ void setType(uint8_t i, uint8_t type);
 void factoryResetEE(void);
 void factoryResetFlash(void);
 void factoryResetGlobalEvents(void);
-extern void initOutputs(void);
 extern void initLeds(void);
 extern void processActions(void);
 extern void processOutputs(void);
@@ -39158,8 +39167,9 @@ void loop(void) {
             flashTime.val = tickGet();
         }
     }
+    pollOutputs();
 }
-# 270 "../main.c"
+# 271 "../main.c"
 ValidTime APP_isSuitableTimeToWriteFlash(void){
     return GOOD_TIME;
 }

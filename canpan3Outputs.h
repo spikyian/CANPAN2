@@ -37,6 +37,8 @@
  * 
  */ 
 
+extern void initOutputs(void);
+extern void pollOutputs(void);
 
 extern void setLed(uint8_t no);
 extern void clearLed(uint8_t no);

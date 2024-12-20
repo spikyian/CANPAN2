@@ -60,8 +60,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "62 ../../VLCBlib_PIC\event_acknowledge.h
 [; ;../../VLCBlib_PIC\event_acknowledge.h: 62: extern const Service eventAckService;
 [v _eventAckService `CS3226 ~T0 @X0 0 e ]
-"111 ../main.c
-[; ;../main.c: 111: void factoryResetGlobalEvents(void);
+"112 ../main.c
+[; ;../main.c: 112: void factoryResetGlobalEvents(void);
 [v _factoryResetGlobalEvents `(v ~T0 @X0 0 ef ]
 "147 ../../VLCBlib_PIC\nvm.h
 [v _flushFlashBlock `(v ~T0 @X0 0 ef ]
@@ -105,10 +105,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "59889
 [; ;C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h: 59889: extern volatile unsigned char ANSELC __attribute__((address(0x410)));
 [v _ANSELC `Vuc ~T0 @X0 0 e@1040 ]
-"112 ../main.c
-[; ;../main.c: 112: extern void initOutputs(void);
+"40 ../canpan3Outputs.h
+[; ;../canpan3Outputs.h: 40: extern void initOutputs(void);
 [v _initOutputs `(v ~T0 @X0 0 ef ]
-"113
+"113 ../main.c
 [; ;../main.c: 113: extern void initLeds(void);
 [v _initLeds `(v ~T0 @X0 0 ef ]
 "43 ../canpan3Inputs.h
@@ -151,8 +151,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 "41 ../canpan3Events.h
 [; ;../canpan3Events.h: 41: extern void doFlash(void);
 [v _doFlash `(v ~T0 @X0 0 ef ]
-"270 ../main.c
-[; ;../main.c: 270: ValidTime APP_isSuitableTimeToWriteFlash(void){
+"41 ../canpan3Outputs.h
+[; ;../canpan3Outputs.h: 41: extern void pollOutputs(void);
+[v _pollOutputs `(v ~T0 @X0 0 ef ]
+"271 ../main.c
+[; ;../main.c: 271: ValidTime APP_isSuitableTimeToWriteFlash(void){
 [c E22865 0 1 .. ]
 [n E22865 ValidTime BAD_TIME GOOD_TIME  ]
 "364 C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h
@@ -3692,7 +3695,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 "126
 [; ;../main.c: 126: static TickValue flashTime;
 [v _flashTime `S3228 ~T0 @X0 1 s ]
-[v F23262 `*CS3226 ~T0 @X0 1 t ]
+[v F23269 `*CS3226 ~T0 @X0 1 t ]
 "128
 [; ;../main.c: 128: const Service * const services[] = {
 [v _services `C*CS3226 ~T0 @X0 -> 9 `i e ]
@@ -3931,35 +3934,38 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 [e :U 3246 ]
 "256
-[; ;../main.c: 256: }
+[; ;../main.c: 256:     pollOutputs();
+[e ( _pollOutputs ..  ]
+"257
+[; ;../main.c: 257: }
 [e :UE 3244 ]
 }
-"270
-[; ;../main.c: 270: ValidTime APP_isSuitableTimeToWriteFlash(void){
+"271
+[; ;../main.c: 271: ValidTime APP_isSuitableTimeToWriteFlash(void){
 [v _APP_isSuitableTimeToWriteFlash `(E22865 ~T0 @X0 1 ef ]
 {
 [e :U _APP_isSuitableTimeToWriteFlash ]
 [f ]
-"271
-[; ;../main.c: 271:     return GOOD_TIME;
+"272
+[; ;../main.c: 272:     return GOOD_TIME;
 [e ) . `E22865 1 ]
 [e $UE 3249  ]
-"272
-[; ;../main.c: 272: }
+"273
+[; ;../main.c: 273: }
 [e :UE 3249 ]
 }
-"277
-[; ;../main.c: 277: Processed APP_postProcessMessage(Message * m) {
+"278
+[; ;../main.c: 278: Processed APP_postProcessMessage(Message * m) {
 [v _APP_postProcessMessage `(E22922 ~T0 @X0 1 ef1`*S3221 ]
 {
 [e :U _APP_postProcessMessage ]
 [v _m `*S3221 ~T0 @X0 1 r1 ]
 [f ]
-"278
-[; ;../main.c: 278:     return NOT_PROCESSED;
+"279
+[; ;../main.c: 279:     return NOT_PROCESSED;
 [e ) . `E22922 0 ]
 [e $UE 3250  ]
-"279
-[; ;../main.c: 279: }
+"280
+[; ;../main.c: 280: }
 [e :UE 3250 ]
 }

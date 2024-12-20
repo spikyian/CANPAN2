@@ -103,100 +103,88 @@ void initOutputs(void) {
 
     // ready
     SPI1CON0bits.EN = 1;
-   
-    // Set up TMR2 to generate interrupt every 78.12us which gives a 50Hz refresh
-    T2CONbits.CKPS = 5;     // clock prescalar 1:1
-    T2CONbits.OUTPS = 0;    // clock postscalar 1:1
-    T2CLKCON = 1;           // Fosc/4 clock source
-    T2PR = 39;              // duration
-    T2HLTbits.MODE = 0;     // free run mode
-    
-    PIR3bits.TMR2IF = 0;    // no outstanding interrupt
-    PIE3bits.TMR2IE = 1;    // enable interrupts
-    T2CONbits.ON = 1;       // enable timer
 }
 
-// Called every 2ms/NUM_BRIGHTNESS_LEVELS i.e. 78us
-#if defined(_18F66K80_FAMILY_)
-void outputIsr(void) 
-#endif
-#if defined(_18FXXQ83_FAMILY_)
-void __interrupt(irq(IRQ_TMR2), base(IVT_BASE)) processOutputs(void) 
-#endif
+/**
+ *  Originally this was set up to be called by Timer 2 every 78us to give a 50Hz
+ *  refresh but this complexity is unnecessary and it is now just called from the 
+ *  poll loop.
+ */
+void pollOutputs(void)
 {
     uint8_t i;
     
-    if (PIR3bits.TMR2IF) {
-        if (brightness == 0) {
-            current_row++;
-            current_row &= 0x3;
+    if (brightness == 0) {
+        // move to next row
+        current_row++;
+        current_row &= 0x3;
 
-            // disable the cathode driver
-            LATCbits.LATC2 = 1; // OE
-            // also turn the anodes off
-            LATBbits.LATB4 = 0;
-            LATBbits.LATB5 = 0;
-            LATCbits.LATC6 = 0;
-            LATCbits.LATC7 = 0;
+        // disable the cathode driver
+        LATCbits.LATC2 = 1; // OE
+        // also turn the anodes off
+        LATBbits.LATB4 = 0;
+        LATBbits.LATB5 = 0;
+        LATCbits.LATC6 = 0;
+        LATCbits.LATC7 = 0;
 
-            cathodes = ledMatrix[current_row];
-            SPI1TCNTH=0;     // 1 byte
-            SPI1TCNTL=1;     // 1 byte
-            SPI1TWIDTH=0;   // 8 bits
+        cathodes = ledMatrix[current_row];
+        SPI1TCNTH=0;     // 1 byte
+        SPI1TCNTL=1;     // 1 byte
+        SPI1TWIDTH=0;   // 8 bits
 
-            SPI1TXB = cathodes; // do the write and send the data
+        SPI1TXB = cathodes; // do the write and send the data
 
-            // wait for data to be sent and latched to form the anode outputs
-            // This takes quite a few cycles but we have to ensure the cathodes have the
-            // right data before turning on the anodes otherwise we don't get a clean display.
-            while (! SPI1STATUSbits.TXBE)
-                ;
-            // It can take up to 365ns for the TLC5917 outputs to output correct data (LE to OUT)
-            // This is 5 instruction cycles (5 * 62.5 ns)
-            // following code before enabling the cathodes is more than 5 instructions
+        // wait for data to be sent and latched to form the anode outputs
+        // This takes quite a few cycles but we have to ensure the cathodes have the
+        // right data before turning on the anodes otherwise we don't get a clean display.
+        while (! SPI1STATUSbits.TXBE)
+            ;
+        // It can take up to 365ns for the TLC5917 outputs to output correct data (LE to OUT)
+        // This is 5 instruction cycles (5 * 62.5 ns)
+        // following code before enabling the cathodes is more than 5 instructions
 
-            // turn the relevant anode driver on
-            switch (current_row) {
-                case 0:
-                    LATBbits.LATB4 = 1;
-                    break;
-                case 1:
-                    LATBbits.LATB5 = 1;
-                    break;
-                case 2:
-                    LATCbits.LATC6 = 1;
-                    break;
-                case 3:
-                    LATCbits.LATC7 = 1;
-                    break;
-            }
-
-            // enable the cathode driver
-            LATCbits.LATC2 = 0; //OE 
-        } else {
-            // disable the cathode driver
-            LATCbits.LATC2 = 1; // OE
-            // here we are turning off the cathodes when brightness setting
-            for (i=0; i<8; i++) {
-                if (brightness > getNV(current_row*8 + i +NV_BRIGHTNESS)) {
-                    cathodes &= ~(1 << i);
-                }
-            }
-            // has been reached. We do NOT change the anodes here.
-            SPI1TXB = cathodes; // do the write and send the data
-            // This takes quite a few cycles but we have to ensure the cathodes have the
-            // right data before latching cathodes.
-            while (! SPI1STATUSbits.TXBE)
-                ;
-            // enable the cathode driver
-            LATCbits.LATC2 = 0; //OE
+        // turn the relevant anode driver on
+        switch (current_row) {
+            case 0:
+                LATBbits.LATB4 = 1;
+                break;
+            case 1:
+                LATBbits.LATB5 = 1;
+                break;
+            case 2:
+                LATCbits.LATC6 = 1;
+                break;
+            case 3:
+                LATCbits.LATC7 = 1;
+                break;
         }
-        brightness++;
-        if (brightness == MAX_BRIGHTNESS) {
-            brightness = 0;
+
+        // enable the cathode driver
+        LATCbits.LATC2 = 0; //OE 
+    } else {
+        // Same row but turn off any LEDs that have their brightness setting
+        // less than the current brightness.
+        
+        // disable the cathode driver
+        LATCbits.LATC2 = 1; // OE
+        // here we are turning off the cathodes when brightness setting
+        for (i=0; i<8; i++) {
+            if (brightness > getNV(current_row*8 + i +NV_BRIGHTNESS)) {
+                cathodes &= ~(1 << i);
+            }
         }
-        // clear the timer interrupt flag ready for next timer expiry
-        PIR3bits.TMR2IF = 0;
+        // has been reached. We do NOT change the anodes here.
+        SPI1TXB = cathodes; // do the write and send the data
+        // This takes quite a few cycles but we have to ensure the cathodes have the
+        // right data before latching cathodes.
+        while (! SPI1STATUSbits.TXBE)
+            ;
+        // enable the cathode driver
+        LATCbits.LATC2 = 0; //OE
+    }
+    brightness++;
+    if (brightness == MAX_BRIGHTNESS) {
+        brightness = 0;
     }
 }
 

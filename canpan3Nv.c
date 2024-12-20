@@ -52,7 +52,7 @@ uint8_t APP_nvDefault(uint8_t index) {
                 return NV_STARTUP_RESTORE;
         if (index == NV_FLASHRATE)
                 return HALF_SECOND/1000;
-        if (index <= (NV_BRIGHTNESS + NUM_LEDS))
+        if (index < (NV_BRIGHTNESS + NUM_LEDS))
                 return 0xFF;
         if (index <= (NV_SWITCHMODE + NUM_BUTTONS))
                 return 0x00;

@@ -49,3 +49,6 @@
 #define NV_STARTUP_SCAN     2
 #define NV_STARTUP_ALLOFF   3
 
+// Possible NV_SWITCHMODE bit values
+#define NV_SWITCHMODE_PAIRED 1
+

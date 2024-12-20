@@ -38764,7 +38764,10 @@ extern void showStatus(StatusDisplay s);
 # 43 "../canpan3Outputs.c" 2
 
 # 1 "../canpan3Outputs.h" 1
-# 41 "../canpan3Outputs.h"
+# 40 "../canpan3Outputs.h"
+extern void initOutputs(void);
+extern void pollOutputs(void);
+
 extern void setLed(uint8_t no);
 extern void clearLed(uint8_t no);
 extern uint8_t testLed(uint8_t no);
@@ -38868,17 +38871,6 @@ void initOutputs(void) {
 
 
     SPI1CON0bits.EN = 1;
-
-
-    T2CONbits.CKPS = 0;
-    T2CONbits.OUTPS = 0;
-    T2CLKCON = 1;
-    T2PR = 16;
-    T2HLTbits.MODE = 0;
-
-    PIR3bits.TMR2IF = 0;
-    PIE3bits.TMR2IE = 1;
-    T2CONbits.ON = 1;
 }
 
 
@@ -38886,82 +38878,81 @@ void initOutputs(void) {
 
 
 
-void __attribute__((picinterrupt(("irq(27), base(0x900)")))) processOutputs(void)
-
+void pollOutputs(void)
 {
     uint8_t i;
 
-    if (PIR3bits.TMR2IF) {
-        if (brightness == 0) {
-            current_row++;
-            current_row &= 0x3;
+    if (brightness == 0) {
+
+        current_row++;
+        current_row &= 0x3;
 
 
-            LATCbits.LATC2 = 1;
+        LATCbits.LATC2 = 1;
 
-            LATBbits.LATB4 = 0;
-            LATBbits.LATB5 = 0;
-            LATCbits.LATC6 = 0;
-            LATCbits.LATC7 = 0;
+        LATBbits.LATB4 = 0;
+        LATBbits.LATB5 = 0;
+        LATCbits.LATC6 = 0;
+        LATCbits.LATC7 = 0;
 
-            cathodes = ledMatrix[current_row];
-            SPI1TCNTH=0;
-            SPI1TCNTL=1;
-            SPI1TWIDTH=0;
+        cathodes = ledMatrix[current_row];
+        SPI1TCNTH=0;
+        SPI1TCNTL=1;
+        SPI1TWIDTH=0;
 
-            SPI1TXB = cathodes;
-
-
-
-
-            while (! SPI1STATUSbits.TXBE)
-                ;
+        SPI1TXB = cathodes;
 
 
 
 
-
-            switch (current_row) {
-                case 0:
-                    LATBbits.LATB4 = 1;
-                    break;
-                case 1:
-                    LATBbits.LATB5 = 1;
-                    break;
-                case 2:
-                    LATCbits.LATC6 = 1;
-                    break;
-                case 3:
-                    LATCbits.LATC7 = 1;
-                    break;
-            }
+        while (! SPI1STATUSbits.TXBE)
+            ;
 
 
-            LATCbits.LATC2 = 0;
-        } else {
-
-            LATCbits.LATC2 = 1;
-
-            for (i=0; i<8; i++) {
-                if (brightness > getNV(current_row*8 + i +3)) {
-                    cathodes &= ~(1 << i);
-                }
-            }
-
-            SPI1TXB = cathodes;
 
 
-            while (! SPI1STATUSbits.TXBE)
-                ;
 
-            LATCbits.LATC2 = 0;
-        }
-        brightness++;
-        if (brightness == 32) {
-            brightness = 0;
+        switch (current_row) {
+            case 0:
+                LATBbits.LATB4 = 1;
+                break;
+            case 1:
+                LATBbits.LATB5 = 1;
+                break;
+            case 2:
+                LATCbits.LATC6 = 1;
+                break;
+            case 3:
+                LATCbits.LATC7 = 1;
+                break;
         }
 
-        PIR3bits.TMR2IF = 0;
+
+        LATCbits.LATC2 = 0;
+    } else {
+
+
+
+
+        LATCbits.LATC2 = 1;
+
+        for (i=0; i<8; i++) {
+            if (brightness > getNV(current_row*8 + i +3)) {
+                cathodes &= ~(1 << i);
+            }
+        }
+
+        SPI1TXB = cathodes;
+
+
+        while (! SPI1STATUSbits.TXBE)
+            ;
+
+        LATCbits.LATC2 = 0;
+    }
+    brightness++;
+    if (brightness == 32) {
+        brightness = 0;
     }
 }
 

@@ -3,11 +3,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;../canpan3Leds.c: 45: static enum canpan3LedState ledStates[(4*8)];
 [c E23097 0 1 2 3 .. ]
 [n E23097 canpan3LedState CANPANLED_ON CANPANLED_OFF CANPANLED_FLASH CANPANLED_ANTIFLASH  ]
-"41 ../canpan3Outputs.h
-[; ;../canpan3Outputs.h: 41: extern void setLed(uint8_t no);
+"43 ../canpan3Outputs.h
+[; ;../canpan3Outputs.h: 43: extern void setLed(uint8_t no);
 [v _setLed `(v ~T0 @X0 0 ef1`uc ]
-"42
-[; ;../canpan3Outputs.h: 42: extern void clearLed(uint8_t no);
+"44
+[; ;../canpan3Outputs.h: 44: extern void clearLed(uint8_t no);
 [v _clearLed `(v ~T0 @X0 0 ef1`uc ]
 "364 C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h
 [; ;C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h: 364: __asm("BOOTREG equ 038h");

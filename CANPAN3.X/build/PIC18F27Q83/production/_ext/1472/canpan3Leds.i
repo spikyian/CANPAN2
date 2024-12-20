@@ -38778,7 +38778,10 @@ extern uint8_t outputState[(4*8)];
 # 42 "../canpan3Leds.c" 2
 
 # 1 "../canpan3Outputs.h" 1
-# 41 "../canpan3Outputs.h"
+# 40 "../canpan3Outputs.h"
+extern void initOutputs(void);
+extern void pollOutputs(void);
+
 extern void setLed(uint8_t no);
 extern void clearLed(uint8_t no);
 extern uint8_t testLed(uint8_t no);

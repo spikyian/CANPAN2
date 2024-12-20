@@ -45,6 +45,8 @@
 #include "nvm.h"
 #include "canpan3Events.h"
 #include "canpan3Inputs.h"
+#include "canpan3Nv.h"
+#include "nv.h"
 
 static uint8_t buttonState[NUM_BUTTON_COLUMNS];
 uint8_t outputState[NUM_BUTTONS];
@@ -64,7 +66,7 @@ extern uint8_t switch2Event[NUM_BUTTONS];
 void driveColumn(void);
 uint8_t findEventForSwitch(uint8_t buttonNo);
 TimedResponseResult sodTRCallback(uint8_t type, uint8_t serviceIndex, uint8_t step);
-void canpanSendProducedEvent(uint8_t tableIndex, uint8_t onOff, uint8_t sv);
+void canpanSendProducedEvent(uint8_t tableIndex, uint8_t onOff);
 EventState getSwitchEventState(uint8_t switchNo);
 
 /**
@@ -113,7 +115,7 @@ void inputScan(void) {
     uint8_t diff;
     uint8_t tableIndex;
     uint8_t sv;
-    uint8_t mode;
+    uint8_t switchMode;
     uint8_t onOff;
     uint8_t buttonNo;
     Word producedEventNN;
@@ -132,31 +134,43 @@ void inputScan(void) {
         if (diff & (1 << i)) {
             // has this particular switch changed?
             onOff = !!(row & (1 << i));
-            buttonNo = column*NUM_BUTTON_ROWS + i;
+            buttonNo = column*NUM_BUTTON_ROWS + i;  // 0 .. 31
             if (mode_flags & FLAG_MODE_LEARN) {
                 // when in teach mode we actually send a ARON1 instead of the event
                 sendMessage5(OPC_ARON1, nn.bytes.hi, nn.bytes.lo, 0, 0, buttonNo+1);
             } else {
-                tableIndex = findEventForSwitch(buttonNo);
+                switchMode = MODE_UNKNOWN;
+                tableIndex = findEventForSwitch(buttonNo & 0xFE);
+                if (tableIndex != NO_INDEX) {
+                    sv = (uint8_t)getNV(NV_SWITCHMODE + (buttonNo & 0xFE));
+                    if (sv & NV_SWITCHMODE_PAIRED) {
+                        switchMode = (buttonNo & 1) ? MODE_PAIRED : MODE_PAIR;
+                    } else {
+                        tableIndex = findEventForSwitch(buttonNo);
+                    }
+                }
+                
                 if (tableIndex != NO_INDEX) {
                     getEVs(tableIndex);
                     sv = evs[EV_SWITCHSV];
-                    // determine the switch mode using the SV event variable
-                    mode = MODE_ON_OFF;
-                    if (sv & SV_ON_OFF) {
-                        mode = MODE_ON_OFF;
-                    } else if (sv & SV_ON_ONLY) {
-                        mode = MODE_ONOFF_ONLY;
-                    } else if (sv & SV_TOGGLE) {
-                        mode = MODE_TOGGLE;
+                    if (switchMode == MODE_UNKNOWN) {
+                        // determine the switch mode using the SV event variable
+                        switchMode = MODE_ON_OFF;
+                        if (sv & SV_ON_OFF) {
+                            switchMode = MODE_ON_OFF;
+                        } else if (sv & SV_ON_ONLY) {
+                            switchMode = MODE_ONOFF_ONLY;
+                        } else if (sv & SV_TOGGLE) {
+                            switchMode = MODE_TOGGLE;
+                        }
                     }
                     // When in learn mode we'll act as if it is ON/OFF mode to send an ARON1
                     if (mode_flags & FLAG_MODE_LEARN) {
-                        mode = MODE_ON_OFF;
+                        switchMode = MODE_ON_OFF;
                     }
-                    if (mode != MODE_UNKNOWN){
+                    if (switchMode != MODE_UNKNOWN){
 
-                        switch(mode) {
+                        switch(switchMode) {
                             case MODE_ON_OFF:
                                 if (sv & SV_POLARITY) {   // invert
                                     onOff = !onOff;
@@ -183,11 +197,22 @@ void inputScan(void) {
                                 }
                                 onOff = outputState[buttonNo];
                                 break;
+                            case MODE_PAIR:
+                                if (! onOff) {
+                                    continue;
+                                }
+                                break;
+                            case MODE_PAIRED:
+                                if (! onOff) {
+                                    continue;
+                                }
+                                onOff = 0;  // force off
+                                break;
                         }
                         writeNVM(EEPROM_NVM_TYPE, EE_ADDR_SWITCHES + buttonNo, outputState[buttonNo]);
                         if (canpanScanReady) {
                             // send the event.
-                            canpanSendProducedEvent(tableIndex, onOff, sv);
+                            canpanSendProducedEvent(tableIndex, onOff);
                         }
                     }
                 }
@@ -223,7 +248,7 @@ void canpanSetAllSwitchOff(void) {
     }
 }
 
-void canpanSendProducedEvent(uint8_t tableIndex, uint8_t onOff, uint8_t sv) {
+void canpanSendProducedEvent(uint8_t tableIndex, uint8_t onOff) {
     uint8_t opc;
     Word producedEventNN;
     Word producedEventEN;
@@ -303,7 +328,7 @@ TimedResponseResult sodTRCallback(uint8_t type, uint8_t serviceIndex, uint8_t ta
     if (value != EVENT_UNKNOWN) {
         sv = evs[EV_SWITCHSV];
         if (!(sv & SV_ONLY)) { // Don't send ON ONLY nor OFF ONLY
-            canpanSendProducedEvent(tableIndex, value==EVENT_ON, evs[EV_SWITCHSV]);
+            canpanSendProducedEvent(tableIndex, value==EVENT_ON);
         }
     }
     return TIMED_RESPONSE_RESULT_NEXT;

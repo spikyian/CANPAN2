@@ -39108,7 +39108,7 @@ static Processed mnsProcessMessage(Message * m) {
             case OPC_RQNP:
                 sendMessage7(OPC_PARAMS, MANU_MERG, 'c',
                         MTYP_CANPAN, 254, 13,
-                        33, 4);
+                        66, 4);
                 return PROCESSED;
             case OPC_RQMN:
                 sendMessage7(OPC_NAME, name[0], name[1], name[2], name[3],
@@ -39519,7 +39519,7 @@ static uint8_t getParameter(uint8_t idx) {
     case PAR_EVNUM:
         return 13;
     case PAR_NVNUM:
-        return 33;
+        return 66;
     case PAR_MAJVER:
         return 4;
     case PAR_FLAGS:

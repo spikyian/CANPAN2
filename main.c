@@ -23,6 +23,7 @@
 #include "canpan3Nv.h"
 #include "canpan3Inputs.h"
 #include "canpan3Events.h"
+#include "canpan3Outputs.h"
 
 /*
   This work is licensed under the:
@@ -109,7 +110,6 @@ void setType(uint8_t i, uint8_t type);
 void factoryResetEE(void);
 void factoryResetFlash(void);
 void factoryResetGlobalEvents(void);
-extern void initOutputs(void);
 extern void initLeds(void);
 extern void processActions(void);
 extern void processOutputs(void);
@@ -253,6 +253,7 @@ void loop(void) {
             flashTime.val = tickGet();
         }
     }
+    pollOutputs();
 }
 
 // Application functions required by MERGLCB library
