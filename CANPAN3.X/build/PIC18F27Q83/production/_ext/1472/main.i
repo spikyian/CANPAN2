@@ -39002,6 +39002,7 @@ extern void inputScan(void);
 extern void doSoD(void);
 extern void canpanSetAllSwitchOff(void);
 extern void loadInputs(void);
+extern void doFlash(void);
 
 extern uint8_t outputState[(8*4)];
 extern uint8_t canpanScanReady;
@@ -39009,9 +39010,8 @@ extern uint8_t canpanScanReady;
 
 # 1 "../canpan3Events.h" 1
 # 40 "../canpan3Events.h"
-extern void initEvents(void);
-extern void doFlash(void);
 extern uint8_t APP_isProducedEvent(uint8_t tableIndex);
+extern void checkDefaultEvents(void);
 # 25 "../main.c" 2
 
 # 1 "../canpan3Outputs.h" 1

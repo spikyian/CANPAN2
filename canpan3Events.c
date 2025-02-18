@@ -88,10 +88,15 @@ uint8_t addDefaultEvent(uint8_t sw) {
     addEvent(nn.word, sw, EV_SWITCHNO, sw, TRUE);
     addEvent(nn.word, sw, EV_SWITCHSV, SV_TOGGLE | SV_COE, TRUE);
     // write the EVs so that these default events also turn on an LED for testing
-    addEvent(nn.word, sw, EV_LEDFLAGS1, ((uint16_t)1<<(sw-1))&0xFF, TRUE);
+/*    addEvent(nn.word, sw, EV_LEDFLAGS1, ((uint16_t)1<<(sw-1))&0xFF, TRUE);
     addEvent(nn.word, sw, EV_LEDFLAGS2, ((uint16_t)1<<(sw-9))&0xFF, TRUE);
     addEvent(nn.word, sw, EV_LEDFLAGS3, ((uint16_t)1<<(sw-17))&0xFF, TRUE);
-    addEvent(nn.word, sw, EV_LEDFLAGS4, ((uint16_t)1<<(sw-25))&0xFF, TRUE);
+    addEvent(nn.word, sw, EV_LEDFLAGS4, ((uint16_t)1<<(sw-25))&0xFF, TRUE); */
+    // The following settings to 0 are probably not required as 0 should be the default.
+    addEvent(nn.word, sw, EV_LEDFLAGS1, 0, TRUE);
+    addEvent(nn.word, sw, EV_LEDFLAGS2, 0, TRUE);
+    addEvent(nn.word, sw, EV_LEDFLAGS3, 0, TRUE);
+    addEvent(nn.word, sw, EV_LEDFLAGS4, 0, TRUE);
     addEvent(nn.word, sw, EV_LEDPOLARITY1, 0, TRUE);
     addEvent(nn.word, sw, EV_LEDPOLARITY2, 0, TRUE);
     addEvent(nn.word, sw, EV_LEDPOLARITY3, 0, TRUE);
@@ -280,33 +285,36 @@ uint8_t APP_addEvent(uint16_t nodeNumber, uint16_t eventNumber, uint8_t evNum, u
         /*
          * Processing of switch events follows the following table
          * 
-         * Row	New_EV2	Prev_EV2	EventId   Default   LEDs	Change
-            1	0	    0           Found               Yes     No change
-            2	0	    0           Found               No      Invalid event remove
-            3	0	    -           Not found           -       Create new event
-            4   0       Valid       Found     Yes       Yes     Error
-            4	0	    Valid       Found     No        Yes     EV2=0 & create new default event for old EV2
-            5   0       Valid       Found     Yes       No      Error
-            5	0	    Valid       Found     No        No      replace this event with default event for old EV2
-            6	0	    -           Not found           -       Create new event
-            7	Valid	0           Found               Yes     EV2=new, switch2Event[new]?EV2=0. 
-            8	Valid	0           Found               No      Invalid event remove	
-            9	Valid	-           Not found           -       New event, EV2=new, switch2Event[new]?EV2=0. 
-            10	Valid	Match       Found               Yes     No change
-            11	Valid	Match       Found               No      No change
-            12	Valid	Match       Found     Yes       Yes     Error
-            12	Valid	Match       Found     No        Yes     EV2=new, create default EV2=old, switch2Event[old]?EV2=created. 
-            13	Valid	Match       Found     Yes       No      Error
-            13	Valid	Match       Found     No        No      EV2=new, create default EV2=old
+        	EV2		                    EV1					
+        Row	New	    Old	                New	Old	EventId match	Default	LEDs	Changes
+        1	0	    0	                nc		Match		            Yes	    No change
+        2	0	    0	                nc		Match		            No	    Invalid event ? remove
+        3	0	    -	                0		No match		        -	    Create new event
+        4	0	    Valid	            nc		Match	        Yes	    Yes	    Error
+        5	0	    Valid	            nc		Match	        No	    Yes     EV2=0 & create new default event for old EV2
+        6	0	    Valid	            nc		Match	        Yes    	No	    Error
+        7	0	    Valid	            nc	0	Match	        No	    No	    replace this event with default event for old EV2
+        8	0	    Valid	            nc	SoD	Match	        No    	No	    Keep this event for SoD and create new default event for EV2
+        9	0	    -	                -	-	No match		        -	    Create new event
+        10	Valid	0	                nc		Match	    	        Yes	    EV2=new, switch2Event[new]?EV2=0. 
+        11	Valid	0	                nc  0	Match	    	        No	    Error Invalid request
+        12	Valid	0	                nc	SoD	Match	    	        No	    Error Invalid request
+        13	Valid	-	                -	-	No match		        -	    New event, EV2=new, switch2Event[new]?EV2=0. 
+        14	Valid	Valid and match    	nc		Match		            Yes     No change
+        15	Valid	Valid and match	    nc		Match		            No	    No change
+        16	Valid	Valid but no match	nc		Match	        Yes	    Yes     Error
+        17	Valid	Valid but no match	nc		Match	        No	    Yes	    EV2=new, create default EV2=old, switch2Event[old]?EV2=created. 
+        18	Valid	Valid but no match	nc		Match	        Yes    	No	    Error
+        19	Valid	Valid but no match	nc		Match	        No	    No	    EV2=new, create default EV2=old
          * 
          */
         if ((switchNo > 0) && (switchNo <= NUM_BUTTONS)) {   
-            // valid new switch, ROWS 7~13
+            // valid new switch, ROWS 10~19
             // find any previous event
             if (tableIndex != NO_INDEX) {
                 if (prevSwitchNo == 0) {
                     if (leds) {
-                        // ROW7
+                        // ROW 10
                         oti = switch2Event[switchNo-1];
                         if (oti != NO_INDEX) {
                             writeEv(oti, EV_SWITCHNO, 0);
@@ -315,31 +323,33 @@ uint8_t APP_addEvent(uint16_t nodeNumber, uint16_t eventNumber, uint8_t evNum, u
                         }
                         // continue to process normally now
                     } else {
-                        // ROW8
+                        // ROW 11,12
                         // shouldn't get here as this would have been an invalid event
                         // continue to fix
                     }
                 } else {
                     if (switchNo == prevSwitchNo) {
-                        // ROW10, ROW11
+                        // ROW14, ROW15
                         // No change to EV2
                         // do nothing
                         // Send a WRACK - difference from CBUS
                         return PROCESSED;
                     } else {
-                        // ROW12, ROW13
+                        // ROW 16~19
                         // Here we are changing the switch associated with this event.
                         // Test if this is a default event and don't allow if it is
                         if (readNVM(EVENT_TABLE_NVM_TYPE, EVENT_TABLE_ADDRESS + EVENTTABLE_WIDTH*tableIndex+EVENTTABLE_OFFSET_FLAGS) && EVENT_FLAG_DEFAULT) {
+                            // ROW 16,18
                             errno = CMDERR_INV_EV_VALUE;
                             return PROCESSED;
                         }
+                        // ROW 17,19
                         // Now we can just create a new default event for the prevSwitchEvent
                         // and then continue to allow this EV2 to be written for the event.
                     }
                 }
             } else {
-                // ROW9
+                // ROW 13
                 oti = switch2Event[switchNo-1];
                 if (oti != NO_INDEX) {
                     writeEv(oti, EV_SWITCHNO, 0);
@@ -349,7 +359,7 @@ uint8_t APP_addEvent(uint16_t nodeNumber, uint16_t eventNumber, uint8_t evNum, u
                 // continue to process normally now
             }
         } else {
-            // invalid new switch value specified, ROWS 1~6
+            // invalid new switch value specified, ROWS 1~9
             // force switchNo to zero
             switchNo = 0;
             evVal = 0;
@@ -358,11 +368,11 @@ uint8_t APP_addEvent(uint16_t nodeNumber, uint16_t eventNumber, uint8_t evNum, u
                 // matches an existing event
                 if (prevSwitchNo == 0) {
                     if (leds) {
-                        // ROW1
+                        // ROW 1
                         // do nothing
                         return PROCESSED;
                     } else {
-                        // ROW2
+                        // ROW 2
                         // this is an invalid event with no switches and no LEDs
                         // remove it
                         writeNVM(EVENT_TABLE_NVM_TYPE, EVENT_TABLE_ADDRESS + EVENTTABLE_WIDTH*tableIndex+EVENTTABLE_OFFSET_ENL, 0);
@@ -373,22 +383,30 @@ uint8_t APP_addEvent(uint16_t nodeNumber, uint16_t eventNumber, uint8_t evNum, u
                     // existing event had a valid switch
                     // Test if this is a default event and don't allow if it is
                     if (readNVM(EVENT_TABLE_NVM_TYPE, EVENT_TABLE_ADDRESS + EVENTTABLE_WIDTH*tableIndex+EVENTTABLE_OFFSET_FLAGS) && EVENT_FLAG_DEFAULT) {
+                        // ROW 4,6
                         errno = CMDERR_INV_EV_VALUE;
                         return PROCESSED;
                     }
                     if (leds) {
-                        // ROW4
+                        // ROW 5
                         // let standard processing write EV2=0 and create a new default event
                     } else {
-                        // ROW5
-                        // delete this event and let standard processing write EV2=0 and create a new default event
-                        writeNVM(EVENT_TABLE_NVM_TYPE, EVENT_TABLE_ADDRESS + EVENTTABLE_WIDTH*tableIndex+EVENTTABLE_OFFSET_ENL, 0);
-                        writeNVM(EVENT_TABLE_NVM_TYPE, EVENT_TABLE_ADDRESS + EVENTTABLE_WIDTH*tableIndex+EVENTTABLE_OFFSET_ENH, 0);
+                        // ROW 7~8
+                        
+                        if ((evs[EV_TYPE] == CANPAN_SELF_SOD) || (evs[EV_TYPE] == CANPAN_SOD)) {
+                            // ROW 8
+                            // let standard processing write EV2=0 and create a new default event
+                        } else {
+                            // ROW 7
+                            // delete this event and let standard processing write EV2=0 and create a new default event
+                            writeNVM(EVENT_TABLE_NVM_TYPE, EVENT_TABLE_ADDRESS + EVENTTABLE_WIDTH*tableIndex+EVENTTABLE_OFFSET_ENL, 0);
+                            writeNVM(EVENT_TABLE_NVM_TYPE, EVENT_TABLE_ADDRESS + EVENTTABLE_WIDTH*tableIndex+EVENTTABLE_OFFSET_ENH, 0);
+                        }
                     }
                 }
             } else {
                 // doesn't match an existing event
-                // ROW3, ROW6
+                // ROW 3, ROW 9
                 // Let normal handling create this event, not associated with a switch
             }
         }

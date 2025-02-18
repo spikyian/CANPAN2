@@ -102,6 +102,7 @@ void initInputs(void) {
     for (i=0; i<NUM_BUTTON_COLUMNS; i++) {
         buttonState[i] = 0;
     }
+    checkDefaultEvents();
 }
 
 /**

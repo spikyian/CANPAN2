@@ -3651,8 +3651,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;../../VLCBlib_PIC/nvm.c: 157:     flashFlags.asByte = 0;
 [e = . _flashFlags 0 -> -> 0 `i `uc ]
 "158
-[; ;../../VLCBlib_PIC/nvm.c: 158:     flashBlock = 0x0700;
-[e = _flashBlock -> -> -> 1792 `i `m `um ]
+[; ;../../VLCBlib_PIC/nvm.c: 158:     flashBlock = 0x0800;
+[e = _flashBlock -> -> -> 2048 `i `m `um ]
 "160
 [; ;../../VLCBlib_PIC/nvm.c: 160:     TBLPTRU = 0;
 [e = _TBLPTRU -> -> 0 `i `uc ]

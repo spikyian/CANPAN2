@@ -38813,7 +38813,7 @@ static flash_address_t flashBlock;
 # 156 "../../VLCBlib_PIC/nvm.c"
 void initRomOps(void) {
     flashFlags.asByte = 0;
-    flashBlock = 0x0700;
+    flashBlock = 0x0800;
 
     TBLPTRU = 0;
 

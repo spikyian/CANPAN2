@@ -37,9 +37,8 @@
  * 
  */ 
 
-extern void initEvents(void);
-extern void doFlash(void);
 extern uint8_t APP_isProducedEvent(uint8_t tableIndex);
+extern void checkDefaultEvents(void);
 
 // EV1 value
 #define CANPAN_CONSUMED 0

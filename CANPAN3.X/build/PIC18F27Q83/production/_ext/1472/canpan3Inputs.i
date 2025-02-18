@@ -38877,9 +38877,8 @@ extern EventState APP_GetEventIndexState(uint8_t tableIndex);
 
 # 1 "../canpan3Events.h" 1
 # 40 "../canpan3Events.h"
-extern void initEvents(void);
-extern void doFlash(void);
 extern uint8_t APP_isProducedEvent(uint8_t tableIndex);
+extern void checkDefaultEvents(void);
 # 46 "../canpan3Inputs.c" 2
 
 # 1 "../canpan3Inputs.h" 1
@@ -38889,6 +38888,7 @@ extern void inputScan(void);
 extern void doSoD(void);
 extern void canpanSetAllSwitchOff(void);
 extern void loadInputs(void);
+extern void doFlash(void);
 
 extern uint8_t outputState[(8*4)];
 extern uint8_t canpanScanReady;
@@ -38980,6 +38980,7 @@ void initInputs(void) {
     for (i=0; i<8; i++) {
         buttonState[i] = 0;
     }
+    checkDefaultEvents();
 }
 
 
@@ -39181,7 +39182,7 @@ uint8_t findEventForSwitch(uint8_t switchNo) {
 void doSoD(void) {
     startTimedResponse(1, findServiceIndex(SERVICE_ID_PRODUCER), sodTRCallback);
 }
-# 318 "../canpan3Inputs.c"
+# 319 "../canpan3Inputs.c"
 TimedResponseResult sodTRCallback(uint8_t type, uint8_t serviceIndex, uint8_t tableIndex) {
     EventState value;
     uint8_t sv;

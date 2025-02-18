@@ -139,8 +139,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "47 ../canpan3Inputs.h
 [; ;../canpan3Inputs.h: 47: extern void loadInputs(void);
 [v _loadInputs `(v ~T0 @X0 0 ef ]
-"50
-[; ;../canpan3Inputs.h: 50: extern uint8_t canpanScanReady;
+"51
+[; ;../canpan3Inputs.h: 51: extern uint8_t canpanScanReady;
 [v _canpanScanReady `uc ~T0 @X0 0 e ]
 "46
 [; ;../canpan3Inputs.h: 46: extern void canpanSetAllSwitchOff(void);
@@ -148,8 +148,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "44
 [; ;../canpan3Inputs.h: 44: extern void inputScan(void);
 [v _inputScan `(v ~T0 @X0 0 ef ]
-"41 ../canpan3Events.h
-[; ;../canpan3Events.h: 41: extern void doFlash(void);
+"48
+[; ;../canpan3Inputs.h: 48: extern void doFlash(void);
 [v _doFlash `(v ~T0 @X0 0 ef ]
 "41 ../canpan3Outputs.h
 [; ;../canpan3Outputs.h: 41: extern void pollOutputs(void);
