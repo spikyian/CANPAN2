@@ -133,8 +133,7 @@ const Service * const services[] = {
     &eventTeachService,
     &eventConsumerService,
     &eventProducerService,
-    &eventCoeService,
-    &eventAckService
+    &eventCoeService
 };
 
 

@@ -1,8 +1,8 @@
 Version 4.0 HI-TECH Software Intermediate Code
 "67 ../canpan3Nv.c
 [; ;../canpan3Nv.c: 67: NvValidation APP_nvValidate(uint8_t index, uint8_t value) {
-[c E23098 0 1 .. ]
-[n E23098 NvValidation INVALID VALID  ]
+[c E23099 0 1 .. ]
+[n E23099 NvValidation INVALID VALID  ]
 "364 C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h
 [; ;C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h: 364: __asm("BOOTREG equ 038h");
 [; <" BOOTREG equ 038h ;# ">
@@ -3550,11 +3550,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $UE 3231  ]
 [e :U 3234 ]
 "55
-[; ;../canpan3Nv.c: 55:         if (index <= (3 + (4*8)))
-[e $ ! <= -> _index `i + -> 3 `i * -> 4 `i -> 8 `i 3235  ]
+[; ;../canpan3Nv.c: 55:         if (index < (3 + (4*8)))
+[e $ ! < -> _index `i + -> 3 `i * -> 4 `i -> 8 `i 3235  ]
 "56
-[; ;../canpan3Nv.c: 56:                 return 0xFF;
-[e ) -> -> 255 `i `uc ]
+[; ;../canpan3Nv.c: 56:                 return 0x0F;
+[e ) -> -> 15 `i `uc ]
 [e $UE 3231  ]
 [e :U 3235 ]
 "57
@@ -3579,7 +3579,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 "67
 [; ;../canpan3Nv.c: 67: NvValidation APP_nvValidate(uint8_t index, uint8_t value) {
-[v _APP_nvValidate `(E23098 ~T0 @X0 1 ef2`uc`uc ]
+[v _APP_nvValidate `(E23099 ~T0 @X0 1 ef2`uc`uc ]
 {
 [e :U _APP_nvValidate ]
 [v _index `uc ~T0 @X0 1 r1 ]
@@ -3591,7 +3591,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "69
 [; ;../canpan3Nv.c: 69:         return INVALID;
-[e ) . `E23098 0 ]
+[e ) . `E23099 0 ]
 [e $UE 3237  ]
 "70
 [; ;../canpan3Nv.c: 70:     }
@@ -3599,7 +3599,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 3238 ]
 "71
 [; ;../canpan3Nv.c: 71:     return VALID;
-[e ) . `E23098 1 ]
+[e ) . `E23099 1 ]
 [e $UE 3237  ]
 "72
 [; ;../canpan3Nv.c: 72: }

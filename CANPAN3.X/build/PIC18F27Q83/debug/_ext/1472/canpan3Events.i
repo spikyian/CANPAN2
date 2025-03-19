@@ -37681,6 +37681,7 @@ unsigned char __t3rd16on(void);
 
 
 
+
 # 1 "../../VLCBlib_PIC\\statusLeds.h" 1
 # 42 "../../VLCBlib_PIC\\statusLeds.h"
 # 1 "../../VLCBlib_PIC/vlcb.h" 1
@@ -37700,7 +37701,6 @@ typedef enum VlcbManufacturer
   MANU_SPROG = 44,
   MANU_ROCRAIL = 70,
   MANU_SPECTRUM = 80,
-  MANU_MERG_VLCB = 250,
   MANU_VLCB = 250,
   MANU_SYSPIXIE = 249,
   MANU_RME = 248,
@@ -38256,6 +38256,8 @@ typedef enum VlcbModeParams
   MODE_HEARTBEAT_OFF = 0x0D,
 
   MODE_BOOT = 0x0E,
+  MODE_FCUCOMPAT_ON = 0x10,
+  MODE_FCUCOMPAT_OFF = 0x11,
 } VlcbModeParams;
 
 typedef enum VlcbBusTypes
@@ -38440,7 +38442,7 @@ extern uint8_t writeNVM(NVMtype type, uint24_t index, uint8_t value);
 
 extern ValidTime APP_isSuitableTimeToWriteFlash(void);
 # 40 "../../VLCBlib_PIC/vlcb.h" 2
-# 83 "../../VLCBlib_PIC/vlcb.h"
+# 82 "../../VLCBlib_PIC/vlcb.h"
 typedef enum Priority {
     pLOW=0,
     pNORMAL=1,
@@ -38495,7 +38497,7 @@ typedef enum {
     EVENT_OFF=0,
     EVENT_ON=1
 } EventState;
-# 148 "../../VLCBlib_PIC/vlcb.h"
+# 147 "../../VLCBlib_PIC/vlcb.h"
 typedef union DiagnosticVal {
     uint16_t asUint;
     int16_t asInt;
@@ -38521,6 +38523,7 @@ typedef enum Mode_state {
     EMODE_SETUP,
     EMODE_NORMAL
 } Mode_state;
+
 
 
 
@@ -38760,7 +38763,7 @@ typedef enum {
 extern void leds_powerUp(void);
 extern void leds_poll(void);
 extern void showStatus(StatusDisplay s);
-# 8 "..\\module.h" 2
+# 9 "..\\module.h" 2
 # 40 "../canpan3Events.c" 2
 
 # 1 "../../VLCBlib_PIC\\event_teach.h" 1
@@ -38821,9 +38824,8 @@ extern TickValue pbTimer;
 
 # 1 "../canpan3Events.h" 1
 # 40 "../canpan3Events.h"
-extern void initEvents(void);
-extern void doFlash(void);
 extern uint8_t APP_isProducedEvent(uint8_t tableIndex);
+extern void checkDefaultEvents(void);
 # 43 "../canpan3Events.c" 2
 
 # 1 "../canpan3Leds.h" 1
@@ -38847,6 +38849,7 @@ extern void inputScan(void);
 extern void doSoD(void);
 extern void canpanSetAllSwitchOff(void);
 extern void loadInputs(void);
+extern void doFlash(void);
 
 extern uint8_t outputState[(8*4)];
 extern uint8_t canpanScanReady;
@@ -38873,10 +38876,15 @@ uint8_t addDefaultEvent(uint8_t sw) {
     addEvent(nn.word, sw, 1, sw, TRUE);
     addEvent(nn.word, sw, 2, 8 | 0b00010000, TRUE);
 
-    addEvent(nn.word, sw, 4, ((uint16_t)1<<(sw-1))&0xFF, TRUE);
-    addEvent(nn.word, sw, 5, ((uint16_t)1<<(sw-9))&0xFF, TRUE);
-    addEvent(nn.word, sw, 6, ((uint16_t)1<<(sw-17))&0xFF, TRUE);
-    addEvent(nn.word, sw, 7, ((uint16_t)1<<(sw-25))&0xFF, TRUE);
+
+
+
+
+
+    addEvent(nn.word, sw, 4, 0, TRUE);
+    addEvent(nn.word, sw, 5, 0, TRUE);
+    addEvent(nn.word, sw, 6, 0, TRUE);
+    addEvent(nn.word, sw, 7, 0, TRUE);
     addEvent(nn.word, sw, 8, 0, TRUE);
     addEvent(nn.word, sw, 9, 0, TRUE);
     addEvent(nn.word, sw, 10, 0, TRUE);
@@ -38911,7 +38919,7 @@ void checkDefaultEvents(void) {
         }
     }
 }
-# 137 "../canpan3Events.c"
+# 142 "../canpan3Events.c"
 uint8_t APP_isConsumedEvent(uint8_t tableIndex) {
     int16_t ev;
 
@@ -39055,7 +39063,7 @@ uint8_t APP_addEvent(uint16_t nodeNumber, uint16_t eventNumber, uint8_t evNum, u
 
             leds = evs[4] | evs[5] | evs[6] | evs[7];
         }
-# 303 "../canpan3Events.c"
+# 311 "../canpan3Events.c"
         if ((switchNo > 0) && (switchNo <= (8*4))) {
 
 
@@ -39087,9 +39095,11 @@ uint8_t APP_addEvent(uint16_t nodeNumber, uint16_t eventNumber, uint8_t evNum, u
 
 
                         if (readNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex+4) && 1) {
+
                             errno = CMDERR_INV_EV_VALUE;
                             return PROCESSED;
                         }
+
 
 
                     }
@@ -39129,6 +39139,7 @@ uint8_t APP_addEvent(uint16_t nodeNumber, uint16_t eventNumber, uint8_t evNum, u
 
 
                     if (readNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex+4) && 1) {
+
                         errno = CMDERR_INV_EV_VALUE;
                         return PROCESSED;
                     }
@@ -39138,8 +39149,15 @@ uint8_t APP_addEvent(uint16_t nodeNumber, uint16_t eventNumber, uint8_t evNum, u
                     } else {
 
 
-                        writeNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex+3, 0);
-                        writeNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex+2, 0);
+                        if ((evs[0] == 3) || (evs[0] == 2)) {
+
+
+                        } else {
+
+
+                            writeNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex+3, 0);
+                            writeNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex+2, 0);
+                        }
                     }
                 }
             } else {
@@ -39151,7 +39169,7 @@ uint8_t APP_addEvent(uint16_t nodeNumber, uint16_t eventNumber, uint8_t evNum, u
     }
     return addEvent(nodeNumber, eventNumber, evNum, evVal, forceOwnNN);
 }
-# 407 "../canpan3Events.c"
+# 425 "../canpan3Events.c"
 Processed APP_processConsumedEvent(uint8_t tableIndex, Message *m) {
     uint8_t onOff;
     uint8_t ledMode;

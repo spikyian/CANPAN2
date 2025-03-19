@@ -37683,6 +37683,7 @@ unsigned char __t3rd16on(void);
 
 
 
+
 # 1 "../../VLCBlib_PIC\\statusLeds.h" 1
 # 42 "../../VLCBlib_PIC\\statusLeds.h"
 # 1 "../../VLCBlib_PIC/vlcb.h" 1
@@ -37771,7 +37772,7 @@ typedef enum {
 extern void leds_powerUp(void);
 extern void leds_poll(void);
 extern void showStatus(StatusDisplay s);
-# 8 "..\\module.h" 2
+# 9 "..\\module.h" 2
 # 38 "../../VLCBlib_PIC/vlcb.h" 2
 
 # 1 "../../VLCB-defs\\vlcbdefs_enums.h" 1
@@ -37786,7 +37787,6 @@ typedef enum VlcbManufacturer
   MANU_SPROG = 44,
   MANU_ROCRAIL = 70,
   MANU_SPECTRUM = 80,
-  MANU_MERG_VLCB = 250,
   MANU_VLCB = 250,
   MANU_SYSPIXIE = 249,
   MANU_RME = 248,
@@ -38342,6 +38342,8 @@ typedef enum VlcbModeParams
   MODE_HEARTBEAT_OFF = 0x0D,
 
   MODE_BOOT = 0x0E,
+  MODE_FCUCOMPAT_ON = 0x10,
+  MODE_FCUCOMPAT_OFF = 0x11,
 } VlcbModeParams;
 
 typedef enum VlcbBusTypes
@@ -38526,7 +38528,7 @@ extern uint8_t writeNVM(NVMtype type, uint24_t index, uint8_t value);
 
 extern ValidTime APP_isSuitableTimeToWriteFlash(void);
 # 40 "../../VLCBlib_PIC/vlcb.h" 2
-# 83 "../../VLCBlib_PIC/vlcb.h"
+# 82 "../../VLCBlib_PIC/vlcb.h"
 typedef enum Priority {
     pLOW=0,
     pNORMAL=1,
@@ -38581,7 +38583,7 @@ typedef enum {
     EVENT_OFF=0,
     EVENT_ON=1
 } EventState;
-# 148 "../../VLCBlib_PIC/vlcb.h"
+# 147 "../../VLCBlib_PIC/vlcb.h"
 typedef union DiagnosticVal {
     uint16_t asUint;
     int16_t asInt;
@@ -38607,6 +38609,7 @@ typedef enum Mode_state {
     EMODE_SETUP,
     EMODE_NORMAL
 } Mode_state;
+
 
 
 
@@ -39298,7 +39301,7 @@ void loop(void);
 # 808 "../../VLCBlib_PIC/vlcb.c"
 const Service * findService(uint8_t id) {
     uint8_t i;
-    for (i=0; i<9; i++) {
+    for (i=0; i<8; i++) {
         if ((services[i] != ((void*)0)) && (services[i]->serviceNo == id)) {
             return services[i];
         }
@@ -39313,7 +39316,7 @@ const Service * findService(uint8_t id) {
 
 uint8_t findServiceIndex(uint8_t serviceType) {
     uint8_t i;
-    for (i=0; i<9; i++) {
+    for (i=0; i<8; i++) {
         if ((services[i] != ((void*)0)) && (services[i]->serviceNo == serviceType)) {
             return i;
         }
@@ -39328,7 +39331,7 @@ uint8_t findServiceIndex(uint8_t serviceType) {
 
 ServicePresent have(uint8_t id) {
     uint8_t i;
-    for (i=0; i<9; i++) {
+    for (i=0; i<8; i++) {
         if ((services[i] != ((void*)0)) && (services[i]->serviceNo == id)) {
             return PRESENT;
         }
@@ -39339,7 +39342,7 @@ ServicePresent have(uint8_t id) {
 void factoryReset(void) {
     uint8_t i;
 
-    for (i=0; i<9; i++) {
+    for (i=0; i<8; i++) {
         if ((services[i] != ((void*)0)) && (services[i]->factoryReset != ((void*)0))) {
             services[i]->factoryReset();
         }
@@ -39365,7 +39368,7 @@ static void powerUp(void) {
     leds_powerUp();
     timedResponseDelay = 5;
 
-    for (i=0; i<9; i++) {
+    for (i=0; i<8; i++) {
         if ((services[i] != ((void*)0)) && (services[i]->powerUp != ((void*)0))) {
             services[i]->powerUp();
         }
@@ -39451,7 +39454,7 @@ static void poll(void) {
         flashFlushTime.val = tickGet();
     }
 
-    for (i=0; i<9; i++) {
+    for (i=0; i<8; i++) {
         if ((services[i] != ((void*)0)) && (services[i]->poll != ((void*)0))) {
             services[i]->poll();
         }
@@ -39468,7 +39471,7 @@ static void poll(void) {
                     showStatus(STATUS_MESSAGE_RECEIVED);
                     handled = APP_preProcessMessage(&m);
                     if (handled == NOT_PROCESSED) {
-                        for (i=0; i<9; i++) {
+                        for (i=0; i<8; i++) {
                             if ((services[i] != ((void*)0)) && (services[i]->processMessage != ((void*)0))) {
                                 if (services[i]->processMessage(&m) == PROCESSED) {
                                     handled = PROCESSED;

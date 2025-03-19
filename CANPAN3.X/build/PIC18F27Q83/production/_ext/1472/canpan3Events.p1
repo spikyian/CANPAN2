@@ -4,17 +4,17 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _checkDefaultEvents `(v ~T0 @X0 0 ef ]
 "87
 [; ;../canpan3Events.c: 87:     addEvent(nn.word, sw, 0, 1, TRUE);
-[c E22889 0 1 .. ]
-[n E22889 Boolean FALSE TRUE  ]
+[c E22890 0 1 .. ]
+[n E22890 Boolean FALSE TRUE  ]
 "98 ../../VLCBlib_PIC\event_teach.h
 [; ;../../VLCBlib_PIC\event_teach.h: 98: extern uint8_t addEvent(uint16_t nodeNumber, uint16_t eventNumber, uint8_t evNum, uint8_t evVal, Boolean forceOwnNN);
-[v _addEvent `(uc ~T0 @X0 0 ef5`us`us`uc`uc`E22889 ]
-"121 ../../VLCBlib_PIC/vlcb.h
-[; ;../../VLCBlib_PIC/vlcb.h: 121:     struct {
+[v _addEvent `(uc ~T0 @X0 0 ef5`us`us`uc`uc`E22890 ]
+"120 ../../VLCBlib_PIC/vlcb.h
+[; ;../../VLCBlib_PIC/vlcb.h: 120:     struct {
 [s S3223 `uc 1 `uc 1 ]
 [n S3223 . lo hi ]
-"120
-[; ;../../VLCBlib_PIC/vlcb.h: 120: typedef union Word {
+"119
+[; ;../../VLCBlib_PIC/vlcb.h: 119: typedef union Word {
 [u S3222 `S3223 1 `us 1 ]
 [n S3222 Word bytes word ]
 "126 ../../VLCBlib_PIC\mns.h
@@ -25,16 +25,16 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _getEv `(s ~T0 @X0 0 ef2`uc`uc ]
 "186 ../canpan3Events.c
 [; ;../canpan3Events.c: 186: Processed APP_preProcessMessage(Message * m) {
-[c E22515 0 1 2 3 4 5 6 7 8 9 10 12 13 16 17 33 34 35 48 63 64 65 66 67 68 69 70 71 72 73 74 76 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 99 111 112 113 114 115 116 117 118 120 127 128 130 131 132 133 135 142 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 162 171 172 175 176 177 178 179 180 181 182 184 185 189 190 191 192 193 194 199 207 208 209 210 211 212 213 216 217 221 222 223 224 225 226 227 230 231 233 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 164 .. ]
-[n E22515 VlcbOpCodes OPC_ACK OPC_NAK OPC_HLT OPC_BON OPC_TOF OPC_TON OPC_ESTOP OPC_ARST OPC_RTOF OPC_RTON OPC_RESTP OPC_RSTAT OPC_QNN OPC_RQNP OPC_RQMN OPC_KLOC OPC_QLOC OPC_DKEEP OPC_DBG1 OPC_EXTC OPC_RLOC OPC_QCON OPC_SNN OPC_ALOC OPC_STMOD OPC_PCON OPC_KCON OPC_DSPD OPC_DFLG OPC_DFNON OPC_DFNOF OPC_SSTAT OPC_NNRSM OPC_RQNN OPC_NNREL OPC_NNACK OPC_NNLRN OPC_NNULN OPC_NNCLR OPC_NNEVN OPC_NERD OPC_RQEVN OPC_WRACK OPC_RQDAT OPC_RQDDS OPC_BOOT OPC_ENUM OPC_NNRST OPC_EXTC1 OPC_DFUN OPC_GLOC OPC_ERR OPC_CMDERR OPC_EVNLF OPC_NVRD OPC_NENRD OPC_RQNPN OPC_NUMEV OPC_CANID OPC_MODE OPC_RQSD OPC_EXTC2 OPC_RDCC3 OPC_WCVO OPC_WCVB OPC_QCVS OPC_PCVS OPC_RDGN OPC_NVSETRD OPC_ACON OPC_ACOF OPC_AREQ OPC_ARON OPC_AROF OPC_EVULN OPC_NVSET OPC_NVANS OPC_ASON OPC_ASOF OPC_ASRQ OPC_PARAN OPC_REVAL OPC_ARSON OPC_ARSOF OPC_EXTC3 OPC_RDCC4 OPC_WCVS OPC_HEARTB OPC_SD OPC_GRSP OPC_ACON1 OPC_ACOF1 OPC_REQEV OPC_ARON1 OPC_AROF1 OPC_NEVAL OPC_PNN OPC_ASON1 OPC_ASOF1 OPC_ARSON1 OPC_ARSOF1 OPC_EXTC4 OPC_RDCC5 OPC_WCVOA OPC_CABDAT OPC_DGN OPC_FCLK OPC_ACON2 OPC_ACOF2 OPC_EVLRN OPC_EVANS OPC_ARON2 OPC_AROF2 OPC_ASON2 OPC_ASOF2 OPC_ARSON2 OPC_ARSOF2 OPC_EXTC5 OPC_RDCC6 OPC_PLOC OPC_NAME OPC_STAT OPC_ENACK OPC_ESD OPC_DTXC OPC_PARAMS OPC_ACON3 OPC_ACOF3 OPC_ENRSP OPC_ARON3 OPC_AROF3 OPC_EVLRNI OPC_ACDAT OPC_ARDAT OPC_ASON3 OPC_ASOF3 OPC_DDES OPC_DDRS OPC_DDWS OPC_ARSON3 OPC_ARSOF3 OPC_EXTC6 OPC_VCVS  ]
-"111 ../../VLCBlib_PIC/vlcb.h
-[; ;../../VLCBlib_PIC/vlcb.h: 111: typedef struct Message {
-[s S3221 `uc 1 `E22515 1 `uc -> 7 `i ]
+[c E22514 0 1 2 3 4 5 6 7 8 9 10 12 13 16 17 33 34 35 48 63 64 65 66 67 68 69 70 71 72 73 74 76 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 99 111 112 113 114 115 116 117 118 120 127 128 130 131 132 133 135 142 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 162 171 172 175 176 177 178 179 180 181 182 184 185 189 190 191 192 193 194 199 207 208 209 210 211 212 213 216 217 221 222 223 224 225 226 227 230 231 233 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 164 .. ]
+[n E22514 VlcbOpCodes OPC_ACK OPC_NAK OPC_HLT OPC_BON OPC_TOF OPC_TON OPC_ESTOP OPC_ARST OPC_RTOF OPC_RTON OPC_RESTP OPC_RSTAT OPC_QNN OPC_RQNP OPC_RQMN OPC_KLOC OPC_QLOC OPC_DKEEP OPC_DBG1 OPC_EXTC OPC_RLOC OPC_QCON OPC_SNN OPC_ALOC OPC_STMOD OPC_PCON OPC_KCON OPC_DSPD OPC_DFLG OPC_DFNON OPC_DFNOF OPC_SSTAT OPC_NNRSM OPC_RQNN OPC_NNREL OPC_NNACK OPC_NNLRN OPC_NNULN OPC_NNCLR OPC_NNEVN OPC_NERD OPC_RQEVN OPC_WRACK OPC_RQDAT OPC_RQDDS OPC_BOOT OPC_ENUM OPC_NNRST OPC_EXTC1 OPC_DFUN OPC_GLOC OPC_ERR OPC_CMDERR OPC_EVNLF OPC_NVRD OPC_NENRD OPC_RQNPN OPC_NUMEV OPC_CANID OPC_MODE OPC_RQSD OPC_EXTC2 OPC_RDCC3 OPC_WCVO OPC_WCVB OPC_QCVS OPC_PCVS OPC_RDGN OPC_NVSETRD OPC_ACON OPC_ACOF OPC_AREQ OPC_ARON OPC_AROF OPC_EVULN OPC_NVSET OPC_NVANS OPC_ASON OPC_ASOF OPC_ASRQ OPC_PARAN OPC_REVAL OPC_ARSON OPC_ARSOF OPC_EXTC3 OPC_RDCC4 OPC_WCVS OPC_HEARTB OPC_SD OPC_GRSP OPC_ACON1 OPC_ACOF1 OPC_REQEV OPC_ARON1 OPC_AROF1 OPC_NEVAL OPC_PNN OPC_ASON1 OPC_ASOF1 OPC_ARSON1 OPC_ARSOF1 OPC_EXTC4 OPC_RDCC5 OPC_WCVOA OPC_CABDAT OPC_DGN OPC_FCLK OPC_ACON2 OPC_ACOF2 OPC_EVLRN OPC_EVANS OPC_ARON2 OPC_AROF2 OPC_ASON2 OPC_ASOF2 OPC_ARSON2 OPC_ARSOF2 OPC_EXTC5 OPC_RDCC6 OPC_PLOC OPC_NAME OPC_STAT OPC_ENACK OPC_ESD OPC_DTXC OPC_PARAMS OPC_ACON3 OPC_ACOF3 OPC_ENRSP OPC_ARON3 OPC_AROF3 OPC_EVLRNI OPC_ACDAT OPC_ARDAT OPC_ASON3 OPC_ASOF3 OPC_DDES OPC_DDRS OPC_DDWS OPC_ARSON3 OPC_ARSOF3 OPC_EXTC6 OPC_VCVS  ]
+"110 ../../VLCBlib_PIC/vlcb.h
+[; ;../../VLCBlib_PIC/vlcb.h: 110: typedef struct Message {
+[s S3221 `uc 1 `E22514 1 `uc -> 7 `i ]
 [n S3221 Message len opc bytes ]
 "186 ../canpan3Events.c
 [; ;../canpan3Events.c: 186: Processed APP_preProcessMessage(Message * m) {
-[c E22922 0 1 .. ]
-[n E22922 Processed NOT_PROCESSED PROCESSED  ]
+[c E22923 0 1 .. ]
+[n E22923 Processed NOT_PROCESSED PROCESSED  ]
 "135 ../../VLCBlib_PIC\mns.h
 [; ;../../VLCBlib_PIC\mns.h: 135: extern uint8_t mode_flags;
 [v _mode_flags `uc ~T0 @X0 0 e ]
@@ -43,25 +43,25 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _errno `uc ~T0 @X0 0 e ]
 "200
 [; ;../canpan3Events.c: 200:                 errno = GRSP_OK;
-[c E22699 0 254 253 252 251 250 .. ]
-[n E22699 VlcbGrspCodes GRSP_OK GRSP_UNKNOWN_NVM_TYPE GRSP_INVALID_DIAGNOSTIC GRSP_INVALID_SERVICE GRSP_INVALID_COMMAND_PARAMETER GRSP_INVALID_MODE  ]
-[v F22998 `(v ~T0 @X0 0 tf ]
-[v F23000 `(v ~T0 @X0 0 tf ]
-[v F23002 `(E22922 ~T0 @X0 0 tf1`*S3221 ]
-[v F23005 `(v ~T0 @X0 0 tf ]
-[v F23007 `(uc ~T0 @X0 0 tf1`uc ]
-"151 ../../VLCBlib_PIC/vlcb.h
-[; ;../../VLCBlib_PIC/vlcb.h: 151:     struct {
+[c E22698 0 254 253 252 251 250 .. ]
+[n E22698 VlcbGrspCodes GRSP_OK GRSP_UNKNOWN_NVM_TYPE GRSP_INVALID_DIAGNOSTIC GRSP_INVALID_SERVICE GRSP_INVALID_COMMAND_PARAMETER GRSP_INVALID_MODE  ]
+[v F22999 `(v ~T0 @X0 0 tf ]
+[v F23001 `(v ~T0 @X0 0 tf ]
+[v F23003 `(E22923 ~T0 @X0 0 tf1`*S3221 ]
+[v F23006 `(v ~T0 @X0 0 tf ]
+[v F23008 `(uc ~T0 @X0 0 tf1`uc ]
+"150 ../../VLCBlib_PIC/vlcb.h
+[; ;../../VLCBlib_PIC/vlcb.h: 150:     struct {
 [s S3225 `uc 1 `uc 1 ]
 [n S3225 . lo hi ]
-"148
-[; ;../../VLCBlib_PIC/vlcb.h: 148: typedef union DiagnosticVal {
+"147
+[; ;../../VLCBlib_PIC/vlcb.h: 147: typedef union DiagnosticVal {
 [u S3224 `us 1 `s 1 `S3225 1 ]
 [n S3224 DiagnosticVal asUint asInt asBytes ]
-[v F23010 `(*S3224 ~T0 @X0 0 tf1`uc ]
+[v F23011 `(*S3224 ~T0 @X0 0 tf1`uc ]
 "299
 [; ;../../VLCBlib_PIC/vlcb.h: 299: typedef struct Service {
-[s S3226 `uc 1 `uc 1 `*F22998 1 `*F23000 1 `*F23002 1 `*F23005 1 `*F23007 1 `*F23010 1 ]
+[s S3226 `uc 1 `uc 1 `*F22999 1 `*F23001 1 `*F23003 1 `*F23006 1 `*F23008 1 `*F23011 1 ]
 [n S3226 Service serviceNo version factoryReset powerUp processMessage poll getESDdata getDiagnostic ]
 "77 ../../VLCBlib_PIC\event_teach.h
 [; ;../../VLCBlib_PIC\event_teach.h: 77: extern const Service eventTeachService;
@@ -83,36 +83,36 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _writeEv `(uc ~T0 @X0 0 ef3`uc`uc`uc ]
 "341 ../canpan3Events.c
 [; ;../canpan3Events.c: 341:                         if (readNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex+4) && 1) {
-[c E22861 0 1 .. ]
-[n E22861 . EEPROM_NVM_TYPE FLASH_NVM_TYPE  ]
+[c E22862 0 1 .. ]
+[n E22862 . EEPROM_NVM_TYPE FLASH_NVM_TYPE  ]
 "160 ../../VLCBlib_PIC/nvm.h
 [; ;../../VLCBlib_PIC/nvm.h: 160: extern int16_t readNVM(NVMtype type, uint24_t index);
-[v _readNVM `(s ~T0 @X0 0 ef2`E22861`um ]
+[v _readNVM `(s ~T0 @X0 0 ef2`E22862`um ]
 "109 ../../VLCBlib_PIC\event_teach.h
 [; ;../../VLCBlib_PIC\event_teach.h: 109: typedef struct {
 [s S3231 `us 1 `us 1 ]
 [n S3231 . NN EN ]
 "343 ../canpan3Events.c
 [; ;../canpan3Events.c: 343:                             errno = CMDERR_INV_EV_VALUE;
-[c E22684 1 2 3 4 5 6 7 8 9 10 11 12 13 .. ]
-[n E22684 VlcbCmdErrs CMDERR_INV_CMD CMDERR_NOT_LRN CMDERR_NOT_SETUP CMDERR_TOO_MANY_EVENTS CMDERR_NO_EV CMDERR_INV_EV_IDX CMDERR_INVALID_EVENT CMDERR_INV_EN_IDX CMDERR_INV_PARAM_IDX CMDERR_INV_NV_IDX CMDERR_INV_EV_VALUE CMDERR_INV_NV_VALUE CMDERR_LRN_OTHER  ]
+[c E22683 1 2 3 4 5 6 7 8 9 10 11 12 13 .. ]
+[n E22683 VlcbCmdErrs CMDERR_INV_CMD CMDERR_NOT_LRN CMDERR_NOT_SETUP CMDERR_TOO_MANY_EVENTS CMDERR_NO_EV CMDERR_INV_EV_IDX CMDERR_INVALID_EVENT CMDERR_INV_EN_IDX CMDERR_INV_PARAM_IDX CMDERR_INV_NV_IDX CMDERR_INV_EV_VALUE CMDERR_INV_NV_VALUE CMDERR_LRN_OTHER  ]
 "169 ../../VLCBlib_PIC/nvm.h
 [; ;../../VLCBlib_PIC/nvm.h: 169: extern uint8_t writeNVM(NVMtype type, uint24_t index, uint8_t value);
-[v _writeNVM `(uc ~T0 @X0 0 ef3`E22861`um`uc ]
+[v _writeNVM `(uc ~T0 @X0 0 ef3`E22862`um`uc ]
 "45 ../canpan3Inputs.h
 [; ;../canpan3Inputs.h: 45: extern void doSoD(void);
 [v _doSoD `(v ~T0 @X0 0 ef ]
 "452 ../canpan3Events.c
 [; ;../canpan3Events.c: 452:                             setLedState(ledNo, CANPANLED_OFF);
-[c E23145 0 1 2 3 .. ]
-[n E23145 canpan3LedState CANPANLED_ON CANPANLED_OFF CANPANLED_FLASH CANPANLED_ANTIFLASH  ]
+[c E23146 0 1 2 3 .. ]
+[n E23146 canpan3LedState CANPANLED_ON CANPANLED_OFF CANPANLED_FLASH CANPANLED_ANTIFLASH  ]
 "48 ../canpan3Leds.h
 [; ;../canpan3Leds.h: 48: extern void setLedState(uint8_t led, enum canpan3LedState state);
-[v _setLedState `(v ~T0 @X0 0 ef2`uc`E23145 ]
+[v _setLedState `(v ~T0 @X0 0 ef2`uc`E23146 ]
 "507 ../canpan3Events.c
 [; ;../canpan3Events.c: 507: EventState APP_GetEventIndexState(uint8_t tableIndex) {
-[c E22909 255 0 1 .. ]
-[n E22909 . EVENT_UNKNOWN EVENT_OFF EVENT_ON  ]
+[c E22910 255 0 1 .. ]
+[n E22910 . EVENT_UNKNOWN EVENT_OFF EVENT_ON  ]
 "364 C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h
 [; ;C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h: 364: __asm("BOOTREG equ 038h");
 [; <" BOOTREG equ 038h ;# ">
@@ -3660,40 +3660,40 @@ Version 4.0 HI-TECH Software Intermediate Code
 [f ]
 "87
 [; ;../canpan3Events.c: 87:     addEvent(nn.word, sw, 0, 1, TRUE);
-[e ( _addEvent (4 , , , , . _nn 1 -> _sw `us -> -> 0 `i `uc -> -> 1 `i `uc . `E22889 1 ]
+[e ( _addEvent (4 , , , , . _nn 1 -> _sw `us -> -> 0 `i `uc -> -> 1 `i `uc . `E22890 1 ]
 "88
 [; ;../canpan3Events.c: 88:     addEvent(nn.word, sw, 1, sw, TRUE);
-[e ( _addEvent (4 , , , , . _nn 1 -> _sw `us -> -> 1 `i `uc _sw . `E22889 1 ]
+[e ( _addEvent (4 , , , , . _nn 1 -> _sw `us -> -> 1 `i `uc _sw . `E22890 1 ]
 "89
 [; ;../canpan3Events.c: 89:     addEvent(nn.word, sw, 2, 8 | 0b00010000, TRUE);
-[e ( _addEvent (4 , , , , . _nn 1 -> _sw `us -> -> 2 `i `uc -> | -> 8 `i -> 16 `i `uc . `E22889 1 ]
+[e ( _addEvent (4 , , , , . _nn 1 -> _sw `us -> -> 2 `i `uc -> | -> 8 `i -> 16 `i `uc . `E22890 1 ]
 "96
 [; ;../canpan3Events.c: 96:     addEvent(nn.word, sw, 4, 0, TRUE);
-[e ( _addEvent (4 , , , , . _nn 1 -> _sw `us -> -> 4 `i `uc -> -> 0 `i `uc . `E22889 1 ]
+[e ( _addEvent (4 , , , , . _nn 1 -> _sw `us -> -> 4 `i `uc -> -> 0 `i `uc . `E22890 1 ]
 "97
 [; ;../canpan3Events.c: 97:     addEvent(nn.word, sw, 5, 0, TRUE);
-[e ( _addEvent (4 , , , , . _nn 1 -> _sw `us -> -> 5 `i `uc -> -> 0 `i `uc . `E22889 1 ]
+[e ( _addEvent (4 , , , , . _nn 1 -> _sw `us -> -> 5 `i `uc -> -> 0 `i `uc . `E22890 1 ]
 "98
 [; ;../canpan3Events.c: 98:     addEvent(nn.word, sw, 6, 0, TRUE);
-[e ( _addEvent (4 , , , , . _nn 1 -> _sw `us -> -> 6 `i `uc -> -> 0 `i `uc . `E22889 1 ]
+[e ( _addEvent (4 , , , , . _nn 1 -> _sw `us -> -> 6 `i `uc -> -> 0 `i `uc . `E22890 1 ]
 "99
 [; ;../canpan3Events.c: 99:     addEvent(nn.word, sw, 7, 0, TRUE);
-[e ( _addEvent (4 , , , , . _nn 1 -> _sw `us -> -> 7 `i `uc -> -> 0 `i `uc . `E22889 1 ]
+[e ( _addEvent (4 , , , , . _nn 1 -> _sw `us -> -> 7 `i `uc -> -> 0 `i `uc . `E22890 1 ]
 "100
 [; ;../canpan3Events.c: 100:     addEvent(nn.word, sw, 8, 0, TRUE);
-[e ( _addEvent (4 , , , , . _nn 1 -> _sw `us -> -> 8 `i `uc -> -> 0 `i `uc . `E22889 1 ]
+[e ( _addEvent (4 , , , , . _nn 1 -> _sw `us -> -> 8 `i `uc -> -> 0 `i `uc . `E22890 1 ]
 "101
 [; ;../canpan3Events.c: 101:     addEvent(nn.word, sw, 9, 0, TRUE);
-[e ( _addEvent (4 , , , , . _nn 1 -> _sw `us -> -> 9 `i `uc -> -> 0 `i `uc . `E22889 1 ]
+[e ( _addEvent (4 , , , , . _nn 1 -> _sw `us -> -> 9 `i `uc -> -> 0 `i `uc . `E22890 1 ]
 "102
 [; ;../canpan3Events.c: 102:     addEvent(nn.word, sw, 10, 0, TRUE);
-[e ( _addEvent (4 , , , , . _nn 1 -> _sw `us -> -> 10 `i `uc -> -> 0 `i `uc . `E22889 1 ]
+[e ( _addEvent (4 , , , , . _nn 1 -> _sw `us -> -> 10 `i `uc -> -> 0 `i `uc . `E22890 1 ]
 "103
 [; ;../canpan3Events.c: 103:     addEvent(nn.word, sw, 11, 0, TRUE);
-[e ( _addEvent (4 , , , , . _nn 1 -> _sw `us -> -> 11 `i `uc -> -> 0 `i `uc . `E22889 1 ]
+[e ( _addEvent (4 , , , , . _nn 1 -> _sw `us -> -> 11 `i `uc -> -> 0 `i `uc . `E22890 1 ]
 "104
 [; ;../canpan3Events.c: 104:     return addEvent(nn.word, sw, 12, 0xFF, TRUE);
-[e ) ( _addEvent (4 , , , , . _nn 1 -> _sw `us -> -> 12 `i `uc -> -> 255 `i `uc . `E22889 1 ]
+[e ) ( _addEvent (4 , , , , . _nn 1 -> _sw `us -> -> 12 `i `uc -> -> 255 `i `uc . `E22890 1 ]
 [e $UE 3233  ]
 "105
 [; ;../canpan3Events.c: 105: }
@@ -3901,7 +3901,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 "186
 [; ;../canpan3Events.c: 186: Processed APP_preProcessMessage(Message * m) {
-[v _APP_preProcessMessage `(E22922 ~T0 @X0 1 ef1`*S3221 ]
+[v _APP_preProcessMessage `(E22923 ~T0 @X0 1 ef1`*S3221 ]
 {
 [e :U _APP_preProcessMessage ]
 [v _m `*S3221 ~T0 @X0 1 r1 ]
@@ -3940,7 +3940,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 3261 ]
 "200
 [; ;../canpan3Events.c: 200:                 errno = GRSP_OK;
-[e = _errno -> . `E22699 0 `uc ]
+[e = _errno -> . `E22698 0 `uc ]
 "201
 [; ;../canpan3Events.c: 201:                 eventTeachService.processMessage(m);
 [e ( *U . _eventTeachService 4 (1 _m ]
@@ -3949,7 +3949,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _checkDefaultEvents ..  ]
 "203
 [; ;../canpan3Events.c: 203:                 return PROCESSED;
-[e ) . `E22922 1 ]
+[e ) . `E22923 1 ]
 [e $UE 3254  ]
 "204
 [; ;../canpan3Events.c: 204:             default:
@@ -3962,10 +3962,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 [e $U 3256  ]
 [e :U 3257 ]
-[e [\ -> . *U _m 1 `ui , $ -> . `E22515 38 `ui 3258
- , $ -> . `E22515 74 `ui 3259
- , $ -> . `E22515 109 `ui 3260
- , $ -> . `E22515 131 `ui 3261
+[e [\ -> . *U _m 1 `ui , $ -> . `E22514 38 `ui 3258
+ , $ -> . `E22514 74 `ui 3259
+ , $ -> . `E22514 109 `ui 3260
+ , $ -> . `E22514 131 `ui 3261
  3262 ]
 [e :U 3256 ]
 "207
@@ -3975,7 +3975,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 "210
 [; ;../canpan3Events.c: 210:     if (m->len < 5) return NOT_PROCESSED;
 [e $ ! < -> . *U _m 0 `i -> 5 `i 3263  ]
-[e ) . `E22922 0 ]
+[e ) . `E22923 0 ]
 [e $UE 3254  ]
 [e :U 3263 ]
 "211
@@ -4050,29 +4050,29 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 3282 ]
 "244
 [; ;../canpan3Events.c: 244:             return NOT_PROCESSED;
-[e ) . `E22922 0 ]
+[e ) . `E22923 0 ]
 [e $UE 3254  ]
 "245
 [; ;../canpan3Events.c: 245:     }
 }
 [e $U 3264  ]
 [e :U 3265 ]
-[e [\ -> . *U _m 1 `ui , $ -> . `E22515 77 `ui 3266
- , $ -> . `E22515 97 `ui 3267
- , $ -> . `E22515 113 `ui 3268
- , $ -> . `E22515 134 `ui 3269
- , $ -> . `E22515 69 `ui 3270
- , $ -> . `E22515 90 `ui 3271
- , $ -> . `E22515 107 `ui 3272
- , $ -> . `E22515 126 `ui 3273
- , $ -> . `E22515 78 `ui 3274
- , $ -> . `E22515 98 `ui 3275
- , $ -> . `E22515 114 `ui 3276
- , $ -> . `E22515 135 `ui 3277
- , $ -> . `E22515 70 `ui 3278
- , $ -> . `E22515 91 `ui 3279
- , $ -> . `E22515 108 `ui 3280
- , $ -> . `E22515 127 `ui 3281
+[e [\ -> . *U _m 1 `ui , $ -> . `E22514 77 `ui 3266
+ , $ -> . `E22514 97 `ui 3267
+ , $ -> . `E22514 113 `ui 3268
+ , $ -> . `E22514 134 `ui 3269
+ , $ -> . `E22514 69 `ui 3270
+ , $ -> . `E22514 90 `ui 3271
+ , $ -> . `E22514 107 `ui 3272
+ , $ -> . `E22514 126 `ui 3273
+ , $ -> . `E22514 78 `ui 3274
+ , $ -> . `E22514 98 `ui 3275
+ , $ -> . `E22514 114 `ui 3276
+ , $ -> . `E22514 135 `ui 3277
+ , $ -> . `E22514 70 `ui 3278
+ , $ -> . `E22514 91 `ui 3279
+ , $ -> . `E22514 108 `ui 3280
+ , $ -> . `E22514 127 `ui 3281
  3282 ]
 [e :U 3264 ]
 "248
@@ -4081,7 +4081,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 "249
 [; ;../canpan3Events.c: 249:     if (tableIndex == 0xff) return NOT_PROCESSED;
 [e $ ! == -> _tableIndex `i -> 255 `i 3283  ]
-[e ) . `E22922 0 ]
+[e ) . `E22923 0 ]
 [e $UE 3254  ]
 [e :U 3283 ]
 "250
@@ -4111,7 +4111,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 3286 ]
 "258
 [; ;../canpan3Events.c: 258:             return NOT_PROCESSED;
-[e ) . `E22922 0 ]
+[e ) . `E22923 0 ]
 [e $UE 3254  ]
 "259
 [; ;../canpan3Events.c: 259:         }
@@ -4123,7 +4123,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 3284 ]
 "261
 [; ;../canpan3Events.c: 261:     return NOT_PROCESSED;
-[e ) . `E22922 0 ]
+[e ) . `E22923 0 ]
 [e $UE 3254  ]
 "262
 [; ;../canpan3Events.c: 262: }
@@ -4131,14 +4131,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 "265
 [; ;../canpan3Events.c: 265: uint8_t APP_addEvent(uint16_t nodeNumber, uint16_t eventNumber, uint8_t evNum, uint8_t evVal, Boolean forceOwnNN) {
-[v _APP_addEvent `(uc ~T0 @X0 1 ef5`us`us`uc`uc`E22889 ]
+[v _APP_addEvent `(uc ~T0 @X0 1 ef5`us`us`uc`uc`E22890 ]
 {
 [e :U _APP_addEvent ]
 [v _nodeNumber `us ~T0 @X0 1 r1 ]
 [v _eventNumber `us ~T0 @X0 1 r2 ]
 [v _evNum `uc ~T0 @X0 1 r3 ]
 [v _evVal `uc ~T0 @X0 1 r4 ]
-[v _forceOwnNN `E22889 ~T0 @X0 1 r5 ]
+[v _forceOwnNN `E22890 ~T0 @X0 1 r5 ]
 [f ]
 "266
 [; ;../canpan3Events.c: 266:     uint8_t tableIndex;
@@ -4251,7 +4251,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "336
 [; ;../canpan3Events.c: 336:                         return PROCESSED;
-[e ) -> . `E22922 1 `uc ]
+[e ) -> . `E22923 1 `uc ]
 [e $UE 3287  ]
 "337
 [; ;../canpan3Events.c: 337:                     } else {
@@ -4261,14 +4261,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "341
 [; ;../canpan3Events.c: 341:                         if (readNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex+4) && 1) {
-[e $ ! && != -> ( _readNVM (2 , . `E22861 1 -> + + -> 124928 `l -> * + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui -> _tableIndex `ui `l -> -> 4 `i `l `um `i -> 0 `i != -> 1 `i -> 0 `i 3301  ]
+[e $ ! && != -> ( _readNVM (2 , . `E22862 1 -> + + -> 124928 `l -> * + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui -> _tableIndex `ui `l -> -> 4 `i `l `um `i -> 0 `i != -> 1 `i -> 0 `i 3301  ]
 {
 "343
 [; ;../canpan3Events.c: 343:                             errno = CMDERR_INV_EV_VALUE;
-[e = _errno -> . `E22684 10 `uc ]
+[e = _errno -> . `E22683 10 `uc ]
 "344
 [; ;../canpan3Events.c: 344:                             return PROCESSED;
-[e ) -> . `E22922 1 `uc ]
+[e ) -> . `E22923 1 `uc ]
 [e $UE 3287  ]
 "345
 [; ;../canpan3Events.c: 345:                         }
@@ -4338,7 +4338,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "373
 [; ;../canpan3Events.c: 373:                         return PROCESSED;
-[e ) -> . `E22922 1 `uc ]
+[e ) -> . `E22923 1 `uc ]
 [e $UE 3287  ]
 "374
 [; ;../canpan3Events.c: 374:                     } else {
@@ -4348,13 +4348,13 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "378
 [; ;../canpan3Events.c: 378:                         writeNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex+3, 0);
-[e ( _writeNVM (3 , , . `E22861 1 -> + + -> 124928 `l -> * + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui -> _tableIndex `ui `l -> -> 3 `i `l `um -> -> 0 `i `uc ]
+[e ( _writeNVM (3 , , . `E22862 1 -> + + -> 124928 `l -> * + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui -> _tableIndex `ui `l -> -> 3 `i `l `um -> -> 0 `i `uc ]
 "379
 [; ;../canpan3Events.c: 379:                         writeNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex+2, 0);
-[e ( _writeNVM (3 , , . `E22861 1 -> + + -> 124928 `l -> * + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui -> _tableIndex `ui `l -> -> 2 `i `l `um -> -> 0 `i `uc ]
+[e ( _writeNVM (3 , , . `E22862 1 -> + + -> 124928 `l -> * + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui -> _tableIndex `ui `l -> -> 2 `i `l `um -> -> 0 `i `uc ]
 "380
 [; ;../canpan3Events.c: 380:                         return PROCESSED;
-[e ) -> . `E22922 1 `uc ]
+[e ) -> . `E22923 1 `uc ]
 [e $UE 3287  ]
 "381
 [; ;../canpan3Events.c: 381:                     }
@@ -4368,14 +4368,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "385
 [; ;../canpan3Events.c: 385:                     if (readNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex+4) && 1) {
-[e $ ! && != -> ( _readNVM (2 , . `E22861 1 -> + + -> 124928 `l -> * + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui -> _tableIndex `ui `l -> -> 4 `i `l `um `i -> 0 `i != -> 1 `i -> 0 `i 3311  ]
+[e $ ! && != -> ( _readNVM (2 , . `E22862 1 -> + + -> 124928 `l -> * + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui -> _tableIndex `ui `l -> -> 4 `i `l `um `i -> 0 `i != -> 1 `i -> 0 `i 3311  ]
 {
 "387
 [; ;../canpan3Events.c: 387:                         errno = CMDERR_INV_EV_VALUE;
-[e = _errno -> . `E22684 10 `uc ]
+[e = _errno -> . `E22683 10 `uc ]
 "388
 [; ;../canpan3Events.c: 388:                         return PROCESSED;
-[e ) -> . `E22922 1 `uc ]
+[e ) -> . `E22923 1 `uc ]
 [e $UE 3287  ]
 "389
 [; ;../canpan3Events.c: 389:                     }
@@ -4403,10 +4403,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "402
 [; ;../canpan3Events.c: 402:                             writeNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex+3, 0);
-[e ( _writeNVM (3 , , . `E22861 1 -> + + -> 124928 `l -> * + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui -> _tableIndex `ui `l -> -> 3 `i `l `um -> -> 0 `i `uc ]
+[e ( _writeNVM (3 , , . `E22862 1 -> + + -> 124928 `l -> * + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui -> _tableIndex `ui `l -> -> 3 `i `l `um -> -> 0 `i `uc ]
 "403
 [; ;../canpan3Events.c: 403:                             writeNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex+2, 0);
-[e ( _writeNVM (3 , , . `E22861 1 -> + + -> 124928 `l -> * + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui -> _tableIndex `ui `l -> -> 2 `i `l `um -> -> 0 `i `uc ]
+[e ( _writeNVM (3 , , . `E22862 1 -> + + -> 124928 `l -> * + + -> # `S3231 `ui -> -> 1 `i `ui -> -> 13 `i `ui -> _tableIndex `ui `l -> -> 2 `i `l `um -> -> 0 `i `uc ]
 "404
 [; ;../canpan3Events.c: 404:                         }
 }
@@ -4447,7 +4447,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 "425
 [; ;../canpan3Events.c: 425: Processed APP_processConsumedEvent(uint8_t tableIndex, Message *m) {
-[v _APP_processConsumedEvent `(E22922 ~T0 @X0 1 ef2`uc`*S3221 ]
+[v _APP_processConsumedEvent `(E22923 ~T0 @X0 1 ef2`uc`*S3221 ]
 {
 [e :U _APP_processConsumedEvent ]
 [v _tableIndex `uc ~T0 @X0 1 r1 ]
@@ -4477,7 +4477,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "435
 [; ;../canpan3Events.c: 435:         return PROCESSED;
-[e ) . `E22922 1 ]
+[e ) . `E22923 1 ]
 [e $UE 3317  ]
 "436
 [; ;../canpan3Events.c: 436:     }
@@ -4532,7 +4532,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "452
 [; ;../canpan3Events.c: 452:                             setLedState(ledNo, CANPANLED_OFF);
-[e ( _setLedState (2 , _ledNo . `E23145 1 ]
+[e ( _setLedState (2 , _ledNo . `E23146 1 ]
 "453
 [; ;../canpan3Events.c: 453:                         } else {
 }
@@ -4541,7 +4541,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "454
 [; ;../canpan3Events.c: 454:                             setLedState(ledNo, CANPANLED_ON);
-[e ( _setLedState (2 , _ledNo . `E23145 0 ]
+[e ( _setLedState (2 , _ledNo . `E23146 0 ]
 "455
 [; ;../canpan3Events.c: 455:                         }
 }
@@ -4558,7 +4558,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "460
 [; ;../canpan3Events.c: 460:                             setLedState(ledNo, CANPANLED_ON);
-[e ( _setLedState (2 , _ledNo . `E23145 0 ]
+[e ( _setLedState (2 , _ledNo . `E23146 0 ]
 "461
 [; ;../canpan3Events.c: 461:                         } else {
 }
@@ -4567,7 +4567,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "462
 [; ;../canpan3Events.c: 462:                             setLedState(ledNo, CANPANLED_OFF);
-[e ( _setLedState (2 , _ledNo . `E23145 1 ]
+[e ( _setLedState (2 , _ledNo . `E23146 1 ]
 "463
 [; ;../canpan3Events.c: 463:                         }
 }
@@ -4592,7 +4592,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "469
 [; ;../canpan3Events.c: 469:                             setLedState(ledNo, CANPANLED_OFF);
-[e ( _setLedState (2 , _ledNo . `E23145 1 ]
+[e ( _setLedState (2 , _ledNo . `E23146 1 ]
 "470
 [; ;../canpan3Events.c: 470:                         } else {
 }
@@ -4601,7 +4601,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "471
 [; ;../canpan3Events.c: 471:                             setLedState(ledNo, CANPANLED_ON);
-[e ( _setLedState (2 , _ledNo . `E23145 0 ]
+[e ( _setLedState (2 , _ledNo . `E23146 0 ]
 "472
 [; ;../canpan3Events.c: 472:                         }
 }
@@ -4626,7 +4626,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "478
 [; ;../canpan3Events.c: 478:                             setLedState(ledNo, CANPANLED_ON);
-[e ( _setLedState (2 , _ledNo . `E23145 0 ]
+[e ( _setLedState (2 , _ledNo . `E23146 0 ]
 "479
 [; ;../canpan3Events.c: 479:                         } else {
 }
@@ -4635,7 +4635,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "480
 [; ;../canpan3Events.c: 480:                             setLedState(ledNo, CANPANLED_OFF);
-[e ( _setLedState (2 , _ledNo . `E23145 1 ]
+[e ( _setLedState (2 , _ledNo . `E23146 1 ]
 "481
 [; ;../canpan3Events.c: 481:                         }
 }
@@ -4660,7 +4660,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "487
 [; ;../canpan3Events.c: 487:                             setLedState(ledNo, CANPANLED_ANTIFLASH);
-[e ( _setLedState (2 , _ledNo . `E23145 3 ]
+[e ( _setLedState (2 , _ledNo . `E23146 3 ]
 "488
 [; ;../canpan3Events.c: 488:                         } else {
 }
@@ -4669,7 +4669,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "489
 [; ;../canpan3Events.c: 489:                             setLedState(ledNo, CANPANLED_FLASH);
-[e ( _setLedState (2 , _ledNo . `E23145 2 ]
+[e ( _setLedState (2 , _ledNo . `E23146 2 ]
 "490
 [; ;../canpan3Events.c: 490:                         }
 }
@@ -4682,7 +4682,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "492
 [; ;../canpan3Events.c: 492:                         setLedState(ledNo, CANPANLED_OFF);
-[e ( _setLedState (2 , _ledNo . `E23145 1 ]
+[e ( _setLedState (2 , _ledNo . `E23146 1 ]
 "493
 [; ;../canpan3Events.c: 493:                     }
 }
@@ -4714,7 +4714,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 "498
 [; ;../canpan3Events.c: 498:     return PROCESSED;
-[e ) . `E22922 1 ]
+[e ) . `E22923 1 ]
 [e $UE 3317  ]
 "499
 [; ;../canpan3Events.c: 499: }
@@ -4722,7 +4722,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 "507
 [; ;../canpan3Events.c: 507: EventState APP_GetEventIndexState(uint8_t tableIndex) {
-[v _APP_GetEventIndexState `(E22909 ~T0 @X0 1 ef1`uc ]
+[v _APP_GetEventIndexState `(E22910 ~T0 @X0 1 ef1`uc ]
 {
 [e :U _APP_GetEventIndexState ]
 [v _tableIndex `uc ~T0 @X0 1 r1 ]
@@ -4736,7 +4736,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "512
 [; ;../canpan3Events.c: 512:         return EVENT_UNKNOWN;
-[e ) . `E22909 0 ]
+[e ) . `E22910 0 ]
 [e $UE 3346  ]
 "513
 [; ;../canpan3Events.c: 513:     }
@@ -4754,7 +4754,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "518
 [; ;../canpan3Events.c: 518:         return EVENT_UNKNOWN;
-[e ) . `E22909 0 ]
+[e ) . `E22910 0 ]
 [e $UE 3346  ]
 "519
 [; ;../canpan3Events.c: 519:     }
@@ -4762,7 +4762,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 3348 ]
 "521
 [; ;../canpan3Events.c: 521:     return outputState[switchNo-1] ? EVENT_ON : EVENT_OFF;
-[e ) -> ? != -> *U + &U _outputState * -> -> - -> _switchNo `i -> 1 `i `ui `ux -> -> # *U &U _outputState `ui `ux `i -> 0 `i : . `E22909 2 . `E22909 1 `E22909 ]
+[e ) -> ? != -> *U + &U _outputState * -> -> - -> _switchNo `i -> 1 `i `ui `ux -> -> # *U &U _outputState `ui `ux `i -> 0 `i : . `E22910 2 . `E22910 1 `E22910 ]
 [e $UE 3346  ]
 "522
 [; ;../canpan3Events.c: 522: }

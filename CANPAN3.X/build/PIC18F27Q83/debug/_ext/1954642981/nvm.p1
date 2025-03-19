@@ -72,12 +72,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 "653
 [; ;C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h: 653: extern volatile unsigned char NVMLOCK __attribute__((address(0x042)));
 [v _NVMLOCK `Vuc ~T0 @X0 0 e@66 ]
-"151 ../../VLCBlib_PIC/vlcb.h
-[; ;../../VLCBlib_PIC/vlcb.h: 151:     struct {
+"150 ../../VLCBlib_PIC/vlcb.h
+[; ;../../VLCBlib_PIC/vlcb.h: 150:     struct {
 [s S3228 `uc 1 `uc 1 ]
 [n S3228 . lo hi ]
-"148
-[; ;../../VLCBlib_PIC/vlcb.h: 148: typedef union DiagnosticVal {
+"147
+[; ;../../VLCBlib_PIC/vlcb.h: 147: typedef union DiagnosticVal {
 [u S3227 `us 1 `s 1 `S3228 1 ]
 [n S3227 DiagnosticVal asUint asInt asBytes ]
 "141 ../../VLCBlib_PIC/mns.h
@@ -88,8 +88,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _updateModuleErrorStatus `(v ~T0 @X0 0 ef ]
 "285 ../../VLCBlib_PIC/nvm.c
 [; ;../../VLCBlib_PIC/nvm.c: 285:     return GRSP_OK;
-[c E22749 0 254 253 252 251 250 .. ]
-[n E22749 VlcbGrspCodes GRSP_OK GRSP_UNKNOWN_NVM_TYPE GRSP_INVALID_DIAGNOSTIC GRSP_INVALID_SERVICE GRSP_INVALID_COMMAND_PARAMETER GRSP_INVALID_MODE  ]
+[c E22748 0 254 253 252 251 250 .. ]
+[n E22748 VlcbGrspCodes GRSP_OK GRSP_UNKNOWN_NVM_TYPE GRSP_INVALID_DIAGNOSTIC GRSP_INVALID_SERVICE GRSP_INVALID_COMMAND_PARAMETER GRSP_INVALID_MODE  ]
 "3843 C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h
 [v _TBLPTRH `Vuc ~T0 @X0 0 e@1271 ]
 "3823
@@ -98,18 +98,18 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _TABLAT `Vuc ~T0 @X0 0 e@1269 ]
 "328 ../../VLCBlib_PIC/nvm.c
 [; ;../../VLCBlib_PIC/nvm.c: 328:     while (! APP_isSuitableTimeToWriteFlash())
-[c E22915 0 1 .. ]
-[n E22915 ValidTime BAD_TIME GOOD_TIME  ]
+[c E22916 0 1 .. ]
+[n E22916 ValidTime BAD_TIME GOOD_TIME  ]
 "447 ../../VLCBlib_PIC/vlcb.h
 [; ;../../VLCBlib_PIC/vlcb.h: 447: extern ValidTime APP_isSuitableTimeToWriteFlash(void);
-[v _APP_isSuitableTimeToWriteFlash `(E22915 ~T0 @X0 0 ef ]
+[v _APP_isSuitableTimeToWriteFlash `(E22916 ~T0 @X0 0 ef ]
 "674 C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h
 [; ;C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h: 674: extern volatile __uint24 NVMADR __attribute__((address(0x043)));
 [v _NVMADR `Vum ~T0 @X0 0 e@67 ]
 "533 ../../VLCBlib_PIC/nvm.c
 [; ;../../VLCBlib_PIC/nvm.c: 533: uint8_t writeNVM(NVMtype type, uint24_t index, uint8_t value) {
-[c E22911 0 1 .. ]
-[n E22911 . EEPROM_NVM_TYPE FLASH_NVM_TYPE  ]
+[c E22912 0 1 .. ]
+[n E22912 . EEPROM_NVM_TYPE FLASH_NVM_TYPE  ]
 "364 C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h
 [; ;C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h: 364: __asm("BOOTREG equ 038h");
 [; <" BOOTREG equ 038h ;# ">
@@ -3651,8 +3651,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;../../VLCBlib_PIC/nvm.c: 157:     flashFlags.asByte = 0;
 [e = . _flashFlags 0 -> -> 0 `i `uc ]
 "158
-[; ;../../VLCBlib_PIC/nvm.c: 158:     flashBlock = 0x0700;
-[e = _flashBlock -> -> -> 1792 `i `m `um ]
+[; ;../../VLCBlib_PIC/nvm.c: 158:     flashBlock = 0x0800;
+[e = _flashBlock -> -> -> 2048 `i `m `um ]
 "160
 [; ;../../VLCBlib_PIC/nvm.c: 160:     TBLPTRU = 0;
 [e = _TBLPTRU -> -> 0 `i `uc ]
@@ -3813,7 +3813,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 3243 ]
 "285
 [; ;../../VLCBlib_PIC/nvm.c: 285:     return GRSP_OK;
-[e ) -> . `E22749 0 `uc ]
+[e ) -> . `E22748 0 `uc ]
 [e $UE 3241  ]
 "286
 [; ;../../VLCBlib_PIC/nvm.c: 286: }
@@ -3975,7 +3975,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 3266 ]
 "387
 [; ;../../VLCBlib_PIC/nvm.c: 387:     while (APP_isSuitableTimeToWriteFlash() == BAD_TIME)
-[e $ == -> ( _APP_isSuitableTimeToWriteFlash ..  `ui -> . `E22915 0 `ui 3267  ]
+[e $ == -> ( _APP_isSuitableTimeToWriteFlash ..  `ui -> . `E22916 0 `ui 3267  ]
 [e :U 3268 ]
 "390
 [; ;../../VLCBlib_PIC/nvm.c: 390:     if (flashFlags.eraseNeeded) {
@@ -4178,7 +4178,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 3288 ]
 "523
 [; ;../../VLCBlib_PIC/nvm.c: 523:     return GRSP_OK;
-[e ) -> . `E22749 0 `uc ]
+[e ) -> . `E22748 0 `uc ]
 [e $UE 3284  ]
 "524
 [; ;../../VLCBlib_PIC/nvm.c: 524: }
@@ -4186,10 +4186,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 "533
 [; ;../../VLCBlib_PIC/nvm.c: 533: uint8_t writeNVM(NVMtype type, uint24_t index, uint8_t value) {
-[v _writeNVM `(uc ~T0 @X0 1 ef3`E22911`um`uc ]
+[v _writeNVM `(uc ~T0 @X0 1 ef3`E22912`um`uc ]
 {
 [e :U _writeNVM ]
-[v _type `E22911 ~T0 @X0 1 r1 ]
+[v _type `E22912 ~T0 @X0 1 r1 ]
 [v _index `um ~T0 @X0 1 r2 ]
 [v _value `uc ~T0 @X0 1 r3 ]
 [f ]
@@ -4216,15 +4216,15 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 3294 ]
 "540
 [; ;../../VLCBlib_PIC/nvm.c: 540:             return GRSP_UNKNOWN_NVM_TYPE;
-[e ) -> . `E22749 1 `uc ]
+[e ) -> . `E22748 1 `uc ]
 [e $UE 3289  ]
 "541
 [; ;../../VLCBlib_PIC/nvm.c: 541:     }
 }
 [e $U 3290  ]
 [e :U 3291 ]
-[e [\ -> _type `ui , $ -> . `E22911 0 `ui 3292
- , $ -> . `E22911 1 `ui 3293
+[e [\ -> _type `ui , $ -> . `E22912 0 `ui 3292
+ , $ -> . `E22912 1 `ui 3293
  3294 ]
 [e :U 3290 ]
 "542
@@ -4233,10 +4233,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 "550
 [; ;../../VLCBlib_PIC/nvm.c: 550: int16_t readNVM(NVMtype type, uint24_t index) {
-[v _readNVM `(s ~T0 @X0 1 ef2`E22911`um ]
+[v _readNVM `(s ~T0 @X0 1 ef2`E22912`um ]
 {
 [e :U _readNVM ]
-[v _type `E22911 ~T0 @X0 1 r1 ]
+[v _type `E22912 ~T0 @X0 1 r1 ]
 [v _index `um ~T0 @X0 1 r2 ]
 [f ]
 "551
@@ -4262,15 +4262,15 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 3300 ]
 "562
 [; ;../../VLCBlib_PIC/nvm.c: 562:             return -GRSP_UNKNOWN_NVM_TYPE;
-[e ) -> -U -> . `E22749 1 `i `s ]
+[e ) -> -U -> . `E22748 1 `i `s ]
 [e $UE 3295  ]
 "563
 [; ;../../VLCBlib_PIC/nvm.c: 563:     }
 }
 [e $U 3296  ]
 [e :U 3297 ]
-[e [\ -> _type `ui , $ -> . `E22911 0 `ui 3298
- , $ -> . `E22911 1 `ui 3299
+[e [\ -> _type `ui , $ -> . `E22912 0 `ui 3298
+ , $ -> . `E22912 1 `ui 3299
  3300 ]
 [e :U 3296 ]
 "564

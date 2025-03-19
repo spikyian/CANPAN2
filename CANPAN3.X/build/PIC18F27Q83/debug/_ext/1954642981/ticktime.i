@@ -37725,6 +37725,7 @@ extern volatile uint8_t timerExtension2;
 
 
 
+
 # 1 "../../VLCBlib_PIC\\statusLeds.h" 1
 # 42 "../../VLCBlib_PIC\\statusLeds.h"
 # 1 "../../VLCBlib_PIC/vlcb.h" 1
@@ -37744,7 +37745,6 @@ typedef enum VlcbManufacturer
   MANU_SPROG = 44,
   MANU_ROCRAIL = 70,
   MANU_SPECTRUM = 80,
-  MANU_MERG_VLCB = 250,
   MANU_VLCB = 250,
   MANU_SYSPIXIE = 249,
   MANU_RME = 248,
@@ -38300,6 +38300,8 @@ typedef enum VlcbModeParams
   MODE_HEARTBEAT_OFF = 0x0D,
 
   MODE_BOOT = 0x0E,
+  MODE_FCUCOMPAT_ON = 0x10,
+  MODE_FCUCOMPAT_OFF = 0x11,
 } VlcbModeParams;
 
 typedef enum VlcbBusTypes
@@ -38484,7 +38486,7 @@ extern uint8_t writeNVM(NVMtype type, uint24_t index, uint8_t value);
 
 extern ValidTime APP_isSuitableTimeToWriteFlash(void);
 # 40 "../../VLCBlib_PIC/vlcb.h" 2
-# 83 "../../VLCBlib_PIC/vlcb.h"
+# 82 "../../VLCBlib_PIC/vlcb.h"
 typedef enum Priority {
     pLOW=0,
     pNORMAL=1,
@@ -38539,7 +38541,7 @@ typedef enum {
     EVENT_OFF=0,
     EVENT_ON=1
 } EventState;
-# 148 "../../VLCBlib_PIC/vlcb.h"
+# 147 "../../VLCBlib_PIC/vlcb.h"
 typedef union DiagnosticVal {
     uint16_t asUint;
     int16_t asInt;
@@ -38565,6 +38567,7 @@ typedef enum Mode_state {
     EMODE_SETUP,
     EMODE_NORMAL
 } Mode_state;
+
 
 
 
@@ -38761,7 +38764,7 @@ typedef enum {
 extern void leds_powerUp(void);
 extern void leds_poll(void);
 extern void showStatus(StatusDisplay s);
-# 8 "..\\module.h" 2
+# 9 "..\\module.h" 2
 # 82 "../../VLCBlib_PIC/ticktime.c" 2
 
 

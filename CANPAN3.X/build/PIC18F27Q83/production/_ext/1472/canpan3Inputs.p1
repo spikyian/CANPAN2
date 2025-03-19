@@ -41,12 +41,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 "41 ../canpan3Events.h
 [; ;../canpan3Events.h: 41: extern void checkDefaultEvents(void);
 [v _checkDefaultEvents `(v ~T0 @X0 0 ef ]
-"121 ../../VLCBlib_PIC/vlcb.h
-[; ;../../VLCBlib_PIC/vlcb.h: 121:     struct {
+"120 ../../VLCBlib_PIC/vlcb.h
+[; ;../../VLCBlib_PIC/vlcb.h: 120:     struct {
 [s S3223 `uc 1 `uc 1 ]
 [n S3223 . lo hi ]
-"120
-[; ;../../VLCBlib_PIC/vlcb.h: 120: typedef union Word {
+"119
+[; ;../../VLCBlib_PIC/vlcb.h: 119: typedef union Word {
 [u S3222 `S3223 1 `us 1 ]
 [n S3222 Word bytes word ]
 "2775 C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h
@@ -58,11 +58,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _mode_flags `uc ~T0 @X0 0 e ]
 "141 ../canpan3Inputs.c
 [; ;../canpan3Inputs.c: 141:                 sendMessage5(OPC_ARON1, nn.bytes.hi, nn.bytes.lo, 0, 0, buttonNo+1);
-[c E22515 0 1 2 3 4 5 6 7 8 9 10 12 13 16 17 33 34 35 48 63 64 65 66 67 68 69 70 71 72 73 74 76 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 99 111 112 113 114 115 116 117 118 120 127 128 130 131 132 133 135 142 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 162 171 172 175 176 177 178 179 180 181 182 184 185 189 190 191 192 193 194 199 207 208 209 210 211 212 213 216 217 221 222 223 224 225 226 227 230 231 233 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 164 .. ]
-[n E22515 VlcbOpCodes OPC_ACK OPC_NAK OPC_HLT OPC_BON OPC_TOF OPC_TON OPC_ESTOP OPC_ARST OPC_RTOF OPC_RTON OPC_RESTP OPC_RSTAT OPC_QNN OPC_RQNP OPC_RQMN OPC_KLOC OPC_QLOC OPC_DKEEP OPC_DBG1 OPC_EXTC OPC_RLOC OPC_QCON OPC_SNN OPC_ALOC OPC_STMOD OPC_PCON OPC_KCON OPC_DSPD OPC_DFLG OPC_DFNON OPC_DFNOF OPC_SSTAT OPC_NNRSM OPC_RQNN OPC_NNREL OPC_NNACK OPC_NNLRN OPC_NNULN OPC_NNCLR OPC_NNEVN OPC_NERD OPC_RQEVN OPC_WRACK OPC_RQDAT OPC_RQDDS OPC_BOOT OPC_ENUM OPC_NNRST OPC_EXTC1 OPC_DFUN OPC_GLOC OPC_ERR OPC_CMDERR OPC_EVNLF OPC_NVRD OPC_NENRD OPC_RQNPN OPC_NUMEV OPC_CANID OPC_MODE OPC_RQSD OPC_EXTC2 OPC_RDCC3 OPC_WCVO OPC_WCVB OPC_QCVS OPC_PCVS OPC_RDGN OPC_NVSETRD OPC_ACON OPC_ACOF OPC_AREQ OPC_ARON OPC_AROF OPC_EVULN OPC_NVSET OPC_NVANS OPC_ASON OPC_ASOF OPC_ASRQ OPC_PARAN OPC_REVAL OPC_ARSON OPC_ARSOF OPC_EXTC3 OPC_RDCC4 OPC_WCVS OPC_HEARTB OPC_SD OPC_GRSP OPC_ACON1 OPC_ACOF1 OPC_REQEV OPC_ARON1 OPC_AROF1 OPC_NEVAL OPC_PNN OPC_ASON1 OPC_ASOF1 OPC_ARSON1 OPC_ARSOF1 OPC_EXTC4 OPC_RDCC5 OPC_WCVOA OPC_CABDAT OPC_DGN OPC_FCLK OPC_ACON2 OPC_ACOF2 OPC_EVLRN OPC_EVANS OPC_ARON2 OPC_AROF2 OPC_ASON2 OPC_ASOF2 OPC_ARSON2 OPC_ARSOF2 OPC_EXTC5 OPC_RDCC6 OPC_PLOC OPC_NAME OPC_STAT OPC_ENACK OPC_ESD OPC_DTXC OPC_PARAMS OPC_ACON3 OPC_ACOF3 OPC_ENRSP OPC_ARON3 OPC_AROF3 OPC_EVLRNI OPC_ACDAT OPC_ARDAT OPC_ASON3 OPC_ASOF3 OPC_DDES OPC_DDRS OPC_DDWS OPC_ARSON3 OPC_ARSOF3 OPC_EXTC6 OPC_VCVS  ]
+[c E22514 0 1 2 3 4 5 6 7 8 9 10 12 13 16 17 33 34 35 48 63 64 65 66 67 68 69 70 71 72 73 74 76 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 99 111 112 113 114 115 116 117 118 120 127 128 130 131 132 133 135 142 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 162 171 172 175 176 177 178 179 180 181 182 184 185 189 190 191 192 193 194 199 207 208 209 210 211 212 213 216 217 221 222 223 224 225 226 227 230 231 233 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 164 .. ]
+[n E22514 VlcbOpCodes OPC_ACK OPC_NAK OPC_HLT OPC_BON OPC_TOF OPC_TON OPC_ESTOP OPC_ARST OPC_RTOF OPC_RTON OPC_RESTP OPC_RSTAT OPC_QNN OPC_RQNP OPC_RQMN OPC_KLOC OPC_QLOC OPC_DKEEP OPC_DBG1 OPC_EXTC OPC_RLOC OPC_QCON OPC_SNN OPC_ALOC OPC_STMOD OPC_PCON OPC_KCON OPC_DSPD OPC_DFLG OPC_DFNON OPC_DFNOF OPC_SSTAT OPC_NNRSM OPC_RQNN OPC_NNREL OPC_NNACK OPC_NNLRN OPC_NNULN OPC_NNCLR OPC_NNEVN OPC_NERD OPC_RQEVN OPC_WRACK OPC_RQDAT OPC_RQDDS OPC_BOOT OPC_ENUM OPC_NNRST OPC_EXTC1 OPC_DFUN OPC_GLOC OPC_ERR OPC_CMDERR OPC_EVNLF OPC_NVRD OPC_NENRD OPC_RQNPN OPC_NUMEV OPC_CANID OPC_MODE OPC_RQSD OPC_EXTC2 OPC_RDCC3 OPC_WCVO OPC_WCVB OPC_QCVS OPC_PCVS OPC_RDGN OPC_NVSETRD OPC_ACON OPC_ACOF OPC_AREQ OPC_ARON OPC_AROF OPC_EVULN OPC_NVSET OPC_NVANS OPC_ASON OPC_ASOF OPC_ASRQ OPC_PARAN OPC_REVAL OPC_ARSON OPC_ARSOF OPC_EXTC3 OPC_RDCC4 OPC_WCVS OPC_HEARTB OPC_SD OPC_GRSP OPC_ACON1 OPC_ACOF1 OPC_REQEV OPC_ARON1 OPC_AROF1 OPC_NEVAL OPC_PNN OPC_ASON1 OPC_ASOF1 OPC_ARSON1 OPC_ARSOF1 OPC_EXTC4 OPC_RDCC5 OPC_WCVOA OPC_CABDAT OPC_DGN OPC_FCLK OPC_ACON2 OPC_ACOF2 OPC_EVLRN OPC_EVANS OPC_ARON2 OPC_AROF2 OPC_ASON2 OPC_ASOF2 OPC_ARSON2 OPC_ARSOF2 OPC_EXTC5 OPC_RDCC6 OPC_PLOC OPC_NAME OPC_STAT OPC_ENACK OPC_ESD OPC_DTXC OPC_PARAMS OPC_ACON3 OPC_ACOF3 OPC_ENRSP OPC_ARON3 OPC_AROF3 OPC_EVLRNI OPC_ACDAT OPC_ARDAT OPC_ASON3 OPC_ASOF3 OPC_DDES OPC_DDRS OPC_DDWS OPC_ARSON3 OPC_ARSOF3 OPC_EXTC6 OPC_VCVS  ]
 "250 ../../VLCBlib_PIC/vlcb.h
 [; ;../../VLCBlib_PIC/vlcb.h: 250: void sendMessage5(VlcbOpCodes opc, uint8_t data1, uint8_t data2, uint8_t data3, uint8_t data4, uint8_t data5);
-[v _sendMessage5 `(v ~T0 @X0 0 ef6`E22515`uc`uc`uc`uc`uc ]
+[v _sendMessage5 `(v ~T0 @X0 0 ef6`E22514`uc`uc`uc`uc`uc ]
 "126 ../../VLCBlib_PIC\mns.h
 [; ;../../VLCBlib_PIC\mns.h: 126: extern Word nn;
 [v _nn `S3222 ~T0 @X0 0 e ]
@@ -78,10 +78,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _evs `uc ~T0 @X0 -> 0 `x e ]
 "213 ../canpan3Inputs.c
 [; ;../canpan3Inputs.c: 213:                         writeNVM(EEPROM_NVM_TYPE, 0x0000 + buttonNo, outputState[buttonNo]);
-[c E22861 0 1 .. ]
-[n E22861 . EEPROM_NVM_TYPE FLASH_NVM_TYPE  ]
+[c E22862 0 1 .. ]
+[n E22862 . EEPROM_NVM_TYPE FLASH_NVM_TYPE  ]
 "169 ../../VLCBlib_PIC\nvm.h
-[v _writeNVM `(uc ~T0 @X0 0 ef3`E22861`um`uc ]
+[v _writeNVM `(uc ~T0 @X0 0 ef3`E22862`um`uc ]
 "69 ../canpan3Inputs.c
 [; ;../canpan3Inputs.c: 69: void canpanSendProducedEvent(uint8_t tableIndex, uint8_t onOff);
 [v _canpanSendProducedEvent `(v ~T0 @X0 0 ef2`uc`uc ]
@@ -91,7 +91,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _getEN `(us ~T0 @X0 0 ef1`uc ]
 "240 ../../VLCBlib_PIC/vlcb.h
 [; ;../../VLCBlib_PIC/vlcb.h: 240: void sendMessage4(VlcbOpCodes opc, uint8_t data1, uint8_t data2, uint8_t data3, uint8_t data4);
-[v _sendMessage4 `(v ~T0 @X0 0 ef5`E22515`uc`uc`uc`uc ]
+[v _sendMessage4 `(v ~T0 @X0 0 ef5`E22514`uc`uc`uc`uc ]
 "97 ../../VLCBlib_PIC\event_producer.h
 [; ;../../VLCBlib_PIC\event_producer.h: 97: extern void incrementProducerCounter(void);
 [v _incrementProducerCounter `(v ~T0 @X0 0 ef ]
@@ -108,34 +108,34 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _switch2Event `uc ~T0 @X0 -> 0 `x e ]
 "305
 [; ;../canpan3Inputs.c: 305:     startTimedResponse(1, findServiceIndex(SERVICE_ID_PRODUCER), sodTRCallback);
-[c E23142 0 1 2 .. ]
-[n E23142 . TIMED_RESPONSE_RESULT_FINISHED TIMED_RESPONSE_RESULT_RETRY TIMED_RESPONSE_RESULT_NEXT  ]
-[v F23154 `(E23142 ~T0 @X0 0 tf3`uc`uc`uc ]
+[c E23143 0 1 2 .. ]
+[n E23143 . TIMED_RESPONSE_RESULT_FINISHED TIMED_RESPONSE_RESULT_RETRY TIMED_RESPONSE_RESULT_NEXT  ]
+[v F23155 `(E23143 ~T0 @X0 0 tf3`uc`uc`uc ]
 "109 ../../VLCBlib_PIC\timedResponse.h
 [; ;../../VLCBlib_PIC\timedResponse.h: 109: extern void startTimedResponse(uint8_t type, uint8_t serviceIndex, TimedResponseResult (*callback)(uint8_t type, uint8_t si, uint8_t step));
-[v _startTimedResponse `(v ~T0 @X0 0 ef3`uc`uc`*F23154 ]
+[v _startTimedResponse `(v ~T0 @X0 0 ef3`uc`uc`*F23155 ]
 "350 ../../VLCBlib_PIC/vlcb.h
 [; ;../../VLCBlib_PIC/vlcb.h: 350: extern uint8_t findServiceIndex(uint8_t id);
 [v _findServiceIndex `(uc ~T0 @X0 0 ef1`uc ]
 "305 ../canpan3Inputs.c
 [; ;../canpan3Inputs.c: 305:     startTimedResponse(1, findServiceIndex(SERVICE_ID_PRODUCER), sodTRCallback);
-[c E22722 0 1 2 3 4 5 6 7 8 9 10 17 .. ]
-[n E22722 VlcbServiceTypes SERVICE_ID_NONE SERVICE_ID_MNS SERVICE_ID_NV SERVICE_ID_CAN SERVICE_ID_OLD_TEACH SERVICE_ID_PRODUCER SERVICE_ID_CONSUMER SERVICE_ID_TEACH SERVICE_ID_CONSUME_OWN_EVENTS SERVICE_ID_EVENTACK SERVICE_ID_BOOT SERVICE_ID_STREAMING  ]
+[c E22721 0 1 2 3 4 5 6 7 8 9 10 17 .. ]
+[n E22721 VlcbServiceTypes SERVICE_ID_NONE SERVICE_ID_MNS SERVICE_ID_NV SERVICE_ID_CAN SERVICE_ID_OLD_TEACH SERVICE_ID_PRODUCER SERVICE_ID_CONSUMER SERVICE_ID_TEACH SERVICE_ID_CONSUME_OWN_EVENTS SERVICE_ID_EVENTACK SERVICE_ID_BOOT SERVICE_ID_STREAMING  ]
 "68
 [; ;../canpan3Inputs.c: 68: TimedResponseResult sodTRCallback(uint8_t type, uint8_t serviceIndex, uint8_t step);
-[v _sodTRCallback `(E23142 ~T0 @X0 0 ef3`uc`uc`uc ]
+[v _sodTRCallback `(E23143 ~T0 @X0 0 ef3`uc`uc`uc ]
 "320
 [; ;../canpan3Inputs.c: 320:     EventState value;
-[c E22909 255 0 1 .. ]
-[n E22909 . EVENT_UNKNOWN EVENT_OFF EVENT_ON  ]
+[c E22910 255 0 1 .. ]
+[n E22910 . EVENT_UNKNOWN EVENT_OFF EVENT_ON  ]
 "113 ../../VLCBlib_PIC\event_producer.h
 [; ;../../VLCBlib_PIC\event_producer.h: 113: extern EventState APP_GetEventIndexState(uint8_t tableIndex);
-[v _APP_GetEventIndexState `(E22909 ~T0 @X0 0 ef1`uc ]
+[v _APP_GetEventIndexState `(E22910 ~T0 @X0 0 ef1`uc ]
 "40 ../canpan3Events.h
 [; ;../canpan3Events.h: 40: extern uint8_t APP_isProducedEvent(uint8_t tableIndex);
 [v _APP_isProducedEvent `(uc ~T0 @X0 0 ef1`uc ]
 "160 ../../VLCBlib_PIC\nvm.h
-[v _readNVM `(s ~T0 @X0 0 ef2`E22861`um ]
+[v _readNVM `(s ~T0 @X0 0 ef2`E22862`um ]
 "364 C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h
 [; ;C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h: 364: __asm("BOOTREG equ 038h");
 [; <" BOOTREG equ 038h ;# ">
@@ -3827,7 +3827,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "141
 [; ;../canpan3Inputs.c: 141:                 sendMessage5(OPC_ARON1, nn.bytes.hi, nn.bytes.lo, 0, 0, buttonNo+1);
-[e ( _sendMessage5 (4 , , , , , . `E22515 93 . . _nn 0 1 . . _nn 0 0 -> -> 0 `i `uc -> -> 0 `i `uc -> + -> _buttonNo `i -> 1 `i `uc ]
+[e ( _sendMessage5 (4 , , , , , . `E22514 93 . . _nn 0 1 . . _nn 0 0 -> -> 0 `i `uc -> -> 0 `i `uc -> + -> _buttonNo `i -> 1 `i `uc ]
 "142
 [; ;../canpan3Inputs.c: 142:             } else {
 }
@@ -4089,7 +4089,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 3258 ]
 "213
 [; ;../canpan3Inputs.c: 213:                         writeNVM(EEPROM_NVM_TYPE, 0x0000 + buttonNo, outputState[buttonNo]);
-[e ( _writeNVM (3 , , . `E22861 0 -> -> + -> 0 `i -> _buttonNo `i `m `um *U + &U _outputState * -> _buttonNo `ux -> -> # *U &U _outputState `ui `ux ]
+[e ( _writeNVM (3 , , . `E22862 0 -> -> + -> 0 `i -> _buttonNo `i `m `um *U + &U _outputState * -> _buttonNo `ux -> -> # *U &U _outputState `ui `ux ]
 "214
 [; ;../canpan3Inputs.c: 214:                         if (canpanScanReady) {
 [e $ ! != -> _canpanScanReady `i -> 0 `i 3274  ]
@@ -4225,7 +4225,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "262
 [; ;../canpan3Inputs.c: 262:             opc = OPC_ASON;
-[e = _opc -> . `E22515 77 `uc ]
+[e = _opc -> . `E22514 77 `uc ]
 "263
 [; ;../canpan3Inputs.c: 263:         } else {
 }
@@ -4234,7 +4234,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "264
 [; ;../canpan3Inputs.c: 264:             opc = OPC_ASOF;
-[e = _opc -> . `E22515 78 `uc ]
+[e = _opc -> . `E22514 78 `uc ]
 "265
 [; ;../canpan3Inputs.c: 265:         }
 }
@@ -4254,7 +4254,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "270
 [; ;../canpan3Inputs.c: 270:             opc = OPC_ACON;
-[e = _opc -> . `E22515 69 `uc ]
+[e = _opc -> . `E22514 69 `uc ]
 "271
 [; ;../canpan3Inputs.c: 271:         } else {
 }
@@ -4263,7 +4263,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "272
 [; ;../canpan3Inputs.c: 272:             opc = OPC_ACOF;
-[e = _opc -> . `E22515 70 `uc ]
+[e = _opc -> . `E22514 70 `uc ]
 "273
 [; ;../canpan3Inputs.c: 273:         }
 }
@@ -4274,7 +4274,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 3284 ]
 "276
 [; ;../canpan3Inputs.c: 276:     sendMessage4(opc, producedEventNN.bytes.hi, producedEventNN.bytes.lo,
-[e ( _sendMessage4 (4 , , , , -> _opc `E22515 . . _producedEventNN 0 1 . . _producedEventNN 0 0 . . _producedEventEN 0 1 . . _producedEventEN 0 0 ]
+[e ( _sendMessage4 (4 , , , , -> _opc `E22514 . . _producedEventNN 0 1 . . _producedEventNN 0 0 . . _producedEventEN 0 1 . . _producedEventEN 0 0 ]
 "279
 [; ;../canpan3Inputs.c: 279:     incrementProducerCounter();
 [e ( _incrementProducerCounter ..  ]
@@ -4324,14 +4324,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 [f ]
 "305
 [; ;../canpan3Inputs.c: 305:     startTimedResponse(1, findServiceIndex(SERVICE_ID_PRODUCER), sodTRCallback);
-[e ( _startTimedResponse (3 , , -> -> 1 `i `uc ( _findServiceIndex (1 -> . `E22722 5 `uc &U _sodTRCallback ]
+[e ( _startTimedResponse (3 , , -> -> 1 `i `uc ( _findServiceIndex (1 -> . `E22721 5 `uc &U _sodTRCallback ]
 "306
 [; ;../canpan3Inputs.c: 306: }
 [e :UE 3289 ]
 }
 "319
 [; ;../canpan3Inputs.c: 319: TimedResponseResult sodTRCallback(uint8_t type, uint8_t serviceIndex, uint8_t tableIndex) {
-[v _sodTRCallback `(E23142 ~T0 @X0 1 ef3`uc`uc`uc ]
+[v _sodTRCallback `(E23143 ~T0 @X0 1 ef3`uc`uc`uc ]
 {
 [e :U _sodTRCallback ]
 [v _type `uc ~T0 @X0 1 r1 ]
@@ -4340,7 +4340,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [f ]
 "320
 [; ;../canpan3Inputs.c: 320:     EventState value;
-[v _value `E22909 ~T0 @X0 1 a ]
+[v _value `E22910 ~T0 @X0 1 a ]
 "321
 [; ;../canpan3Inputs.c: 321:     uint8_t sv;
 [v _sv `uc ~T0 @X0 1 a ]
@@ -4350,7 +4350,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "324
 [; ;../canpan3Inputs.c: 324:         return TIMED_RESPONSE_RESULT_FINISHED;
-[e ) . `E23142 0 ]
+[e ) . `E23143 0 ]
 [e $UE 3290  ]
 "325
 [; ;../canpan3Inputs.c: 325:     }
@@ -4361,7 +4361,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = _value ( _APP_GetEventIndexState (1 _tableIndex ]
 "329
 [; ;../canpan3Inputs.c: 329:     if (value != EVENT_UNKNOWN) {
-[e $ ! != -> _value `ui -> . `E22909 0 `ui 3292  ]
+[e $ ! != -> _value `ui -> . `E22910 0 `ui 3292  ]
 {
 "330
 [; ;../canpan3Inputs.c: 330:         sv = evs[2];
@@ -4372,7 +4372,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "332
 [; ;../canpan3Inputs.c: 332:             canpanSendProducedEvent(tableIndex, value==EVENT_ON);
-[e ( _canpanSendProducedEvent (2 , _tableIndex -> -> == -> _value `ui -> . `E22909 2 `ui `i `uc ]
+[e ( _canpanSendProducedEvent (2 , _tableIndex -> -> == -> _value `ui -> . `E22910 2 `ui `i `uc ]
 "333
 [; ;../canpan3Inputs.c: 333:         }
 }
@@ -4383,7 +4383,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 3292 ]
 "335
 [; ;../canpan3Inputs.c: 335:     return TIMED_RESPONSE_RESULT_NEXT;
-[e ) . `E23142 2 ]
+[e ) . `E23143 2 ]
 [e $UE 3290  ]
 "336
 [; ;../canpan3Inputs.c: 336: }
@@ -4428,7 +4428,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $ ! < -> _buttonNo `i * -> 8 `i -> 4 `i 3300  ]
 "352
 [; ;../canpan3Inputs.c: 352:                 outputState[buttonNo] = (uint8_t)readNVM(EEPROM_NVM_TYPE, 0x0000 +buttonNo);
-[e = *U + &U _outputState * -> _buttonNo `ux -> -> # *U &U _outputState `ui `ux -> ( _readNVM (2 , . `E22861 0 -> -> + -> 0 `i -> _buttonNo `i `m `um `uc ]
+[e = *U + &U _outputState * -> _buttonNo `ux -> -> # *U &U _outputState `ui `ux -> ( _readNVM (2 , . `E22862 0 -> -> + -> 0 `i -> _buttonNo `i `m `um `uc ]
 [e :U 3300 ]
 "353
 [; ;../canpan3Inputs.c: 353:             }

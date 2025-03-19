@@ -1,68 +1,95 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"151 ../../VLCBlib_PIC/vlcb.h
-[; ;../../VLCBlib_PIC/vlcb.h: 151:     struct {
+"150 ../../VLCBlib_PIC/vlcb.h
+[; ;../../VLCBlib_PIC/vlcb.h: 150:     struct {
 [s S3228 `uc 1 `uc 1 ]
 [n S3228 . lo hi ]
-"148
-[; ;../../VLCBlib_PIC/vlcb.h: 148: typedef union DiagnosticVal {
+"147
+[; ;../../VLCBlib_PIC/vlcb.h: 147: typedef union DiagnosticVal {
 [u S3227 `us 1 `s 1 `S3228 1 ]
 [n S3227 DiagnosticVal asUint asInt asBytes ]
-[v F23048 `(v ~T0 @X0 0 tf ]
-[v F23050 `(v ~T0 @X0 0 tf ]
-"72 ../../VLCBlib_PIC/event_consumer_simple.c
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 72: const Service eventConsumerService = {
-[c E22565 0 1 2 3 4 5 6 7 8 9 10 12 13 16 17 33 34 35 48 63 64 65 66 67 68 69 70 71 72 73 74 76 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 99 111 112 113 114 115 116 117 118 120 127 128 130 131 132 133 135 142 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 162 171 172 175 176 177 178 179 180 181 182 184 185 189 190 191 192 193 194 199 207 208 209 210 211 212 213 216 217 221 222 223 224 225 226 227 230 231 233 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 164 .. ]
-[n E22565 VlcbOpCodes OPC_ACK OPC_NAK OPC_HLT OPC_BON OPC_TOF OPC_TON OPC_ESTOP OPC_ARST OPC_RTOF OPC_RTON OPC_RESTP OPC_RSTAT OPC_QNN OPC_RQNP OPC_RQMN OPC_KLOC OPC_QLOC OPC_DKEEP OPC_DBG1 OPC_EXTC OPC_RLOC OPC_QCON OPC_SNN OPC_ALOC OPC_STMOD OPC_PCON OPC_KCON OPC_DSPD OPC_DFLG OPC_DFNON OPC_DFNOF OPC_SSTAT OPC_NNRSM OPC_RQNN OPC_NNREL OPC_NNACK OPC_NNLRN OPC_NNULN OPC_NNCLR OPC_NNEVN OPC_NERD OPC_RQEVN OPC_WRACK OPC_RQDAT OPC_RQDDS OPC_BOOT OPC_ENUM OPC_NNRST OPC_EXTC1 OPC_DFUN OPC_GLOC OPC_ERR OPC_CMDERR OPC_EVNLF OPC_NVRD OPC_NENRD OPC_RQNPN OPC_NUMEV OPC_CANID OPC_MODE OPC_RQSD OPC_EXTC2 OPC_RDCC3 OPC_WCVO OPC_WCVB OPC_QCVS OPC_PCVS OPC_RDGN OPC_NVSETRD OPC_ACON OPC_ACOF OPC_AREQ OPC_ARON OPC_AROF OPC_EVULN OPC_NVSET OPC_NVANS OPC_ASON OPC_ASOF OPC_ASRQ OPC_PARAN OPC_REVAL OPC_ARSON OPC_ARSOF OPC_EXTC3 OPC_RDCC4 OPC_WCVS OPC_HEARTB OPC_SD OPC_GRSP OPC_ACON1 OPC_ACOF1 OPC_REQEV OPC_ARON1 OPC_AROF1 OPC_NEVAL OPC_PNN OPC_ASON1 OPC_ASOF1 OPC_ARSON1 OPC_ARSOF1 OPC_EXTC4 OPC_RDCC5 OPC_WCVOA OPC_CABDAT OPC_DGN OPC_FCLK OPC_ACON2 OPC_ACOF2 OPC_EVLRN OPC_EVANS OPC_ARON2 OPC_AROF2 OPC_ASON2 OPC_ASOF2 OPC_ARSON2 OPC_ARSOF2 OPC_EXTC5 OPC_RDCC6 OPC_PLOC OPC_NAME OPC_STAT OPC_ENACK OPC_ESD OPC_DTXC OPC_PARAMS OPC_ACON3 OPC_ACOF3 OPC_ENRSP OPC_ARON3 OPC_AROF3 OPC_EVLRNI OPC_ACDAT OPC_ARDAT OPC_ASON3 OPC_ASOF3 OPC_DDES OPC_DDRS OPC_DDWS OPC_ARSON3 OPC_ARSOF3 OPC_EXTC6 OPC_VCVS  ]
-"111 ../../VLCBlib_PIC/vlcb.h
-[; ;../../VLCBlib_PIC/vlcb.h: 111: typedef struct Message {
-[s S3224 `uc 1 `E22565 1 `uc -> 7 `i ]
+[v F23049 `(v ~T0 @X0 0 tf ]
+[v F23051 `(v ~T0 @X0 0 tf ]
+"73 ../../VLCBlib_PIC/event_consumer_simple.c
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 73: const Service eventConsumerService = {
+[c E22564 0 1 2 3 4 5 6 7 8 9 10 12 13 16 17 33 34 35 48 63 64 65 66 67 68 69 70 71 72 73 74 76 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 99 111 112 113 114 115 116 117 118 120 127 128 130 131 132 133 135 142 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 162 171 172 175 176 177 178 179 180 181 182 184 185 189 190 191 192 193 194 199 207 208 209 210 211 212 213 216 217 221 222 223 224 225 226 227 230 231 233 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 164 .. ]
+[n E22564 VlcbOpCodes OPC_ACK OPC_NAK OPC_HLT OPC_BON OPC_TOF OPC_TON OPC_ESTOP OPC_ARST OPC_RTOF OPC_RTON OPC_RESTP OPC_RSTAT OPC_QNN OPC_RQNP OPC_RQMN OPC_KLOC OPC_QLOC OPC_DKEEP OPC_DBG1 OPC_EXTC OPC_RLOC OPC_QCON OPC_SNN OPC_ALOC OPC_STMOD OPC_PCON OPC_KCON OPC_DSPD OPC_DFLG OPC_DFNON OPC_DFNOF OPC_SSTAT OPC_NNRSM OPC_RQNN OPC_NNREL OPC_NNACK OPC_NNLRN OPC_NNULN OPC_NNCLR OPC_NNEVN OPC_NERD OPC_RQEVN OPC_WRACK OPC_RQDAT OPC_RQDDS OPC_BOOT OPC_ENUM OPC_NNRST OPC_EXTC1 OPC_DFUN OPC_GLOC OPC_ERR OPC_CMDERR OPC_EVNLF OPC_NVRD OPC_NENRD OPC_RQNPN OPC_NUMEV OPC_CANID OPC_MODE OPC_RQSD OPC_EXTC2 OPC_RDCC3 OPC_WCVO OPC_WCVB OPC_QCVS OPC_PCVS OPC_RDGN OPC_NVSETRD OPC_ACON OPC_ACOF OPC_AREQ OPC_ARON OPC_AROF OPC_EVULN OPC_NVSET OPC_NVANS OPC_ASON OPC_ASOF OPC_ASRQ OPC_PARAN OPC_REVAL OPC_ARSON OPC_ARSOF OPC_EXTC3 OPC_RDCC4 OPC_WCVS OPC_HEARTB OPC_SD OPC_GRSP OPC_ACON1 OPC_ACOF1 OPC_REQEV OPC_ARON1 OPC_AROF1 OPC_NEVAL OPC_PNN OPC_ASON1 OPC_ASOF1 OPC_ARSON1 OPC_ARSOF1 OPC_EXTC4 OPC_RDCC5 OPC_WCVOA OPC_CABDAT OPC_DGN OPC_FCLK OPC_ACON2 OPC_ACOF2 OPC_EVLRN OPC_EVANS OPC_ARON2 OPC_AROF2 OPC_ASON2 OPC_ASOF2 OPC_ARSON2 OPC_ARSOF2 OPC_EXTC5 OPC_RDCC6 OPC_PLOC OPC_NAME OPC_STAT OPC_ENACK OPC_ESD OPC_DTXC OPC_PARAMS OPC_ACON3 OPC_ACOF3 OPC_ENRSP OPC_ARON3 OPC_AROF3 OPC_EVLRNI OPC_ACDAT OPC_ARDAT OPC_ASON3 OPC_ASOF3 OPC_DDES OPC_DDRS OPC_DDWS OPC_ARSON3 OPC_ARSOF3 OPC_EXTC6 OPC_VCVS  ]
+"110 ../../VLCBlib_PIC/vlcb.h
+[; ;../../VLCBlib_PIC/vlcb.h: 110: typedef struct Message {
+[s S3224 `uc 1 `E22564 1 `uc -> 7 `i ]
 [n S3224 Message len opc bytes ]
-"72 ../../VLCBlib_PIC/event_consumer_simple.c
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 72: const Service eventConsumerService = {
-[c E22972 0 1 .. ]
-[n E22972 Processed NOT_PROCESSED PROCESSED  ]
-[v F23052 `(E22972 ~T0 @X0 0 tf1`*S3224 ]
-[v F23055 `(v ~T0 @X0 0 tf ]
-[v F23057 `(uc ~T0 @X0 0 tf1`uc ]
-[v F23060 `(*S3227 ~T0 @X0 0 tf1`uc ]
+"73 ../../VLCBlib_PIC/event_consumer_simple.c
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 73: const Service eventConsumerService = {
+[c E22973 0 1 .. ]
+[n E22973 Processed NOT_PROCESSED PROCESSED  ]
+[v F23053 `(E22973 ~T0 @X0 0 tf1`*S3224 ]
+[v F23056 `(v ~T0 @X0 0 tf ]
+[v F23058 `(uc ~T0 @X0 0 tf1`uc ]
+[v F23061 `(*S3227 ~T0 @X0 0 tf1`uc ]
 "299 ../../VLCBlib_PIC/vlcb.h
 [; ;../../VLCBlib_PIC/vlcb.h: 299: typedef struct Service {
-[s S3229 `uc 1 `uc 1 `*F23048 1 `*F23050 1 `*F23052 1 `*F23055 1 `*F23057 1 `*F23060 1 ]
+[s S3229 `uc 1 `uc 1 `*F23049 1 `*F23051 1 `*F23053 1 `*F23056 1 `*F23058 1 `*F23061 1 ]
 [n S3229 Service serviceNo version factoryReset powerUp processMessage poll getESDdata getDiagnostic ]
-"72 ../../VLCBlib_PIC/event_consumer_simple.c
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 72: const Service eventConsumerService = {
-[c E22772 0 1 2 3 4 5 6 7 8 9 10 17 .. ]
-[n E22772 VlcbServiceTypes SERVICE_ID_NONE SERVICE_ID_MNS SERVICE_ID_NV SERVICE_ID_CAN SERVICE_ID_OLD_TEACH SERVICE_ID_PRODUCER SERVICE_ID_CONSUMER SERVICE_ID_TEACH SERVICE_ID_CONSUME_OWN_EVENTS SERVICE_ID_EVENTACK SERVICE_ID_BOOT SERVICE_ID_STREAMING  ]
-[v F23152 `(v ~T0 @X0 0 tf ]
-"58
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 58: static void consumerPowerUp(void);
-[v _consumerPowerUp `(v ~T0 @X0 0 sf ]
+"73 ../../VLCBlib_PIC/event_consumer_simple.c
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 73: const Service eventConsumerService = {
+[c E22771 0 1 2 3 4 5 6 7 8 9 10 17 .. ]
+[n E22771 VlcbServiceTypes SERVICE_ID_NONE SERVICE_ID_MNS SERVICE_ID_NV SERVICE_ID_CAN SERVICE_ID_OLD_TEACH SERVICE_ID_PRODUCER SERVICE_ID_CONSUMER SERVICE_ID_TEACH SERVICE_ID_CONSUME_OWN_EVENTS SERVICE_ID_EVENTACK SERVICE_ID_BOOT SERVICE_ID_STREAMING  ]
+[v F23163 `(v ~T0 @X0 0 tf ]
 "59
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 59: static Processed consumerProcessMessage(Message * m);
-[v _consumerProcessMessage `(E22972 ~T0 @X0 0 sf1`*S3224 ]
-[v F23156 `(v ~T0 @X0 0 tf ]
-"61
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 61: static uint8_t consumerEsdData(uint8_t index);
-[v _consumerEsdData `(uc ~T0 @X0 0 sf1`uc ]
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 59: static void consumerPowerUp(void);
+[v _consumerPowerUp `(v ~T0 @X0 0 sf ]
 "60
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 60: static DiagnosticVal * consumerGetDiagnostic(uint8_t index);
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 60: static Processed consumerProcessMessage(Message * m);
+[v _consumerProcessMessage `(E22973 ~T0 @X0 0 sf1`*S3224 ]
+[v F23167 `(v ~T0 @X0 0 tf ]
+"62
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 62: static uint8_t consumerEsdData(uint8_t index);
+[v _consumerEsdData `(uc ~T0 @X0 0 sf1`uc ]
+"61
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 61: static DiagnosticVal * consumerGetDiagnostic(uint8_t index);
 [v _consumerGetDiagnostic `(*S3227 ~T0 @X0 0 sf1`uc ]
+"63
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 63: static Processed consumerEventCheckLen(Message * m, uint8_t needed);
+[v _consumerEventCheckLen `(E22973 ~T0 @X0 0 sf2`*S3224`uc ]
+"120 ../../VLCBlib_PIC/vlcb.h
+[; ;../../VLCBlib_PIC/vlcb.h: 120:     struct {
+[s S3226 `uc 1 `uc 1 ]
+[n S3226 . lo hi ]
+"119
+[; ;../../VLCBlib_PIC/vlcb.h: 119: typedef union Word {
+[u S3225 `S3226 1 `us 1 ]
+[n S3225 Word bytes word ]
+"126 ../../VLCBlib_PIC/mns.h
+[; ;../../VLCBlib_PIC/mns.h: 126: extern Word nn;
+[v _nn `S3225 ~T0 @X0 0 e ]
+"119 ../../VLCBlib_PIC/event_consumer_simple.c
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 119:             if (m->bytes[2] == MODE_EVENT_ACK_ON) {
+[c E22820 255 0 1 8 9 10 11 12 13 14 16 17 .. ]
+[n E22820 VlcbModeParams MODE_UNINITIALISED MODE_SETUP MODE_NORMAL MODE_LEARN_ON MODE_LEARN_OFF MODE_EVENT_ACK_ON MODE_EVENT_ACK_OFF MODE_HEARTBEAT_ON MODE_HEARTBEAT_OFF MODE_BOOT MODE_FCUCOMPAT_ON MODE_FCUCOMPAT_OFF  ]
+"135 ../../VLCBlib_PIC/mns.h
+[; ;../../VLCBlib_PIC/mns.h: 135: extern uint8_t mode_flags;
+[v _mode_flags `uc ~T0 @X0 0 e ]
 "97 ../../VLCBlib_PIC/event_teach.h
 [; ;../../VLCBlib_PIC/event_teach.h: 97: extern uint8_t findEvent(uint16_t nodeNumber, uint16_t eventNumber);
 [v _findEvent `(uc ~T0 @X0 0 ef2`us`us ]
-"64 ../../VLCBlib_PIC/event_consumer_simple.c
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 64: uint8_t isConsumedEvent(uint8_t eventIndex);
+"65 ../../VLCBlib_PIC/event_consumer_simple.c
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 65: uint8_t isConsumedEvent(uint8_t eventIndex);
 [v _isConsumedEvent `(uc ~T0 @X0 0 ef1`uc ]
-"79 ../../VLCBlib_PIC/event_consumer_simple.h
-[; ;../../VLCBlib_PIC/event_consumer_simple.h: 79: extern Processed APP_processConsumedEvent(uint8_t tableIndex, Message * m);
-[v _APP_processConsumedEvent `(E22972 ~T0 @X0 0 ef2`uc`*S3224 ]
-"63 ../../VLCBlib_PIC/event_consumer_simple.c
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 63: extern uint8_t APP_isConsumedEvent(uint8_t eventIndex);
+"273 ../../VLCBlib_PIC/vlcb.h
+[; ;../../VLCBlib_PIC/vlcb.h: 273: void sendMessage7(VlcbOpCodes opc, uint8_t data1, uint8_t data2, uint8_t data3, uint8_t data4, uint8_t data5, uint8_t data6, uint8_t data7);
+[v _sendMessage7 `(v ~T0 @X0 0 ef8`E22564`uc`uc`uc`uc`uc`uc`uc ]
+"80 ../../VLCBlib_PIC/event_consumer_simple.h
+[; ;../../VLCBlib_PIC/event_consumer_simple.h: 80: extern Processed APP_processConsumedEvent(uint8_t tableIndex, Message * m);
+[v _APP_processConsumedEvent `(E22973 ~T0 @X0 0 ef2`uc`*S3224 ]
+"64 ../../VLCBlib_PIC/event_consumer_simple.c
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 64: extern uint8_t APP_isConsumedEvent(uint8_t eventIndex);
 [v _APP_isConsumedEvent `(uc ~T0 @X0 0 ef1`uc ]
-"198
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 198:             return CONSUMER_EV_NOT_SPECIFIED;
-[c E22900 0 1 2 .. ]
-[n E22900 VlcbConsumerEvUsage CONSUMER_EV_NOT_SPECIFIED CONSUMER_EV_ACTIONS CONSUMER_EV_SLOTS  ]
+"235
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 235:             return CONSUMER_EV_NOT_SPECIFIED;
+[c E22901 0 1 2 .. ]
+[n E22901 VlcbConsumerEvUsage CONSUMER_EV_NOT_SPECIFIED CONSUMER_EV_ACTIONS CONSUMER_EV_SLOTS  ]
+"190 ../../VLCBlib_PIC/vlcb.h
+[; ;../../VLCBlib_PIC/vlcb.h: 190: extern Processed checkLen(Message * m, uint8_t needed, uint8_t service);
+[v _checkLen `(E22973 ~T0 @X0 0 ef3`*S3224`uc`uc ]
 "364 C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h
 [; ;C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h: 364: __asm("BOOTREG equ 038h");
 [; <" BOOTREG equ 038h ;# ">
@@ -3582,298 +3609,384 @@ Version 4.0 HI-TECH Software Intermediate Code
 "69656
 [; ;C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h: 69656: __asm("TOSU equ 04FFh");
 [; <" TOSU equ 04FFh ;# ">
-"57 ../../VLCBlib_PIC/event_consumer_simple.c
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 57: static DiagnosticVal consumerDiagnostics[1 +1];
-[v _consumerDiagnostics `S3227 ~T0 @X0 -> 2 `i s ]
-"72
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 72: const Service eventConsumerService = {
+"58 ../../VLCBlib_PIC/event_consumer_simple.c
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 58: static DiagnosticVal consumerDiagnostics[2 +1];
+[v _consumerDiagnostics `S3227 ~T0 @X0 -> 3 `i s ]
+"73
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 73: const Service eventConsumerService = {
 [v _eventConsumerService `CS3229 ~T0 @X0 1 e ]
 [i _eventConsumerService
 :U ..
 :U ..
--> . `E22772 6 `uc
--> -> 1 `i `uc
--> -> -> 0 `i `*v `*F23152
+-> . `E22771 6 `uc
+-> -> 2 `i `uc
+-> -> -> 0 `i `*v `*F23163
 &U _consumerPowerUp
 &U _consumerProcessMessage
--> -> -> 0 `i `*v `*F23156
+-> -> -> 0 `i `*v `*F23167
 &U _consumerEsdData
 &U _consumerGetDiagnostic
 ..
 ..
 ]
-"91
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 91: static void consumerPowerUp(void) {
+"92
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 92: static void consumerPowerUp(void) {
 [v _consumerPowerUp `(v ~T0 @X0 1 sf ]
 {
 [e :U _consumerPowerUp ]
 [f ]
-"93
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 93:     uint8_t temp;
+"94
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 94:     uint8_t temp;
 [v _temp `uc ~T0 @X0 1 a ]
-"95
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 95:     for (temp=1; temp<=1; temp++) {
+"96
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 96:     for (temp=1; temp<=2; temp++) {
 {
 [e = _temp -> -> 1 `i `uc ]
-[e $ <= -> _temp `i -> 1 `i 3233  ]
+[e $ <= -> _temp `i -> 2 `i 3233  ]
 [e $U 3234  ]
 [e :U 3233 ]
 {
-"96
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 96:  consumerDiagnostics[temp].asUint = 0;
-[e = . *U + &U _consumerDiagnostics * -> _temp `ux -> -> # *U &U _consumerDiagnostics `ui `ux 0 -> -> 0 `i `us ]
 "97
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 97:     }
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 97:         consumerDiagnostics[temp].asUint = 0;
+[e = . *U + &U _consumerDiagnostics * -> _temp `ux -> -> # *U &U _consumerDiagnostics `ui `ux 0 -> -> 0 `i `us ]
+"98
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 98:     }
 }
 [e ++ _temp -> -> 1 `i `uc ]
-[e $ <= -> _temp `i -> 1 `i 3233  ]
+[e $ <= -> _temp `i -> 2 `i 3233  ]
 [e :U 3234 ]
 }
-"98
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 98:     consumerDiagnostics[0].asUint = 1;
-[e = . *U + &U _consumerDiagnostics * -> -> -> 0 `i `ui `ux -> -> # *U &U _consumerDiagnostics `ui `ux 0 -> -> 1 `i `us ]
-"100
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 100: }
+"99
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 99:     consumerDiagnostics[0].asUint = 2;
+[e = . *U + &U _consumerDiagnostics * -> -> -> 0 `i `ui `ux -> -> # *U &U _consumerDiagnostics `ui `ux 0 -> -> 2 `i `us ]
+"101
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 101: }
 [e :UE 3232 ]
 }
-"108
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 108: static Processed consumerProcessMessage(Message *m) {
-[v _consumerProcessMessage `(E22972 ~T0 @X0 1 sf1`*S3224 ]
+"110
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 110: static Processed consumerProcessMessage(Message *m) {
+[v _consumerProcessMessage `(E22973 ~T0 @X0 1 sf1`*S3224 ]
 {
 [e :U _consumerProcessMessage ]
 [v _m `*S3224 ~T0 @X0 1 r1 ]
 [f ]
-"109
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 109:     Processed ret;
-[v _ret `E22972 ~T0 @X0 1 a ]
-"110
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 110:     uint8_t tableIndex;
-[v _tableIndex `uc ~T0 @X0 1 a ]
 "111
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 111:     uint16_t enn;
-[v _enn `us ~T0 @X0 1 a ]
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 111:     Processed ret;
+[v _ret `E22973 ~T0 @X0 1 a ]
+"112
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 112:     uint8_t tableIndex;
+[v _tableIndex `uc ~T0 @X0 1 a ]
 "113
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 113:     if (m->len < 5) return NOT_PROCESSED;
-[e $ ! < -> . *U _m 0 `i -> 5 `i 3237  ]
-[e ) . `E22972 0 ]
-[e $UE 3236  ]
-[e :U 3237 ]
-"115
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 115:     enn = ((uint16_t)m->bytes[0])*256+m->bytes[1];
-[e = _enn -> + * -> -> *U + &U . *U _m 2 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux `us `ui -> -> 256 `i `ui -> *U + &U . *U _m 2 * -> -> -> 1 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux `ui `us ]
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 113:     uint16_t enn;
+[v _enn `us ~T0 @X0 1 a ]
+"116
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 116:     if (m->opc == OPC_MODE) {
+[e $ ! == -> . *U _m 1 `ui -> . `E22564 59 `ui 3237  ]
+{
 "117
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 117:     switch (m->opc) {
-[e $U 3239  ]
-{
-"118
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 118:         case OPC_ASON:
-[e :U 3240 ]
-"120
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 120:         case OPC_ASON1:
-[e :U 3241 ]
-"121
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 121:         case OPC_ASON2:
-[e :U 3242 ]
-"122
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 122:         case OPC_ASON3:
-[e :U 3243 ]
-"124
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 124:   enn = 0;
-[e = _enn -> -> 0 `i `us ]
-"126
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 126:         case OPC_ACON:
-[e :U 3244 ]
-"128
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 128:         case OPC_ACON1:
-[e :U 3245 ]
-"129
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 129:         case OPC_ACON2:
-[e :U 3246 ]
-"130
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 130:         case OPC_ACON3:
-[e :U 3247 ]
-"132
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 132:             break;
-[e $U 3238  ]
-"133
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 133:         case OPC_ASOF:
-[e :U 3248 ]
-"135
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 135:         case OPC_ASOF1:
-[e :U 3249 ]
-"136
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 136:         case OPC_ASOF2:
-[e :U 3250 ]
-"137
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 137:         case OPC_ASOF3:
-[e :U 3251 ]
-"139
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 139:   enn = 0;
-[e = _enn -> -> 0 `i `us ]
-"141
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 141:         case OPC_ACOF:
-[e :U 3252 ]
-"143
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 143:         case OPC_ACOF1:
-[e :U 3253 ]
-"144
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 144:         case OPC_ACOF2:
-[e :U 3254 ]
-"145
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 145:         case OPC_ACOF3:
-[e :U 3255 ]
-"147
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 147:             break;
-[e $U 3238  ]
-"148
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 148:         default:
-[e :U 3256 ]
-"149
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 149:             return NOT_PROCESSED;
-[e ) . `E22972 0 ]
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 117:         if (consumerEventCheckLen(m, 4) == PROCESSED) return PROCESSED;
+[e $ ! == -> ( _consumerEventCheckLen (2 , _m -> -> 4 `i `uc `ui -> . `E22973 1 `ui 3238  ]
+[e ) . `E22973 1 ]
 [e $UE 3236  ]
-"150
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 150:     }
-}
-[e $U 3238  ]
-[e :U 3239 ]
-[e [\ -> . *U _m 1 `ui , $ -> . `E22565 77 `ui 3240
- , $ -> . `E22565 97 `ui 3241
- , $ -> . `E22565 113 `ui 3242
- , $ -> . `E22565 134 `ui 3243
- , $ -> . `E22565 69 `ui 3244
- , $ -> . `E22565 90 `ui 3245
- , $ -> . `E22565 107 `ui 3246
- , $ -> . `E22565 126 `ui 3247
- , $ -> . `E22565 78 `ui 3248
- , $ -> . `E22565 98 `ui 3249
- , $ -> . `E22565 114 `ui 3250
- , $ -> . `E22565 135 `ui 3251
- , $ -> . `E22565 70 `ui 3252
- , $ -> . `E22565 91 `ui 3253
- , $ -> . `E22565 108 `ui 3254
- , $ -> . `E22565 127 `ui 3255
- 3256 ]
 [e :U 3238 ]
+"118
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 118:         if ((m->bytes[0] == nn.bytes.hi) && (m->bytes[1] == nn.bytes.lo)) {
+[e $ ! && == -> *U + &U . *U _m 2 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux `i -> . . _nn 0 1 `i == -> *U + &U . *U _m 2 * -> -> -> 1 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux `i -> . . _nn 0 0 `i 3239  ]
+{
+"119
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 119:             if (m->bytes[2] == MODE_EVENT_ACK_ON) {
+[e $ ! == -> *U + &U . *U _m 2 * -> -> -> 2 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux `i -> . `E22820 5 `i 3240  ]
+{
+"121
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 121:                 mode_flags |= 2;
+[e =| _mode_flags -> -> 2 `i `uc ]
+"122
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 122:                 return PROCESSED;
+[e ) . `E22973 1 ]
+[e $UE 3236  ]
+"123
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 123:             } else if (m->bytes[2] == MODE_EVENT_ACK_OFF) {
+}
+[e $U 3241  ]
+[e :U 3240 ]
+[e $ ! == -> *U + &U . *U _m 2 * -> -> -> 2 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux `i -> . `E22820 6 `i 3242  ]
+{
+"125
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 125:                 mode_flags &= ~2;
+[e =& _mode_flags -> ~ -> 2 `i `uc ]
+"126
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 126:                 return PROCESSED;
+[e ) . `E22973 1 ]
+[e $UE 3236  ]
+"127
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 127:             }
+}
+[e :U 3242 ]
+[e :U 3241 ]
+"128
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 128:         }
+}
+[e :U 3239 ]
+"129
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 129:         return NOT_PROCESSED;
+[e ) . `E22973 0 ]
+[e $UE 3236  ]
+"130
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 130:     }
+}
+[e :U 3237 ]
+"133
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 133:     if (m->len < 5) return NOT_PROCESSED;
+[e $ ! < -> . *U _m 0 `i -> 5 `i 3243  ]
+[e ) . `E22973 0 ]
+[e $UE 3236  ]
+[e :U 3243 ]
+"135
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 135:     enn = ((uint16_t)m->bytes[0])*256+m->bytes[1];
+[e = _enn -> + * -> -> *U + &U . *U _m 2 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux `us `ui -> -> 256 `i `ui -> *U + &U . *U _m 2 * -> -> -> 1 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux `ui `us ]
+"137
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 137:     switch (m->opc) {
+[e $U 3245  ]
+{
+"138
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 138:         case OPC_ASON:
+[e :U 3246 ]
+"140
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 140:         case OPC_ASON1:
+[e :U 3247 ]
+"141
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 141:         case OPC_ASON2:
+[e :U 3248 ]
+"142
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 142:         case OPC_ASON3:
+[e :U 3249 ]
+"144
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 144:   enn = 0;
+[e = _enn -> -> 0 `i `us ]
+"146
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 146:         case OPC_ACON:
+[e :U 3250 ]
+"148
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 148:         case OPC_ACON1:
+[e :U 3251 ]
+"149
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 149:         case OPC_ACON2:
+[e :U 3252 ]
+"150
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 150:         case OPC_ACON3:
+[e :U 3253 ]
 "152
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 152:     tableIndex = findEvent(enn, ((uint16_t)m->bytes[2])*256+m->bytes[3]);
-[e = _tableIndex ( _findEvent (2 , _enn -> + * -> -> *U + &U . *U _m 2 * -> -> -> 2 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux `us `ui -> -> 256 `i `ui -> *U + &U . *U _m 2 * -> -> -> 3 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux `ui `us ]
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 152:             break;
+[e $U 3244  ]
 "153
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 153:     if (tableIndex == 0xff) return NOT_PROCESSED;
-[e $ ! == -> _tableIndex `i -> 255 `i 3257  ]
-[e ) . `E22972 0 ]
-[e $UE 3236  ]
-[e :U 3257 ]
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 153:         case OPC_ASOF:
+[e :U 3254 ]
 "155
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 155:     if (!isConsumedEvent(tableIndex)) {
-[e $ ! ! != -> ( _isConsumedEvent (1 _tableIndex `i -> 0 `i 3258  ]
-{
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 155:         case OPC_ASOF1:
+[e :U 3255 ]
 "156
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 156:         return NOT_PROCESSED;
-[e ) . `E22972 0 ]
-[e $UE 3236  ]
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 156:         case OPC_ASOF2:
+[e :U 3256 ]
 "157
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 157:     }
-}
-[e :U 3258 ]
-"158
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 158:     ret = APP_processConsumedEvent(tableIndex, m);
-[e = _ret ( _APP_processConsumedEvent (2 , _tableIndex _m ]
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 157:         case OPC_ASOF3:
+[e :U 3257 ]
 "159
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 159:     if (ret == PROCESSED) {
-[e $ ! == -> _ret `ui -> . `E22972 1 `ui 3259  ]
-{
-"160
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 160:         consumerDiagnostics[1].asUint++;
-[e ++ . *U + &U _consumerDiagnostics * -> -> -> 1 `i `ui `ux -> -> # *U &U _consumerDiagnostics `ui `ux 0 -> -> 1 `i `us ]
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 159:   enn = 0;
+[e = _enn -> -> 0 `i `us ]
 "161
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 161:     }
-}
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 161:         case OPC_ACOF:
+[e :U 3258 ]
+"163
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 163:         case OPC_ACOF1:
 [e :U 3259 ]
-"162
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 162:     return ret;
+"164
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 164:         case OPC_ACOF2:
+[e :U 3260 ]
+"165
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 165:         case OPC_ACOF3:
+[e :U 3261 ]
+"167
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 167:             break;
+[e $U 3244  ]
+"168
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 168:         default:
+[e :U 3262 ]
+"169
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 169:             return NOT_PROCESSED;
+[e ) . `E22973 0 ]
+[e $UE 3236  ]
+"170
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 170:     }
+}
+[e $U 3244  ]
+[e :U 3245 ]
+[e [\ -> . *U _m 1 `ui , $ -> . `E22564 77 `ui 3246
+ , $ -> . `E22564 97 `ui 3247
+ , $ -> . `E22564 113 `ui 3248
+ , $ -> . `E22564 134 `ui 3249
+ , $ -> . `E22564 69 `ui 3250
+ , $ -> . `E22564 90 `ui 3251
+ , $ -> . `E22564 107 `ui 3252
+ , $ -> . `E22564 126 `ui 3253
+ , $ -> . `E22564 78 `ui 3254
+ , $ -> . `E22564 98 `ui 3255
+ , $ -> . `E22564 114 `ui 3256
+ , $ -> . `E22564 135 `ui 3257
+ , $ -> . `E22564 70 `ui 3258
+ , $ -> . `E22564 91 `ui 3259
+ , $ -> . `E22564 108 `ui 3260
+ , $ -> . `E22564 127 `ui 3261
+ 3262 ]
+[e :U 3244 ]
+"172
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 172:     tableIndex = findEvent(enn, ((uint16_t)m->bytes[2])*256+m->bytes[3]);
+[e = _tableIndex ( _findEvent (2 , _enn -> + * -> -> *U + &U . *U _m 2 * -> -> -> 2 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux `us `ui -> -> 256 `i `ui -> *U + &U . *U _m 2 * -> -> -> 3 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux `ui `us ]
+"173
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 173:     if (tableIndex == 0xff) return NOT_PROCESSED;
+[e $ ! == -> _tableIndex `i -> 255 `i 3263  ]
+[e ) . `E22973 0 ]
+[e $UE 3236  ]
+[e :U 3263 ]
+"175
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 175:     if (!isConsumedEvent(tableIndex)) {
+[e $ ! ! != -> ( _isConsumedEvent (1 _tableIndex `i -> 0 `i 3264  ]
+{
+"176
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 176:         return NOT_PROCESSED;
+[e ) . `E22973 0 ]
+[e $UE 3236  ]
+"177
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 177:     }
+}
+[e :U 3264 ]
+"183
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 183:     if ((mode_flags & 2) && (isConsumedEvent(tableIndex))) {
+[e $ ! && != & -> _mode_flags `i -> 2 `i -> 0 `i != -> ( _isConsumedEvent (1 _tableIndex `i -> 0 `i 3265  ]
+{
+"185
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 185:         sendMessage7(OPC_ENACK, nn.bytes.hi, nn.bytes.lo, m->opc, m->bytes[0], m->bytes[1], m->bytes[2], m->bytes[3]);
+[e ( _sendMessage7 (4 , , , , , , , . `E22564 122 . . _nn 0 1 . . _nn 0 0 -> . *U _m 1 `uc *U + &U . *U _m 2 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux *U + &U . *U _m 2 * -> -> -> 1 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux *U + &U . *U _m 2 * -> -> -> 2 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux *U + &U . *U _m 2 * -> -> -> 3 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux ]
+"187
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 187:         consumerDiagnostics[2].asInt++;
+[e ++ . *U + &U _consumerDiagnostics * -> -> -> 2 `i `ui `ux -> -> # *U &U _consumerDiagnostics `ui `ux 1 -> -> 1 `i `s ]
+"189
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 189:     }
+}
+[e :U 3265 ]
+"195
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 195:     ret = APP_processConsumedEvent(tableIndex, m);
+[e = _ret ( _APP_processConsumedEvent (2 , _tableIndex _m ]
+"196
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 196:     if (ret == PROCESSED) {
+[e $ ! == -> _ret `ui -> . `E22973 1 `ui 3266  ]
+{
+"197
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 197:         consumerDiagnostics[1].asUint++;
+[e ++ . *U + &U _consumerDiagnostics * -> -> -> 1 `i `ui `ux -> -> # *U &U _consumerDiagnostics `ui `ux 0 -> -> 1 `i `us ]
+"198
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 198:     }
+}
+[e :U 3266 ]
+"199
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 199:     return ret;
 [e ) _ret ]
 [e $UE 3236  ]
-"163
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 163: }
+"200
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 200: }
 [e :UE 3236 ]
 }
-"171
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 171: uint8_t isConsumedEvent(uint8_t eventIndex) {
+"208
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 208: uint8_t isConsumedEvent(uint8_t eventIndex) {
 [v _isConsumedEvent `(uc ~T0 @X0 1 ef1`uc ]
 {
 [e :U _isConsumedEvent ]
 [v _eventIndex `uc ~T0 @X0 1 r1 ]
 [f ]
-"172
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 172:     return APP_isConsumedEvent(eventIndex);
+"209
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 209:     return APP_isConsumedEvent(eventIndex);
 [e ) ( _APP_isConsumedEvent (1 _eventIndex ]
-[e $UE 3260  ]
-"173
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 173: }
-[e :UE 3260 ]
+[e $UE 3267  ]
+"210
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 210: }
+[e :UE 3267 ]
 }
-"181
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 181: static DiagnosticVal * consumerGetDiagnostic(uint8_t index) {
+"218
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 218: static DiagnosticVal * consumerGetDiagnostic(uint8_t index) {
 [v _consumerGetDiagnostic `(*S3227 ~T0 @X0 1 sf1`uc ]
 {
 [e :U _consumerGetDiagnostic ]
 [v _index `uc ~T0 @X0 1 r1 ]
 [f ]
-"182
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 182:     if (index > 1) {
-[e $ ! > -> _index `i -> 1 `i 3262  ]
+"219
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 219:     if (index > 2) {
+[e $ ! > -> _index `i -> 2 `i 3269  ]
 {
-"183
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 183:         return ((void*)0);
+"220
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 220:         return ((void*)0);
 [e ) -> -> -> 0 `i `*v `*S3227 ]
-[e $UE 3261  ]
-"184
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 184:     }
+[e $UE 3268  ]
+"221
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 221:     }
 }
-[e :U 3262 ]
-"185
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 185:     return &(consumerDiagnostics[index-1]);
-[e ) &U *U + &U _consumerDiagnostics * -> -> - -> _index `i -> 1 `i `ui `ux -> -> # *U &U _consumerDiagnostics `ui `ux ]
-[e $UE 3261  ]
-"186
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 186: }
-[e :UE 3261 ]
+[e :U 3269 ]
+"222
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 222:     return &(consumerDiagnostics[index]);
+[e ) &U *U + &U _consumerDiagnostics * -> _index `ux -> -> # *U &U _consumerDiagnostics `ui `ux ]
+[e $UE 3268  ]
+"223
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 223: }
+[e :UE 3268 ]
 }
-"195
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 195: static uint8_t consumerEsdData(uint8_t index) {
+"232
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 232: static uint8_t consumerEsdData(uint8_t index) {
 [v _consumerEsdData `(uc ~T0 @X0 1 sf1`uc ]
 {
 [e :U _consumerEsdData ]
 [v _index `uc ~T0 @X0 1 r1 ]
 [f ]
-"196
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 196:     switch (index){
-[e $U 3265  ]
+"233
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 233:     switch (index){
+[e $U 3272  ]
 {
-"197
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 197:         case 0:
-[e :U 3266 ]
-"198
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 198:             return CONSUMER_EV_NOT_SPECIFIED;
-[e ) -> . `E22900 0 `uc ]
-[e $UE 3263  ]
-"199
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 199:         default:
-[e :U 3267 ]
-"200
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 200:             return 0;
+"234
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 234:         case 0:
+[e :U 3273 ]
+"235
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 235:             return CONSUMER_EV_NOT_SPECIFIED;
+[e ) -> . `E22901 0 `uc ]
+[e $UE 3270  ]
+"236
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 236:         default:
+[e :U 3274 ]
+"237
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 237:             return 0;
 [e ) -> -> 0 `i `uc ]
-[e $UE 3263  ]
-"201
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 201:     }
+[e $UE 3270  ]
+"238
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 238:     }
 }
-[e $U 3264  ]
-[e :U 3265 ]
-[e [\ _index , $ -> 0 `i 3266
- 3267 ]
-[e :U 3264 ]
-"202
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 202: }
-[e :UE 3263 ]
+[e $U 3271  ]
+[e :U 3272 ]
+[e [\ _index , $ -> 0 `i 3273
+ 3274 ]
+[e :U 3271 ]
+"239
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 239: }
+[e :UE 3270 ]
+}
+"248
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 248: static Processed consumerEventCheckLen(Message * m, uint8_t needed) {
+[v _consumerEventCheckLen `(E22973 ~T0 @X0 1 sf2`*S3224`uc ]
+{
+[e :U _consumerEventCheckLen ]
+[v _m `*S3224 ~T0 @X0 1 r1 ]
+[v _needed `uc ~T0 @X0 1 r2 ]
+[f ]
+"249
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 249:     return checkLen(m, needed, SERVICE_ID_CONSUMER);
+[e ) ( _checkLen (3 , , _m _needed -> . `E22771 6 `uc ]
+[e $UE 3275  ]
+"250
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 250: }
+[e :UE 3275 ]
 }

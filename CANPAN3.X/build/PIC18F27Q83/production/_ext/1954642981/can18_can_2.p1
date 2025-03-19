@@ -1,38 +1,38 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"151 ../../VLCBlib_PIC/vlcb.h
-[; ;../../VLCBlib_PIC/vlcb.h: 151:     struct {
+"150 ../../VLCBlib_PIC/vlcb.h
+[; ;../../VLCBlib_PIC/vlcb.h: 150:     struct {
 [s S3229 `uc 1 `uc 1 ]
 [n S3229 . lo hi ]
-"148
-[; ;../../VLCBlib_PIC/vlcb.h: 148: typedef union DiagnosticVal {
+"147
+[; ;../../VLCBlib_PIC/vlcb.h: 147: typedef union DiagnosticVal {
 [u S3228 `us 1 `s 1 `S3229 1 ]
 [n S3228 DiagnosticVal asUint asInt asBytes ]
-[v F23215 `(v ~T0 @X0 0 tf ]
-[v F23217 `(v ~T0 @X0 0 tf ]
+[v F23216 `(v ~T0 @X0 0 tf ]
+[v F23218 `(v ~T0 @X0 0 tf ]
 "119 ../../VLCBlib_PIC/can18_can_2.c
 [; ;../../VLCBlib_PIC/can18_can_2.c: 119: const Service canService = {
-[c E22732 0 1 2 3 4 5 6 7 8 9 10 12 13 16 17 33 34 35 48 63 64 65 66 67 68 69 70 71 72 73 74 76 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 99 111 112 113 114 115 116 117 118 120 127 128 130 131 132 133 135 142 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 162 171 172 175 176 177 178 179 180 181 182 184 185 189 190 191 192 193 194 199 207 208 209 210 211 212 213 216 217 221 222 223 224 225 226 227 230 231 233 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 164 .. ]
-[n E22732 VlcbOpCodes OPC_ACK OPC_NAK OPC_HLT OPC_BON OPC_TOF OPC_TON OPC_ESTOP OPC_ARST OPC_RTOF OPC_RTON OPC_RESTP OPC_RSTAT OPC_QNN OPC_RQNP OPC_RQMN OPC_KLOC OPC_QLOC OPC_DKEEP OPC_DBG1 OPC_EXTC OPC_RLOC OPC_QCON OPC_SNN OPC_ALOC OPC_STMOD OPC_PCON OPC_KCON OPC_DSPD OPC_DFLG OPC_DFNON OPC_DFNOF OPC_SSTAT OPC_NNRSM OPC_RQNN OPC_NNREL OPC_NNACK OPC_NNLRN OPC_NNULN OPC_NNCLR OPC_NNEVN OPC_NERD OPC_RQEVN OPC_WRACK OPC_RQDAT OPC_RQDDS OPC_BOOT OPC_ENUM OPC_NNRST OPC_EXTC1 OPC_DFUN OPC_GLOC OPC_ERR OPC_CMDERR OPC_EVNLF OPC_NVRD OPC_NENRD OPC_RQNPN OPC_NUMEV OPC_CANID OPC_MODE OPC_RQSD OPC_EXTC2 OPC_RDCC3 OPC_WCVO OPC_WCVB OPC_QCVS OPC_PCVS OPC_RDGN OPC_NVSETRD OPC_ACON OPC_ACOF OPC_AREQ OPC_ARON OPC_AROF OPC_EVULN OPC_NVSET OPC_NVANS OPC_ASON OPC_ASOF OPC_ASRQ OPC_PARAN OPC_REVAL OPC_ARSON OPC_ARSOF OPC_EXTC3 OPC_RDCC4 OPC_WCVS OPC_HEARTB OPC_SD OPC_GRSP OPC_ACON1 OPC_ACOF1 OPC_REQEV OPC_ARON1 OPC_AROF1 OPC_NEVAL OPC_PNN OPC_ASON1 OPC_ASOF1 OPC_ARSON1 OPC_ARSOF1 OPC_EXTC4 OPC_RDCC5 OPC_WCVOA OPC_CABDAT OPC_DGN OPC_FCLK OPC_ACON2 OPC_ACOF2 OPC_EVLRN OPC_EVANS OPC_ARON2 OPC_AROF2 OPC_ASON2 OPC_ASOF2 OPC_ARSON2 OPC_ARSOF2 OPC_EXTC5 OPC_RDCC6 OPC_PLOC OPC_NAME OPC_STAT OPC_ENACK OPC_ESD OPC_DTXC OPC_PARAMS OPC_ACON3 OPC_ACOF3 OPC_ENRSP OPC_ARON3 OPC_AROF3 OPC_EVLRNI OPC_ACDAT OPC_ARDAT OPC_ASON3 OPC_ASOF3 OPC_DDES OPC_DDRS OPC_DDWS OPC_ARSON3 OPC_ARSOF3 OPC_EXTC6 OPC_VCVS  ]
-"111 ../../VLCBlib_PIC/vlcb.h
-[; ;../../VLCBlib_PIC/vlcb.h: 111: typedef struct Message {
-[s S3225 `uc 1 `E22732 1 `uc -> 7 `i ]
+[c E22731 0 1 2 3 4 5 6 7 8 9 10 12 13 16 17 33 34 35 48 63 64 65 66 67 68 69 70 71 72 73 74 76 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 99 111 112 113 114 115 116 117 118 120 127 128 130 131 132 133 135 142 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 162 171 172 175 176 177 178 179 180 181 182 184 185 189 190 191 192 193 194 199 207 208 209 210 211 212 213 216 217 221 222 223 224 225 226 227 230 231 233 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 164 .. ]
+[n E22731 VlcbOpCodes OPC_ACK OPC_NAK OPC_HLT OPC_BON OPC_TOF OPC_TON OPC_ESTOP OPC_ARST OPC_RTOF OPC_RTON OPC_RESTP OPC_RSTAT OPC_QNN OPC_RQNP OPC_RQMN OPC_KLOC OPC_QLOC OPC_DKEEP OPC_DBG1 OPC_EXTC OPC_RLOC OPC_QCON OPC_SNN OPC_ALOC OPC_STMOD OPC_PCON OPC_KCON OPC_DSPD OPC_DFLG OPC_DFNON OPC_DFNOF OPC_SSTAT OPC_NNRSM OPC_RQNN OPC_NNREL OPC_NNACK OPC_NNLRN OPC_NNULN OPC_NNCLR OPC_NNEVN OPC_NERD OPC_RQEVN OPC_WRACK OPC_RQDAT OPC_RQDDS OPC_BOOT OPC_ENUM OPC_NNRST OPC_EXTC1 OPC_DFUN OPC_GLOC OPC_ERR OPC_CMDERR OPC_EVNLF OPC_NVRD OPC_NENRD OPC_RQNPN OPC_NUMEV OPC_CANID OPC_MODE OPC_RQSD OPC_EXTC2 OPC_RDCC3 OPC_WCVO OPC_WCVB OPC_QCVS OPC_PCVS OPC_RDGN OPC_NVSETRD OPC_ACON OPC_ACOF OPC_AREQ OPC_ARON OPC_AROF OPC_EVULN OPC_NVSET OPC_NVANS OPC_ASON OPC_ASOF OPC_ASRQ OPC_PARAN OPC_REVAL OPC_ARSON OPC_ARSOF OPC_EXTC3 OPC_RDCC4 OPC_WCVS OPC_HEARTB OPC_SD OPC_GRSP OPC_ACON1 OPC_ACOF1 OPC_REQEV OPC_ARON1 OPC_AROF1 OPC_NEVAL OPC_PNN OPC_ASON1 OPC_ASOF1 OPC_ARSON1 OPC_ARSOF1 OPC_EXTC4 OPC_RDCC5 OPC_WCVOA OPC_CABDAT OPC_DGN OPC_FCLK OPC_ACON2 OPC_ACOF2 OPC_EVLRN OPC_EVANS OPC_ARON2 OPC_AROF2 OPC_ASON2 OPC_ASOF2 OPC_ARSON2 OPC_ARSOF2 OPC_EXTC5 OPC_RDCC6 OPC_PLOC OPC_NAME OPC_STAT OPC_ENACK OPC_ESD OPC_DTXC OPC_PARAMS OPC_ACON3 OPC_ACOF3 OPC_ENRSP OPC_ARON3 OPC_AROF3 OPC_EVLRNI OPC_ACDAT OPC_ARDAT OPC_ASON3 OPC_ASOF3 OPC_DDES OPC_DDRS OPC_DDWS OPC_ARSON3 OPC_ARSOF3 OPC_EXTC6 OPC_VCVS  ]
+"110 ../../VLCBlib_PIC/vlcb.h
+[; ;../../VLCBlib_PIC/vlcb.h: 110: typedef struct Message {
+[s S3225 `uc 1 `E22731 1 `uc -> 7 `i ]
 [n S3225 Message len opc bytes ]
 "119 ../../VLCBlib_PIC/can18_can_2.c
 [; ;../../VLCBlib_PIC/can18_can_2.c: 119: const Service canService = {
-[c E23139 0 1 .. ]
-[n E23139 Processed NOT_PROCESSED PROCESSED  ]
-[v F23219 `(E23139 ~T0 @X0 0 tf1`*S3225 ]
-[v F23222 `(v ~T0 @X0 0 tf ]
-[v F23224 `(uc ~T0 @X0 0 tf1`uc ]
-[v F23227 `(*S3228 ~T0 @X0 0 tf1`uc ]
+[c E23140 0 1 .. ]
+[n E23140 Processed NOT_PROCESSED PROCESSED  ]
+[v F23220 `(E23140 ~T0 @X0 0 tf1`*S3225 ]
+[v F23223 `(v ~T0 @X0 0 tf ]
+[v F23225 `(uc ~T0 @X0 0 tf1`uc ]
+[v F23228 `(*S3228 ~T0 @X0 0 tf1`uc ]
 "299 ../../VLCBlib_PIC/vlcb.h
 [; ;../../VLCBlib_PIC/vlcb.h: 299: typedef struct Service {
-[s S3230 `uc 1 `uc 1 `*F23215 1 `*F23217 1 `*F23219 1 `*F23222 1 `*F23224 1 `*F23227 1 ]
+[s S3230 `uc 1 `uc 1 `*F23216 1 `*F23218 1 `*F23220 1 `*F23223 1 `*F23225 1 `*F23228 1 ]
 [n S3230 Service serviceNo version factoryReset powerUp processMessage poll getESDdata getDiagnostic ]
 "119 ../../VLCBlib_PIC/can18_can_2.c
 [; ;../../VLCBlib_PIC/can18_can_2.c: 119: const Service canService = {
-[c E22939 0 1 2 3 4 5 6 7 8 9 10 17 .. ]
-[n E22939 VlcbServiceTypes SERVICE_ID_NONE SERVICE_ID_MNS SERVICE_ID_NV SERVICE_ID_CAN SERVICE_ID_OLD_TEACH SERVICE_ID_PRODUCER SERVICE_ID_CONSUMER SERVICE_ID_TEACH SERVICE_ID_CONSUME_OWN_EVENTS SERVICE_ID_EVENTACK SERVICE_ID_BOOT SERVICE_ID_STREAMING  ]
+[c E22938 0 1 2 3 4 5 6 7 8 9 10 17 .. ]
+[n E22938 VlcbServiceTypes SERVICE_ID_NONE SERVICE_ID_MNS SERVICE_ID_NV SERVICE_ID_CAN SERVICE_ID_OLD_TEACH SERVICE_ID_PRODUCER SERVICE_ID_CONSUMER SERVICE_ID_TEACH SERVICE_ID_CONSUME_OWN_EVENTS SERVICE_ID_EVENTACK SERVICE_ID_BOOT SERVICE_ID_STREAMING  ]
 "95
 [; ;../../VLCBlib_PIC/can18_can_2.c: 95: static void canFactoryReset(void);
 [v _canFactoryReset `(v ~T0 @X0 0 sf ]
@@ -41,7 +41,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _canPowerUp `(v ~T0 @X0 0 sf ]
 "98
 [; ;../../VLCBlib_PIC/can18_can_2.c: 98: static Processed canProcessMessage(Message * m);
-[v _canProcessMessage `(E23139 ~T0 @X0 0 sf1`*S3225 ]
+[v _canProcessMessage `(E23140 ~T0 @X0 0 sf1`*S3225 ]
 "97
 [; ;../../VLCBlib_PIC/can18_can_2.c: 97: static void canPoll(void);
 [v _canPoll `(v ~T0 @X0 0 sf ]
@@ -53,30 +53,30 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _canGetDiagnostic `(*S3228 ~T0 @X0 0 sf1`uc ]
 "144
 [; ;../../VLCBlib_PIC/can18_can_2.c: 144: const Transport canTransport = {
-[c E23250 0 1 .. ]
-[n E23250 SendResult SEND_FAILED SEND_OK  ]
-[v F23256 `(E23250 ~T0 @X0 0 tf1`*S3225 ]
-[c E23246 0 1 .. ]
-[n E23246 MessageReceived NOT_RECEIVED RECEIVED  ]
-[v F23259 `(E23246 ~T0 @X0 0 tf1`*S3225 ]
+[c E23251 0 1 .. ]
+[n E23251 SendResult SEND_FAILED SEND_OK  ]
+[v F23257 `(E23251 ~T0 @X0 0 tf1`*S3225 ]
+[c E23247 0 1 .. ]
+[n E23247 MessageReceived NOT_RECEIVED RECEIVED  ]
+[v F23260 `(E23247 ~T0 @X0 0 tf1`*S3225 ]
 "422 ../../VLCBlib_PIC/vlcb.h
 [; ;../../VLCBlib_PIC/vlcb.h: 422: typedef struct Transport {
-[s S3231 `*F23256 1 `*F23259 1 ]
+[s S3231 `*F23257 1 `*F23260 1 ]
 [n S3231 Transport sendMessage receiveMessage ]
 "135 ../../VLCBlib_PIC/can18_can_2.c
 [; ;../../VLCBlib_PIC/can18_can_2.c: 135: static SendResult canSendMessage(Message * mp);
-[v _canSendMessage `(E23250 ~T0 @X0 0 sf1`*S3225 ]
+[v _canSendMessage `(E23251 ~T0 @X0 0 sf1`*S3225 ]
 "136
 [; ;../../VLCBlib_PIC/can18_can_2.c: 136: static MessageReceived canReceiveMessage(Message * m);
-[v _canReceiveMessage `(E23246 ~T0 @X0 0 sf1`*S3225 ]
+[v _canReceiveMessage `(E23247 ~T0 @X0 0 sf1`*S3225 ]
 "54 ../../VLCBlib_PIC/messageQueue.h
 [; ;../../VLCBlib_PIC/messageQueue.h: 54: typedef struct MessageQueue {
 [s S3232 `*S3225 1 `uc 1 `uc 1 `uc 1 ]
 [n S3232 MessageQueue messages readIndex writeIndex size ]
 "171 ../../VLCBlib_PIC/can18_can_2.c
 [; ;../../VLCBlib_PIC/can18_can_2.c: 171: } EnumerationState;
-[c E23349 0 1 2 3 .. ]
-[n E23349 EnumerationState NO_ENUMERATION ENUMERATION_REQUIRED ENUMERATION_IN_PROGRESS ENUMERATION_IN_PROGRESS_TX_WAITING  ]
+[c E23350 0 1 2 3 .. ]
+[n E23350 EnumerationState NO_ENUMERATION ENUMERATION_REQUIRED ENUMERATION_IN_PROGRESS ENUMERATION_IN_PROGRESS_TX_WAITING  ]
 "216 ../../VLCBlib_PIC/ticktime.h
 [; ;../../VLCBlib_PIC/ticktime.h: 216:     {
 [s S3223 `uc 1 `uc 1 `uc 1 `uc 1 ]
@@ -91,14 +91,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 [n S3222 _TickValue val byte v word ]
 "210 ../../VLCBlib_PIC/can18_can_2.c
 [; ;../../VLCBlib_PIC/can18_can_2.c: 210:     writeNVM(EEPROM_NVM_TYPE, 0x3FE, canId);
-[c E23078 0 1 .. ]
-[n E23078 . EEPROM_NVM_TYPE FLASH_NVM_TYPE  ]
+[c E23079 0 1 .. ]
+[n E23079 . EEPROM_NVM_TYPE FLASH_NVM_TYPE  ]
 "169 ../../VLCBlib_PIC/nvm.h
 [; ;../../VLCBlib_PIC/nvm.h: 169: extern uint8_t writeNVM(NVMtype type, uint24_t index, uint8_t value);
-[v _writeNVM `(uc ~T0 @X0 0 ef3`E23078`um`uc ]
+[v _writeNVM `(uc ~T0 @X0 0 ef3`E23079`um`uc ]
 "160
 [; ;../../VLCBlib_PIC/nvm.h: 160: extern int16_t readNVM(NVMtype type, uint24_t index);
-[v _readNVM `(s ~T0 @X0 0 ef2`E23078`um ]
+[v _readNVM `(s ~T0 @X0 0 ef2`E23079`um ]
 "23953 C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h
 [; ;C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h: 23953: extern volatile unsigned char RB2PPS __attribute__((address(0x20B)));
 [v _RB2PPS `Vuc ~T0 @X0 0 e@523 ]
@@ -135,13 +135,13 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _C1CONHbits `VS422 ~T0 @X0 0 e@257 ]
 "289 ../../VLCBlib_PIC/can18_can_2.c
 [; ;../../VLCBlib_PIC/can18_can_2.c: 289:     if (CAN_OP_MODE_REQUEST_SUCCESS == CAN1_OperationModeSet(CAN_CONFIGURATION_MODE)) {
-[c E23279 0 1 2 .. ]
-[n E23279 CAN_OP_MODE_STATUS CAN_OP_MODE_REQUEST_SUCCESS CAN_OP_MODE_REQUEST_FAIL CAN_OP_MODE_SYS_ERROR_OCCURED  ]
-[c E23270 0 1 2 3 4 5 6 7 .. ]
-[n E23270 CAN_OP_MODES CAN_NORMAL_FD_MODE CAN_DISABLE_MODE CAN_INTERNAL_LOOPBACK_MODE CAN_LISTEN_ONLY_MODE CAN_CONFIGURATION_MODE CAN_EXTERNAL_LOOPBACK_MODE CAN_NORMAL_2_0_MODE CAN_RESTRICTED_OPERATION_MODE  ]
+[c E23280 0 1 2 .. ]
+[n E23280 CAN_OP_MODE_STATUS CAN_OP_MODE_REQUEST_SUCCESS CAN_OP_MODE_REQUEST_FAIL CAN_OP_MODE_SYS_ERROR_OCCURED  ]
+[c E23271 0 1 2 3 4 5 6 7 .. ]
+[n E23271 CAN_OP_MODES CAN_NORMAL_FD_MODE CAN_DISABLE_MODE CAN_INTERNAL_LOOPBACK_MODE CAN_LISTEN_ONLY_MODE CAN_CONFIGURATION_MODE CAN_EXTERNAL_LOOPBACK_MODE CAN_NORMAL_2_0_MODE CAN_RESTRICTED_OPERATION_MODE  ]
 "103
 [; ;../../VLCBlib_PIC/can18_can_2.c: 103: enum CAN_OP_MODE_STATUS CAN1_OperationModeSet(const enum CAN_OP_MODES requestMode);
-[v _CAN1_OperationModeSet `(E23279 ~T0 @X0 0 ef1`CE23270 ]
+[v _CAN1_OperationModeSet `(E23280 ~T0 @X0 0 ef1`CE23271 ]
 "13015 C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h
 [; ;C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h: 13015: extern volatile unsigned long C1FIFOBA __attribute__((address(0x14C)));
 [v _C1FIFOBA `Vul ~T0 @X0 0 e@332 ]
@@ -350,12 +350,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 "14149
 [; ;C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h: 14149: extern volatile C1FIFOSTA1Lbits_t C1FIFOSTA1Lbits __attribute__((address(0x160)));
 [v _C1FIFOSTA1Lbits `VS654 ~T0 @X0 0 e@352 ]
-"121 ../../VLCBlib_PIC/vlcb.h
-[; ;../../VLCBlib_PIC/vlcb.h: 121:     struct {
+"120 ../../VLCBlib_PIC/vlcb.h
+[; ;../../VLCBlib_PIC/vlcb.h: 120:     struct {
 [s S3227 `uc 1 `uc 1 ]
 [n S3227 . lo hi ]
-"120
-[; ;../../VLCBlib_PIC/vlcb.h: 120: typedef union Word {
+"119
+[; ;../../VLCBlib_PIC/vlcb.h: 119: typedef union Word {
 [u S3226 `S3227 1 `us 1 ]
 [n S3226 Word bytes word ]
 "126 ../../VLCBlib_PIC/mns.h
@@ -363,18 +363,18 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _nn `S3226 ~T0 @X0 0 e ]
 "250 ../../VLCBlib_PIC/vlcb.h
 [; ;../../VLCBlib_PIC/vlcb.h: 250: void sendMessage5(VlcbOpCodes opc, uint8_t data1, uint8_t data2, uint8_t data3, uint8_t data4, uint8_t data5);
-[v _sendMessage5 `(v ~T0 @X0 0 ef6`E22732`uc`uc`uc`uc`uc ]
+[v _sendMessage5 `(v ~T0 @X0 0 ef6`E22731`uc`uc`uc`uc`uc ]
 "423 ../../VLCBlib_PIC/can18_can_2.c
 [; ;../../VLCBlib_PIC/can18_can_2.c: 423:                 sendMessage5(OPC_GRSP, nn.bytes.hi, nn.bytes.lo, OPC_CANID, SERVICE_ID_MNS, CMDERR_INV_CMD);
-[c E22901 1 2 3 4 5 6 7 8 9 10 11 12 13 .. ]
-[n E22901 VlcbCmdErrs CMDERR_INV_CMD CMDERR_NOT_LRN CMDERR_NOT_SETUP CMDERR_TOO_MANY_EVENTS CMDERR_NO_EV CMDERR_INV_EV_IDX CMDERR_INVALID_EVENT CMDERR_INV_EN_IDX CMDERR_INV_PARAM_IDX CMDERR_INV_NV_IDX CMDERR_INV_EV_VALUE CMDERR_INV_NV_VALUE CMDERR_LRN_OTHER  ]
+[c E22900 1 2 3 4 5 6 7 8 9 10 11 12 13 .. ]
+[n E22900 VlcbCmdErrs CMDERR_INV_CMD CMDERR_NOT_LRN CMDERR_NOT_SETUP CMDERR_TOO_MANY_EVENTS CMDERR_NO_EV CMDERR_INV_EV_IDX CMDERR_INVALID_EVENT CMDERR_INV_EN_IDX CMDERR_INV_PARAM_IDX CMDERR_INV_NV_IDX CMDERR_INV_EV_VALUE CMDERR_INV_NV_VALUE CMDERR_LRN_OTHER  ]
 "181
 [; ;../../VLCBlib_PIC/can18_can_2.c: 181: static void processEnumeration(void);
 [v _processEnumeration `(v ~T0 @X0 0 sf ]
 "469
 [; ;../../VLCBlib_PIC/can18_can_2.c: 469:             return CAN_HW_PIC_CAN_2_0;
-[c E23051 0 1 2 3 4 5 6 7 8 .. ]
-[n E23051 VlcbCanHardware CAN_HW_NOT_SPECIFIED CAN_HW_PIC_ECAN CAN_HW_PIC_CAN_2_0 CAN_HW_PIC_CAN_FD CAN_HW_MCP2515 CAN_HW_MCP2518 CAN_HW_ESP32_TWAI CAN_HW_SAM3X8E CAN_HW_PICO_PIO  ]
+[c E23052 0 1 2 3 4 5 6 7 8 .. ]
+[n E23052 VlcbCanHardware CAN_HW_NOT_SPECIFIED CAN_HW_PIC_ECAN CAN_HW_PIC_CAN_2_0 CAN_HW_PIC_CAN_FD CAN_HW_MCP2515 CAN_HW_MCP2518 CAN_HW_ESP32_TWAI CAN_HW_SAM3X8E CAN_HW_PICO_PIO  ]
 "12117 C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h
 [; ;C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h: 12117: extern volatile unsigned char C1TRECU __attribute__((address(0x136)));
 [v _C1TRECU `Vuc ~T0 @X0 0 e@310 ]
@@ -463,18 +463,18 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _C1FIFOSTA3Hbits `VS710 ~T0 @X0 0 e@377 ]
 "579 ../../VLCBlib_PIC/can18_can_2.c
 [; ;../../VLCBlib_PIC/can18_can_2.c: 579:     if (isEvent(mp->opc)) {
-[c E23106 0 1 .. ]
-[n E23106 Boolean FALSE TRUE  ]
+[c E23107 0 1 .. ]
+[n E23107 Boolean FALSE TRUE  ]
 "196 ../../VLCBlib_PIC/vlcb.h
 [; ;../../VLCBlib_PIC/vlcb.h: 196: extern Boolean isEvent(uint8_t opc);
-[v _isEvent `(E23106 ~T0 @X0 0 ef1`uc ]
+[v _isEvent `(E23107 ~T0 @X0 0 ef1`uc ]
 "580 ../../VLCBlib_PIC/can18_can_2.c
 [; ;../../VLCBlib_PIC/can18_can_2.c: 580:         if (have(SERVICE_ID_CONSUME_OWN_EVENTS)) {
-[c E23233 0 1 .. ]
-[n E23233 ServicePresent NOT_PRESENT PRESENT  ]
+[c E23234 0 1 .. ]
+[n E23234 ServicePresent NOT_PRESENT PRESENT  ]
 "343 ../../VLCBlib_PIC/vlcb.h
 [; ;../../VLCBlib_PIC/vlcb.h: 343: extern ServicePresent have(uint8_t id);
-[v _have `(E23233 ~T0 @X0 0 ef1`uc ]
+[v _have `(E23234 ~T0 @X0 0 ef1`uc ]
 "98 ../../VLCBlib_PIC/messageQueue.h
 [; ;../../VLCBlib_PIC/messageQueue.h: 98: extern Message * getNextWriteMessage(MessageQueue * q);
 [v _getNextWriteMessage `(*S3225 ~T0 @X0 0 ef1`*S3232 ]
@@ -483,14 +483,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _updateModuleErrorStatus `(v ~T0 @X0 0 ef ]
 "634 ../../VLCBlib_PIC/can18_can_2.c
 [; ;../../VLCBlib_PIC/can18_can_2.c: 634:     txFifoObj[0] = (uint8_t)((canPri[priorities[mp->opc]] & 1) << 7) | (canId & 0x7F);
-[c E23100 0 1 2 3 .. ]
-[n E23100 Priority pLOW pNORMAL pABOVE pHIGH  ]
+[c E23101 0 1 2 3 .. ]
+[n E23101 Priority pLOW pNORMAL pABOVE pHIGH  ]
 "179 ../../VLCBlib_PIC/vlcb.h
 [; ;../../VLCBlib_PIC/vlcb.h: 179: extern const Priority priorities[256];
-[v _priorities `CE23100 ~T0 @X0 -> 0 `x e ]
+[v _priorities `CE23101 ~T0 @X0 -> 0 `x e ]
 "180 ../../VLCBlib_PIC/can18_can_2.c
 [; ;../../VLCBlib_PIC/can18_can_2.c: 180: static void startEnumeration(Boolean txWaiting);
-[v _startEnumeration `(v ~T0 @X0 0 sf1`E23106 ]
+[v _startEnumeration `(v ~T0 @X0 0 sf1`E23107 ]
 "13615 C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h
 [; ;C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h: 13615: extern volatile unsigned long C1TXQUA __attribute__((address(0x158)));
 [v _C1TXQUA `Vul ~T0 @X0 0 e@344 ]
@@ -516,14 +516,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _C1FIFOCON3Hbits `VS700 ~T0 @X0 0 e@373 ]
 "853 ../../VLCBlib_PIC/can18_can_2.c
 [; ;../../VLCBlib_PIC/can18_can_2.c: 853:                         setNewCanId(canId);
-[c E23266 0 1 .. ]
-[n E23266 CanidResult CANID_FAIL CANID_OK  ]
+[c E23267 0 1 .. ]
+[n E23267 CanidResult CANID_FAIL CANID_OK  ]
 "178
 [; ;../../VLCBlib_PIC/can18_can_2.c: 178: static CanidResult setNewCanId(uint8_t newCanId);
-[v _setNewCanId `(E23266 ~T0 @X0 0 sf1`uc ]
+[v _setNewCanId `(E23267 ~T0 @X0 0 sf1`uc ]
 "204 ../../VLCBlib_PIC/can.h
 [; ;../../VLCBlib_PIC/can.h: 204: enum CAN_OP_MODES CAN1_OperationModeGet(void);
-[v _CAN1_OperationModeGet `(E23270 ~T0 @X0 0 ef ]
+[v _CAN1_OperationModeGet `(E23271 ~T0 @X0 0 ef ]
 "9147 C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h
 [; ;C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h: 9147:     struct {
 [s S429 :3 `uc 1 :1 `uc 1 :4 `uc 1 ]
@@ -4082,7 +4082,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [i _canService
 :U ..
 :U ..
--> . `E22939 3 `uc
+-> . `E22938 3 `uc
 -> -> 2 `i `uc
 &U _canFactoryReset
 &U _canPowerUp
@@ -4118,13 +4118,13 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _rxQueue `S3232 ~T0 @X0 1 s ]
 "171
 [; ;../../VLCBlib_PIC/can18_can_2.c: 171: } EnumerationState;
-[v _EnumerationState `E23349 ~T0 @X0 1 e ]
+[v _EnumerationState `E23350 ~T0 @X0 1 e ]
 "172
 [; ;../../VLCBlib_PIC/can18_can_2.c: 172: static TickValue enumerationStartTime;
 [v _enumerationStartTime `S3222 ~T0 @X0 1 s ]
 "173
 [; ;../../VLCBlib_PIC/can18_can_2.c: 173: static enum EnumerationState enumerationState;
-[v _enumerationState `E23349 ~T0 @X0 1 s ]
+[v _enumerationState `E23350 ~T0 @X0 1 s ]
 "174
 [; ;../../VLCBlib_PIC/can18_can_2.c: 174: static uint8_t enumerationResults[(0x7F/8)+1];
 [v _enumerationResults `uc ~T0 @X0 -> 16 `i s ]
@@ -4151,7 +4151,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = _canId -> -> 0 `i `uc ]
 "210
 [; ;../../VLCBlib_PIC/can18_can_2.c: 210:     writeNVM(EEPROM_NVM_TYPE, 0x3FE, canId);
-[e ( _writeNVM (3 , , . `E23078 0 -> -> -> 1022 `i `m `um _canId ]
+[e ( _writeNVM (3 , , . `E23079 0 -> -> -> 1022 `i `m `um _canId ]
 "211
 [; ;../../VLCBlib_PIC/can18_can_2.c: 211: }
 [e :UE 3233 ]
@@ -4184,7 +4184,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = . _rxQueue 3 -> -> 8 `i `uc ]
 "262
 [; ;../../VLCBlib_PIC/can18_can_2.c: 262:     temp = readNVM(EEPROM_NVM_TYPE, 0x3FE);
-[e = _temp -> ( _readNVM (2 , . `E23078 0 -> -> -> 1022 `i `m `um `i ]
+[e = _temp -> ( _readNVM (2 , . `E23079 0 -> -> -> 1022 `i `m `um `i ]
 "263
 [; ;../../VLCBlib_PIC/can18_can_2.c: 263:     if (temp < 0) {
 [e $ ! < _temp -> 0 `i 3235  ]
@@ -4249,7 +4249,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = . . _C1CONHbits 0 6 -> -> 1 `i `uc ]
 "289
 [; ;../../VLCBlib_PIC/can18_can_2.c: 289:     if (CAN_OP_MODE_REQUEST_SUCCESS == CAN1_OperationModeSet(CAN_CONFIGURATION_MODE)) {
-[e $ ! == -> . `E23279 0 `ui -> ( _CAN1_OperationModeSet (1 . `E23270 4 `ui 3240  ]
+[e $ ! == -> . `E23280 0 `ui -> ( _CAN1_OperationModeSet (1 . `E23271 4 `ui 3240  ]
 {
 "293
 [; ;../../VLCBlib_PIC/can18_can_2.c: 293:         C1FIFOBA = 0x3BB0;
@@ -4355,7 +4355,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = _C1FLTCON0L -> -> 131 `i `uc ]
 "347
 [; ;../../VLCBlib_PIC/can18_can_2.c: 347:         (void)CAN1_OperationModeSet(CAN_NORMAL_2_0_MODE);
-[e ( _CAN1_OperationModeSet (1 . `E23270 6 ]
+[e ( _CAN1_OperationModeSet (1 . `E23271 6 ]
 "348
 [; ;../../VLCBlib_PIC/can18_can_2.c: 348:     }
 }
@@ -4365,7 +4365,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _prepareSelfEnumResponse ..  ]
 "353
 [; ;../../VLCBlib_PIC/can18_can_2.c: 353:     enumerationState = NO_ENUMERATION;
-[e = _enumerationState . `E23349 0 ]
+[e = _enumerationState . `E23350 0 ]
 "354
 [; ;../../VLCBlib_PIC/can18_can_2.c: 354:     enumerationStartTime.val = tickGet();
 [e = . _enumerationStartTime 0 ( _tickGet ..  ]
@@ -4480,7 +4480,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 "409
 [; ;../../VLCBlib_PIC/can18_can_2.c: 409: static Processed canProcessMessage(Message * m) {
-[v _canProcessMessage `(E23139 ~T0 @X0 1 sf1`*S3225 ]
+[v _canProcessMessage `(E23140 ~T0 @X0 1 sf1`*S3225 ]
 {
 [e :U _canProcessMessage ]
 [v _m `*S3225 ~T0 @X0 1 r1 ]
@@ -4488,19 +4488,19 @@ Version 4.0 HI-TECH Software Intermediate Code
 "411
 [; ;../../VLCBlib_PIC/can18_can_2.c: 411:     if (m->len < 3) return NOT_PROCESSED;
 [e $ ! < -> . *U _m 0 `i -> 3 `i 3249  ]
-[e ) . `E23139 0 ]
+[e ) . `E23140 0 ]
 [e $UE 3248  ]
 [e :U 3249 ]
 "412
 [; ;../../VLCBlib_PIC/can18_can_2.c: 412:     if (m->bytes[0] != nn.bytes.hi) return NOT_PROCESSED;
 [e $ ! != -> *U + &U . *U _m 2 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux `i -> . . _nn 0 1 `i 3250  ]
-[e ) . `E23139 0 ]
+[e ) . `E23140 0 ]
 [e $UE 3248  ]
 [e :U 3250 ]
 "413
 [; ;../../VLCBlib_PIC/can18_can_2.c: 413:     if (m->bytes[1] != nn.bytes.lo) return NOT_PROCESSED;
 [e $ ! != -> *U + &U . *U _m 2 * -> -> -> 1 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux `i -> . . _nn 0 0 `i 3251  ]
-[e ) . `E23139 0 ]
+[e ) . `E23140 0 ]
 [e $UE 3248  ]
 [e :U 3251 ]
 "416
@@ -4512,7 +4512,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 3254 ]
 "419
 [; ;../../VLCBlib_PIC/can18_can_2.c: 419:             return PROCESSED;
-[e ) . `E23139 1 ]
+[e ) . `E23140 1 ]
 [e $UE 3248  ]
 "420
 [; ;../../VLCBlib_PIC/can18_can_2.c: 420:         case OPC_CANID:
@@ -4523,10 +4523,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "423
 [; ;../../VLCBlib_PIC/can18_can_2.c: 423:                 sendMessage5(OPC_GRSP, nn.bytes.hi, nn.bytes.lo, OPC_CANID, SERVICE_ID_MNS, CMDERR_INV_CMD);
-[e ( _sendMessage5 (4 , , , , , . `E22732 89 . . _nn 0 1 . . _nn 0 0 -> . `E22732 58 `uc -> . `E22939 1 `uc -> . `E22901 0 `uc ]
+[e ( _sendMessage5 (4 , , , , , . `E22731 89 . . _nn 0 1 . . _nn 0 0 -> . `E22731 58 `uc -> . `E22938 1 `uc -> . `E22900 0 `uc ]
 "425
 [; ;../../VLCBlib_PIC/can18_can_2.c: 425:                 return PROCESSED;
-[e ) . `E23139 1 ]
+[e ) . `E23140 1 ]
 [e $UE 3248  ]
 "426
 [; ;../../VLCBlib_PIC/can18_can_2.c: 426:             }
@@ -4534,7 +4534,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 3256 ]
 "428
 [; ;../../VLCBlib_PIC/can18_can_2.c: 428:             return PROCESSED;
-[e ) . `E23139 1 ]
+[e ) . `E23140 1 ]
 [e $UE 3248  ]
 "429
 [; ;../../VLCBlib_PIC/can18_can_2.c: 429:         default:
@@ -4547,13 +4547,13 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 [e $U 3252  ]
 [e :U 3253 ]
-[e [\ -> . *U _m 1 `ui , $ -> . `E22732 46 `ui 3254
- , $ -> . `E22732 58 `ui 3255
+[e [\ -> . *U _m 1 `ui , $ -> . `E22731 46 `ui 3254
+ , $ -> . `E22731 58 `ui 3255
  3257 ]
 [e :U 3252 ]
 "432
 [; ;../../VLCBlib_PIC/can18_can_2.c: 432:     return NOT_PROCESSED;
-[e ) . `E23139 0 ]
+[e ) . `E23140 0 ]
 [e $UE 3248  ]
 "433
 [; ;../../VLCBlib_PIC/can18_can_2.c: 433: }
@@ -4591,7 +4591,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 3262 ]
 "469
 [; ;../../VLCBlib_PIC/can18_can_2.c: 469:             return CAN_HW_PIC_CAN_2_0;
-[e ) -> . `E23051 2 `uc ]
+[e ) -> . `E23052 2 `uc ]
 [e $UE 3259  ]
 "470
 [; ;../../VLCBlib_PIC/can18_can_2.c: 470:         default:
@@ -4797,7 +4797,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 "568
 [; ;../../VLCBlib_PIC/can18_can_2.c: 568: static SendResult canSendMessage(Message * mp) {
-[v _canSendMessage `(E23250 ~T0 @X0 1 sf1`*S3225 ]
+[v _canSendMessage `(E23251 ~T0 @X0 1 sf1`*S3225 ]
 {
 [e :U _canSendMessage ]
 [v _mp `*S3225 ~T0 @X0 1 r1 ]
@@ -4820,7 +4820,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "580
 [; ;../../VLCBlib_PIC/can18_can_2.c: 580:         if (have(SERVICE_ID_CONSUME_OWN_EVENTS)) {
-[e $ ! != -> ( _have (1 -> . `E22939 8 `uc `ui -> -> 0 `i `ui 3283  ]
+[e $ ! != -> ( _have (1 -> . `E22938 8 `uc `ui -> -> 0 `i `ui 3283  ]
 {
 "582
 [; ;../../VLCBlib_PIC/can18_can_2.c: 582:             m = getNextWriteMessage(&rxQueue);
@@ -4906,7 +4906,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _updateModuleErrorStatus ..  ]
 "615
 [; ;../../VLCBlib_PIC/can18_can_2.c: 615:         return SEND_FAILED;
-[e ) . `E23250 0 ]
+[e ) . `E23251 0 ]
 [e $UE 3281  ]
 "616
 [; ;../../VLCBlib_PIC/can18_can_2.c: 616:     }
@@ -4925,11 +4925,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 3288 ]
 "627
 [; ;../../VLCBlib_PIC/can18_can_2.c: 627:     if ((canId == 0) && (enumerationState == NO_ENUMERATION)) {
-[e $ ! && == -> _canId `i -> 0 `i == -> _enumerationState `ui -> . `E23349 0 `ui 3289  ]
+[e $ ! && == -> _canId `i -> 0 `i == -> _enumerationState `ui -> . `E23350 0 `ui 3289  ]
 {
 "628
 [; ;../../VLCBlib_PIC/can18_can_2.c: 628:         enumerationState = ENUMERATION_REQUIRED;
-[e = _enumerationState . `E23349 1 ]
+[e = _enumerationState . `E23350 1 ]
 "629
 [; ;../../VLCBlib_PIC/can18_can_2.c: 629:         canId = 1;
 [e = _canId -> -> 1 `i `uc ]
@@ -5008,7 +5008,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "661
 [; ;../../VLCBlib_PIC/can18_can_2.c: 661:         startEnumeration(1);
-[e ( _startEnumeration (1 -> -> 1 `i `E23106 ]
+[e ( _startEnumeration (1 -> -> 1 `i `E23107 ]
 "662
 [; ;../../VLCBlib_PIC/can18_can_2.c: 662:     } else {
 }
@@ -5024,7 +5024,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 3292 ]
 "666
 [; ;../../VLCBlib_PIC/can18_can_2.c: 666:     return SEND_OK;
-[e ) . `E23250 1 ]
+[e ) . `E23251 1 ]
 [e $UE 3281  ]
 "667
 [; ;../../VLCBlib_PIC/can18_can_2.c: 667: }
@@ -5061,7 +5061,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 "692
 [; ;../../VLCBlib_PIC/can18_can_2.c: 692: static MessageReceived canReceiveMessage(Message * m){
-[v _canReceiveMessage `(E23246 ~T0 @X0 1 sf1`*S3225 ]
+[v _canReceiveMessage `(E23247 ~T0 @X0 1 sf1`*S3225 ]
 {
 [e :U _canReceiveMessage ]
 [v _m `*S3225 ~T0 @X0 1 r1 ]
@@ -5090,7 +5090,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _memcpy (3 , , -> _m `*v -> _mp `*Cv -> # `S3225 `ui ]
 "704
 [; ;../../VLCBlib_PIC/can18_can_2.c: 704:         return RECEIVED;
-[e ) . `E23246 1 ]
+[e ) . `E23247 1 ]
 [e $UE 3294  ]
 "705
 [; ;../../VLCBlib_PIC/can18_can_2.c: 705:     } else {
@@ -5104,7 +5104,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "708
 [; ;../../VLCBlib_PIC/can18_can_2.c: 708:             return NOT_RECEIVED;
-[e ) . `E23246 0 ]
+[e ) . `E23247 0 ]
 [e $UE 3294  ]
 "709
 [; ;../../VLCBlib_PIC/can18_can_2.c: 709:         }
@@ -5148,7 +5148,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = . . _C1FIFOCON3Hbits 0 0 -> -> 1 `i `uc ]
 "730
 [; ;../../VLCBlib_PIC/can18_can_2.c: 730:             return NOT_RECEIVED;
-[e ) . `E23246 0 ]
+[e ) . `E23247 0 ]
 [e $UE 3294  ]
 "731
 [; ;../../VLCBlib_PIC/can18_can_2.c: 731:         }
@@ -5166,7 +5166,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = . . _C1FIFOCON3Hbits 0 0 -> -> 1 `i `uc ]
 "736
 [; ;../../VLCBlib_PIC/can18_can_2.c: 736:             return NOT_RECEIVED;
-[e ) . `E23246 0 ]
+[e ) . `E23247 0 ]
 [e $UE 3294  ]
 "737
 [; ;../../VLCBlib_PIC/can18_can_2.c: 737:         }
@@ -5174,7 +5174,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 3300 ]
 "738
 [; ;../../VLCBlib_PIC/can18_can_2.c: 738:         m->opc = rxFifoObj[8];
-[e = . *U _m 1 -> *U + _rxFifoObj * -> -> 8 `i `x -> -> # *U _rxFifoObj `i `x `E22732 ]
+[e = . *U _m 1 -> *U + _rxFifoObj * -> -> 8 `i `x -> -> # *U _rxFifoObj `i `x `E22731 ]
 "739
 [; ;../../VLCBlib_PIC/can18_can_2.c: 739:         m->bytes[0] = rxFifoObj[9];
 [e = *U + &U . *U _m 2 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux *U + _rxFifoObj * -> -> 9 `i `x -> -> # *U _rxFifoObj `i `x ]
@@ -5201,7 +5201,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = . . _C1FIFOCON3Hbits 0 0 -> -> 1 `i `uc ]
 "748
 [; ;../../VLCBlib_PIC/can18_can_2.c: 748:         return RECEIVED;
-[e ) . `E23246 1 ]
+[e ) . `E23247 1 ]
 [e $UE 3294  ]
 "749
 [; ;../../VLCBlib_PIC/can18_can_2.c: 749:     }
@@ -5213,10 +5213,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 "769
 [; ;../../VLCBlib_PIC/can18_can_2.c: 769: static void startEnumeration(Boolean txWaiting) {
-[v _startEnumeration `(v ~T0 @X0 1 sf1`E23106 ]
+[v _startEnumeration `(v ~T0 @X0 1 sf1`E23107 ]
 {
 [e :U _startEnumeration ]
-[v _txWaiting `E23106 ~T0 @X0 1 r1 ]
+[v _txWaiting `E23107 ~T0 @X0 1 r1 ]
 [f ]
 "770
 [; ;../../VLCBlib_PIC/can18_can_2.c: 770:     uint8_t i;
@@ -5244,7 +5244,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = *U + &U _enumerationResults * -> -> -> 0 `i `ui `ux -> -> # *U &U _enumerationResults `ui `ux -> -> 1 `i `uc ]
 "777
 [; ;../../VLCBlib_PIC/can18_can_2.c: 777:     enumerationState = txWaiting ? ENUMERATION_IN_PROGRESS_TX_WAITING : ENUMERATION_IN_PROGRESS;
-[e = _enumerationState -> ? != -> _txWaiting `ui -> -> 0 `i `ui : . `E23349 3 . `E23349 2 `E23349 ]
+[e = _enumerationState -> ? != -> _txWaiting `ui -> -> 0 `i `ui : . `E23350 3 . `E23350 2 `E23350 ]
 "778
 [; ;../../VLCBlib_PIC/can18_can_2.c: 778:     enumerationStartTime.val = tickGet();
 [e = . _enumerationStartTime 0 ( _tickGet ..  ]
@@ -5290,7 +5290,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "803
 [; ;../../VLCBlib_PIC/can18_can_2.c: 803:                 enumerationState = ENUMERATION_REQUIRED;
-[e = _enumerationState . `E23349 1 ]
+[e = _enumerationState . `E23350 1 ]
 "805
 [; ;../../VLCBlib_PIC/can18_can_2.c: 805:                 canDiagnostics[0x0E].asUint++;
 [e ++ . *U + &U _canDiagnostics * -> -> -> 14 `i `ui `ux -> -> # *U &U _canDiagnostics `ui `ux 0 -> -> 1 `i `us ]
@@ -5315,9 +5315,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 [e $U 3306  ]
 [e :U 3307 ]
-[e [\ -> _enumerationState `ui , $ -> . `E23349 2 `ui 3308
- , $ -> . `E23349 3 `ui 3309
- , $ -> . `E23349 0 `ui 3310
+[e [\ -> _enumerationState `ui , $ -> . `E23350 2 `ui 3308
+ , $ -> . `E23350 3 `ui 3309
+ , $ -> . `E23350 0 `ui 3310
  3312 ]
 [e :U 3306 ]
 "813
@@ -5348,7 +5348,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "830
 [; ;../../VLCBlib_PIC/can18_can_2.c: 830:                 startEnumeration(0);
-[e ( _startEnumeration (1 -> -> 0 `i `E23106 ]
+[e ( _startEnumeration (1 -> -> 0 `i `E23107 ]
 "831
 [; ;../../VLCBlib_PIC/can18_can_2.c: 831:             }
 }
@@ -5447,7 +5447,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 3332 ]
 "867
 [; ;../../VLCBlib_PIC/can18_can_2.c: 867:                 if (enumerationState == ENUMERATION_IN_PROGRESS_TX_WAITING) {
-[e $ ! == -> _enumerationState `ui -> . `E23349 3 `ui 3333  ]
+[e $ ! == -> _enumerationState `ui -> . `E23350 3 `ui 3333  ]
 {
 "869
 [; ;../../VLCBlib_PIC/can18_can_2.c: 869:                     for (i=0; i< 32; i++) {
@@ -5476,7 +5476,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 3333 ]
 "875
 [; ;../../VLCBlib_PIC/can18_can_2.c: 875:                 enumerationState = NO_ENUMERATION;
-[e = _enumerationState . `E23349 0 ]
+[e = _enumerationState . `E23350 0 ]
 "876
 [; ;../../VLCBlib_PIC/can18_can_2.c: 876:             }
 }
@@ -5495,9 +5495,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 [e $U 3314  ]
 [e :U 3315 ]
-[e [\ -> _enumerationState `ui , $ -> . `E23349 1 `ui 3316
- , $ -> . `E23349 2 `ui 3318
- , $ -> . `E23349 3 `ui 3319
+[e [\ -> _enumerationState `ui , $ -> . `E23350 1 `ui 3316
+ , $ -> . `E23350 2 `ui 3318
+ , $ -> . `E23350 3 `ui 3319
  3337 ]
 [e :U 3314 ]
 "881
@@ -5506,7 +5506,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 "888
 [; ;../../VLCBlib_PIC/can18_can_2.c: 888: static CanidResult setNewCanId(uint8_t newCanId) {
-[v _setNewCanId `(E23266 ~T0 @X0 1 sf1`uc ]
+[v _setNewCanId `(E23267 ~T0 @X0 1 sf1`uc ]
 {
 [e :U _setNewCanId ]
 [v _newCanId `uc ~T0 @X0 1 r1 ]
@@ -5523,13 +5523,13 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _prepareSelfEnumResponse ..  ]
 "893
 [; ;../../VLCBlib_PIC/can18_can_2.c: 893:         writeNVM(EEPROM_NVM_TYPE, 0x3FE, newCanId );
-[e ( _writeNVM (3 , , . `E23078 0 -> -> -> 1022 `i `m `um _newCanId ]
+[e ( _writeNVM (3 , , . `E23079 0 -> -> -> 1022 `i `m `um _newCanId ]
 "895
 [; ;../../VLCBlib_PIC/can18_can_2.c: 895:         canDiagnostics[0x0F].asUint++;
 [e ++ . *U + &U _canDiagnostics * -> -> -> 15 `i `ui `ux -> -> # *U &U _canDiagnostics `ui `ux 0 -> -> 1 `i `us ]
 "897
 [; ;../../VLCBlib_PIC/can18_can_2.c: 897:         return CANID_OK;
-[e ) . `E23266 1 ]
+[e ) . `E23267 1 ]
 [e $UE 3338  ]
 "898
 [; ;../../VLCBlib_PIC/can18_can_2.c: 898:     } else {
@@ -5539,7 +5539,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "899
 [; ;../../VLCBlib_PIC/can18_can_2.c: 899:         return CANID_FAIL;
-[e ) . `E23266 0 ]
+[e ) . `E23267 0 ]
 [e $UE 3338  ]
 "900
 [; ;../../VLCBlib_PIC/can18_can_2.c: 900:     }
@@ -5551,24 +5551,24 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 "911
 [; ;../../VLCBlib_PIC/can18_can_2.c: 911: enum CAN_OP_MODE_STATUS CAN1_OperationModeSet(const enum CAN_OP_MODES requestMode)
-[v _CAN1_OperationModeSet `(E23279 ~T0 @X0 1 ef1`CE23270 ]
+[v _CAN1_OperationModeSet `(E23280 ~T0 @X0 1 ef1`CE23271 ]
 "912
 [; ;../../VLCBlib_PIC/can18_can_2.c: 912: {
 {
 [e :U _CAN1_OperationModeSet ]
 "911
 [; ;../../VLCBlib_PIC/can18_can_2.c: 911: enum CAN_OP_MODE_STATUS CAN1_OperationModeSet(const enum CAN_OP_MODES requestMode)
-[v _requestMode `CE23270 ~T0 @X0 1 r1 ]
+[v _requestMode `CE23271 ~T0 @X0 1 r1 ]
 "912
 [; ;../../VLCBlib_PIC/can18_can_2.c: 912: {
 [f ]
 "913
 [; ;../../VLCBlib_PIC/can18_can_2.c: 913:     enum CAN_OP_MODE_STATUS status = CAN_OP_MODE_REQUEST_SUCCESS;
-[v _status `E23279 ~T0 @X0 1 a ]
-[e = _status . `E23279 0 ]
+[v _status `E23280 ~T0 @X0 1 a ]
+[e = _status . `E23280 0 ]
 "915
 [; ;../../VLCBlib_PIC/can18_can_2.c: 915:     if ((CAN1_OperationModeGet() == CAN_CONFIGURATION_MODE)
-[e $ ! || || == -> ( _CAN1_OperationModeGet ..  `ui -> . `E23270 4 `ui == -> _requestMode `ui -> . `E23270 1 `ui == -> _requestMode `ui -> . `E23270 4 `ui 3342  ]
+[e $ ! || || == -> ( _CAN1_OperationModeGet ..  `ui -> . `E23271 4 `ui == -> _requestMode `ui -> . `E23271 1 `ui == -> _requestMode `ui -> . `E23271 4 `ui 3342  ]
 "918
 [; ;../../VLCBlib_PIC/can18_can_2.c: 918:     {
 {
@@ -5590,7 +5590,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "926
 [; ;../../VLCBlib_PIC/can18_can_2.c: 926:                 status = CAN_OP_MODE_SYS_ERROR_OCCURED;
-[e = _status . `E23279 2 ]
+[e = _status . `E23280 2 ]
 "927
 [; ;../../VLCBlib_PIC/can18_can_2.c: 927:                 break;
 [e $U 3345  ]
@@ -5618,7 +5618,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "933
 [; ;../../VLCBlib_PIC/can18_can_2.c: 933:         status = CAN_OP_MODE_REQUEST_FAIL;
-[e = _status . `E23279 1 ]
+[e = _status . `E23280 1 ]
 "934
 [; ;../../VLCBlib_PIC/can18_can_2.c: 934:     }
 }
@@ -5633,7 +5633,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 "944
 [; ;../../VLCBlib_PIC/can18_can_2.c: 944: enum CAN_OP_MODES CAN1_OperationModeGet(void)
-[v _CAN1_OperationModeGet `(E23270 ~T0 @X0 1 ef ]
+[v _CAN1_OperationModeGet `(E23271 ~T0 @X0 1 ef ]
 "945
 [; ;../../VLCBlib_PIC/can18_can_2.c: 945: {
 {
@@ -5641,7 +5641,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [f ]
 "946
 [; ;../../VLCBlib_PIC/can18_can_2.c: 946:     return C1CONUbits.OPMOD;
-[e ) -> . . _C1CONUbits 0 5 `E23270 ]
+[e ) -> . . _C1CONUbits 0 5 `E23271 ]
 [e $UE 3348  ]
 "947
 [; ;../../VLCBlib_PIC/can18_can_2.c: 947: }

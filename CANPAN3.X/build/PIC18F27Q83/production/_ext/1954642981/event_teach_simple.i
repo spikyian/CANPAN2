@@ -37683,6 +37683,7 @@ unsigned char __t3rd16on(void);
 
 
 
+
 # 1 "../../VLCBlib_PIC\\statusLeds.h" 1
 # 42 "../../VLCBlib_PIC\\statusLeds.h"
 # 1 "../../VLCBlib_PIC/vlcb.h" 1
@@ -37771,7 +37772,7 @@ typedef enum {
 extern void leds_powerUp(void);
 extern void leds_poll(void);
 extern void showStatus(StatusDisplay s);
-# 8 "..\\module.h" 2
+# 9 "..\\module.h" 2
 # 38 "../../VLCBlib_PIC/vlcb.h" 2
 
 # 1 "../../VLCB-defs\\vlcbdefs_enums.h" 1
@@ -37786,7 +37787,6 @@ typedef enum VlcbManufacturer
   MANU_SPROG = 44,
   MANU_ROCRAIL = 70,
   MANU_SPECTRUM = 80,
-  MANU_MERG_VLCB = 250,
   MANU_VLCB = 250,
   MANU_SYSPIXIE = 249,
   MANU_RME = 248,
@@ -38342,6 +38342,8 @@ typedef enum VlcbModeParams
   MODE_HEARTBEAT_OFF = 0x0D,
 
   MODE_BOOT = 0x0E,
+  MODE_FCUCOMPAT_ON = 0x10,
+  MODE_FCUCOMPAT_OFF = 0x11,
 } VlcbModeParams;
 
 typedef enum VlcbBusTypes
@@ -38526,7 +38528,7 @@ extern uint8_t writeNVM(NVMtype type, uint24_t index, uint8_t value);
 
 extern ValidTime APP_isSuitableTimeToWriteFlash(void);
 # 40 "../../VLCBlib_PIC/vlcb.h" 2
-# 83 "../../VLCBlib_PIC/vlcb.h"
+# 82 "../../VLCBlib_PIC/vlcb.h"
 typedef enum Priority {
     pLOW=0,
     pNORMAL=1,
@@ -38581,7 +38583,7 @@ typedef enum {
     EVENT_OFF=0,
     EVENT_ON=1
 } EventState;
-# 148 "../../VLCBlib_PIC/vlcb.h"
+# 147 "../../VLCBlib_PIC/vlcb.h"
 typedef union DiagnosticVal {
     uint16_t asUint;
     int16_t asInt;
@@ -38607,6 +38609,7 @@ typedef enum Mode_state {
     EMODE_SETUP,
     EMODE_NORMAL
 } Mode_state;
+
 
 
 
@@ -38897,9 +38900,8 @@ uint8_t errno;
 uint8_t eventChains[32][20];
 
 
-
 static uint8_t timedResponseOpcode;
-# 166 "../../VLCBlib_PIC/event_teach_simple.c"
+# 164 "../../VLCBlib_PIC/event_teach_simple.c"
 const Service eventTeachService = {
     SERVICE_ID_OLD_TEACH,
     1,
@@ -38918,7 +38920,7 @@ const Service eventTeachService = {
     teachGetDiagnostic,
 
 };
-# 192 "../../VLCBlib_PIC/event_teach_simple.c"
+# 190 "../../VLCBlib_PIC/event_teach_simple.c"
 static void teachFactoryReset(void) {
     clearAllEvents();
 }
@@ -38942,7 +38944,7 @@ static void teachPowerUp(void) {
     errno = 0;
     mode_flags &= ~1;
 }
-# 223 "../../VLCBlib_PIC/event_teach_simple.c"
+# 221 "../../VLCBlib_PIC/event_teach_simple.c"
 static Processed teachProcessMessage(Message* m) {
     switch(m->opc) {
 
@@ -39057,7 +39059,7 @@ static Processed teachProcessMessage(Message* m) {
     }
     return NOT_PROCESSED;
 }
-# 345 "../../VLCBlib_PIC/event_teach_simple.c"
+# 343 "../../VLCBlib_PIC/event_teach_simple.c"
 static Processed teachCheckLen(Message * m, uint8_t needed, uint8_t learn) {
     if (learn) {
 
@@ -39089,14 +39091,14 @@ static uint8_t teachGetESDdata(uint8_t id) {
         default: return 0;
     }
 }
-# 384 "../../VLCBlib_PIC/event_teach_simple.c"
+# 382 "../../VLCBlib_PIC/event_teach_simple.c"
 static DiagnosticVal * teachGetDiagnostic(uint8_t index) {
     if (index > 1) {
         return ((void*)0);
     }
     return &(teachDiagnostics[index]);
 }
-# 399 "../../VLCBlib_PIC/event_teach_simple.c"
+# 397 "../../VLCBlib_PIC/event_teach_simple.c"
 static void clearAllEvents(void) {
     uint8_t tableIndex;
 
@@ -39134,7 +39136,7 @@ static void doNnevn(void) {
 static void doNerd(void) {
     startTimedResponse(2, findServiceIndex(SERVICE_ID_OLD_TEACH), nerdCallback);
 }
-# 444 "../../VLCBlib_PIC/event_teach_simple.c"
+# 442 "../../VLCBlib_PIC/event_teach_simple.c"
 TimedResponseResult nerdCallback(uint8_t type, uint8_t serviceIndex, uint8_t step){
     Word nodeNumber, eventNumber;
 
@@ -39205,7 +39207,7 @@ static void doNnclr(void) {
     sendMessage5(OPC_GRSP, nn.bytes.hi, nn.bytes.lo, OPC_NNCLR, SERVICE_ID_OLD_TEACH, GRSP_OK);
 
 }
-# 524 "../../VLCBlib_PIC/event_teach_simple.c"
+# 522 "../../VLCBlib_PIC/event_teach_simple.c"
 static void doEvlrn(uint16_t nodeNumber, uint16_t eventNumber, uint8_t evNum, uint8_t evVal) {
 
     evNum--;
@@ -39254,17 +39256,19 @@ static void doReval(uint8_t enNum, uint8_t evNum) {
     }
 
     evIndex = evNum-1U;
+
     if (evNum == 0) {
+        evVal = 13;
+        if ((mode_flags & 8) == 0) {
 
 
-
-        timedResponseOpcode = OPC_NEVAL;
-        startTimedResponse(tableIndex, findServiceIndex(SERVICE_ID_OLD_TEACH), reqevCallback);
-
-        evVal = numEv(tableIndex);
+            timedResponseOpcode = OPC_NEVAL;
+            startTimedResponse(tableIndex, findServiceIndex(SERVICE_ID_OLD_TEACH), reqevCallback);
+        }
     } else {
         evVal = getEv(tableIndex, evIndex);
     }
+
     if (evVal < 0) {
 
         sendMessage3(OPC_CMDERR, nn.bytes.hi, nn.bytes.lo, (uint8_t)(-evVal));
@@ -39322,21 +39326,21 @@ static void doReqev(uint16_t nodeNumber, uint16_t eventNumber, uint8_t evNum) {
 
         return;
     }
+
     if (evNum == 0) {
-
-        sendMessage6(OPC_EVANS, nodeNumber>>8, nodeNumber&0xFF, eventNumber>>8, eventNumber&0xFF, 0, numEv(tableIndex));
-
-
-        timedResponseOpcode = OPC_EVANS;
-        startTimedResponse(tableIndex, findServiceIndex(SERVICE_ID_OLD_TEACH), reqevCallback);
-        return;
+        evVal = 13;
+        if ((mode_flags & 8) == 0) {
+            sendMessage6(OPC_EVANS, nodeNumber>>8, nodeNumber&0xFF, eventNumber>>8, eventNumber&0xFF, 0, numEv(tableIndex));
 
 
-
-
+            timedResponseOpcode = OPC_EVANS;
+            startTimedResponse(tableIndex, findServiceIndex(SERVICE_ID_OLD_TEACH), reqevCallback);
+            return;
+        }
     } else {
         evVal = getEv(tableIndex, evNum-1);
     }
+
     if (evVal < 0) {
 
         sendMessage3(OPC_CMDERR, nn.bytes.hi, nn.bytes.lo, (uint8_t)(-evVal));

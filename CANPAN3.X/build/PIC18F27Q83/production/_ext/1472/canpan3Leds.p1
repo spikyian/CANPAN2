@@ -1,8 +1,8 @@
 Version 4.0 HI-TECH Software Intermediate Code
 "45 ../canpan3Leds.c
 [; ;../canpan3Leds.c: 45: static enum canpan3LedState ledStates[(4*8)];
-[c E23097 0 1 2 3 .. ]
-[n E23097 canpan3LedState CANPANLED_ON CANPANLED_OFF CANPANLED_FLASH CANPANLED_ANTIFLASH  ]
+[c E23098 0 1 2 3 .. ]
+[n E23098 canpan3LedState CANPANLED_ON CANPANLED_OFF CANPANLED_FLASH CANPANLED_ANTIFLASH  ]
 "43 ../canpan3Outputs.h
 [; ;../canpan3Outputs.h: 43: extern void setLed(uint8_t no);
 [v _setLed `(v ~T0 @X0 0 ef1`uc ]
@@ -3530,7 +3530,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; <" TOSU equ 04FFh ;# ">
 "45 ../canpan3Leds.c
 [; ;../canpan3Leds.c: 45: static enum canpan3LedState ledStates[(4*8)];
-[v _ledStates `E23097 ~T0 @X0 -> 32 `i s ]
+[v _ledStates `E23098 ~T0 @X0 -> 32 `i s ]
 "46
 [; ;../canpan3Leds.c: 46: static uint8_t flashToggle;
 [v _flashToggle `uc ~T0 @X0 1 s ]
@@ -3553,7 +3553,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "55
 [; ;../canpan3Leds.c: 55:         ledStates[i] = CANPANLED_OFF;
-[e = *U + &U _ledStates * -> _i `ux -> -> # *U &U _ledStates `ui `ux . `E23097 1 ]
+[e = *U + &U _ledStates * -> _i `ux -> -> # *U &U _ledStates `ui `ux . `E23098 1 ]
 "56
 [; ;../canpan3Leds.c: 56:     }
 }
@@ -3570,11 +3570,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 "65
 [; ;../canpan3Leds.c: 65: void setLedState(uint8_t ledNo, enum canpan3LedState state) {
-[v _setLedState `(v ~T0 @X0 1 ef2`uc`E23097 ]
+[v _setLedState `(v ~T0 @X0 1 ef2`uc`E23098 ]
 {
 [e :U _setLedState ]
 [v _ledNo `uc ~T0 @X0 1 r1 ]
-[v _state `E23097 ~T0 @X0 1 r2 ]
+[v _state `E23098 ~T0 @X0 1 r2 ]
 [f ]
 "66
 [; ;../canpan3Leds.c: 66:     ledStates[ledNo] = state;
@@ -3615,10 +3615,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 [e $U 3236  ]
 [e :U 3237 ]
-[e [\ -> *U + &U _ledStates * -> _ledNo `ux -> -> # *U &U _ledStates `ui `ux `ui , $ -> . `E23097 0 `ui 3238
- , $ -> . `E23097 1 `ui 3239
- , $ -> . `E23097 2 `ui 3240
- , $ -> . `E23097 3 `ui 3241
+[e [\ -> *U + &U _ledStates * -> _ledNo `ux -> -> # *U &U _ledStates `ui `ux `ui , $ -> . `E23098 0 `ui 3238
+ , $ -> . `E23098 1 `ui 3239
+ , $ -> . `E23098 2 `ui 3240
+ , $ -> . `E23098 3 `ui 3241
  3236 ]
 [e :U 3236 ]
 "80
@@ -3712,10 +3712,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 [e $U 3246  ]
 [e :U 3247 ]
-[e [\ -> *U + &U _ledStates * -> _ledNo `ux -> -> # *U &U _ledStates `ui `ux `ui , $ -> . `E23097 2 `ui 3248
- , $ -> . `E23097 3 `ui 3251
- , $ -> . `E23097 0 `ui 3254
- , $ -> . `E23097 1 `ui 3255
+[e [\ -> *U + &U _ledStates * -> _ledNo `ux -> -> # *U &U _ledStates `ui `ux `ui , $ -> . `E23098 2 `ui 3248
+ , $ -> . `E23098 3 `ui 3251
+ , $ -> . `E23098 0 `ui 3254
+ , $ -> . `E23098 1 `ui 3255
  3246 ]
 [e :U 3246 ]
 "109

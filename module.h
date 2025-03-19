@@ -3,7 +3,8 @@
 
 // comment out for CBUS
 #define VLCB
-
+// Enable FCU compatibility
+#define FCU_COMPAT
 
 #include "statusLeds.h"
 
@@ -12,7 +13,7 @@
 //
 // The data version stored at NV#0
 #define APP_NVM_VERSION 1
-#define NUM_SERVICES 9
+#define NUM_SERVICES 8
 
 
 #if defined(_18FXXQ83_FAMILY_)

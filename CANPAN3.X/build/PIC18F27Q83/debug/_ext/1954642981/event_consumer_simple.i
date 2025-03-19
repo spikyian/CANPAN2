@@ -37683,6 +37683,7 @@ unsigned char __t3rd16on(void);
 
 
 
+
 # 1 "../../VLCBlib_PIC\\statusLeds.h" 1
 # 42 "../../VLCBlib_PIC\\statusLeds.h"
 # 1 "../../VLCBlib_PIC/vlcb.h" 1
@@ -37771,7 +37772,7 @@ typedef enum {
 extern void leds_powerUp(void);
 extern void leds_poll(void);
 extern void showStatus(StatusDisplay s);
-# 8 "..\\module.h" 2
+# 9 "..\\module.h" 2
 # 38 "../../VLCBlib_PIC/vlcb.h" 2
 
 # 1 "../../VLCB-defs\\vlcbdefs_enums.h" 1
@@ -37786,7 +37787,6 @@ typedef enum VlcbManufacturer
   MANU_SPROG = 44,
   MANU_ROCRAIL = 70,
   MANU_SPECTRUM = 80,
-  MANU_MERG_VLCB = 250,
   MANU_VLCB = 250,
   MANU_SYSPIXIE = 249,
   MANU_RME = 248,
@@ -38342,6 +38342,8 @@ typedef enum VlcbModeParams
   MODE_HEARTBEAT_OFF = 0x0D,
 
   MODE_BOOT = 0x0E,
+  MODE_FCUCOMPAT_ON = 0x10,
+  MODE_FCUCOMPAT_OFF = 0x11,
 } VlcbModeParams;
 
 typedef enum VlcbBusTypes
@@ -38526,7 +38528,7 @@ extern uint8_t writeNVM(NVMtype type, uint24_t index, uint8_t value);
 
 extern ValidTime APP_isSuitableTimeToWriteFlash(void);
 # 40 "../../VLCBlib_PIC/vlcb.h" 2
-# 83 "../../VLCBlib_PIC/vlcb.h"
+# 82 "../../VLCBlib_PIC/vlcb.h"
 typedef enum Priority {
     pLOW=0,
     pNORMAL=1,
@@ -38581,7 +38583,7 @@ typedef enum {
     EVENT_OFF=0,
     EVENT_ON=1
 } EventState;
-# 148 "../../VLCBlib_PIC/vlcb.h"
+# 147 "../../VLCBlib_PIC/vlcb.h"
 typedef union DiagnosticVal {
     uint16_t asUint;
     int16_t asInt;
@@ -38607,6 +38609,7 @@ typedef enum Mode_state {
     EMODE_SETUP,
     EMODE_NORMAL
 } Mode_state;
+
 
 
 
@@ -38766,7 +38769,7 @@ extern ValidTime APP_isSuitableTimeToWriteFlash(void);
 # 1 "../../VLCBlib_PIC/event_consumer_simple.h" 1
 # 69 "../../VLCBlib_PIC/event_consumer_simple.h"
 extern const Service eventConsumerService;
-# 79 "../../VLCBlib_PIC/event_consumer_simple.h"
+# 80 "../../VLCBlib_PIC/event_consumer_simple.h"
 extern Processed APP_processConsumedEvent(uint8_t tableIndex, Message * m);
 # 44 "../../VLCBlib_PIC/event_consumer_simple.c" 2
 
@@ -38799,13 +38802,39 @@ typedef struct {
     uint16_t EN;
 } Event;
 # 45 "../../VLCBlib_PIC/event_consumer_simple.c" 2
-# 57 "../../VLCBlib_PIC/event_consumer_simple.c"
-static DiagnosticVal consumerDiagnostics[1 +1];
+
+# 1 "../../VLCBlib_PIC/mns.h" 1
+# 111 "../../VLCBlib_PIC/mns.h"
+extern const Service mnsService;
+# 126 "../../VLCBlib_PIC/mns.h"
+extern Word nn;
+
+
+
+extern uint8_t mode_state;
+
+
+
+
+extern uint8_t mode_flags;
+
+
+
+
+
+extern DiagnosticVal mnsDiagnostics[6 +1];
+extern void updateModuleErrorStatus(void);
+
+
+extern TickValue pbTimer;
+# 46 "../../VLCBlib_PIC/event_consumer_simple.c" 2
+# 58 "../../VLCBlib_PIC/event_consumer_simple.c"
+static DiagnosticVal consumerDiagnostics[2 +1];
 static void consumerPowerUp(void);
 static Processed consumerProcessMessage(Message * m);
 static DiagnosticVal * consumerGetDiagnostic(uint8_t index);
 static uint8_t consumerEsdData(uint8_t index);
-
+static Processed consumerEventCheckLen(Message * m, uint8_t needed);
 extern uint8_t APP_isConsumedEvent(uint8_t eventIndex);
 uint8_t isConsumedEvent(uint8_t eventIndex);
 
@@ -38817,7 +38846,7 @@ uint8_t isConsumedEvent(uint8_t eventIndex);
 
 const Service eventConsumerService = {
     SERVICE_ID_CONSUMER,
-    1,
+    2,
     ((void*)0),
     consumerPowerUp,
     consumerProcessMessage,
@@ -38838,23 +38867,35 @@ static void consumerPowerUp(void) {
 
     uint8_t temp;
 
-    for (temp=1; temp<=1; temp++) {
- consumerDiagnostics[temp].asUint = 0;
+    for (temp=1; temp<=2; temp++) {
+        consumerDiagnostics[temp].asUint = 0;
     }
-    consumerDiagnostics[0].asUint = 1;
+    consumerDiagnostics[0].asUint = 2;
 
 }
-
-
-
-
-
-
-
+# 110 "../../VLCBlib_PIC/event_consumer_simple.c"
 static Processed consumerProcessMessage(Message *m) {
     Processed ret;
     uint8_t tableIndex;
     uint16_t enn;
+
+
+    if (m->opc == OPC_MODE) {
+        if (consumerEventCheckLen(m, 4) == PROCESSED) return PROCESSED;
+        if ((m->bytes[0] == nn.bytes.hi) && (m->bytes[1] == nn.bytes.lo)) {
+            if (m->bytes[2] == MODE_EVENT_ACK_ON) {
+
+                mode_flags |= 2;
+                return PROCESSED;
+            } else if (m->bytes[2] == MODE_EVENT_ACK_OFF) {
+
+                mode_flags &= ~2;
+                return PROCESSED;
+            }
+        }
+        return NOT_PROCESSED;
+    }
+
 
     if (m->len < 5) return NOT_PROCESSED;
 
@@ -38901,6 +38942,23 @@ static Processed consumerProcessMessage(Message *m) {
     if (!isConsumedEvent(tableIndex)) {
         return NOT_PROCESSED;
     }
+
+
+
+
+
+    if ((mode_flags & 2) && (isConsumedEvent(tableIndex))) {
+
+        sendMessage7(OPC_ENACK, nn.bytes.hi, nn.bytes.lo, m->opc, m->bytes[0], m->bytes[1], m->bytes[2], m->bytes[3]);
+
+        consumerDiagnostics[2].asInt++;
+
+    }
+
+
+
+
+
     ret = APP_processConsumedEvent(tableIndex, m);
     if (ret == PROCESSED) {
         consumerDiagnostics[1].asUint++;
@@ -38925,12 +38983,12 @@ uint8_t isConsumedEvent(uint8_t eventIndex) {
 
 
 static DiagnosticVal * consumerGetDiagnostic(uint8_t index) {
-    if (index > 1) {
+    if (index > 2) {
         return ((void*)0);
     }
     return &(consumerDiagnostics[index-1]);
 }
-# 195 "../../VLCBlib_PIC/event_consumer_simple.c"
+# 232 "../../VLCBlib_PIC/event_consumer_simple.c"
 static uint8_t consumerEsdData(uint8_t index) {
     switch (index){
         case 0:
@@ -38938,4 +38996,8 @@ static uint8_t consumerEsdData(uint8_t index) {
         default:
             return 0;
     }
+}
+# 248 "../../VLCBlib_PIC/event_consumer_simple.c"
+static Processed consumerEventCheckLen(Message * m, uint8_t needed) {
+    return checkLen(m, needed, SERVICE_ID_CONSUMER);
 }

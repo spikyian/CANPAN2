@@ -1,79 +1,79 @@
 Version 4.0 HI-TECH Software Intermediate Code
-[v F23048 `(v ~T0 @X0 0 tf ]
-[v F23050 `(v ~T0 @X0 0 tf ]
+[v F23049 `(v ~T0 @X0 0 tf ]
+[v F23051 `(v ~T0 @X0 0 tf ]
 "76 ../../VLCBlib_PIC/boot.c
 [; ;../../VLCBlib_PIC/boot.c: 76: const Service bootService = {
-[c E22565 0 1 2 3 4 5 6 7 8 9 10 12 13 16 17 33 34 35 48 63 64 65 66 67 68 69 70 71 72 73 74 76 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 99 111 112 113 114 115 116 117 118 120 127 128 130 131 132 133 135 142 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 162 171 172 175 176 177 178 179 180 181 182 184 185 189 190 191 192 193 194 199 207 208 209 210 211 212 213 216 217 221 222 223 224 225 226 227 230 231 233 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 164 .. ]
-[n E22565 VlcbOpCodes OPC_ACK OPC_NAK OPC_HLT OPC_BON OPC_TOF OPC_TON OPC_ESTOP OPC_ARST OPC_RTOF OPC_RTON OPC_RESTP OPC_RSTAT OPC_QNN OPC_RQNP OPC_RQMN OPC_KLOC OPC_QLOC OPC_DKEEP OPC_DBG1 OPC_EXTC OPC_RLOC OPC_QCON OPC_SNN OPC_ALOC OPC_STMOD OPC_PCON OPC_KCON OPC_DSPD OPC_DFLG OPC_DFNON OPC_DFNOF OPC_SSTAT OPC_NNRSM OPC_RQNN OPC_NNREL OPC_NNACK OPC_NNLRN OPC_NNULN OPC_NNCLR OPC_NNEVN OPC_NERD OPC_RQEVN OPC_WRACK OPC_RQDAT OPC_RQDDS OPC_BOOT OPC_ENUM OPC_NNRST OPC_EXTC1 OPC_DFUN OPC_GLOC OPC_ERR OPC_CMDERR OPC_EVNLF OPC_NVRD OPC_NENRD OPC_RQNPN OPC_NUMEV OPC_CANID OPC_MODE OPC_RQSD OPC_EXTC2 OPC_RDCC3 OPC_WCVO OPC_WCVB OPC_QCVS OPC_PCVS OPC_RDGN OPC_NVSETRD OPC_ACON OPC_ACOF OPC_AREQ OPC_ARON OPC_AROF OPC_EVULN OPC_NVSET OPC_NVANS OPC_ASON OPC_ASOF OPC_ASRQ OPC_PARAN OPC_REVAL OPC_ARSON OPC_ARSOF OPC_EXTC3 OPC_RDCC4 OPC_WCVS OPC_HEARTB OPC_SD OPC_GRSP OPC_ACON1 OPC_ACOF1 OPC_REQEV OPC_ARON1 OPC_AROF1 OPC_NEVAL OPC_PNN OPC_ASON1 OPC_ASOF1 OPC_ARSON1 OPC_ARSOF1 OPC_EXTC4 OPC_RDCC5 OPC_WCVOA OPC_CABDAT OPC_DGN OPC_FCLK OPC_ACON2 OPC_ACOF2 OPC_EVLRN OPC_EVANS OPC_ARON2 OPC_AROF2 OPC_ASON2 OPC_ASOF2 OPC_ARSON2 OPC_ARSOF2 OPC_EXTC5 OPC_RDCC6 OPC_PLOC OPC_NAME OPC_STAT OPC_ENACK OPC_ESD OPC_DTXC OPC_PARAMS OPC_ACON3 OPC_ACOF3 OPC_ENRSP OPC_ARON3 OPC_AROF3 OPC_EVLRNI OPC_ACDAT OPC_ARDAT OPC_ASON3 OPC_ASOF3 OPC_DDES OPC_DDRS OPC_DDWS OPC_ARSON3 OPC_ARSOF3 OPC_EXTC6 OPC_VCVS  ]
-"111 ../../VLCBlib_PIC/vlcb.h
-[; ;../../VLCBlib_PIC/vlcb.h: 111: typedef struct Message {
-[s S3224 `uc 1 `E22565 1 `uc -> 7 `i ]
+[c E22564 0 1 2 3 4 5 6 7 8 9 10 12 13 16 17 33 34 35 48 63 64 65 66 67 68 69 70 71 72 73 74 76 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 99 111 112 113 114 115 116 117 118 120 127 128 130 131 132 133 135 142 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 162 171 172 175 176 177 178 179 180 181 182 184 185 189 190 191 192 193 194 199 207 208 209 210 211 212 213 216 217 221 222 223 224 225 226 227 230 231 233 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 164 .. ]
+[n E22564 VlcbOpCodes OPC_ACK OPC_NAK OPC_HLT OPC_BON OPC_TOF OPC_TON OPC_ESTOP OPC_ARST OPC_RTOF OPC_RTON OPC_RESTP OPC_RSTAT OPC_QNN OPC_RQNP OPC_RQMN OPC_KLOC OPC_QLOC OPC_DKEEP OPC_DBG1 OPC_EXTC OPC_RLOC OPC_QCON OPC_SNN OPC_ALOC OPC_STMOD OPC_PCON OPC_KCON OPC_DSPD OPC_DFLG OPC_DFNON OPC_DFNOF OPC_SSTAT OPC_NNRSM OPC_RQNN OPC_NNREL OPC_NNACK OPC_NNLRN OPC_NNULN OPC_NNCLR OPC_NNEVN OPC_NERD OPC_RQEVN OPC_WRACK OPC_RQDAT OPC_RQDDS OPC_BOOT OPC_ENUM OPC_NNRST OPC_EXTC1 OPC_DFUN OPC_GLOC OPC_ERR OPC_CMDERR OPC_EVNLF OPC_NVRD OPC_NENRD OPC_RQNPN OPC_NUMEV OPC_CANID OPC_MODE OPC_RQSD OPC_EXTC2 OPC_RDCC3 OPC_WCVO OPC_WCVB OPC_QCVS OPC_PCVS OPC_RDGN OPC_NVSETRD OPC_ACON OPC_ACOF OPC_AREQ OPC_ARON OPC_AROF OPC_EVULN OPC_NVSET OPC_NVANS OPC_ASON OPC_ASOF OPC_ASRQ OPC_PARAN OPC_REVAL OPC_ARSON OPC_ARSOF OPC_EXTC3 OPC_RDCC4 OPC_WCVS OPC_HEARTB OPC_SD OPC_GRSP OPC_ACON1 OPC_ACOF1 OPC_REQEV OPC_ARON1 OPC_AROF1 OPC_NEVAL OPC_PNN OPC_ASON1 OPC_ASOF1 OPC_ARSON1 OPC_ARSOF1 OPC_EXTC4 OPC_RDCC5 OPC_WCVOA OPC_CABDAT OPC_DGN OPC_FCLK OPC_ACON2 OPC_ACOF2 OPC_EVLRN OPC_EVANS OPC_ARON2 OPC_AROF2 OPC_ASON2 OPC_ASOF2 OPC_ARSON2 OPC_ARSOF2 OPC_EXTC5 OPC_RDCC6 OPC_PLOC OPC_NAME OPC_STAT OPC_ENACK OPC_ESD OPC_DTXC OPC_PARAMS OPC_ACON3 OPC_ACOF3 OPC_ENRSP OPC_ARON3 OPC_AROF3 OPC_EVLRNI OPC_ACDAT OPC_ARDAT OPC_ASON3 OPC_ASOF3 OPC_DDES OPC_DDRS OPC_DDWS OPC_ARSON3 OPC_ARSOF3 OPC_EXTC6 OPC_VCVS  ]
+"110 ../../VLCBlib_PIC/vlcb.h
+[; ;../../VLCBlib_PIC/vlcb.h: 110: typedef struct Message {
+[s S3224 `uc 1 `E22564 1 `uc -> 7 `i ]
 [n S3224 Message len opc bytes ]
 "76 ../../VLCBlib_PIC/boot.c
 [; ;../../VLCBlib_PIC/boot.c: 76: const Service bootService = {
-[c E22972 0 1 .. ]
-[n E22972 Processed NOT_PROCESSED PROCESSED  ]
-[v F23052 `(E22972 ~T0 @X0 0 tf1`*S3224 ]
-[v F23055 `(v ~T0 @X0 0 tf ]
-[v F23057 `(uc ~T0 @X0 0 tf1`uc ]
-"151 ../../VLCBlib_PIC/vlcb.h
-[; ;../../VLCBlib_PIC/vlcb.h: 151:     struct {
+[c E22973 0 1 .. ]
+[n E22973 Processed NOT_PROCESSED PROCESSED  ]
+[v F23053 `(E22973 ~T0 @X0 0 tf1`*S3224 ]
+[v F23056 `(v ~T0 @X0 0 tf ]
+[v F23058 `(uc ~T0 @X0 0 tf1`uc ]
+"150 ../../VLCBlib_PIC/vlcb.h
+[; ;../../VLCBlib_PIC/vlcb.h: 150:     struct {
 [s S3228 `uc 1 `uc 1 ]
 [n S3228 . lo hi ]
-"148
-[; ;../../VLCBlib_PIC/vlcb.h: 148: typedef union DiagnosticVal {
+"147
+[; ;../../VLCBlib_PIC/vlcb.h: 147: typedef union DiagnosticVal {
 [u S3227 `us 1 `s 1 `S3228 1 ]
 [n S3227 DiagnosticVal asUint asInt asBytes ]
-[v F23060 `(*S3227 ~T0 @X0 0 tf1`uc ]
+[v F23061 `(*S3227 ~T0 @X0 0 tf1`uc ]
 "299
 [; ;../../VLCBlib_PIC/vlcb.h: 299: typedef struct Service {
-[s S3229 `uc 1 `uc 1 `*F23048 1 `*F23050 1 `*F23052 1 `*F23055 1 `*F23057 1 `*F23060 1 ]
+[s S3229 `uc 1 `uc 1 `*F23049 1 `*F23051 1 `*F23053 1 `*F23056 1 `*F23058 1 `*F23061 1 ]
 [n S3229 Service serviceNo version factoryReset powerUp processMessage poll getESDdata getDiagnostic ]
 "76 ../../VLCBlib_PIC/boot.c
 [; ;../../VLCBlib_PIC/boot.c: 76: const Service bootService = {
-[c E22772 0 1 2 3 4 5 6 7 8 9 10 17 .. ]
-[n E22772 VlcbServiceTypes SERVICE_ID_NONE SERVICE_ID_MNS SERVICE_ID_NV SERVICE_ID_CAN SERVICE_ID_OLD_TEACH SERVICE_ID_PRODUCER SERVICE_ID_CONSUMER SERVICE_ID_TEACH SERVICE_ID_CONSUME_OWN_EVENTS SERVICE_ID_EVENTACK SERVICE_ID_BOOT SERVICE_ID_STREAMING  ]
-[v F23111 `(v ~T0 @X0 0 tf ]
+[c E22771 0 1 2 3 4 5 6 7 8 9 10 17 .. ]
+[n E22771 VlcbServiceTypes SERVICE_ID_NONE SERVICE_ID_MNS SERVICE_ID_NV SERVICE_ID_CAN SERVICE_ID_OLD_TEACH SERVICE_ID_PRODUCER SERVICE_ID_CONSUMER SERVICE_ID_TEACH SERVICE_ID_CONSUME_OWN_EVENTS SERVICE_ID_EVENTACK SERVICE_ID_BOOT SERVICE_ID_STREAMING  ]
+[v F23112 `(v ~T0 @X0 0 tf ]
 "66
 [; ;../../VLCBlib_PIC/boot.c: 66: static void bootPowerUp(void);
 [v _bootPowerUp `(v ~T0 @X0 0 sf ]
 "67
 [; ;../../VLCBlib_PIC/boot.c: 67: static Processed bootProcessMessage(Message * m);
-[v _bootProcessMessage `(E22972 ~T0 @X0 0 sf1`*S3224 ]
-[v F23115 `(v ~T0 @X0 0 tf ]
+[v _bootProcessMessage `(E22973 ~T0 @X0 0 sf1`*S3224 ]
+[v F23116 `(v ~T0 @X0 0 tf ]
 "68
 [; ;../../VLCBlib_PIC/boot.c: 68: static uint8_t bootEsdData(uint8_t id);
 [v _bootEsdData `(uc ~T0 @X0 0 sf1`uc ]
-[v F23118 `(*S3227 ~T0 @X0 0 tf1`uc ]
+[v F23119 `(*S3227 ~T0 @X0 0 tf1`uc ]
 "144
 [; ;../../VLCBlib_PIC/boot.c: 144: const uint8_t paramBlock[] __attribute__((address(0x820))) = {
-[c E22432 13 165 44 70 80 250 250 249 248 .. ]
-[n E22432 VlcbManufacturer MANU_DEV MANU_MERG MANU_SPROG MANU_ROCRAIL MANU_SPECTRUM MANU_MERG_VLCB MANU_VLCB MANU_SYSPIXIE MANU_RME  ]
-[c E22443 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 252 255 254 253 252 .. ]
-[n E22443 VlcbMergModuleTypes MTYP_SLIM MTYP_CANACC4 MTYP_CANACC5 MTYP_CANACC8 MTYP_CANACE3 MTYP_CANACE8C MTYP_CANLED MTYP_CANLED64 MTYP_CANACC4_2 MTYP_CANCAB MTYP_CANCMD MTYP_CANSERVO MTYP_CANBC MTYP_CANRPI MTYP_CANTTCA MTYP_CANTTCB MTYP_CANHS MTYP_CANTOTI MTYP_CAN8I8O MTYP_CANSERVO8C MTYP_CANRFID MTYP_CANTC4 MTYP_CANACE16C MTYP_CANIO8 MTYP_CANSNDX MTYP_CANEther MTYP_CANSIG64 MTYP_CANSIG8 MTYP_CANCOND8C MTYP_CANPAN MTYP_CANACE3C MTYP_CANPanel MTYP_CANMIO MTYP_CANACE8MIO MTYP_CANSOL MTYP_CANBIP MTYP_CANCDU MTYP_CANACC4CDU MTYP_CANWiBase MTYP_WiCAB MTYP_CANWiFi MTYP_CANFTT MTYP_CANHNDST MTYP_CANTCHNDST MTYP_CANRFID8 MTYP_CANmchRFID MTYP_CANPiWi MTYP_CAN4DC MTYP_CANELEV MTYP_CANSCAN MTYP_CANMIO_SVO MTYP_CANMIO_INP MTYP_CANMIO_OUT MTYP_CANBIP_OUT MTYP_CANASTOP MTYP_CANCSB MTYP_CANMAG MTYP_CANACE16CMIO MTYP_CANPiNODE MTYP_CANDISP MTYP_CANCOMPUTE MTYP_CANRC522 MTYP_CANINP MTYP_CANOUT MTYP_CANXIO MTYP_CANCABDC MTYP_CANRCOM MTYP_CANMP3 MTYP_CANXMAS MTYP_CANSVOSET MTYP_CANCMDDC MTYP_CANTEXT MTYP_CANASIGNAL MTYP_CANSLIDER MTYP_CANDCATC MTYP_CANGATE MTYP_CANSINP MTYP_CANSOUT MTYP_CANSBIP MTYP_CANBUFFER MTYP_CANLEVER MTYP_CANSHIELD MTYP_CAN4IN4OUT MTYP_CANCMDB MTYP_CANPIXEL MTYP_CANCABPE MTYP_CANSMARTTD MTYP_VLCB MTYP_CAN_SW MTYP_EMPTY MTYP_CANUSB MTYP_CANDEV  ]
-[c E22844 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 25 30 31 32 33 34 35 36 37 38 .. ]
-[n E22844 VlcbMicrochipProcessors P18F2480 P18F4480 P18F2580 P18F4580 P18F2585 P18F4585 P18F2680 P18F4680 P18F2682 P18F4682 P18F2685 P18F4685 P18F25K80 P18F45K80 P18F26K80 P18F46K80 P18F65K80 P18F66K80 P18F25K83 P18F26K83 P18F27Q84 P18F47Q84 P18F27Q83 P18F14K22 P32MX534F064 P32MX564F064 P32MX564F128 P32MX575F256 P32MX575F512 P32MX764F128 P32MX775F256 P32MX775F512 P32MX795F512  ]
-[c E22833 1 2 3 4 .. ]
-[n E22833 VlcbBusTypes PB_CAN PB_ETH PB_MIWI PB_USB  ]
-[c E22839 1 2 3 .. ]
-[n E22839 VlcbProcessorManufacturers CPUM_MICROCHIP CPUM_ATMEL CPUM_ARM  ]
+[c E22432 13 165 44 70 80 250 249 248 .. ]
+[n E22432 VlcbManufacturer MANU_DEV MANU_MERG MANU_SPROG MANU_ROCRAIL MANU_SPECTRUM MANU_VLCB MANU_SYSPIXIE MANU_RME  ]
+[c E22442 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 252 255 254 253 252 .. ]
+[n E22442 VlcbMergModuleTypes MTYP_SLIM MTYP_CANACC4 MTYP_CANACC5 MTYP_CANACC8 MTYP_CANACE3 MTYP_CANACE8C MTYP_CANLED MTYP_CANLED64 MTYP_CANACC4_2 MTYP_CANCAB MTYP_CANCMD MTYP_CANSERVO MTYP_CANBC MTYP_CANRPI MTYP_CANTTCA MTYP_CANTTCB MTYP_CANHS MTYP_CANTOTI MTYP_CAN8I8O MTYP_CANSERVO8C MTYP_CANRFID MTYP_CANTC4 MTYP_CANACE16C MTYP_CANIO8 MTYP_CANSNDX MTYP_CANEther MTYP_CANSIG64 MTYP_CANSIG8 MTYP_CANCOND8C MTYP_CANPAN MTYP_CANACE3C MTYP_CANPanel MTYP_CANMIO MTYP_CANACE8MIO MTYP_CANSOL MTYP_CANBIP MTYP_CANCDU MTYP_CANACC4CDU MTYP_CANWiBase MTYP_WiCAB MTYP_CANWiFi MTYP_CANFTT MTYP_CANHNDST MTYP_CANTCHNDST MTYP_CANRFID8 MTYP_CANmchRFID MTYP_CANPiWi MTYP_CAN4DC MTYP_CANELEV MTYP_CANSCAN MTYP_CANMIO_SVO MTYP_CANMIO_INP MTYP_CANMIO_OUT MTYP_CANBIP_OUT MTYP_CANASTOP MTYP_CANCSB MTYP_CANMAG MTYP_CANACE16CMIO MTYP_CANPiNODE MTYP_CANDISP MTYP_CANCOMPUTE MTYP_CANRC522 MTYP_CANINP MTYP_CANOUT MTYP_CANXIO MTYP_CANCABDC MTYP_CANRCOM MTYP_CANMP3 MTYP_CANXMAS MTYP_CANSVOSET MTYP_CANCMDDC MTYP_CANTEXT MTYP_CANASIGNAL MTYP_CANSLIDER MTYP_CANDCATC MTYP_CANGATE MTYP_CANSINP MTYP_CANSOUT MTYP_CANSBIP MTYP_CANBUFFER MTYP_CANLEVER MTYP_CANSHIELD MTYP_CAN4IN4OUT MTYP_CANCMDB MTYP_CANPIXEL MTYP_CANCABPE MTYP_CANSMARTTD MTYP_VLCB MTYP_CAN_SW MTYP_EMPTY MTYP_CANUSB MTYP_CANDEV  ]
+[c E22845 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 25 30 31 32 33 34 35 36 37 38 .. ]
+[n E22845 VlcbMicrochipProcessors P18F2480 P18F4480 P18F2580 P18F4580 P18F2585 P18F4585 P18F2680 P18F4680 P18F2682 P18F4682 P18F2685 P18F4685 P18F25K80 P18F45K80 P18F26K80 P18F46K80 P18F65K80 P18F66K80 P18F25K83 P18F26K83 P18F27Q84 P18F47Q84 P18F27Q83 P18F14K22 P32MX534F064 P32MX564F064 P32MX564F128 P32MX575F256 P32MX575F512 P32MX764F128 P32MX775F256 P32MX775F512 P32MX795F512  ]
+[c E22834 1 2 3 4 .. ]
+[n E22834 VlcbBusTypes PB_CAN PB_ETH PB_MIWI PB_USB  ]
+[c E22840 1 2 3 .. ]
+[n E22840 VlcbProcessorManufacturers CPUM_MICROCHIP CPUM_ATMEL CPUM_ARM  ]
 "203
 [; ;../../VLCBlib_PIC/boot.c: 203:     bootloaderType = BL_TYPE_Unknown;
-[c E22905 0 1 2 3 .. ]
-[n E22905 VlcbBootloaderType BL_TYPE_Unknown BL_TYPE_MikeBolton BL_TYPE_KonradOrlowski BL_TYPE_IanHogg  ]
+[c E22906 0 1 2 3 .. ]
+[n E22906 VlcbBootloaderType BL_TYPE_Unknown BL_TYPE_MikeBolton BL_TYPE_KonradOrlowski BL_TYPE_IanHogg  ]
 "210
 [; ;../../VLCBlib_PIC/boot.c: 210:             b = (uint8_t)readNVM(FLASH_NVM_TYPE, a+i);
-[c E22911 0 1 .. ]
-[n E22911 . EEPROM_NVM_TYPE FLASH_NVM_TYPE  ]
+[c E22912 0 1 .. ]
+[n E22912 . EEPROM_NVM_TYPE FLASH_NVM_TYPE  ]
 "160 ../../VLCBlib_PIC/nvm.h
 [; ;../../VLCBlib_PIC/nvm.h: 160: extern int16_t readNVM(NVMtype type, uint24_t index);
-[v _readNVM `(s ~T0 @X0 0 ef2`E22911`um ]
-"121 ../../VLCBlib_PIC/vlcb.h
-[; ;../../VLCBlib_PIC/vlcb.h: 121:     struct {
+[v _readNVM `(s ~T0 @X0 0 ef2`E22912`um ]
+"120 ../../VLCBlib_PIC/vlcb.h
+[; ;../../VLCBlib_PIC/vlcb.h: 120:     struct {
 [s S3226 `uc 1 `uc 1 ]
 [n S3226 . lo hi ]
-"120
-[; ;../../VLCBlib_PIC/vlcb.h: 120: typedef union Word {
+"119
+[; ;../../VLCBlib_PIC/vlcb.h: 119: typedef union Word {
 [u S3225 `S3226 1 `us 1 ]
 [n S3225 Word bytes word ]
 "126 ../../VLCBlib_PIC/mns.h
@@ -81,11 +81,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _nn `S3225 ~T0 @X0 0 e ]
 "239 ../../VLCBlib_PIC/boot.c
 [; ;../../VLCBlib_PIC/boot.c: 239:             if (m->bytes[2] != MODE_BOOT) return NOT_PROCESSED;
-[c E22821 255 0 1 8 9 10 11 12 13 14 .. ]
-[n E22821 VlcbModeParams MODE_UNINITIALISED MODE_SETUP MODE_NORMAL MODE_LEARN_ON MODE_LEARN_OFF MODE_EVENT_ACK_ON MODE_EVENT_ACK_OFF MODE_HEARTBEAT_ON MODE_HEARTBEAT_OFF MODE_BOOT  ]
+[c E22820 255 0 1 8 9 10 11 12 13 14 16 17 .. ]
+[n E22820 VlcbModeParams MODE_UNINITIALISED MODE_SETUP MODE_NORMAL MODE_LEARN_ON MODE_LEARN_OFF MODE_EVENT_ACK_ON MODE_EVENT_ACK_OFF MODE_HEARTBEAT_ON MODE_HEARTBEAT_OFF MODE_BOOT MODE_FCUCOMPAT_ON MODE_FCUCOMPAT_OFF  ]
 "169 ../../VLCBlib_PIC/nvm.h
 [; ;../../VLCBlib_PIC/nvm.h: 169: extern uint8_t writeNVM(NVMtype type, uint24_t index, uint8_t value);
-[v _writeNVM `(uc ~T0 @X0 0 ef3`E22911`um`uc ]
+[v _writeNVM `(uc ~T0 @X0 0 ef3`E22912`um`uc ]
 "364 C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h
 [; ;C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h: 364: __asm("BOOTREG equ 038h");
 [; <" BOOTREG equ 038h ;# ">
@@ -3611,14 +3611,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 [i _bootService
 :U ..
 :U ..
--> . `E22772 10 `uc
+-> . `E22771 10 `uc
 -> -> 2 `i `uc
--> -> -> 0 `i `*v `*F23111
+-> -> -> 0 `i `*v `*F23112
 &U _bootPowerUp
 &U _bootProcessMessage
--> -> -> 0 `i `*v `*F23115
+-> -> -> 0 `i `*v `*F23116
 &U _bootEsdData
--> -> -> 0 `i `*v `*F23118
+-> -> -> 0 `i `*v `*F23119
 ..
 ..
 ]
@@ -3638,14 +3638,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 :U ..
 -> . `E22432 1 `uc
 -> -> 99 `ui `uc
--> . `E22443 29 `uc
+-> . `E22442 29 `uc
 -> -> 254 `i `uc
 -> -> 13 `i `uc
 -> -> 66 `i `uc
 -> -> 4 `i `uc
 -> | | -> 8 `i -> 1 `i -> 2 `i `uc
--> . `E22844 22 `uc
--> . `E22833 0 `uc
+-> . `E22845 22 `uc
+-> . `E22834 0 `uc
 -> -> 0 `i `uc
 -> -> 8 `i `uc
 -> -> 0 `i `uc
@@ -3654,7 +3654,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 -> -> 0 `i `uc
 -> -> 0 `i `uc
 -> -> 0 `i `uc
--> . `E22839 0 `uc
+-> . `E22840 0 `uc
 -> -> 113 `i `uc
 -> -> 0 `i `uc
 -> -> 0 `i `uc
@@ -3666,8 +3666,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 -> -> 8 `i `uc
 -> -> 0 `i `uc
 -> -> 0 `i `uc
--> & + + + + + + + + + + + + + + + + + -> . `E22432 1 `ui -> 99 `ui -> . `E22443 29 `ui -> -> 254 `i `ui -> -> 13 `i `ui -> -> 66 `i `ui -> -> 4 `i `ui -> -> 8 `i `ui -> -> 8 `i `ui -> . `E22839 0 `ui -> -> 113 `i `ui -> -> 20 `i `ui -> -> 72 `i `ui -> -> 8 `i `ui -> -> 1 `i `ui -> -> 2 `i `ui -> . `E22833 0 `ui -> . `E22844 22 `ui -> -> 255 `i `ui `uc
--> >> + + + + + + + + + + + + + + + + + -> . `E22432 1 `ui -> 99 `ui -> . `E22443 29 `ui -> -> 254 `i `ui -> -> 13 `i `ui -> -> 66 `i `ui -> -> 4 `i `ui -> -> 8 `i `ui -> -> 8 `i `ui -> . `E22839 0 `ui -> -> 113 `i `ui -> -> 20 `i `ui -> -> 72 `i `ui -> -> 8 `i `ui -> -> 1 `i `ui -> -> 2 `i `ui -> . `E22833 0 `ui -> . `E22844 22 `ui -> 8 `i `uc
+-> & + + + + + + + + + + + + + + + + + -> . `E22432 1 `ui -> 99 `ui -> . `E22442 29 `ui -> -> 254 `i `ui -> -> 13 `i `ui -> -> 66 `i `ui -> -> 4 `i `ui -> -> 8 `i `ui -> -> 8 `i `ui -> . `E22840 0 `ui -> -> 113 `i `ui -> -> 20 `i `ui -> -> 72 `i `ui -> -> 8 `i `ui -> -> 1 `i `ui -> -> 2 `i `ui -> . `E22834 0 `ui -> . `E22845 22 `ui -> -> 255 `i `ui `uc
+-> >> + + + + + + + + + + + + + + + + + -> . `E22432 1 `ui -> 99 `ui -> . `E22442 29 `ui -> -> 254 `i `ui -> -> 13 `i `ui -> -> 66 `i `ui -> -> 4 `i `ui -> -> 8 `i `ui -> -> 8 `i `ui -> . `E22840 0 `ui -> -> 113 `i `ui -> -> 20 `i `ui -> -> 72 `i `ui -> -> 8 `i `ui -> -> 1 `i `ui -> -> 2 `i `ui -> . `E22834 0 `ui -> . `E22845 22 `ui -> 8 `i `uc
 ..
 ]
 "190
@@ -3714,7 +3714,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _found `uc ~T0 @X0 1 a ]
 "203
 [; ;../../VLCBlib_PIC/boot.c: 203:     bootloaderType = BL_TYPE_Unknown;
-[e = _bootloaderType -> . `E22905 0 `uc ]
+[e = _bootloaderType -> . `E22906 0 `uc ]
 "204
 [; ;../../VLCBlib_PIC/boot.c: 204:     bootloaderVersion = 0;
 [e = _bootloaderVersion -> -> 0 `i `uc ]
@@ -3739,7 +3739,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "210
 [; ;../../VLCBlib_PIC/boot.c: 210:             b = (uint8_t)readNVM(FLASH_NVM_TYPE, a+i);
-[e = _b -> ( _readNVM (2 , . `E22911 1 + _a -> _i `um `uc ]
+[e = _b -> ( _readNVM (2 , . `E22912 1 + _a -> _i `um `uc ]
 "211
 [; ;../../VLCBlib_PIC/boot.c: 211:             if (b != bl_version[i]) {
 [e $ ! != -> _b `i -> *U + &U _bl_version * -> _i `ux -> -> # *U &U _bl_version `ui `ux `i 3238  ]
@@ -3776,10 +3776,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "219
 [; ;../../VLCBlib_PIC/boot.c: 219:             bootloaderType = (uint8_t)readNVM(FLASH_NVM_TYPE, a+11);
-[e = _bootloaderType -> ( _readNVM (2 , . `E22911 1 + _a -> -> -> 11 `i `m `um `uc ]
+[e = _bootloaderType -> ( _readNVM (2 , . `E22912 1 + _a -> -> -> 11 `i `m `um `uc ]
 "220
 [; ;../../VLCBlib_PIC/boot.c: 220:             bootloaderVersion = (uint8_t)readNVM(FLASH_NVM_TYPE, a+12);
-[e = _bootloaderVersion -> ( _readNVM (2 , . `E22911 1 + _a -> -> -> 12 `i `m `um `uc ]
+[e = _bootloaderVersion -> ( _readNVM (2 , . `E22912 1 + _a -> -> -> 12 `i `m `um `uc ]
 "221
 [; ;../../VLCBlib_PIC/boot.c: 221:             return;
 [e $UE 3231  ]
@@ -3800,7 +3800,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 "231
 [; ;../../VLCBlib_PIC/boot.c: 231: static Processed bootProcessMessage(Message * m) {
-[v _bootProcessMessage `(E22972 ~T0 @X0 1 sf1`*S3224 ]
+[v _bootProcessMessage `(E22973 ~T0 @X0 1 sf1`*S3224 ]
 {
 [e :U _bootProcessMessage ]
 [v _m `*S3224 ~T0 @X0 1 r1 ]
@@ -3808,13 +3808,13 @@ Version 4.0 HI-TECH Software Intermediate Code
 "233
 [; ;../../VLCBlib_PIC/boot.c: 233:     if (m->bytes[0] != nn.bytes.hi) return NOT_PROCESSED;
 [e $ ! != -> *U + &U . *U _m 2 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux `i -> . . _nn 0 1 `i 3242  ]
-[e ) . `E22972 0 ]
+[e ) . `E22973 0 ]
 [e $UE 3241  ]
 [e :U 3242 ]
 "234
 [; ;../../VLCBlib_PIC/boot.c: 234:     if (m->bytes[1] != nn.bytes.lo) return NOT_PROCESSED;
 [e $ ! != -> *U + &U . *U _m 2 * -> -> -> 1 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux `i -> . . _nn 0 0 `i 3243  ]
-[e ) . `E22972 0 ]
+[e ) . `E22973 0 ]
 [e $UE 3241  ]
 [e :U 3243 ]
 "236
@@ -3826,8 +3826,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 3246 ]
 "239
 [; ;../../VLCBlib_PIC/boot.c: 239:             if (m->bytes[2] != MODE_BOOT) return NOT_PROCESSED;
-[e $ ! != -> *U + &U . *U _m 2 * -> -> -> 2 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux `i -> . `E22821 9 `i 3247  ]
-[e ) . `E22972 0 ]
+[e $ ! != -> *U + &U . *U _m 2 * -> -> -> 2 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux `i -> . `E22820 9 `i 3247  ]
+[e ) . `E22973 0 ]
 [e $UE 3241  ]
 [e :U 3247 ]
 "242
@@ -3835,28 +3835,28 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 3248 ]
 "244
 [; ;../../VLCBlib_PIC/boot.c: 244:             writeNVM(EEPROM_NVM_TYPE, 0x3FF, 0xFF);
-[e ( _writeNVM (3 , , . `E22911 0 -> -> -> 1023 `i `m `um -> -> 255 `i `uc ]
+[e ( _writeNVM (3 , , . `E22912 0 -> -> -> 1023 `i `m `um -> -> 255 `i `uc ]
 "245
 [; ;../../VLCBlib_PIC/boot.c: 245:             __asm("reset");
 [; <" reset ;# ">
 "246
 [; ;../../VLCBlib_PIC/boot.c: 246:             return PROCESSED;
-[e ) . `E22972 1 ]
+[e ) . `E22973 1 ]
 [e $UE 3241  ]
 "247
 [; ;../../VLCBlib_PIC/boot.c: 247:         default:
 [e :U 3249 ]
 "248
 [; ;../../VLCBlib_PIC/boot.c: 248:             return NOT_PROCESSED;
-[e ) . `E22972 0 ]
+[e ) . `E22973 0 ]
 [e $UE 3241  ]
 "249
 [; ;../../VLCBlib_PIC/boot.c: 249:     }
 }
 [e $U 3244  ]
 [e :U 3245 ]
-[e [\ -> . *U _m 1 `ui , $ -> . `E22565 59 `ui 3246
- , $ -> . `E22565 45 `ui 3248
+[e [\ -> . *U _m 1 `ui , $ -> . `E22564 59 `ui 3246
+ , $ -> . `E22564 45 `ui 3248
  3249 ]
 [e :U 3244 ]
 "250
