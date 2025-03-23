@@ -44,10 +44,13 @@
 #define NV_SWITCHMODE       35   // 32 entries 35..66
 
 // The possible NV_STARTUP values
-#define NV_STARTUP_RESTORE  0
-#define NV_STARTUP_NOTHING  1
-#define NV_STARTUP_SCAN     2
-#define NV_STARTUP_ALLOFF   3
+//#define NV_STARTUP_RESTORE  0
+//#define NV_STARTUP_NOTHING  1
+//#define NV_STARTUP_SCAN     2
+//#define NV_STARTUP_ALLOFF   3
+// Startup value bit fields
+#define NV_STARTUP_RESTORESWITCHES  0x01
+#define NV_STARTUP_RESTORELEDS      0x02
 
 // Possible NV_SWITCHMODE bit values
 #define NV_SWITCHMODE_PAIRED 1

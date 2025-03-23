@@ -24,6 +24,7 @@
 #include "canpan3Inputs.h"
 #include "canpan3Events.h"
 #include "canpan3Outputs.h"
+#include "canpan3Leds.h"
 
 /*
   This work is licensed under the:
@@ -57,7 +58,7 @@
     WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE
  */
 /**
- *	The Main CANMIO program supporting configurable I/O.
+ *	The Main CANPAN module
  *
  * @author Ian Hogg 
  * @date August 2024
@@ -85,7 +86,7 @@
  * File:   main.c
  * Author: Ian Hogg
  * 
- * This is the main for the CANPAN2 module.
+ * This is the main for the CANPAN3 module.
  * Based on EV and NV settings of CANPAN_4c_beta104
  */
 
@@ -103,26 +104,18 @@
 void __init(void);
 uint8_t checkCBUS( void);
 void ISRHigh(void);
-void initialise(void);
-void configIO(uint8_t io);
-void factoryReset(void);
-void setType(uint8_t i, uint8_t type);
-void factoryResetEE(void);
-void factoryResetFlash(void);
 void factoryResetGlobalEvents(void);
 extern void initLeds(void);
-extern void processActions(void);
-extern void processOutputs(void);
+extern void clearAllEvents(void);
+extern uint8_t addTestEvent(uint8_t sw);
 #if defined(_18F66K80_FAMILY_)
 extern void inputIsr(void);
 extern void outputIsr(void);
 #endif
 
 static TickValue   startTime;
-static uint8_t        started;
-TickValue   lastServoStartTime;
+static uint8_t     started;
 static TickValue   lastInputScanTime;
-static TickValue   lastActionPollTime;
 static TickValue   flashTime;
 
 const Service * const services[] = {
@@ -158,9 +151,18 @@ void APP_factoryReset(void) {
 /**
  * Called if the PB is held down during power up.
  * Normally would perform any test functionality to help a builder check the hardware.
+ * 
+ * Create an event for every switch which also turns on the respective LED.
+ * WARNING: Will remove any user provisioned events
  */
 void APP_testMode(void) {
+    uint8_t sw;
     
+    clearAllEvents();
+    
+    for (sw=0; sw<NUM_BUTTONS; sw++) {
+        addTestEvent(sw+1);
+    }
 }
 
 /**
@@ -196,6 +198,7 @@ void setup(void) {
     initOutputs();
     initLeds();
     initInputs();
+    initEvents();
     
     // Lock the PPS
 /*    PPSLOCK = 0x55; //Required sequence
@@ -206,29 +209,13 @@ void setup(void) {
     ei(); 
 
     startTime.val = tickGet();
-    lastServoStartTime.val = startTime.val;
     lastInputScanTime.val = startTime.val;
-    lastActionPollTime.val = startTime.val;
     flashTime.val = startTime.val;
 
     started = FALSE;
+    canpanScanReady = 0;
     
     nv = (uint8_t)getNV(NV_STARTUP);
-    /* This is done with bit checks as that's what the original CANPAN code did */
-    switch (nv) {
-        case NV_STARTUP_RESTORE:
-            loadInputs();
-            break;
-        case NV_STARTUP_NOTHING:
-            canpanScanReady = 1;
-            break;
-        case NV_STARTUP_SCAN:
-            canpanScanReady = 0;
-            break;
-        case NV_STARTUP_ALLOFF:
-            canpanSetAllSwitchOff();
-            break;
-    }
 }
 
 /**

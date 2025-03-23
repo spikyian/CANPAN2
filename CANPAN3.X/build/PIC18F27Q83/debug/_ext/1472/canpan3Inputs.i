@@ -38881,7 +38881,8 @@ extern EventState APP_GetEventIndexState(uint8_t tableIndex);
 # 1 "../canpan3Events.h" 1
 # 40 "../canpan3Events.h"
 extern uint8_t APP_isProducedEvent(uint8_t tableIndex);
-extern void checkDefaultEvents(void);
+extern void rebuildLookupTable(void);
+extern void initEvents(void);
 # 46 "../canpan3Inputs.c" 2
 
 # 1 "../canpan3Inputs.h" 1
@@ -38955,6 +38956,8 @@ EventState getSwitchEventState(uint8_t switchNo);
 
 void initInputs(void) {
     uint8_t i;
+    uint8_t startNv;
+
     canpanScanReady = 0;
 
     TRISAbits.TRISA0=0;
@@ -38977,13 +38980,17 @@ void initInputs(void) {
 
     column = 0;
     driveColumn();
+    startNv = (uint8_t)getNV(1);
     for (i=0; i<(8*4); i++) {
-        outputState[i] = 0;
+        if (!(startNv & 0x01)) {
+            outputState[i] = (uint8_t)readNVM(EEPROM_NVM_TYPE, 0x0000 +i);
+        } else {
+            outputState[i] = 0;
+        }
     }
     for (i=0; i<8; i++) {
         buttonState[i] = 0;
     }
-    checkDefaultEvents();
 }
 
 
@@ -39030,6 +39037,8 @@ void inputScan(void) {
                     } else {
                         tableIndex = findEventForSwitch(buttonNo);
                     }
+                } else {
+                    tableIndex = findEventForSwitch(buttonNo);
                 }
 
                 if (tableIndex != 0xff) {
@@ -39078,6 +39087,7 @@ void inputScan(void) {
                                     continue;
                                 }
                                 onOff = outputState[buttonNo];
+                                writeNVM(EEPROM_NVM_TYPE, 0x0000 + buttonNo, outputState[buttonNo]);
                                 break;
                             case 4:
                                 if (! onOff) {
@@ -39091,7 +39101,7 @@ void inputScan(void) {
                                 onOff = 0;
                                 break;
                         }
-                        writeNVM(EEPROM_NVM_TYPE, 0x0000 + buttonNo, outputState[buttonNo]);
+
                         if (canpanScanReady) {
 
                             canpanSendProducedEvent(tableIndex, onOff);
@@ -39173,7 +39183,10 @@ void driveColumn(void) {
 
 
 uint8_t findEventForSwitch(uint8_t switchNo) {
-    return switch2Event[switchNo];
+    if ((switchNo > 0) && (switchNo <= (8*4))) {
+        return switch2Event[switchNo];
+    }
+    return 0xff;
 }
 
 
@@ -39185,7 +39198,7 @@ uint8_t findEventForSwitch(uint8_t switchNo) {
 void doSoD(void) {
     startTimedResponse(1, findServiceIndex(SERVICE_ID_PRODUCER), sodTRCallback);
 }
-# 319 "../canpan3Inputs.c"
+# 331 "../canpan3Inputs.c"
 TimedResponseResult sodTRCallback(uint8_t type, uint8_t serviceIndex, uint8_t tableIndex) {
     EventState value;
     uint8_t sv;
@@ -39203,24 +39216,4 @@ TimedResponseResult sodTRCallback(uint8_t type, uint8_t serviceIndex, uint8_t ta
         }
     }
     return TIMED_RESPONSE_RESULT_NEXT;
-}
-
-
-
-
-
-void loadInputs(void) {
-    uint8_t tableIndex;
-    uint8_t buttonNo;
-
-    for (tableIndex=0; tableIndex < 254; tableIndex++) {
-        getEVs(tableIndex);
-        if (APP_isProducedEvent(tableIndex)) {
-            if (evs[2] & 8) {
-                buttonNo = evs[1] - 1;
-                if (buttonNo < (8*4))
-                outputState[buttonNo] = (uint8_t)readNVM(EEPROM_NVM_TYPE, 0x0000 +buttonNo);
-            }
-        }
-    }
 }

@@ -38817,7 +38817,7 @@ uint8_t APP_nvDefault(uint8_t index) {
         if (index == 2)
                 return (62500/2)/1000;
         if (index < (3 + (4*8)))
-                return 0x0F;
+                return 16;
         if (index <= (35 + (8*4)))
                 return 0x00;
     }

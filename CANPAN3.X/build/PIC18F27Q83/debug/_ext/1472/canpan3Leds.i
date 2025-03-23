@@ -38775,7 +38775,11 @@ enum canpan3LedState {
     CANPANLED_ANTIFLASH
 };
 
+
+
+
 extern void setLedState(uint8_t led, enum canpan3LedState state);
+extern void restoreLeds(void);
 
 extern uint8_t outputState[(4*8)];
 # 42 "../canpan3Leds.c" 2
@@ -38790,18 +38794,68 @@ extern void clearLed(uint8_t no);
 extern uint8_t testLed(uint8_t no);
 # 43 "../canpan3Leds.c" 2
 
+# 1 "../canpan3Nv.h" 1
+# 44 "../canpan3Leds.c" 2
+
+# 1 "../../VLCBlib_PIC\\nv.h" 1
+# 86 "../../VLCBlib_PIC\\nv.h"
+extern const Service nvService;
+
+
+
+
+typedef enum NvValidation {
+    INVALID=0,
+    VALID=1
+} NvValidation;
+# 103 "../../VLCBlib_PIC\\nv.h"
+extern NvValidation APP_nvValidate(uint8_t index, uint8_t value);
+# 116 "../../VLCBlib_PIC\\nv.h"
+extern int16_t getNV(uint8_t index);
+
+
+
+
+
+
+extern void saveNV(uint8_t index, uint8_t value);
+
+
+
+
+
+
+
+extern uint8_t setNV(uint8_t index, uint8_t value);
+
+
+
+extern void loadNvCache(void);
+# 45 "../canpan3Leds.c" 2
+
+
+
+void setLedStateNoSave(uint8_t ledNo, enum canpan3LedState state);
 
 static enum canpan3LedState ledStates[(4*8)];
 static uint8_t flashToggle;
+static uint8_t startupNv;
 
 
 
 
 void initLeds(void) {
-    uint8_t i;
+    uint8_t ledNo;
 
-    for (i=0; i<(4*8); i++) {
-        ledStates[i] = CANPANLED_OFF;
+    startupNv = (uint8_t)getNV(1);
+
+    for (ledNo=0; ledNo<(4*8); ledNo++) {
+        if (startupNv & 0x02) {
+            enum canpan3LedState state = (uint8_t)readNVM(EEPROM_NVM_TYPE, 0x0040 +ledNo);
+            setLedStateNoSave(ledNo, state);
+        } else {
+            ledStates[ledNo] = CANPANLED_OFF;
+        }
     }
     flashToggle = 0;
 }
@@ -38811,7 +38865,7 @@ void initLeds(void) {
 
 
 
-void setLedState(uint8_t ledNo, enum canpan3LedState state) {
+void setLedStateNoSave(uint8_t ledNo, enum canpan3LedState state) {
     ledStates[ledNo] = state;
     switch (ledStates[ledNo]) {
         case CANPANLED_ON:
@@ -38826,6 +38880,17 @@ void setLedState(uint8_t ledNo, enum canpan3LedState state) {
             break;
     }
 
+}
+
+
+
+
+
+void setLedState(uint8_t ledNo, enum canpan3LedState state) {
+    setLedStateNoSave(ledNo, state);
+    if (startupNv & 0x02) {
+        writeNVM(EEPROM_NVM_TYPE, 0x0040 +ledNo, (uint8_t)state);
+    }
 }
 
 

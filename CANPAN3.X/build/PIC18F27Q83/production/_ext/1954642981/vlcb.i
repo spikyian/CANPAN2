@@ -39410,20 +39410,20 @@ uint8_t pbUpTimer(uint8_t timeout) {
 
     return (uint8_t)((tickGet() - pbTimer.val)/62500);
 }
-# 954 "../../VLCBlib_PIC/vlcb.c"
+# 956 "../../VLCBlib_PIC/vlcb.c"
 static void checkPowerOnPb(void) {
     uint8_t i;
 
 
     if ((!(PORTAbits.RA3))) {
 
-        i = pbDownTimer(30);
+        i = pbDownTimer(28);
         if (i == 0) {
 
             return;
-        } else if ((i>=2) && (i < 6)) {
+        } else if (i < 4) {
             APP_testMode();
-        } else if (i >= 10) {
+        } else if (i >= 8) {
             showStatus(STATUS_RESET_WARNING);
 
             i = pbUpTimer(5);
@@ -39438,7 +39438,7 @@ static void checkPowerOnPb(void) {
         }
     }
 }
-# 993 "../../VLCBlib_PIC/vlcb.c"
+# 995 "../../VLCBlib_PIC/vlcb.c"
 static void poll(void) {
     uint8_t i;
     Message m;
@@ -39492,7 +39492,7 @@ static void poll(void) {
         showStatus(STATUS_MESSAGE_ACTED);
     }
 }
-# 1096 "../../VLCBlib_PIC/vlcb.c"
+# 1098 "../../VLCBlib_PIC/vlcb.c"
 Processed checkLen(Message * m, uint8_t needed, uint8_t service) {
     if (m->len < needed) {
 
@@ -39506,7 +39506,7 @@ Processed checkLen(Message * m, uint8_t needed, uint8_t service) {
     }
     return NOT_PROCESSED;
 }
-# 1118 "../../VLCBlib_PIC/vlcb.c"
+# 1120 "../../VLCBlib_PIC/vlcb.c"
 Boolean isEvent(uint8_t opc) {
     return (((opc & 0b10010000) == 0b10010000) && ((~opc & 0b00000110)== 0b00000110)) ? TRUE : FALSE;
 }
@@ -39537,27 +39537,27 @@ void sendMessage1(VlcbOpCodes opc, uint8_t data1){
 void sendMessage2(VlcbOpCodes opc, uint8_t data1, uint8_t data2){
     sendMessage(opc, 3, data1, data2, 0,0,0,0,0);
 }
-# 1156 "../../VLCBlib_PIC/vlcb.c"
+# 1158 "../../VLCBlib_PIC/vlcb.c"
 void sendMessage3(VlcbOpCodes opc, uint8_t data1, uint8_t data2, uint8_t data3) {
     sendMessage(opc, 4, data1, data2, data3, 0,0,0,0);
 }
-# 1168 "../../VLCBlib_PIC/vlcb.c"
+# 1170 "../../VLCBlib_PIC/vlcb.c"
 void sendMessage4(VlcbOpCodes opc, uint8_t data1, uint8_t data2, uint8_t data3, uint8_t data4){
     sendMessage(opc, 5, data1, data2, data3, data4, 0,0,0);
 }
-# 1181 "../../VLCBlib_PIC/vlcb.c"
+# 1183 "../../VLCBlib_PIC/vlcb.c"
 void sendMessage5(VlcbOpCodes opc, uint8_t data1, uint8_t data2, uint8_t data3, uint8_t data4, uint8_t data5) {
     sendMessage(opc, 6, data1, data2, data3, data4, data5, 0,0);
 }
-# 1195 "../../VLCBlib_PIC/vlcb.c"
+# 1197 "../../VLCBlib_PIC/vlcb.c"
 void sendMessage6(VlcbOpCodes opc, uint8_t data1, uint8_t data2, uint8_t data3, uint8_t data4, uint8_t data5, uint8_t data6) {
     sendMessage(opc, 7, data1, data2, data3, data4, data5, data6,0);
 }
-# 1210 "../../VLCBlib_PIC/vlcb.c"
+# 1212 "../../VLCBlib_PIC/vlcb.c"
 void sendMessage7(VlcbOpCodes opc, uint8_t data1, uint8_t data2, uint8_t data3, uint8_t data4, uint8_t data5, uint8_t data6, uint8_t data7) {
     sendMessage(opc, 8, data1, data2, data3, data4, data5, data6, data7);
 }
-# 1226 "../../VLCBlib_PIC/vlcb.c"
+# 1228 "../../VLCBlib_PIC/vlcb.c"
 void sendMessage(VlcbOpCodes opc, uint8_t len, uint8_t data1, uint8_t data2, uint8_t data3, uint8_t data4, uint8_t data5, uint8_t data6, uint8_t data7) {
     tmpMessage.opc = opc;
     tmpMessage.len = len;
@@ -39583,10 +39583,10 @@ void sendMessage(VlcbOpCodes opc, uint8_t len, uint8_t data1, uint8_t data2, uin
 
 void main(void) {
     uint8_t i;
-# 1259 "../../VLCBlib_PIC/vlcb.c"
+# 1261 "../../VLCBlib_PIC/vlcb.c"
     OSCCON1bits.NOSC = 2;
     OSCCON1bits.NDIV = 0;
-# 1275 "../../VLCBlib_PIC/vlcb.c"
+# 1277 "../../VLCBlib_PIC/vlcb.c"
     IVTBASEU = 0x00;
     IVTBASEH = 0x09;
     IVTBASEL = 0x00;
@@ -39594,7 +39594,7 @@ void main(void) {
     IVTLOCK = 0x55;
     IVTLOCK = 0xAA;
     IVTLOCKbits.IVTLOCKED = 0x01;
-# 1293 "../../VLCBlib_PIC/vlcb.c"
+# 1295 "../../VLCBlib_PIC/vlcb.c"
     initRomOps();
 
     if (readNVM(EEPROM_NVM_TYPE, 0x3FA) != 1) {
@@ -39621,7 +39621,7 @@ void main(void) {
         loop();
     }
 }
-# 1338 "../../VLCBlib_PIC/vlcb.c"
+# 1340 "../../VLCBlib_PIC/vlcb.c"
 void __attribute__((picinterrupt(("irq(default), base(0x900)")))) DEFAULT_ISR(void)
 {
 

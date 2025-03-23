@@ -49,11 +49,11 @@ uint8_t APP_nvDefault(uint8_t index) {
     if (index < NV_NUM) {
         // Global NVs
         if (index == NV_STARTUP)
-                return NV_STARTUP_RESTORE;
+                return 0; // Restore switches
         if (index == NV_FLASHRATE)
                 return HALF_SECOND/1000;
         if (index < (NV_BRIGHTNESS + NUM_LEDS))
-                return 0x0F;
+                return 16;
         if (index <= (NV_SWITCHMODE + NUM_BUTTONS))
                 return 0x00;
     }

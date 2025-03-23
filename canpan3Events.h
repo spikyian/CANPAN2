@@ -38,18 +38,21 @@
  */ 
 
 extern uint8_t APP_isProducedEvent(uint8_t tableIndex);
-extern void checkDefaultEvents(void);
+extern void rebuildLookupTable(void);
+extern void initEvents(void);
 
 // EV1 value
 #define CANPAN_CONSUMED 0
 #define CANPAN_PRODUCED 1
 #define CANPAN_SOD      2
 #define CANPAN_SELF_SOD 3
-// Switch inputs EVs
+// EVs
 #define EV_TYPE         0
+// Switch inputs EVs
 #define EV_SWITCHNO     1
 #define EV_SWITCHSV     2
 #define EV_UNUSED       3
+// LED output EVs
 #define EV_LEDFLAGS1    4
 #define EV_LEDFLAGS2    5
 #define EV_LEDFLAGS3    6

@@ -38861,7 +38861,7 @@ static void teachFactoryReset(void);
 static void teachPowerUp(void);
 static Processed teachProcessMessage(Message * m);
 static uint8_t teachGetESDdata(uint8_t id);
-static void clearAllEvents(void);
+void clearAllEvents(void);
 Processed checkLen(Message * m, uint8_t needed, uint8_t service);
 static Processed teachCheckLen(Message * m, uint8_t needed, uint8_t learn);
 static uint8_t evtIdxToTableIndex(uint8_t evtIdx);
@@ -39099,7 +39099,7 @@ static DiagnosticVal * teachGetDiagnostic(uint8_t index) {
     return &(teachDiagnostics[index]);
 }
 # 397 "../../VLCBlib_PIC/event_teach_simple.c"
-static void clearAllEvents(void) {
+void clearAllEvents(void) {
     uint8_t tableIndex;
 
     for (tableIndex=0; tableIndex<254; tableIndex++) {

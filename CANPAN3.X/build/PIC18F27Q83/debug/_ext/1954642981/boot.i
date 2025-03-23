@@ -38839,12 +38839,12 @@ __asm("db 0");
 # 144 "../../VLCBlib_PIC/boot.c"
 const uint8_t paramBlock[] __attribute__((address(0x820))) = {
     MANU_MERG,
-    'c',
+    'a',
     MTYP_CANPAN,
     254,
     13,
     66,
-    4,
+    5,
     0x08
 
             |0x01
@@ -38867,7 +38867,7 @@ const uint8_t paramBlock[] __attribute__((address(0x820))) = {
     0,8,0,0,
     0,0,0,0,
     CPUM_MICROCHIP,
-    113,
+    1,
     0,
     0,
     0,
@@ -38878,8 +38878,8 @@ const uint8_t paramBlock[] __attribute__((address(0x820))) = {
     0x08,
     0,
     0,
-    ((MANU_MERG+'c'+MTYP_CANPAN+254 +13 +66 +4 +(8) +(8)+CPUM_MICROCHIP+113 +(20)+(0x48)+(0x08)+1 +2 +PB_CAN+P18F27Q83)&0xFF),
-    ((MANU_MERG+'c'+MTYP_CANPAN+254 +13 +66 +4 +(8) +(8)+CPUM_MICROCHIP+113 +(20)+(0x48)+(0x08)+1 +2 +PB_CAN+P18F27Q83)>>8)
+    ((MANU_MERG+'a'+MTYP_CANPAN+254 +13 +66 +5 +(8) +(8)+CPUM_MICROCHIP+1 +(20)+(0x48)+(0x08)+1 +2 +PB_CAN+P18F27Q83)&0xFF),
+    ((MANU_MERG+'a'+MTYP_CANPAN+254 +13 +66 +5 +(8) +(8)+CPUM_MICROCHIP+1 +(20)+(0x48)+(0x08)+1 +2 +PB_CAN+P18F27Q83)>>8)
 };
 
 

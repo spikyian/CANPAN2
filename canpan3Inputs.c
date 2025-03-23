@@ -74,6 +74,8 @@ EventState getSwitchEventState(uint8_t switchNo);
  */
 void initInputs(void) {
     uint8_t i;
+    uint8_t startNv;
+    
     canpanScanReady = 0;
     // Column drivers
     TRISAbits.TRISA0=0;
@@ -96,13 +98,17 @@ void initInputs(void) {
     // start the column outputs
     column = 0;
     driveColumn();
+    startNv = (uint8_t)getNV(NV_STARTUP);
     for (i=0; i<NUM_BUTTONS; i++) {
-        outputState[i] = 0;     // default 0 but maybe loaded from EEPROM later
+        if (!(startNv & NV_STARTUP_RESTORESWITCHES)) {
+            outputState[i] = (uint8_t)readNVM(EEPROM_NVM_TYPE, EE_ADDR_SWITCHES+i);
+        } else {
+            outputState[i] = 0;     // default 0 but maybe loaded from EEPROM later
+        }
     }
     for (i=0; i<NUM_BUTTON_COLUMNS; i++) {
         buttonState[i] = 0;
     }
-    checkDefaultEvents();
 }
 
 /**
@@ -149,6 +155,8 @@ void inputScan(void) {
                     } else {
                         tableIndex = findEventForSwitch(buttonNo);
                     }
+                } else {
+                    tableIndex = findEventForSwitch(buttonNo);
                 }
                 
                 if (tableIndex != NO_INDEX) {
@@ -197,6 +205,7 @@ void inputScan(void) {
                                     continue;   // don't react when button is released
                                 }
                                 onOff = outputState[buttonNo];
+                                writeNVM(EEPROM_NVM_TYPE, EE_ADDR_SWITCHES + buttonNo, outputState[buttonNo]);
                                 break;
                             case MODE_PAIR:
                                 if (! onOff) {
@@ -210,7 +219,7 @@ void inputScan(void) {
                                 onOff = 0;  // force off
                                 break;
                         }
-                        writeNVM(EEPROM_NVM_TYPE, EE_ADDR_SWITCHES + buttonNo, outputState[buttonNo]);
+                        
                         if (canpanScanReady) {
                             // send the event.
                             canpanSendProducedEvent(tableIndex, onOff);
@@ -292,7 +301,10 @@ void driveColumn(void) {
  * @return 
  */
 uint8_t findEventForSwitch(uint8_t switchNo) {
-    return switch2Event[switchNo];
+    if ((switchNo > 0) && (switchNo <= NUM_BUTTONS)) {
+        return switch2Event[switchNo];
+    }
+    return NO_INDEX;
 }
 
 /**
@@ -333,24 +345,4 @@ TimedResponseResult sodTRCallback(uint8_t type, uint8_t serviceIndex, uint8_t ta
         }
     }
     return TIMED_RESPONSE_RESULT_NEXT;
-}
-
-
-/**
- * Load the switch state in from EEPROM
- */
-void loadInputs(void) {
-    uint8_t tableIndex;
-    uint8_t buttonNo;
-
-    for (tableIndex=0; tableIndex < NUM_EVENTS; tableIndex++) {
-        getEVs(tableIndex);
-        if (APP_isProducedEvent(tableIndex)) {
-            if (evs[EV_SWITCHSV] & SV_TOGGLE) {
-                buttonNo = evs[EV_SWITCHNO] - 1;
-                if (buttonNo < NUM_BUTTONS)
-                outputState[buttonNo] = (uint8_t)readNVM(EEPROM_NVM_TYPE, EE_ADDR_SWITCHES+buttonNo);
-            }
-        }
-    }
 }

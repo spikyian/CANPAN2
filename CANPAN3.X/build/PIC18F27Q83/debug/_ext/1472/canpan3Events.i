@@ -38825,7 +38825,8 @@ extern TickValue pbTimer;
 # 1 "../canpan3Events.h" 1
 # 40 "../canpan3Events.h"
 extern uint8_t APP_isProducedEvent(uint8_t tableIndex);
-extern void checkDefaultEvents(void);
+extern void rebuildLookupTable(void);
+extern void initEvents(void);
 # 43 "../canpan3Events.c" 2
 
 # 1 "../canpan3Leds.h" 1
@@ -38837,7 +38838,11 @@ enum canpan3LedState {
     CANPANLED_ANTIFLASH
 };
 
+
+
+
 extern void setLedState(uint8_t led, enum canpan3LedState state);
+extern void restoreLeds(void);
 
 extern uint8_t outputState[(4*8)];
 # 44 "../canpan3Events.c" 2
@@ -38857,34 +38862,40 @@ extern uint8_t canpanScanReady;
 
 
 
-void checkDefaultEvents(void);
+void rebuildLookupTable(void);
 
+extern void clearAllEvents(void);
 uint8_t APP_isProducedEvent(uint8_t tableIndex);
 uint8_t switch2Event[(8*4)];
 
 void factoryResetGlobalEvents(void) {
-    uint8_t sw;
 
-
-    checkDefaultEvents();
+    clearAllEvents();
 }
-# 77 "../canpan3Events.c"
+# 76 "../canpan3Events.c"
 extern uint8_t errno;
-# 86 "../canpan3Events.c"
-uint8_t addDefaultEvent(uint8_t sw) {
+
+
+void initEvents(void) {
+    rebuildLookupTable();
+}
+
+
+
+
+
+
+
+uint8_t addTestEvent(uint8_t sw) {
     addEvent(nn.word, sw, 0, 1, TRUE);
     addEvent(nn.word, sw, 1, sw, TRUE);
     addEvent(nn.word, sw, 2, 8 | 0b00010000, TRUE);
 
+    addEvent(nn.word, sw, 4, ((uint16_t)1<<(sw-1))&0xFF, TRUE);
+    addEvent(nn.word, sw, 5, ((uint16_t)1<<(sw-9))&0xFF, TRUE);
+    addEvent(nn.word, sw, 6, ((uint16_t)1<<(sw-17))&0xFF, TRUE);
+    addEvent(nn.word, sw, 7, ((uint16_t)1<<(sw-25))&0xFF, TRUE);
 
-
-
-
-
-    addEvent(nn.word, sw, 4, 0, TRUE);
-    addEvent(nn.word, sw, 5, 0, TRUE);
-    addEvent(nn.word, sw, 6, 0, TRUE);
-    addEvent(nn.word, sw, 7, 0, TRUE);
     addEvent(nn.word, sw, 8, 0, TRUE);
     addEvent(nn.word, sw, 9, 0, TRUE);
     addEvent(nn.word, sw, 10, 0, TRUE);
@@ -38896,7 +38907,7 @@ uint8_t addDefaultEvent(uint8_t sw) {
 
 
 
-void checkDefaultEvents(void) {
+void rebuildLookupTable(void) {
     uint8_t sw;
     int16_t swNo;
     uint8_t i;
@@ -38912,14 +38923,8 @@ void checkDefaultEvents(void) {
             switch2Event[swNo-1] = i;
         }
     }
-
-    for (sw=1; sw <= (8*4); sw++) {
-        if (switch2Event[sw-1] == 0xff) {
-            switch2Event[sw-1] = addDefaultEvent(sw);
-        }
-    }
 }
-# 142 "../canpan3Events.c"
+# 135 "../canpan3Events.c"
 uint8_t APP_isConsumedEvent(uint8_t tableIndex) {
     int16_t ev;
 
@@ -38980,7 +38985,7 @@ Processed APP_preProcessMessage(Message * m) {
 
                 errno = GRSP_OK;
                 eventTeachService.processMessage(m);
-                checkDefaultEvents();
+                rebuildLookupTable();
                 return PROCESSED;
             default:
                 break;
@@ -39053,123 +39058,35 @@ uint8_t APP_addEvent(uint16_t nodeNumber, uint16_t eventNumber, uint8_t evNum, u
     if (evNum == 1) {
         switchNo = evVal;
         tableIndex = findEvent(nodeNumber, eventNumber);
-        if (tableIndex != 0xff) {
 
-            getEVs(tableIndex);
-            prevSwitchNo = evs[1];
-            if (prevSwitchNo > (8*4)) {
-                prevSwitchNo = 0;
-            }
-
-            leds = evs[4] | evs[5] | evs[6] | evs[7];
-        }
-# 311 "../canpan3Events.c"
         if ((switchNo > 0) && (switchNo <= (8*4))) {
+            oti = switch2Event[switchNo-1];
+            if ((oti != 0xff) && (oti != tableIndex)){
+
+                writeEv(oti, 1, 0);
+
+                getEVs(oti);
 
 
-            if (tableIndex != 0xff) {
-                if (prevSwitchNo == 0) {
-                    if (leds) {
-
-                        oti = switch2Event[switchNo-1];
-                        if (oti != 0xff) {
-                            writeEv(oti, 1, 0);
-                        } else {
-
-                        }
-
-                    } else {
+                leds = evs[4] | evs[5] | evs[6] | evs[7];
+                if (leds == 0) {
 
 
-
-                    }
-                } else {
-                    if (switchNo == prevSwitchNo) {
-
-
-
-
-                        return PROCESSED;
-                    } else {
-
-
-
-                        if (readNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex+4) && 1) {
-
-                            errno = CMDERR_INV_EV_VALUE;
-                            return PROCESSED;
-                        }
-
-
-
-                    }
+                    writeNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*oti+3, 0);
+                    writeNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*oti+2, 0);
                 }
-            } else {
-
-                oti = switch2Event[switchNo-1];
-                if (oti != 0xff) {
-                    writeEv(oti, 1, 0);
-                } else {
-
-                }
-
             }
+            switch2Event[switchNo-1] = tableIndex;
         } else {
 
 
             switchNo = 0;
             evVal = 0;
-
-            if (tableIndex != 0xff) {
-
-                if (prevSwitchNo == 0) {
-                    if (leds) {
-
-
-                        return PROCESSED;
-                    } else {
-
-
-
-                        writeNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex+3, 0);
-                        writeNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex+2, 0);
-                        return PROCESSED;
-                    }
-                } else {
-
-
-                    if (readNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex+4) && 1) {
-
-                        errno = CMDERR_INV_EV_VALUE;
-                        return PROCESSED;
-                    }
-                    if (leds) {
-
-
-                    } else {
-
-
-                        if ((evs[0] == 3) || (evs[0] == 2)) {
-
-
-                        } else {
-
-
-                            writeNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex+3, 0);
-                            writeNVM(FLASH_NVM_TYPE, 0x1E800 + (sizeof(Event) + 1 + 13)*tableIndex+2, 0);
-                        }
-                    }
-                }
-            } else {
-
-
-
-            }
         }
     }
     return addEvent(nodeNumber, eventNumber, evNum, evVal, forceOwnNN);
 }
-# 425 "../canpan3Events.c"
+# 305 "../canpan3Events.c"
 Processed APP_processConsumedEvent(uint8_t tableIndex, Message *m) {
     uint8_t onOff;
     uint8_t ledMode;

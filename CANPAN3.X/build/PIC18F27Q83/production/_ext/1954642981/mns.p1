@@ -110,7 +110,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;../../VLCBlib_PIC/vlcb.h: 273: void sendMessage7(VlcbOpCodes opc, uint8_t data1, uint8_t data2, uint8_t data3, uint8_t data4, uint8_t data5, uint8_t data6, uint8_t data7);
 [v _sendMessage7 `(v ~T0 @X0 0 ef8`E22564`uc`uc`uc`uc`uc`uc`uc ]
 "395 ../../VLCBlib_PIC/mns.c
-[; ;../../VLCBlib_PIC/mns.c: 395:                 sendMessage7(OPC_PARAMS, MANU_MERG, 'c',
+[; ;../../VLCBlib_PIC/mns.c: 395:                 sendMessage7(OPC_PARAMS, MANU_MERG, 'a',
 [c E22432 13 165 44 70 80 250 249 248 .. ]
 [n E22432 VlcbManufacturer MANU_DEV MANU_MERG MANU_SPROG MANU_ROCRAIL MANU_SPECTRUM MANU_VLCB MANU_SYSPIXIE MANU_RME  ]
 [c E22442 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 252 255 254 253 252 .. ]
@@ -4066,8 +4066,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;../../VLCBlib_PIC/mns.c: 394:             case OPC_RQNP:
 [e :U 3252 ]
 "395
-[; ;../../VLCBlib_PIC/mns.c: 395:                 sendMessage7(OPC_PARAMS, MANU_MERG, 'c',
-[e ( _sendMessage7 (4 , , , , , , , . `E22564 125 -> . `E22432 1 `uc -> -> 99 `ui `uc -> . `E22442 29 `uc -> -> 254 `i `uc -> -> 13 `i `uc -> -> 66 `i `uc -> -> 4 `i `uc ]
+[; ;../../VLCBlib_PIC/mns.c: 395:                 sendMessage7(OPC_PARAMS, MANU_MERG, 'a',
+[e ( _sendMessage7 (4 , , , , , , , . `E22564 125 -> . `E22432 1 `uc -> -> 97 `ui `uc -> . `E22442 29 `uc -> -> 254 `i `uc -> -> 13 `i `uc -> -> 66 `i `uc -> -> 5 `i `uc ]
 "398
 [; ;../../VLCBlib_PIC/mns.c: 398:                 return PROCESSED;
 [e ) . `E22973 1 ]
@@ -5286,8 +5286,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;../../VLCBlib_PIC/mns.c: 843:     case PAR_MINVER:
 [e :U 3365 ]
 "844
-[; ;../../VLCBlib_PIC/mns.c: 844:         return 'c';
-[e ) -> -> 99 `ui `uc ]
+[; ;../../VLCBlib_PIC/mns.c: 844:         return 'a';
+[e ) -> -> 97 `ui `uc ]
 [e $UE 3360  ]
 "845
 [; ;../../VLCBlib_PIC/mns.c: 845:     case PAR_MTYP:
@@ -5321,8 +5321,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;../../VLCBlib_PIC/mns.c: 853:     case PAR_MAJVER:
 [e :U 3370 ]
 "854
-[; ;../../VLCBlib_PIC/mns.c: 854:         return 4;
-[e ) -> -> 4 `i `uc ]
+[; ;../../VLCBlib_PIC/mns.c: 854:         return 5;
+[e ) -> -> 5 `i `uc ]
 [e $UE 3360  ]
 "855
 [; ;../../VLCBlib_PIC/mns.c: 855:     case PAR_FLAGS:
@@ -5424,8 +5424,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;../../VLCBlib_PIC/mns.c: 884:     case PAR_BETA:
 [e :U 3384 ]
 "885
-[; ;../../VLCBlib_PIC/mns.c: 885:         return 113;
-[e ) -> -> 113 `i `uc ]
+[; ;../../VLCBlib_PIC/mns.c: 885:         return 1;
+[e ) -> -> 1 `i `uc ]
 [e $UE 3360  ]
 "886
 [; ;../../VLCBlib_PIC/mns.c: 886:     default:

@@ -41,18 +41,31 @@
 #include "module.h"
 #include "canpan3Leds.h"
 #include "canpan3Outputs.h"
+#include "canpan3Nv.h"
+#include "nv.h"
+
+//forward references
+void setLedStateNoSave(uint8_t ledNo, enum canpan3LedState state);
 
 static enum canpan3LedState ledStates[NUM_LEDS];
 static uint8_t flashToggle;
+static uint8_t startupNv;
 
 /**
  * Initialise the LEDs.
  */
 void initLeds(void) {
-    uint8_t i;
+    uint8_t ledNo;
     
-    for (i=0; i<NUM_LEDS; i++) {
-        ledStates[i] = CANPANLED_OFF;
+    startupNv = (uint8_t)getNV(NV_STARTUP);
+    
+    for (ledNo=0; ledNo<NUM_LEDS; ledNo++) {
+        if (startupNv & NV_STARTUP_RESTORELEDS) {
+            enum canpan3LedState state = (uint8_t)readNVM(EEPROM_NVM_TYPE, EE_ADDR_LEDS+ledNo);
+            setLedStateNoSave(ledNo, state);
+        } else {
+            ledStates[ledNo] = CANPANLED_OFF;
+        }
     }
     flashToggle = 0;
 }
@@ -62,7 +75,7 @@ void initLeds(void) {
  * @param led
  * @param state
  */
-void setLedState(uint8_t ledNo, enum canpan3LedState state) {
+void setLedStateNoSave(uint8_t ledNo, enum canpan3LedState state) {
     ledStates[ledNo] = state;
     switch (ledStates[ledNo]) {
         case CANPANLED_ON:
@@ -77,6 +90,17 @@ void setLedState(uint8_t ledNo, enum canpan3LedState state) {
             break;
     }
     
+}
+/**
+ * Set the specified LED to the given state and save the vale in EEPROM.
+ * @param led
+ * @param state
+ */
+void setLedState(uint8_t ledNo, enum canpan3LedState state) {
+    setLedStateNoSave(ledNo, state);
+    if (startupNv & NV_STARTUP_RESTORELEDS) {
+        writeNVM(EEPROM_NVM_TYPE, EE_ADDR_LEDS+ledNo, (uint8_t)state);
+    }
 }
 
 /**

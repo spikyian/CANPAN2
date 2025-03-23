@@ -45,6 +45,10 @@ enum canpan3LedState {
     CANPANLED_ANTIFLASH
 };
 
+/** location in EEPROM where the LED state is stored. */
+#define EE_ADDR_LEDS    0x0040
+
 extern void setLedState(uint8_t led, enum canpan3LedState state);
+extern void restoreLeds(void);
 
 extern uint8_t outputState[NUM_LEDS];

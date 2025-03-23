@@ -39014,7 +39014,8 @@ extern uint8_t canpanScanReady;
 # 1 "../canpan3Events.h" 1
 # 40 "../canpan3Events.h"
 extern uint8_t APP_isProducedEvent(uint8_t tableIndex);
-extern void checkDefaultEvents(void);
+extern void rebuildLookupTable(void);
+extern void initEvents(void);
 # 25 "../main.c" 2
 
 # 1 "../canpan3Outputs.h" 1
@@ -39026,20 +39027,32 @@ extern void setLed(uint8_t no);
 extern void clearLed(uint8_t no);
 extern uint8_t testLed(uint8_t no);
 # 26 "../main.c" 2
-# 103 "../main.c"
+
+# 1 "../canpan3Leds.h" 1
+# 41 "../canpan3Leds.h"
+enum canpan3LedState {
+    CANPANLED_ON,
+    CANPANLED_OFF,
+    CANPANLED_FLASH,
+    CANPANLED_ANTIFLASH
+};
+
+
+
+
+extern void setLedState(uint8_t led, enum canpan3LedState state);
+extern void restoreLeds(void);
+
+extern uint8_t outputState[(4*8)];
+# 27 "../main.c" 2
+# 104 "../main.c"
 void __init(void);
 uint8_t checkCBUS( void);
 void ISRHigh(void);
-void initialise(void);
-void configIO(uint8_t io);
-void factoryReset(void);
-void setType(uint8_t i, uint8_t type);
-void factoryResetEE(void);
-void factoryResetFlash(void);
 void factoryResetGlobalEvents(void);
 extern void initLeds(void);
-extern void processActions(void);
-extern void processOutputs(void);
+extern void clearAllEvents(void);
+extern uint8_t addTestEvent(uint8_t sw);
 
 
 
@@ -39047,9 +39060,7 @@ extern void processOutputs(void);
 
 static TickValue startTime;
 static uint8_t started;
-TickValue lastServoStartTime;
 static TickValue lastInputScanTime;
-static TickValue lastActionPollTime;
 static TickValue flashTime;
 
 const Service * const services[] = {
@@ -39081,13 +39092,15 @@ void APP_factoryReset(void) {
         writeNVM(EEPROM_NVM_TYPE, 0x0000 +sw, 0);
     }
 }
-
-
-
-
-
+# 158 "../main.c"
 void APP_testMode(void) {
+    uint8_t sw;
 
+    clearAllEvents();
+
+    for (sw=0; sw<(8*4); sw++) {
+        addTestEvent(sw+1);
+    }
 }
 
 
@@ -39101,7 +39114,7 @@ void setup(void) {
 
 
     transport = &canTransport;
-# 188 "../main.c"
+# 190 "../main.c"
     WPUA = 0b00001000;
     WPUB = 0;
     WPUC = 0;
@@ -39113,6 +39126,7 @@ void setup(void) {
     initOutputs();
     initLeds();
     initInputs();
+    initEvents();
 
 
 
@@ -39123,29 +39137,13 @@ void setup(void) {
     (INTCON0bits.GIE = 1);
 
     startTime.val = tickGet();
-    lastServoStartTime.val = startTime.val;
     lastInputScanTime.val = startTime.val;
-    lastActionPollTime.val = startTime.val;
     flashTime.val = startTime.val;
 
     started = FALSE;
+    canpanScanReady = 0;
 
     nv = (uint8_t)getNV(1);
-
-    switch (nv) {
-        case 0:
-            loadInputs();
-            break;
-        case 1:
-            canpanScanReady = 1;
-            break;
-        case 2:
-            canpanScanReady = 0;
-            break;
-        case 3:
-            canpanSetAllSwitchOff();
-            break;
-    }
 }
 
 
@@ -39171,7 +39169,7 @@ void loop(void) {
     }
     pollOutputs();
 }
-# 270 "../main.c"
+# 257 "../main.c"
 ValidTime APP_isSuitableTimeToWriteFlash(void){
     return GOOD_TIME;
 }

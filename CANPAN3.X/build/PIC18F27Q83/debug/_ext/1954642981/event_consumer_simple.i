@@ -38986,7 +38986,7 @@ static DiagnosticVal * consumerGetDiagnostic(uint8_t index) {
     if (index > 2) {
         return ((void*)0);
     }
-    return &(consumerDiagnostics[index-1]);
+    return &(consumerDiagnostics[index]);
 }
 # 232 "../../VLCBlib_PIC/event_consumer_simple.c"
 static uint8_t consumerEsdData(uint8_t index) {

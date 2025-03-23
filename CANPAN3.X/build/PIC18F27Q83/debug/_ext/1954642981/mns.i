@@ -7,7 +7,7 @@
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.46\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
 # 1 "../../VLCBlib_PIC/mns.c" 2
-# 107 "../../VLCBlib_PIC/mns.c"
+# 106 "../../VLCBlib_PIC/mns.c"
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.46\\pic\\include\\xc.h" 1 3
 # 18 "C:\\Program Files\\Microchip\\xc8\\v2.46\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -37671,7 +37671,7 @@ __attribute__((__unsupported__("The READTIMER" "0" "() macro is not available wi
 unsigned char __t1rd16on(void);
 unsigned char __t3rd16on(void);
 # 33 "C:\\Program Files\\Microchip\\xc8\\v2.46\\pic\\include\\xc.h" 2 3
-# 107 "../../VLCBlib_PIC/mns.c" 2
+# 106 "../../VLCBlib_PIC/mns.c" 2
 
 
 # 1 "../../VLCBlib_PIC/vlcb.h" 1
@@ -38765,11 +38765,11 @@ typedef struct Transport {
 extern const Transport * transport;
 # 447 "../../VLCBlib_PIC/vlcb.h"
 extern ValidTime APP_isSuitableTimeToWriteFlash(void);
-# 109 "../../VLCBlib_PIC/mns.c" 2
+# 108 "../../VLCBlib_PIC/mns.c" 2
 
 
 # 1 "../../VLCBlib_PIC/devincs.h" 1
-# 111 "../../VLCBlib_PIC/mns.c" 2
+# 110 "../../VLCBlib_PIC/mns.c" 2
 
 
 # 1 "../../VLCBlib_PIC/mns.h" 1
@@ -38796,7 +38796,7 @@ extern void updateModuleErrorStatus(void);
 
 
 extern TickValue pbTimer;
-# 113 "../../VLCBlib_PIC/mns.c" 2
+# 112 "../../VLCBlib_PIC/mns.c" 2
 
 
 
@@ -38832,7 +38832,7 @@ extern void startTimedResponse(uint8_t type, uint8_t serviceIndex, TimedResponse
 
 
 extern void pollTimedResponse(void);
-# 116 "../../VLCBlib_PIC/mns.c" 2
+# 115 "../../VLCBlib_PIC/mns.c" 2
 
 
 
@@ -38885,7 +38885,7 @@ typedef struct {
     uint16_t NN;
     uint16_t EN;
 } Event;
-# 139 "../../VLCBlib_PIC/mns.c" 2
+# 138 "../../VLCBlib_PIC/mns.c" 2
 
 # 1 "../../VLCBlib_PIC/event_producer.h" 1
 # 79 "../../VLCBlib_PIC/event_producer.h"
@@ -38906,7 +38906,7 @@ extern EventState APP_GetEventState(Happening h);
 
 
 extern EventState APP_GetEventIndexState(uint8_t tableIndex);
-# 140 "../../VLCBlib_PIC/mns.c" 2
+# 139 "../../VLCBlib_PIC/mns.c" 2
 
 Boolean sendProducedEvent(Happening happening, EventState onOff);
 
@@ -38989,13 +38989,13 @@ static TickValue heartbeatTimer;
 
 
 static TickValue uptimeTimer;
-# 231 "../../VLCBlib_PIC/mns.c"
+# 230 "../../VLCBlib_PIC/mns.c"
 TimedResponseResult mnsTRserviceDiscoveryCallback(uint8_t type, uint8_t serviceIndex, uint8_t step);
-# 240 "../../VLCBlib_PIC/mns.c"
+# 239 "../../VLCBlib_PIC/mns.c"
 TimedResponseResult mnsTRallDiagnosticsCallback(uint8_t type, uint8_t serviceIndex, uint8_t step);
-# 249 "../../VLCBlib_PIC/mns.c"
+# 248 "../../VLCBlib_PIC/mns.c"
 TimedResponseResult mnsTRrqnpnCallback(uint8_t type, uint8_t serviceIndex, uint8_t step);
-# 272 "../../VLCBlib_PIC/mns.c"
+# 271 "../../VLCBlib_PIC/mns.c"
 static uint8_t getParameterFlags(void);
 
 
@@ -39074,7 +39074,7 @@ static void mnsPowerUp(void) {
     heartbeatTimer.val = 0;
     uptimeTimer.val = 0;
 }
-# 359 "../../VLCBlib_PIC/mns.c"
+# 358 "../../VLCBlib_PIC/mns.c"
 static Processed mnsProcessMessage(Message * m) {
     uint8_t i;
     uint8_t flags;
@@ -39112,9 +39112,9 @@ static Processed mnsProcessMessage(Message * m) {
                 }
                 return PROCESSED;
             case OPC_RQNP:
-                sendMessage7(OPC_PARAMS, MANU_MERG, 'c',
+                sendMessage7(OPC_PARAMS, MANU_MERG, 'a',
                         MTYP_CANPAN, 254, 13,
-                        66, 4);
+                        66, 5);
                 return PROCESSED;
             case OPC_RQMN:
                 sendMessage7(OPC_NAME, name[0], name[1], name[2], name[3],
@@ -39142,14 +39142,21 @@ static Processed mnsProcessMessage(Message * m) {
             if ((m->bytes[0] == 0) && (m->bytes[1] == 0)) {
                 newMode = m->bytes[2];
 
-                if (newMode == MODE_HEARTBEAT_ON) {
-                    mode_flags |= 4;
-
-                    return PROCESSED;
-                } else if (newMode == MODE_HEARTBEAT_OFF) {
-                    mode_flags &= ~4;
-
-                    return PROCESSED;
+                switch (newMode) {
+                    case MODE_HEARTBEAT_ON:
+                        mode_flags |= 4;
+                        return PROCESSED;
+                    case MODE_HEARTBEAT_OFF:
+                        mode_flags &= ~4;
+                        return PROCESSED;
+                    case MODE_FCUCOMPAT_ON:
+                        mode_flags |= 8;
+                        return PROCESSED;
+                    case MODE_FCUCOMPAT_OFF:
+                        mode_flags &= ~8;
+                        return PROCESSED;
+                    default:
+                        break;
                 }
             }
             break;
@@ -39266,40 +39273,41 @@ static Processed mnsProcessMessage(Message * m) {
             newMode = m->bytes[2];
             previousNN.word = nn.word;
 
-            if (mode_state == MODE_NORMAL) {
-                if ((newMode == MODE_SETUP) || (newMode == MODE_UNINITIALISED)) {
-                    sendMessage2((newMode == MODE_SETUP) ? OPC_RQNN : OPC_NNREL, nn.bytes.hi, nn.bytes.lo);
+            switch (newMode) {
+                case MODE_SETUP:
+                case MODE_UNINITIALISED:
+                    if (mode_state == MODE_NORMAL) {
+                        sendMessage2((newMode == MODE_SETUP) ? OPC_RQNN : OPC_NNREL, nn.bytes.hi, nn.bytes.lo);
+                        sendMessage5(OPC_GRSP, nn.bytes.hi, nn.bytes.lo, OPC_MODE, SERVICE_ID_MNS, GRSP_OK);
+                        nn.bytes.lo = nn.bytes.hi = 0;
+                        writeNVM(EEPROM_NVM_TYPE, 0x3FC +1, nn.bytes.hi);
+                        writeNVM(EEPROM_NVM_TYPE, 0x3FC, nn.bytes.lo);
+
+                        mode_state = (newMode == MODE_SETUP) ? MODE_SETUP : MODE_UNINITIALISED;
+                        setupModePreviousMode = MODE_NORMAL;
+
+                        setLEDsByMode();
+                        return PROCESSED;
+                    }
+                    break;
+                case MODE_HEARTBEAT_ON:
+                    mode_flags |= 4;
                     sendMessage5(OPC_GRSP, nn.bytes.hi, nn.bytes.lo, OPC_MODE, SERVICE_ID_MNS, GRSP_OK);
-                    nn.bytes.lo = nn.bytes.hi = 0;
-                    writeNVM(EEPROM_NVM_TYPE, 0x3FC +1, nn.bytes.hi);
-                    writeNVM(EEPROM_NVM_TYPE, 0x3FC, nn.bytes.lo);
-
-                    mode_state = (newMode == MODE_SETUP) ? MODE_SETUP : MODE_UNINITIALISED;
-                    setupModePreviousMode = MODE_NORMAL;
-
-                    setLEDsByMode();
                     return PROCESSED;
-                }
-            }
-
-            if (newMode == MODE_HEARTBEAT_ON) {
-                mode_flags |= 4;
-                sendMessage5(OPC_GRSP, nn.bytes.hi, nn.bytes.lo, OPC_MODE, SERVICE_ID_MNS, GRSP_OK);
-                return PROCESSED;
-            } else if (newMode == MODE_HEARTBEAT_OFF) {
-                mode_flags &= ~4;
-                sendMessage5(OPC_GRSP, nn.bytes.hi, nn.bytes.lo, OPC_MODE, SERVICE_ID_MNS, GRSP_OK);
-                return PROCESSED;
-            }
-
-            if (newMode == MODE_FCUCOMPAT_ON) {
-                mode_flags |= 8;
-                sendMessage5(OPC_GRSP, nn.bytes.hi, nn.bytes.lo, OPC_MODE, SERVICE_ID_MNS, GRSP_OK);
-                return PROCESSED;
-            } else if (newMode == MODE_FCUCOMPAT_OFF) {
-                mode_flags &= ~8;
-                sendMessage5(OPC_GRSP, nn.bytes.hi, nn.bytes.lo, OPC_MODE, SERVICE_ID_MNS, GRSP_OK);
-                return PROCESSED;
+                case MODE_HEARTBEAT_OFF:
+                    mode_flags &= ~4;
+                    sendMessage5(OPC_GRSP, nn.bytes.hi, nn.bytes.lo, OPC_MODE, SERVICE_ID_MNS, GRSP_OK);
+                    return PROCESSED;
+                case MODE_FCUCOMPAT_ON:
+                    mode_flags |= 8;
+                    sendMessage5(OPC_GRSP, nn.bytes.hi, nn.bytes.lo, OPC_MODE, SERVICE_ID_MNS, GRSP_OK);
+                    return PROCESSED;
+                case MODE_FCUCOMPAT_OFF:
+                    mode_flags &= ~8;
+                    sendMessage5(OPC_GRSP, nn.bytes.hi, nn.bytes.lo, OPC_MODE, SERVICE_ID_MNS, GRSP_OK);
+                    return PROCESSED;
+                default:
+                    break;
             }
             return NOT_PROCESSED;
 
@@ -39487,7 +39495,7 @@ static void mnsPoll(void) {
             }
     }
 }
-# 798 "../../VLCBlib_PIC/mns.c"
+# 805 "../../VLCBlib_PIC/mns.c"
 static DiagnosticVal * mnsGetDiagnostic(uint8_t index) {
     if (index > 6) {
         return ((void*)0);
@@ -39527,7 +39535,7 @@ static uint8_t getParameter(uint8_t idx) {
     case PAR_MANU:
         return MANU_MERG;
     case PAR_MINVER:
-        return 'c';
+        return 'a';
     case PAR_MTYP:
         return MTYP_CANPAN;
     case PAR_EVTNUM:
@@ -39537,7 +39545,7 @@ static uint8_t getParameter(uint8_t idx) {
     case PAR_NVNUM:
         return 66;
     case PAR_MAJVER:
-        return 4;
+        return 5;
     case PAR_FLAGS:
         return getParameterFlags();
     case PAR_CPUID:
@@ -39568,12 +39576,12 @@ static uint8_t getParameter(uint8_t idx) {
     case PAR_CPUMAN:
         return CPUM_MICROCHIP;
     case PAR_BETA:
-        return 113;
+        return 1;
     default:
         return 0;
     }
 }
-# 892 "../../VLCBlib_PIC/mns.c"
+# 899 "../../VLCBlib_PIC/mns.c"
 TimedResponseResult mnsTRserviceDiscoveryCallback(uint8_t type, uint8_t serviceIndex, uint8_t step) {
     if (step >= 8) {
         return TIMED_RESPONSE_RESULT_FINISHED;
@@ -39583,7 +39591,7 @@ TimedResponseResult mnsTRserviceDiscoveryCallback(uint8_t type, uint8_t serviceI
 
     return TIMED_RESPONSE_RESULT_NEXT;
 }
-# 911 "../../VLCBlib_PIC/mns.c"
+# 918 "../../VLCBlib_PIC/mns.c"
 TimedResponseResult mnsTRallDiagnosticsCallback(uint8_t type, uint8_t serviceIndex, uint8_t step) {
     if (services[serviceIndex]->getDiagnostic == ((void*)0)) {
         sendMessage6(OPC_DGN, nn.bytes.hi, nn.bytes.lo, serviceIndex+1, 0, 0, 0);
@@ -39598,7 +39606,7 @@ TimedResponseResult mnsTRallDiagnosticsCallback(uint8_t type, uint8_t serviceInd
     sendMessage6(OPC_DGN, nn.bytes.hi, nn.bytes.lo, serviceIndex+1, step, d->asBytes.hi, d->asBytes.lo);
     return TIMED_RESPONSE_RESULT_NEXT;
 }
-# 934 "../../VLCBlib_PIC/mns.c"
+# 941 "../../VLCBlib_PIC/mns.c"
 TimedResponseResult mnsTRrqnpnCallback(uint8_t type, uint8_t serviceIndex, uint8_t step) {
     if (step >= 20) {
         return TIMED_RESPONSE_RESULT_FINISHED;
