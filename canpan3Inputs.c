@@ -301,7 +301,7 @@ void driveColumn(void) {
  * @return 
  */
 uint8_t findEventForSwitch(uint8_t switchNo) {
-    if ((switchNo > 0) && (switchNo <= NUM_BUTTONS)) {
+    if ((switchNo >= 0) && (switchNo < NUM_BUTTONS)) {
         return switch2Event[switchNo];
     }
     return NO_INDEX;

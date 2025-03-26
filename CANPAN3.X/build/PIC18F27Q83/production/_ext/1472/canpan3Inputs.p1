@@ -4332,8 +4332,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _switchNo `uc ~T0 @X0 1 r1 ]
 [f ]
 "304
-[; ;../canpan3Inputs.c: 304:     if ((switchNo > 0) && (switchNo <= (8*4))) {
-[e $ ! && > -> _switchNo `i -> 0 `i <= -> _switchNo `i * -> 8 `i -> 4 `i 3292  ]
+[; ;../canpan3Inputs.c: 304:     if ((switchNo >= 0) && (switchNo < (8*4))) {
+[e $ ! && >= -> _switchNo `i -> 0 `i < -> _switchNo `i * -> 8 `i -> 4 `i 3292  ]
 {
 "305
 [; ;../canpan3Inputs.c: 305:         return switch2Event[switchNo];

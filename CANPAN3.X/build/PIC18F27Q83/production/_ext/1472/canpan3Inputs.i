@@ -39183,7 +39183,7 @@ void driveColumn(void) {
 
 
 uint8_t findEventForSwitch(uint8_t switchNo) {
-    if ((switchNo > 0) && (switchNo <= (8*4))) {
+    if ((switchNo >= 0) && (switchNo < (8*4))) {
         return switch2Event[switchNo];
     }
     return 0xff;
