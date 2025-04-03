@@ -462,7 +462,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h: 15501: extern volatile C1FIFOSTA3Hbits_t C1FIFOSTA3Hbits __attribute__((address(0x179)));
 [v _C1FIFOSTA3Hbits `VS710 ~T0 @X0 0 e@377 ]
 "579 ../../VLCBlib_PIC/can18_can_2.c
-[; ;../../VLCBlib_PIC/can18_can_2.c: 579:     if (isEvent(mp->opc)) {
+[; ;../../VLCBlib_PIC/can18_can_2.c: 579:     if (isEvent((uint8_t)(mp->opc))) {
 [c E23107 0 1 .. ]
 [n E23107 Boolean FALSE TRUE  ]
 "196 ../../VLCBlib_PIC/vlcb.h
@@ -4815,7 +4815,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;../../VLCBlib_PIC/can18_can_2.c: 575:     Message * m;
 [v _m `*S3225 ~T0 @X0 1 a ]
 "579
-[; ;../../VLCBlib_PIC/can18_can_2.c: 579:     if (isEvent(mp->opc)) {
+[; ;../../VLCBlib_PIC/can18_can_2.c: 579:     if (isEvent((uint8_t)(mp->opc))) {
 [e $ ! != -> ( _isEvent (1 -> . *U _mp 1 `uc `ui -> -> 0 `i `ui 3282  ]
 {
 "580
@@ -4959,7 +4959,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;../../VLCBlib_PIC/can18_can_2.c: 639:     txFifoObj[7] = 0;
 [e = *U + _txFifoObj * -> -> 7 `i `x -> -> # *U _txFifoObj `i `x -> -> 0 `i `uc ]
 "640
-[; ;../../VLCBlib_PIC/can18_can_2.c: 640:     txFifoObj[8] = mp->opc;
+[; ;../../VLCBlib_PIC/can18_can_2.c: 640:     txFifoObj[8] = (uint8_t)(mp->opc);
 [e = *U + _txFifoObj * -> -> 8 `i `x -> -> # *U _txFifoObj `i `x -> . *U _mp 1 `uc ]
 "641
 [; ;../../VLCBlib_PIC/can18_can_2.c: 641:     txFifoObj[9] = mp->bytes[0];
@@ -5573,7 +5573,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;../../VLCBlib_PIC/can18_can_2.c: 918:     {
 {
 "919
-[; ;../../VLCBlib_PIC/can18_can_2.c: 919:         C1CONTbits.REQOP = requestMode;
+[; ;../../VLCBlib_PIC/can18_can_2.c: 919:         C1CONTbits.REQOP = (unsigned char)requestMode;
 [e = . . _C1CONTbits 0 0 -> _requestMode `uc ]
 "921
 [; ;../../VLCBlib_PIC/can18_can_2.c: 921:         while (C1CONUbits.OPMOD != requestMode)

@@ -38844,6 +38844,11 @@ extern void initTimedResponse(void);
 
 
 
+extern uint8_t timedResponseInProgress(void);
+
+
+
+
 
 
 
@@ -39046,7 +39051,7 @@ void inputScan(void) {
                     sv = evs[2];
                     if (switchMode == 0) {
 
-                        switchMode = 1;
+                        switchMode = 0;
                         if (sv & 1) {
                             switchMode = 1;
                         } else if (sv & 4) {
@@ -39070,9 +39075,10 @@ void inputScan(void) {
                                 break;
                             case 2:
                                 if (sv & 0b00000010) {
-                                    if (onOff) {
+                                    if (! onOff) {
                                         continue;
                                     }
+                                    onOff = 0;
                                 } else {
                                     if (! onOff) {
                                         continue;
@@ -39093,12 +39099,14 @@ void inputScan(void) {
                                 if (! onOff) {
                                     continue;
                                 }
+                                outputState[buttonNo] = 1;
                                 break;
                             case 5:
                                 if (! onOff) {
                                     continue;
                                 }
                                 onOff = 0;
+                                outputState[buttonNo&0xFE] = 0;
                                 break;
                         }
 
@@ -39183,7 +39191,7 @@ void driveColumn(void) {
 
 
 uint8_t findEventForSwitch(uint8_t switchNo) {
-    if ((switchNo >= 0) && (switchNo < (8*4))) {
+    if (switchNo < (8*4)) {
         return switch2Event[switchNo];
     }
     return 0xff;
@@ -39196,9 +39204,11 @@ uint8_t findEventForSwitch(uint8_t switchNo) {
 
 
 void doSoD(void) {
-    startTimedResponse(1, findServiceIndex(SERVICE_ID_PRODUCER), sodTRCallback);
+    if (!timedResponseInProgress()) {
+        startTimedResponse(1, findServiceIndex(SERVICE_ID_PRODUCER), sodTRCallback);
+    }
 }
-# 331 "../canpan3Inputs.c"
+# 336 "../canpan3Inputs.c"
 TimedResponseResult sodTRCallback(uint8_t type, uint8_t serviceIndex, uint8_t tableIndex) {
     EventState value;
     uint8_t sv;

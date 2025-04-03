@@ -38789,6 +38789,11 @@ extern void initTimedResponse(void);
 
 
 
+extern uint8_t timedResponseInProgress(void);
+
+
+
+
 
 
 
@@ -38814,7 +38819,15 @@ static TimedResponseResult (*timedResponseCallback)(uint8_t type, uint8_t servic
 void initTimedResponse(void) {
     timedResponseType = 0xFF;
 }
-# 85 "../../VLCBlib_PIC/timedResponse.c"
+
+
+
+
+
+uint8_t timedResponseInProgress(void) {
+    return timedResponseType != 0xFF;
+}
+# 93 "../../VLCBlib_PIC/timedResponse.c"
 void startTimedResponse(uint8_t type, uint8_t serviceIndex, TimedResponseResult (*callback)(uint8_t type, uint8_t si, uint8_t step)) {
     timedResponseType = type;
     if (serviceIndex == 0) {

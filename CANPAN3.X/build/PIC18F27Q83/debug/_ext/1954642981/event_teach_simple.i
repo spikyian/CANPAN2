@@ -38815,6 +38815,11 @@ extern void initTimedResponse(void);
 
 
 
+extern uint8_t timedResponseInProgress(void);
+
+
+
+
 
 
 
@@ -39068,7 +39073,7 @@ static Processed teachCheckLen(Message * m, uint8_t needed, uint8_t learn) {
             if (mode_flags & 1) {
 
 
-                sendMessage5(OPC_GRSP, nn.bytes.hi, nn.bytes.lo, m->opc, SERVICE_ID_OLD_TEACH, CMDERR_INV_CMD);
+                sendMessage5(OPC_GRSP, nn.bytes.hi, nn.bytes.lo, (uint8_t)(m->opc), SERVICE_ID_OLD_TEACH, CMDERR_INV_CMD);
 
             }
             return PROCESSED;

@@ -38934,7 +38934,7 @@ uint8_t APP_isConsumedEvent(uint8_t tableIndex) {
         return 0;
     }
 
-    if ((ev == 2)||(ev == 3)) {
+    if ((ev & 2) == 2) {
         return 1;
     }
     ev = getEv(tableIndex, 4);
@@ -39099,7 +39099,7 @@ Processed APP_processConsumedEvent(uint8_t tableIndex, Message *m) {
 
         return PROCESSED;
     }
-    if (onOff && ((evs[0] == 2)||(evs[0] == 3))) {
+    if (onOff && ((evs[0] & 2) == 2)) {
         doSoD();
     }
 

@@ -141,7 +141,7 @@ uint8_t APP_isConsumedEvent(uint8_t tableIndex) {
         return 0;
     }
 
-    if ((ev == CANPAN_SOD)||(ev == CANPAN_SELF_SOD)) {    // SoD consumed event
+    if ((ev & CANPAN_SOD) == CANPAN_SOD) {    // SoD consumed event
         return 1;
     }
     ev = getEv(tableIndex, EV_LEDFLAGS1);
@@ -314,7 +314,7 @@ Processed APP_processConsumedEvent(uint8_t tableIndex, Message *m) {
         // something went wrong
         return PROCESSED;
     }
-    if (onOff && ((evs[EV_TYPE] == CANPAN_SOD)||(evs[EV_TYPE] == CANPAN_SELF_SOD))) {
+    if (onOff && ((evs[EV_TYPE] & CANPAN_SOD) == CANPAN_SOD)) {
         doSoD();
     }
     // using the EVs and the event on/off state we work out the new LED state

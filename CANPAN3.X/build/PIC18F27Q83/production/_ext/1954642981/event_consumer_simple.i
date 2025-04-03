@@ -38949,7 +38949,7 @@ static Processed consumerProcessMessage(Message *m) {
 
     if ((mode_flags & 2) && (isConsumedEvent(tableIndex))) {
 
-        sendMessage7(OPC_ENACK, nn.bytes.hi, nn.bytes.lo, m->opc, m->bytes[0], m->bytes[1], m->bytes[2], m->bytes[3]);
+        sendMessage7(OPC_ENACK, nn.bytes.hi, nn.bytes.lo, (uint8_t)(m->opc), m->bytes[0], m->bytes[1], m->bytes[2], m->bytes[3]);
 
         consumerDiagnostics[2].asInt++;
 

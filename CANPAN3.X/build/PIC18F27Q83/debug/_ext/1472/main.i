@@ -7,6 +7,7 @@
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.46\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
 # 1 "../main.c" 2
+# 39 "../main.c"
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.46\\pic\\include\\xc.h" 1 3
 # 18 "C:\\Program Files\\Microchip\\xc8\\v2.46\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -37670,7 +37671,7 @@ __attribute__((__unsupported__("The READTIMER" "0" "() macro is not available wi
 unsigned char __t1rd16on(void);
 unsigned char __t3rd16on(void);
 # 33 "C:\\Program Files\\Microchip\\xc8\\v2.46\\pic\\include\\xc.h" 2 3
-# 1 "../main.c" 2
+# 39 "../main.c" 2
 
 # 1 "../module.h" 1
 
@@ -38763,7 +38764,7 @@ extern void leds_powerUp(void);
 extern void leds_poll(void);
 extern void showStatus(StatusDisplay s);
 # 9 "..\\module.h" 2
-# 2 "../main.c" 2
+# 40 "../main.c" 2
 
 
 
@@ -38791,7 +38792,7 @@ extern void updateModuleErrorStatus(void);
 
 
 extern TickValue pbTimer;
-# 5 "../main.c" 2
+# 43 "../main.c" 2
 
 # 1 "../../VLCBlib_PIC\\nv.h" 1
 # 86 "../../VLCBlib_PIC\\nv.h"
@@ -38827,7 +38828,7 @@ extern uint8_t setNV(uint8_t index, uint8_t value);
 
 
 extern void loadNvCache(void);
-# 6 "../main.c" 2
+# 44 "../main.c" 2
 
 # 1 "../../VLCBlib_PIC\\can.h" 1
 # 85 "../../VLCBlib_PIC\\can.h"
@@ -38869,12 +38870,12 @@ enum CAN_OP_MODE_STATUS
 enum CAN_OP_MODE_STATUS CAN1_OperationModeSet(const enum CAN_OP_MODES requestMode);
 # 204 "../../VLCBlib_PIC\\can.h"
 enum CAN_OP_MODES CAN1_OperationModeGet(void);
-# 7 "../main.c" 2
+# 45 "../main.c" 2
 
 # 1 "../../VLCBlib_PIC\\boot.h" 1
 # 81 "../../VLCBlib_PIC\\boot.h"
 extern const Service bootService;
-# 8 "../main.c" 2
+# 46 "../main.c" 2
 
 # 1 "../../VLCBlib_PIC\\event_teach.h" 1
 # 77 "../../VLCBlib_PIC\\event_teach.h"
@@ -38904,14 +38905,14 @@ typedef struct {
     uint16_t NN;
     uint16_t EN;
 } Event;
-# 9 "../main.c" 2
+# 47 "../main.c" 2
 
 # 1 "../../VLCBlib_PIC\\event_consumer_simple.h" 1
 # 69 "../../VLCBlib_PIC\\event_consumer_simple.h"
 extern const Service eventConsumerService;
 # 80 "../../VLCBlib_PIC\\event_consumer_simple.h"
 extern Processed APP_processConsumedEvent(uint8_t tableIndex, Message * m);
-# 10 "../main.c" 2
+# 48 "../main.c" 2
 
 # 1 "../../VLCBlib_PIC\\event_producer.h" 1
 # 79 "../../VLCBlib_PIC\\event_producer.h"
@@ -38932,17 +38933,17 @@ extern EventState APP_GetEventState(Happening h);
 
 
 extern EventState APP_GetEventIndexState(uint8_t tableIndex);
-# 11 "../main.c" 2
+# 49 "../main.c" 2
 
 # 1 "../../VLCBlib_PIC\\event_acknowledge.h" 1
 # 62 "../../VLCBlib_PIC\\event_acknowledge.h"
 extern const Service eventAckService;
-# 12 "../main.c" 2
+# 50 "../main.c" 2
 
 # 1 "../../VLCBlib_PIC\\event_coe.h" 1
 # 59 "../../VLCBlib_PIC\\event_coe.h"
 extern const Service eventCoeService;
-# 13 "../main.c" 2
+# 51 "../main.c" 2
 
 
 
@@ -38968,6 +38969,11 @@ extern void initTimedResponse(void);
 
 
 
+extern uint8_t timedResponseInProgress(void);
+
+
+
+
 
 
 
@@ -38978,10 +38984,10 @@ extern void startTimedResponse(uint8_t type, uint8_t serviceIndex, TimedResponse
 
 
 extern void pollTimedResponse(void);
-# 16 "../main.c" 2
+# 54 "../main.c" 2
 
 # 1 "../../VLCBlib_PIC\\devincs.h" 1
-# 17 "../main.c" 2
+# 55 "../main.c" 2
 
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.46\\pic\\include\\c99\\stddef.h" 1 3
 # 19 "C:\\Program Files\\Microchip\\xc8\\v2.46\\pic\\include\\c99\\stddef.h" 3
@@ -38989,14 +38995,14 @@ extern void pollTimedResponse(void);
 # 138 "C:\\Program Files\\Microchip\\xc8\\v2.46\\pic\\include\\c99\\bits/alltypes.h" 3
 typedef int ptrdiff_t;
 # 20 "C:\\Program Files\\Microchip\\xc8\\v2.46\\pic\\include\\c99\\stddef.h" 2 3
-# 18 "../main.c" 2
+# 56 "../main.c" 2
 
 
 
 
 
 # 1 "../canpan3Nv.h" 1
-# 23 "../main.c" 2
+# 61 "../main.c" 2
 
 # 1 "../canpan3Inputs.h" 1
 # 43 "../canpan3Inputs.h"
@@ -39009,14 +39015,14 @@ extern void doFlash(void);
 
 extern uint8_t outputState[(8*4)];
 extern uint8_t canpanScanReady;
-# 24 "../main.c" 2
+# 62 "../main.c" 2
 
 # 1 "../canpan3Events.h" 1
 # 40 "../canpan3Events.h"
 extern uint8_t APP_isProducedEvent(uint8_t tableIndex);
 extern void rebuildLookupTable(void);
 extern void initEvents(void);
-# 25 "../main.c" 2
+# 63 "../main.c" 2
 
 # 1 "../canpan3Outputs.h" 1
 # 40 "../canpan3Outputs.h"
@@ -39026,7 +39032,7 @@ extern void pollOutputs(void);
 extern void setLed(uint8_t no);
 extern void clearLed(uint8_t no);
 extern uint8_t testLed(uint8_t no);
-# 26 "../main.c" 2
+# 64 "../main.c" 2
 
 # 1 "../canpan3Leds.h" 1
 # 41 "../canpan3Leds.h"
@@ -39044,8 +39050,8 @@ extern void setLedState(uint8_t led, enum canpan3LedState state);
 extern void restoreLeds(void);
 
 extern uint8_t outputState[(4*8)];
-# 27 "../main.c" 2
-# 104 "../main.c"
+# 65 "../main.c" 2
+# 137 "../main.c"
 void __init(void);
 uint8_t checkCBUS( void);
 void ISRHigh(void);
@@ -39092,7 +39098,7 @@ void APP_factoryReset(void) {
         writeNVM(EEPROM_NVM_TYPE, 0x0000 +sw, 0);
     }
 }
-# 158 "../main.c"
+# 191 "../main.c"
 void APP_testMode(void) {
     uint8_t sw;
 
@@ -39114,7 +39120,7 @@ void setup(void) {
 
 
     transport = &canTransport;
-# 190 "../main.c"
+# 223 "../main.c"
     WPUA = 0b00001000;
     WPUB = 0;
     WPUC = 0;
@@ -39167,9 +39173,10 @@ void loop(void) {
             flashTime.val = tickGet();
         }
     }
+
     pollOutputs();
 }
-# 257 "../main.c"
+# 291 "../main.c"
 ValidTime APP_isSuitableTimeToWriteFlash(void){
     return GOOD_TIME;
 }

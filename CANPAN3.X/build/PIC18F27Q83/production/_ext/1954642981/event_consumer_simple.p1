@@ -3864,7 +3864,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $ ! && != & -> _mode_flags `i -> 2 `i -> 0 `i != -> ( _isConsumedEvent (1 _tableIndex `i -> 0 `i 3265  ]
 {
 "185
-[; ;../../VLCBlib_PIC/event_consumer_simple.c: 185:         sendMessage7(OPC_ENACK, nn.bytes.hi, nn.bytes.lo, m->opc, m->bytes[0], m->bytes[1], m->bytes[2], m->bytes[3]);
+[; ;../../VLCBlib_PIC/event_consumer_simple.c: 185:         sendMessage7(OPC_ENACK, nn.bytes.hi, nn.bytes.lo, (uint8_t)(m->opc), m->bytes[0], m->bytes[1], m->bytes[2], m->bytes[3]);
 [e ( _sendMessage7 (4 , , , , , , , . `E22564 122 . . _nn 0 1 . . _nn 0 0 -> . *U _m 1 `uc *U + &U . *U _m 2 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux *U + &U . *U _m 2 * -> -> -> 1 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux *U + &U . *U _m 2 * -> -> -> 2 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux *U + &U . *U _m 2 * -> -> -> 3 `i `ui `ux -> -> # *U &U . *U _m 2 `ui `ux ]
 "187
 [; ;../../VLCBlib_PIC/event_consumer_simple.c: 187:         consumerDiagnostics[2].asInt++;

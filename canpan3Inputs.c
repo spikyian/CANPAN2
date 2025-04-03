@@ -164,7 +164,7 @@ void inputScan(void) {
                     sv = evs[EV_SWITCHSV];
                     if (switchMode == MODE_UNKNOWN) {
                         // determine the switch mode using the SV event variable
-                        switchMode = MODE_ON_OFF;
+                        switchMode = MODE_UNKNOWN;
                         if (sv & SV_ON_OFF) {
                             switchMode = MODE_ON_OFF;
                         } else if (sv & SV_ON_ONLY) {
@@ -187,11 +187,12 @@ void inputScan(void) {
                                 outputState[buttonNo] = onOff;
                                 break;
                             case MODE_ONOFF_ONLY:
-                                if (sv & SV_POLARITY) {   // invert
-                                    if (onOff) {    // don't send ON event
+                                if (sv & SV_POLARITY) {   // OFF ONLY
+                                    if (! onOff) {    // don't send OFF event
                                         continue;
                                     }
-                                } else {
+                                    onOff = 0;      // make it an OFF event
+                                } else {                // ON ONLY
                                     if (! onOff) {
                                         continue;   // don't send OFF event
                                     }
@@ -211,12 +212,14 @@ void inputScan(void) {
                                 if (! onOff) {
                                     continue;
                                 }
+                                outputState[buttonNo] = 1;
                                 break;
                             case MODE_PAIRED:
                                 if (! onOff) {
                                     continue;
                                 }
                                 onOff = 0;  // force off
+                                outputState[buttonNo&0xFE] = 0;
                                 break;
                         }
                         
@@ -301,7 +304,7 @@ void driveColumn(void) {
  * @return 
  */
 uint8_t findEventForSwitch(uint8_t switchNo) {
-    if ((switchNo >= 0) && (switchNo < NUM_BUTTONS)) {
+    if (switchNo < NUM_BUTTONS) {
         return switch2Event[switchNo];
     }
     return NO_INDEX;
@@ -314,7 +317,9 @@ uint8_t findEventForSwitch(uint8_t switchNo) {
  * whenever another response is required.
  */
 void doSoD(void) {
-    startTimedResponse(TIMED_RESPONSE_SOD, findServiceIndex(SERVICE_ID_PRODUCER), sodTRCallback);
+    if (!timedResponseInProgress()) {
+        startTimedResponse(TIMED_RESPONSE_SOD, findServiceIndex(SERVICE_ID_PRODUCER), sodTRCallback);
+    }
 }
 
 /**

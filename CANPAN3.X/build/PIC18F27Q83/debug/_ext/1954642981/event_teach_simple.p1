@@ -42,7 +42,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 "100
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 100: static Processed teachProcessMessage(Message * m);
 [v _teachProcessMessage `(E22973 ~T0 @X0 0 sf1`*S3224 ]
-[v F23244 `(v ~T0 @X0 0 tf ]
+[v F23245 `(v ~T0 @X0 0 tf ]
 "101
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 101: static uint8_t teachGetESDdata(uint8_t id);
 [v _teachGetESDdata `(uc ~T0 @X0 0 sf1`uc ]
@@ -126,10 +126,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 432:     startTimedResponse(2, findServiceIndex(SERVICE_ID_OLD_TEACH), nerdCallback);
 [c E23105 0 1 2 .. ]
 [n E23105 . TIMED_RESPONSE_RESULT_FINISHED TIMED_RESPONSE_RESULT_RETRY TIMED_RESPONSE_RESULT_NEXT  ]
-[v F23117 `(E23105 ~T0 @X0 0 tf3`uc`uc`uc ]
-"109 ../../VLCBlib_PIC/timedResponse.h
-[; ;../../VLCBlib_PIC/timedResponse.h: 109: extern void startTimedResponse(uint8_t type, uint8_t serviceIndex, TimedResponseResult (*callback)(uint8_t type, uint8_t si, uint8_t step));
-[v _startTimedResponse `(v ~T0 @X0 0 ef3`uc`uc`*F23117 ]
+[v F23118 `(E23105 ~T0 @X0 0 tf3`uc`uc`uc ]
+"114 ../../VLCBlib_PIC/timedResponse.h
+[; ;../../VLCBlib_PIC/timedResponse.h: 114: extern void startTimedResponse(uint8_t type, uint8_t serviceIndex, TimedResponseResult (*callback)(uint8_t type, uint8_t si, uint8_t step));
+[v _startTimedResponse `(v ~T0 @X0 0 ef3`uc`uc`*F23118 ]
 "350 ../../VLCBlib_PIC/vlcb.h
 [; ;../../VLCBlib_PIC/vlcb.h: 350: extern uint8_t findServiceIndex(uint8_t id);
 [v _findServiceIndex `(uc ~T0 @X0 0 ef1`uc ]
@@ -3728,10 +3728,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "135
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 135: uint8_t errno;
 [v _errno `uc ~T0 @X0 1 e ]
-[v F23237 `uc ~T0 @X0 -> 20 `i t ]
+[v F23238 `uc ~T0 @X0 -> 20 `i t ]
 "138
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 138: uint8_t eventChains[32][20];
-[v _eventChains `F23237 ~T0 @X0 -> 32 `i e ]
+[v _eventChains `F23238 ~T0 @X0 -> 32 `i e ]
 "141
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 141: static uint8_t timedResponseOpcode;
 [v _timedResponseOpcode `uc ~T0 @X0 1 s ]
@@ -3746,7 +3746,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 &U _teachFactoryReset
 &U _teachPowerUp
 &U _teachProcessMessage
--> -> -> 0 `i `*v `*F23244
+-> -> -> 0 `i `*v `*F23245
 &U _teachGetESDdata
 &U _teachGetDiagnostic
 ..
@@ -4230,7 +4230,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $ ! != & -> _mode_flags `i -> 1 `i -> 0 `i 3288  ]
 {
 "351
-[; ;../../VLCBlib_PIC/event_teach_simple.c: 351:                 sendMessage5(OPC_GRSP, nn.bytes.hi, nn.bytes.lo, m->opc, SERVICE_ID_OLD_TEACH, CMDERR_INV_CMD);
+[; ;../../VLCBlib_PIC/event_teach_simple.c: 351:                 sendMessage5(OPC_GRSP, nn.bytes.hi, nn.bytes.lo, (uint8_t)(m->opc), SERVICE_ID_OLD_TEACH, CMDERR_INV_CMD);
 [e ( _sendMessage5 (4 , , , , , . `E22564 89 . . _nn 0 1 . . _nn 0 0 -> . *U _m 1 `uc -> . `E22771 4 `uc -> . `E22733 0 `uc ]
 "353
 [; ;../../VLCBlib_PIC/event_teach_simple.c: 353:             }

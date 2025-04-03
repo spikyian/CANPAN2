@@ -106,9 +106,18 @@ void initOutputs(void) {
 }
 
 /**
- *  Originally this was set up to be called by Timer 2 every 78us to give a 50Hz
- *  refresh but this complexity is unnecessary and it is now just called from the 
- *  poll loop.
+ * Each time this is called we increase the global brightness value. When brightness 
+ * reaches max it is reset back to 0, this also moves to the next display row.
+ * Starting with all enabled LEDs on then any LEDs which have a brightness setting 
+ * less than the global brightness are turned off.
+ * 
+ * A complete refresh of the LED matrix takes MAX_BRIGHTNESS * NUM_ROWS = 32*4 = 128
+ * calls of this function.
+ * To get a 50Hz refresh rate this function must be called at least every 156us.
+ *  
+ * Originally this was set up to be called by Timer 2 every 78us to give a 50Hz
+ * refresh but this complexity is unnecessary and it is now just called from the 
+ * poll loop.
  */
 void pollOutputs(void)
 {
@@ -168,12 +177,13 @@ void pollOutputs(void)
         // disable the cathode driver
         LATCbits.LATC2 = 1; // OE
         // here we are turning off the cathodes when brightness setting
+        // has been reached. We do NOT change the anodes here.
         for (i=0; i<8; i++) {
             if (brightness > getNV(current_row*8 + i +NV_BRIGHTNESS)) {
                 cathodes &= ~(1 << i);
             }
         }
-        // has been reached. We do NOT change the anodes here.
+        
         SPI1TXB = cathodes; // do the write and send the data
         // This takes quite a few cycles but we have to ensure the cathodes have the
         // right data before latching cathodes.

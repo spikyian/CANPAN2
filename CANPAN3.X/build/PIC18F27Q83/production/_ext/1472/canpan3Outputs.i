@@ -38875,12 +38875,7 @@ void initOutputs(void) {
 
     SPI1CON0bits.EN = 1;
 }
-
-
-
-
-
-
+# 122 "../canpan3Outputs.c"
 void pollOutputs(void)
 {
     uint8_t i;
@@ -38938,6 +38933,7 @@ void pollOutputs(void)
 
 
         LATCbits.LATC2 = 1;
+
 
         for (i=0; i<8; i++) {
             if (brightness > getNV(current_row*8 + i +3)) {

@@ -39330,7 +39330,7 @@ static SendResult canSendMessage(Message * mp) {
 
 
 
-    if (isEvent(mp->opc)) {
+    if (isEvent((uint8_t)(mp->opc))) {
         if (have(SERVICE_ID_CONSUME_OWN_EVENTS)) {
 
             m = getNextWriteMessage(&rxQueue);
@@ -39391,7 +39391,7 @@ static SendResult canSendMessage(Message * mp) {
     txFifoObj[5] = 0;
     txFifoObj[6] = 0;
     txFifoObj[7] = 0;
-    txFifoObj[8] = mp->opc;
+    txFifoObj[8] = (uint8_t)(mp->opc);
     txFifoObj[9] = mp->bytes[0];
     txFifoObj[10] = mp->bytes[1];
     txFifoObj[11] = mp->bytes[2];
@@ -39629,7 +39629,7 @@ enum CAN_OP_MODE_STATUS CAN1_OperationModeSet(const enum CAN_OP_MODES requestMod
         || (requestMode == CAN_DISABLE_MODE)
         || (requestMode == CAN_CONFIGURATION_MODE))
     {
-        C1CONTbits.REQOP = requestMode;
+        C1CONTbits.REQOP = (unsigned char)requestMode;
 
         while (C1CONUbits.OPMOD != requestMode)
         {

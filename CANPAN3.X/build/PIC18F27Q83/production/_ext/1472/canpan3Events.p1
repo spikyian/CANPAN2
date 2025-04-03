@@ -3797,8 +3797,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 [e :U 3244 ]
 "144
-[; ;../canpan3Events.c: 144:     if ((ev == 2)||(ev == 3)) {
-[e $ ! || == -> _ev `i -> 2 `i == -> _ev `i -> 3 `i 3245  ]
+[; ;../canpan3Events.c: 144:     if ((ev & 2) == 2) {
+[e $ ! == & -> _ev `i -> 2 `i -> 2 `i 3245  ]
 {
 "145
 [; ;../canpan3Events.c: 145:         return 1;
@@ -4253,8 +4253,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 [e :U 3291 ]
 "317
-[; ;../canpan3Events.c: 317:     if (onOff && ((evs[0] == 2)||(evs[0] == 3))) {
-[e $ ! && != -> _onOff `i -> 0 `i || == -> *U + &U _evs * -> -> -> 0 `i `ui `ux -> -> # *U &U _evs `ui `ux `i -> 2 `i == -> *U + &U _evs * -> -> -> 0 `i `ui `ux -> -> # *U &U _evs `ui `ux `i -> 3 `i 3292  ]
+[; ;../canpan3Events.c: 317:     if (onOff && ((evs[0] & 2) == 2)) {
+[e $ ! && != -> _onOff `i -> 0 `i == & -> *U + &U _evs * -> -> -> 0 `i `ui `ux -> -> # *U &U _evs `ui `ux `i -> 2 `i -> 2 `i 3292  ]
 {
 "318
 [; ;../canpan3Events.c: 318:         doSoD();
