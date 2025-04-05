@@ -150,6 +150,7 @@ static TickValue   startTime;
 static uint8_t     started;
 static TickValue   lastInputScanTime;
 static TickValue   flashTime;
+static TickValue   outputPollTime;
 
 const Service * const services[] = {
     &canService,
@@ -244,6 +245,7 @@ void setup(void) {
     startTime.val = tickGet();
     lastInputScanTime.val = startTime.val;
     flashTime.val = startTime.val;
+    outputPollTime.val = startTime.val;
 
     started = FALSE;
     canpanScanReady = 0;

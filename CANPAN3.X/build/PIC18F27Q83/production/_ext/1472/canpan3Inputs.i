@@ -39093,7 +39093,9 @@ void inputScan(void) {
                                     continue;
                                 }
                                 onOff = outputState[buttonNo];
-                                writeNVM(EEPROM_NVM_TYPE, 0x0000 + buttonNo, outputState[buttonNo]);
+                                if ((getNV(1) & 0x01) == 0) {
+                                    writeNVM(EEPROM_NVM_TYPE, 0x0000 + buttonNo, outputState[buttonNo]);
+                                }
                                 break;
                             case 4:
                                 if (! onOff) {
@@ -39208,7 +39210,7 @@ void doSoD(void) {
         startTimedResponse(1, findServiceIndex(SERVICE_ID_PRODUCER), sodTRCallback);
     }
 }
-# 336 "../canpan3Inputs.c"
+# 338 "../canpan3Inputs.c"
 TimedResponseResult sodTRCallback(uint8_t type, uint8_t serviceIndex, uint8_t tableIndex) {
     EventState value;
     uint8_t sv;

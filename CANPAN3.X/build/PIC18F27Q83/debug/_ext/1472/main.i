@@ -39068,6 +39068,7 @@ static TickValue startTime;
 static uint8_t started;
 static TickValue lastInputScanTime;
 static TickValue flashTime;
+static TickValue outputPollTime;
 
 const Service * const services[] = {
     &canService,
@@ -39098,7 +39099,7 @@ void APP_factoryReset(void) {
         writeNVM(EEPROM_NVM_TYPE, 0x0000 +sw, 0);
     }
 }
-# 191 "../main.c"
+# 192 "../main.c"
 void APP_testMode(void) {
     uint8_t sw;
 
@@ -39120,7 +39121,7 @@ void setup(void) {
 
 
     transport = &canTransport;
-# 223 "../main.c"
+# 224 "../main.c"
     WPUA = 0b00001000;
     WPUB = 0;
     WPUC = 0;
@@ -39145,6 +39146,7 @@ void setup(void) {
     startTime.val = tickGet();
     lastInputScanTime.val = startTime.val;
     flashTime.val = startTime.val;
+    outputPollTime.val = startTime.val;
 
     started = FALSE;
     canpanScanReady = 0;
@@ -39176,7 +39178,7 @@ void loop(void) {
 
     pollOutputs();
 }
-# 291 "../main.c"
+# 293 "../main.c"
 ValidTime APP_isSuitableTimeToWriteFlash(void){
     return GOOD_TIME;
 }

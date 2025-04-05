@@ -38879,6 +38879,7 @@ void initOutputs(void) {
 void pollOutputs(void)
 {
     uint8_t i;
+    uint8_t offset;
 
     if (brightness == 0) {
 
@@ -38935,8 +38936,9 @@ void pollOutputs(void)
         LATCbits.LATC2 = 1;
 
 
+        offset = current_row*8 +3;
         for (i=0; i<8; i++) {
-            if (brightness > getNV(current_row*8 + i +3)) {
+            if (brightness > getNV(offset + i)) {
                 cathodes &= ~(1 << i);
             }
         }

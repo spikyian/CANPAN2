@@ -39054,7 +39054,7 @@ static void mnsPowerUp(void) {
     setupModePreviousMode = mode_state;
     temp = readNVM(EEPROM_NVM_TYPE, 0x3F9);
     if (temp < 0) {
-        mode_flags = 4;
+        mode_flags = 0;
     } else {
         mode_flags = (uint8_t)temp;
     }
@@ -39581,7 +39581,7 @@ static uint8_t getParameter(uint8_t idx) {
     case PAR_CPUMAN:
         return CPUM_MICROCHIP;
     case PAR_BETA:
-        return 2;
+        return 4;
     default:
         return 0;
     }

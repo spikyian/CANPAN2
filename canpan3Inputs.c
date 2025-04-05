@@ -206,7 +206,9 @@ void inputScan(void) {
                                     continue;   // don't react when button is released
                                 }
                                 onOff = outputState[buttonNo];
-                                writeNVM(EEPROM_NVM_TYPE, EE_ADDR_SWITCHES + buttonNo, outputState[buttonNo]);
+                                if ((getNV(NV_STARTUP) & NV_STARTUP_RESTORESWITCHES) == 0) {
+                                    writeNVM(EEPROM_NVM_TYPE, EE_ADDR_SWITCHES + buttonNo, outputState[buttonNo]);
+                                }
                                 break;
                             case MODE_PAIR:
                                 if (! onOff) {

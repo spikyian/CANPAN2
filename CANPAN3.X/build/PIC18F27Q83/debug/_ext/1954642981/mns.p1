@@ -3923,8 +3923,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $ ! < _temp -> 0 `i 3240  ]
 {
 "324
-[; ;../../VLCBlib_PIC/mns.c: 324:         mode_flags = 4;
-[e = _mode_flags -> -> 4 `i `uc ]
+[; ;../../VLCBlib_PIC/mns.c: 324:         mode_flags = 0;
+[e = _mode_flags -> -> 0 `i `uc ]
 "325
 [; ;../../VLCBlib_PIC/mns.c: 325:     } else {
 }
@@ -5424,8 +5424,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;../../VLCBlib_PIC/mns.c: 884:     case PAR_BETA:
 [e :U 3384 ]
 "885
-[; ;../../VLCBlib_PIC/mns.c: 885:         return 2;
-[e ) -> -> 2 `i `uc ]
+[; ;../../VLCBlib_PIC/mns.c: 885:         return 4;
+[e ) -> -> 4 `i `uc ]
 [e $UE 3360  ]
 "886
 [; ;../../VLCBlib_PIC/mns.c: 886:     default:

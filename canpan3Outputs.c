@@ -122,6 +122,7 @@ void initOutputs(void) {
 void pollOutputs(void)
 {
     uint8_t i;
+    uint8_t offset;
     
     if (brightness == 0) {
         // move to next row
@@ -178,8 +179,9 @@ void pollOutputs(void)
         LATCbits.LATC2 = 1; // OE
         // here we are turning off the cathodes when brightness setting
         // has been reached. We do NOT change the anodes here.
+        offset = current_row*8 +NV_BRIGHTNESS;
         for (i=0; i<8; i++) {
-            if (brightness > getNV(current_row*8 + i +NV_BRIGHTNESS)) {
+            if (brightness > getNV(offset + i)) {
                 cathodes &= ~(1 << i);
             }
         }
