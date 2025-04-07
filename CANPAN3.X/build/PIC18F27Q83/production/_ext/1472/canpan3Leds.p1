@@ -1,8 +1,8 @@
 Version 4.0 HI-TECH Software Intermediate Code
 "50 ../canpan3Leds.c
 [; ;../canpan3Leds.c: 50: static enum canpan3LedState ledStates[(4*8)];
-[c E23098 0 1 2 3 .. ]
-[n E23098 canpan3LedState CANPANLED_ON CANPANLED_OFF CANPANLED_FLASH CANPANLED_ANTIFLASH  ]
+[c E23101 0 1 2 3 .. ]
+[n E23101 canpan3LedState CANPANLED_ON CANPANLED_OFF CANPANLED_FLASH CANPANLED_ANTIFLASH  ]
 "116 ../../VLCBlib_PIC\nv.h
 [; ;../../VLCBlib_PIC\nv.h: 116: extern int16_t getNV(uint8_t index);
 [v _getNV `(s ~T0 @X0 0 ef1`uc ]
@@ -15,16 +15,16 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _readNVM `(s ~T0 @X0 0 ef2`E22862`um ]
 "48 ../canpan3Leds.c
 [; ;../canpan3Leds.c: 48: void setLedStateNoSave(uint8_t ledNo, enum canpan3LedState state);
-[v _setLedStateNoSave `(v ~T0 @X0 0 ef2`uc`E23098 ]
+[v _setLedStateNoSave `(v ~T0 @X0 0 ef2`uc`E23101 ]
 "43 ../canpan3Outputs.h
 [; ;../canpan3Outputs.h: 43: extern void setLed(uint8_t no);
 [v _setLed `(v ~T0 @X0 0 ef1`uc ]
 "44
 [; ;../canpan3Outputs.h: 44: extern void clearLed(uint8_t no);
 [v _clearLed `(v ~T0 @X0 0 ef1`uc ]
-"169 ../../VLCBlib_PIC/nvm.h
-[; ;../../VLCBlib_PIC/nvm.h: 169: extern uint8_t writeNVM(NVMtype type, uint24_t index, uint8_t value);
-[v _writeNVM `(uc ~T0 @X0 0 ef3`E22862`um`uc ]
+"180 ../../VLCBlib_PIC/nvm.h
+[; ;../../VLCBlib_PIC/nvm.h: 180: extern uint8_t EEPROM_WriteNoVerify(eeprom_address_t index, eeprom_data_t value);
+[v _EEPROM_WriteNoVerify `(uc ~T0 @X0 0 ef2`um`uc ]
 "364 C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h
 [; ;C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h: 364: __asm("BOOTREG equ 038h");
 [; <" BOOTREG equ 038h ;# ">
@@ -3546,7 +3546,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; <" TOSU equ 04FFh ;# ">
 "50 ../canpan3Leds.c
 [; ;../canpan3Leds.c: 50: static enum canpan3LedState ledStates[(4*8)];
-[v _ledStates `E23098 ~T0 @X0 -> 32 `i s ]
+[v _ledStates `E23101 ~T0 @X0 -> 32 `i s ]
 "51
 [; ;../canpan3Leds.c: 51: static uint8_t flashToggle;
 [v _flashToggle `uc ~T0 @X0 1 s ]
@@ -3579,8 +3579,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "64
 [; ;../canpan3Leds.c: 64:             enum canpan3LedState state = (uint8_t)readNVM(EEPROM_NVM_TYPE, 0x0040 +ledNo);
-[v _state `E23098 ~T0 @X0 1 a ]
-[e = _state -> -> ( _readNVM (2 , . `E22862 0 -> -> + -> 64 `i -> _ledNo `i `m `um `uc `E23098 ]
+[v _state `E23101 ~T0 @X0 1 a ]
+[e = _state -> -> ( _readNVM (2 , . `E22862 0 -> -> + -> 64 `i -> _ledNo `i `m `um `uc `E23101 ]
 "65
 [; ;../canpan3Leds.c: 65:             setLedStateNoSave(ledNo, state);
 [e ( _setLedStateNoSave (2 , _ledNo _state ]
@@ -3592,7 +3592,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "67
 [; ;../canpan3Leds.c: 67:             ledStates[ledNo] = CANPANLED_OFF;
-[e = *U + &U _ledStates * -> _ledNo `ux -> -> # *U &U _ledStates `ui `ux . `E23098 1 ]
+[e = *U + &U _ledStates * -> _ledNo `ux -> -> # *U &U _ledStates `ui `ux . `E23101 1 ]
 "68
 [; ;../canpan3Leds.c: 68:         }
 }
@@ -3613,11 +3613,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 "78
 [; ;../canpan3Leds.c: 78: void setLedStateNoSave(uint8_t ledNo, enum canpan3LedState state) {
-[v _setLedStateNoSave `(v ~T0 @X0 1 ef2`uc`E23098 ]
+[v _setLedStateNoSave `(v ~T0 @X0 1 ef2`uc`E23101 ]
 {
 [e :U _setLedStateNoSave ]
 [v _ledNo `uc ~T0 @X0 1 r1 ]
-[v _state `E23098 ~T0 @X0 1 r2 ]
+[v _state `E23101 ~T0 @X0 1 r2 ]
 [f ]
 "79
 [; ;../canpan3Leds.c: 79:     ledStates[ledNo] = state;
@@ -3658,10 +3658,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 [e $U 3238  ]
 [e :U 3239 ]
-[e [\ -> *U + &U _ledStates * -> _ledNo `ux -> -> # *U &U _ledStates `ui `ux `ui , $ -> . `E23098 0 `ui 3240
- , $ -> . `E23098 1 `ui 3241
- , $ -> . `E23098 2 `ui 3242
- , $ -> . `E23098 3 `ui 3243
+[e [\ -> *U + &U _ledStates * -> _ledNo `ux -> -> # *U &U _ledStates `ui `ux `ui , $ -> . `E23101 0 `ui 3240
+ , $ -> . `E23101 1 `ui 3241
+ , $ -> . `E23101 2 `ui 3242
+ , $ -> . `E23101 3 `ui 3243
  3238 ]
 [e :U 3238 ]
 "93
@@ -3670,11 +3670,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 "99
 [; ;../canpan3Leds.c: 99: void setLedState(uint8_t ledNo, enum canpan3LedState state) {
-[v _setLedState `(v ~T0 @X0 1 ef2`uc`E23098 ]
+[v _setLedState `(v ~T0 @X0 1 ef2`uc`E23101 ]
 {
 [e :U _setLedState ]
 [v _ledNo `uc ~T0 @X0 1 r1 ]
-[v _state `E23098 ~T0 @X0 1 r2 ]
+[v _state `E23101 ~T0 @X0 1 r2 ]
 [f ]
 "100
 [; ;../canpan3Leds.c: 100:     setLedStateNoSave(ledNo, state);
@@ -3684,8 +3684,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $ ! != & -> _startupNv `i -> 2 `i -> 0 `i 3245  ]
 {
 "102
-[; ;../canpan3Leds.c: 102:         writeNVM(EEPROM_NVM_TYPE, 0x0040 +ledNo, (uint8_t)state);
-[e ( _writeNVM (3 , , . `E22862 0 -> -> + -> 64 `i -> _ledNo `i `m `um -> _state `uc ]
+[; ;../canpan3Leds.c: 102:         EEPROM_WriteNoVerify(0x0040 +ledNo, (uint8_t)state);
+[e ( _EEPROM_WriteNoVerify (2 , -> -> + -> 64 `i -> _ledNo `i `m `um -> _state `uc ]
 "103
 [; ;../canpan3Leds.c: 103:     }
 }
@@ -3781,10 +3781,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 [e $U 3250  ]
 [e :U 3251 ]
-[e [\ -> *U + &U _ledStates * -> _ledNo `ux -> -> # *U &U _ledStates `ui `ux `ui , $ -> . `E23098 2 `ui 3252
- , $ -> . `E23098 3 `ui 3255
- , $ -> . `E23098 0 `ui 3258
- , $ -> . `E23098 1 `ui 3259
+[e [\ -> *U + &U _ledStates * -> _ledNo `ux -> -> # *U &U _ledStates `ui `ux `ui , $ -> . `E23101 2 `ui 3252
+ , $ -> . `E23101 3 `ui 3255
+ , $ -> . `E23101 0 `ui 3258
+ , $ -> . `E23101 1 `ui 3259
  3250 ]
 [e :U 3250 ]
 "133

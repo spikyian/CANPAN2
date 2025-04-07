@@ -41,6 +41,8 @@ extern uint8_t APP_isProducedEvent(uint8_t tableIndex);
 extern void rebuildLookupTable(void);
 extern void initEvents(void);
 
+extern uint8_t switch2Event[NUM_PRODUCED_EVENTS];
+
 // EV1 value
 #define CANPAN_CONSUMED 0
 #define CANPAN_PRODUCED 1

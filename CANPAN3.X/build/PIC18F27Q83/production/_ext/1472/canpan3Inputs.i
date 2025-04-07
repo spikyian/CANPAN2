@@ -38433,8 +38433,10 @@ extern void initRomOps(void);
 
 
 extern int16_t readNVM(NVMtype type, uint24_t index);
-# 169 "../../VLCBlib_PIC/nvm.h"
+# 171 "../../VLCBlib_PIC/nvm.h"
 extern uint8_t writeNVM(NVMtype type, uint24_t index, uint8_t value);
+# 180 "../../VLCBlib_PIC/nvm.h"
+extern uint8_t EEPROM_WriteNoVerify(eeprom_address_t index, eeprom_data_t value);
 
 
 
@@ -38888,6 +38890,8 @@ extern EventState APP_GetEventIndexState(uint8_t tableIndex);
 extern uint8_t APP_isProducedEvent(uint8_t tableIndex);
 extern void rebuildLookupTable(void);
 extern void initEvents(void);
+
+extern uint8_t switch2Event[((8*4)+1)];
 # 46 "../canpan3Inputs.c" 2
 
 # 1 "../canpan3Inputs.h" 1
@@ -38898,6 +38902,7 @@ extern void doSoD(void);
 extern void canpanSetAllSwitchOff(void);
 extern void loadInputs(void);
 extern void doFlash(void);
+extern void canpanSendProducedEvent(uint8_t tableIndex, uint8_t onOff);
 
 extern uint8_t outputState[(8*4)];
 extern uint8_t canpanScanReady;
@@ -38948,8 +38953,7 @@ uint8_t outputState[(8*4)];
 
 static uint8_t column;
 uint8_t canpanScanReady;
-extern uint8_t switch2Event[(8*4)];
-# 66 "../canpan3Inputs.c"
+# 65 "../canpan3Inputs.c"
 void driveColumn(void);
 uint8_t findEventForSwitch(uint8_t buttonNo);
 TimedResponseResult sodTRCallback(uint8_t type, uint8_t serviceIndex, uint8_t step);
@@ -39036,7 +39040,7 @@ void inputScan(void) {
                 switchMode = 0;
                 tableIndex = findEventForSwitch(buttonNo & 0xFE);
                 if (tableIndex != 0xff) {
-                    sv = (uint8_t)getNV(35 + (buttonNo & 0xFE));
+                    sv = (uint8_t)getNV((3 +(8*4)) + (buttonNo & 0xFE));
                     if (sv & 1) {
                         switchMode = (buttonNo & 1) ? 5 : 4;
                     } else {
@@ -39094,7 +39098,7 @@ void inputScan(void) {
                                 }
                                 onOff = outputState[buttonNo];
                                 if ((getNV(1) & 0x01) == 0) {
-                                    writeNVM(EEPROM_NVM_TYPE, 0x0000 + buttonNo, outputState[buttonNo]);
+                                    EEPROM_WriteNoVerify(0x0000 + buttonNo, outputState[buttonNo]);
                                 }
                                 break;
                             case 4:
@@ -39193,7 +39197,7 @@ void driveColumn(void) {
 
 
 uint8_t findEventForSwitch(uint8_t switchNo) {
-    if (switchNo < (8*4)) {
+    if (switchNo < ((8*4)+1)) {
         return switch2Event[switchNo];
     }
     return 0xff;
@@ -39210,7 +39214,7 @@ void doSoD(void) {
         startTimedResponse(1, findServiceIndex(SERVICE_ID_PRODUCER), sodTRCallback);
     }
 }
-# 338 "../canpan3Inputs.c"
+# 337 "../canpan3Inputs.c"
 TimedResponseResult sodTRCallback(uint8_t type, uint8_t serviceIndex, uint8_t tableIndex) {
     EventState value;
     uint8_t sv;

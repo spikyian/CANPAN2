@@ -38433,8 +38433,10 @@ extern void initRomOps(void);
 
 
 extern int16_t readNVM(NVMtype type, uint24_t index);
-# 169 "../../VLCBlib_PIC/nvm.h"
+# 171 "../../VLCBlib_PIC/nvm.h"
 extern uint8_t writeNVM(NVMtype type, uint24_t index, uint8_t value);
+# 180 "../../VLCBlib_PIC/nvm.h"
+extern uint8_t EEPROM_WriteNoVerify(eeprom_address_t index, eeprom_data_t value);
 
 
 
@@ -39012,6 +39014,7 @@ extern void doSoD(void);
 extern void canpanSetAllSwitchOff(void);
 extern void loadInputs(void);
 extern void doFlash(void);
+extern void canpanSendProducedEvent(uint8_t tableIndex, uint8_t onOff);
 
 extern uint8_t outputState[(8*4)];
 extern uint8_t canpanScanReady;
@@ -39022,6 +39025,8 @@ extern uint8_t canpanScanReady;
 extern uint8_t APP_isProducedEvent(uint8_t tableIndex);
 extern void rebuildLookupTable(void);
 extern void initEvents(void);
+
+extern uint8_t switch2Event[((8*4)+1)];
 # 63 "../main.c" 2
 
 # 1 "../canpan3Outputs.h" 1
@@ -39158,13 +39163,16 @@ void setup(void) {
 
 
 void loop(void) {
+    uint8_t tableIndex;
 
-    if (!started && ((tickGet() - startTime.val) > (62500*2))) {
-        started = TRUE;
 
-    }
-
-    if (started) {
+    if (started == FALSE) {
+        if ((tickGet() - startTime.val) > ((62500*2)+getNV(((3 +(8*4)) + (8*4)))*62500)) {
+            started = TRUE;
+            tableIndex = switch2Event[((8*4)+1)-1];
+            if (tableIndex != 0xff) canpanSendProducedEvent(tableIndex, TRUE);
+        }
+    } else {
         if ((tickGet() - lastInputScanTime.val) > 2*(62500/1000)) {
             inputScan();
             lastInputScanTime.val = tickGet();
@@ -39178,7 +39186,7 @@ void loop(void) {
 
     pollOutputs();
 }
-# 293 "../main.c"
+# 296 "../main.c"
 ValidTime APP_isSuitableTimeToWriteFlash(void){
     return GOOD_TIME;
 }

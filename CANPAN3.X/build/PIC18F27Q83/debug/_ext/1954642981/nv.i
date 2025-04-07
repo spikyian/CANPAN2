@@ -38519,8 +38519,10 @@ extern void initRomOps(void);
 
 
 extern int16_t readNVM(NVMtype type, uint24_t index);
-# 169 "../../VLCBlib_PIC/nvm.h"
+# 171 "../../VLCBlib_PIC/nvm.h"
 extern uint8_t writeNVM(NVMtype type, uint24_t index, uint8_t value);
+# 180 "../../VLCBlib_PIC/nvm.h"
+extern uint8_t EEPROM_WriteNoVerify(eeprom_address_t index, eeprom_data_t value);
 
 
 
@@ -38909,7 +38911,7 @@ const Service nvService = {
 
 
 
-static uint8_t nvCache[66 +1];
+static uint8_t nvCache[67 +1];
 
 
 
@@ -38930,7 +38932,7 @@ extern uint8_t APP_nvDefault(uint8_t index);
 
 static void nvFactoryReset(void) {
     uint8_t i;
-    for (i=1; i<= 66; i++) {
+    for (i=1; i<= 67; i++) {
         writeNVM(EEPROM_NVM_TYPE, 0x200 +i, APP_nvDefault(i));
     }
 }
@@ -38968,7 +38970,7 @@ void loadNvCache(void) {
     uint8_t i;
     int16_t temp;
 
-    for (i=1; i<= 66; i++) {
+    for (i=1; i<= 67; i++) {
         temp = readNVM(EEPROM_NVM_TYPE, 0x200 +i);
         if (temp < 0) {
 
@@ -38985,8 +38987,8 @@ void loadNvCache(void) {
 
 
 int16_t getNV(uint8_t index) {
-    if (index == 0) return 66;
-    if (index > 66) return -CMDERR_INV_NV_IDX;
+    if (index == 0) return 67;
+    if (index > 67) return -CMDERR_INV_NV_IDX;
 
     return nvCache[index];
 
@@ -39004,7 +39006,7 @@ void saveNV(uint8_t index, uint8_t value) {
 uint8_t setNV(uint8_t index, uint8_t value) {
     uint8_t oldValue;
 
-    if (index > 66) return CMDERR_INV_NV_IDX;
+    if (index > 67) return CMDERR_INV_NV_IDX;
     if (APP_nvValidate(index, value) == INVALID) return CMDERR_INV_NV_VALUE;
 
     oldValue = nvCache[index];
@@ -39132,14 +39134,14 @@ static Processed nvProcessMessage(Message * m) {
 # 354 "../../VLCBlib_PIC/nv.c"
 static uint8_t nvGetESDdata(uint8_t id) {
     switch (id) {
-        case 1: return 66;
+        case 1: return 67;
         default: return 0;
     }
 }
 # 369 "../../VLCBlib_PIC/nv.c"
 TimedResponseResult nvTRnvrdCallback(uint8_t type, uint8_t serviceIndex, uint8_t step) {
     int16_t valueOrError;
-    if (step > 66) {
+    if (step > 67) {
         return TIMED_RESPONSE_RESULT_FINISHED;
     }
     valueOrError = getNV(step+1);

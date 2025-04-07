@@ -38519,8 +38519,10 @@ extern void initRomOps(void);
 
 
 extern int16_t readNVM(NVMtype type, uint24_t index);
-# 169 "../../VLCBlib_PIC/nvm.h"
+# 171 "../../VLCBlib_PIC/nvm.h"
 extern uint8_t writeNVM(NVMtype type, uint24_t index, uint8_t value);
+# 180 "../../VLCBlib_PIC/nvm.h"
+extern uint8_t EEPROM_WriteNoVerify(eeprom_address_t index, eeprom_data_t value);
 
 
 
@@ -38843,7 +38845,7 @@ const uint8_t paramBlock[] __attribute__((address(0x820))) = {
     MTYP_CANPAN,
     254,
     13,
-    66,
+    67,
     5,
     0x08
 
@@ -38867,7 +38869,7 @@ const uint8_t paramBlock[] __attribute__((address(0x820))) = {
     0,8,0,0,
     0,0,0,0,
     CPUM_MICROCHIP,
-    4,
+    5,
     0,
     0,
     0,
@@ -38878,8 +38880,8 @@ const uint8_t paramBlock[] __attribute__((address(0x820))) = {
     0x08,
     0,
     0,
-    ((MANU_MERG+'a'+MTYP_CANPAN+254 +13 +66 +5 +(8) +(8)+CPUM_MICROCHIP+4 +(20)+(0x48)+(0x08)+1 +2 +PB_CAN+P18F27Q83)&0xFF),
-    ((MANU_MERG+'a'+MTYP_CANPAN+254 +13 +66 +5 +(8) +(8)+CPUM_MICROCHIP+4 +(20)+(0x48)+(0x08)+1 +2 +PB_CAN+P18F27Q83)>>8)
+    ((MANU_MERG+'a'+MTYP_CANPAN+254 +13 +67 +5 +(8) +(8)+CPUM_MICROCHIP+5 +(20)+(0x48)+(0x08)+1 +2 +PB_CAN+P18F27Q83)&0xFF),
+    ((MANU_MERG+'a'+MTYP_CANPAN+254 +13 +67 +5 +(8) +(8)+CPUM_MICROCHIP+5 +(20)+(0x48)+(0x08)+1 +2 +PB_CAN+P18F27Q83)>>8)
 };
 
 

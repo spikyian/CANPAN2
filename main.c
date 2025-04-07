@@ -257,13 +257,16 @@ void setup(void) {
  * The loop code call repeatedly from VLCB.
  */
 void loop(void) {
+    uint8_t tableIndex;
+    
     // Startup delay for CBUS about 2 seconds to let other modules get powered up - ISR will be running so incoming packets processed
-    if (!started && (tickTimeSince(startTime) >  TWO_SECOND)) {
-        started = TRUE;
-        // sendProducedEvent(HAPPENING_SOD, EVENT_ON);
-    }
-
-    if (started) {
+    if (started == FALSE) {
+        if (tickTimeSince(startTime) >  (TWO_SECOND+getNV(NV_STARTUP_EVENT_DELAY)*ONE_SECOND)) {
+            started = TRUE;
+            tableIndex = switch2Event[SOD_PSEUDO_SWITCH-1];
+            if (tableIndex != NO_INDEX) canpanSendProducedEvent(tableIndex, TRUE);
+        }
+    } else {
         if (tickTimeSince(lastInputScanTime) > 2*ONE_MILI_SECOND) {
             inputScan();    // Strobe inputs for changes
             lastInputScanTime.val = tickGet();

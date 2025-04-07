@@ -38520,8 +38520,10 @@ extern void initRomOps(void);
 
 
 extern int16_t readNVM(NVMtype type, uint24_t index);
-# 169 "../../VLCBlib_PIC/nvm.h"
+# 171 "../../VLCBlib_PIC/nvm.h"
 extern uint8_t writeNVM(NVMtype type, uint24_t index, uint8_t value);
+# 180 "../../VLCBlib_PIC/nvm.h"
+extern uint8_t EEPROM_WriteNoVerify(eeprom_address_t index, eeprom_data_t value);
 
 
 
@@ -39062,7 +39064,7 @@ static void mnsPowerUp(void) {
 
     mode_flags |= 8;
 
-
+    last_mode_flags = mode_flags;
     setLEDsByMode();
 
     pbTimer.val = tickGet();
@@ -39119,7 +39121,7 @@ static Processed mnsProcessMessage(Message * m) {
             case OPC_RQNP:
                 sendMessage7(OPC_PARAMS, MANU_MERG, 'a',
                         MTYP_CANPAN, 254, 13,
-                        66, 5);
+                        67, 5);
                 return PROCESSED;
             case OPC_RQMN:
                 sendMessage7(OPC_NAME, name[0], name[1], name[2], name[3],
@@ -39548,7 +39550,7 @@ static uint8_t getParameter(uint8_t idx) {
     case PAR_EVNUM:
         return 13;
     case PAR_NVNUM:
-        return 66;
+        return 67;
     case PAR_MAJVER:
         return 5;
     case PAR_FLAGS:
@@ -39581,7 +39583,7 @@ static uint8_t getParameter(uint8_t idx) {
     case PAR_CPUMAN:
         return CPUM_MICROCHIP;
     case PAR_BETA:
-        return 4;
+        return 5;
     default:
         return 0;
     }

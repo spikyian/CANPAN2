@@ -38433,8 +38433,10 @@ extern void initRomOps(void);
 
 
 extern int16_t readNVM(NVMtype type, uint24_t index);
-# 169 "../../VLCBlib_PIC/nvm.h"
+# 171 "../../VLCBlib_PIC/nvm.h"
 extern uint8_t writeNVM(NVMtype type, uint24_t index, uint8_t value);
+# 180 "../../VLCBlib_PIC/nvm.h"
+extern uint8_t EEPROM_WriteNoVerify(eeprom_address_t index, eeprom_data_t value);
 
 
 
@@ -38889,7 +38891,7 @@ void setLedStateNoSave(uint8_t ledNo, enum canpan3LedState state) {
 void setLedState(uint8_t ledNo, enum canpan3LedState state) {
     setLedStateNoSave(ledNo, state);
     if (startupNv & 0x02) {
-        writeNVM(EEPROM_NVM_TYPE, 0x0040 +ledNo, (uint8_t)state);
+        EEPROM_WriteNoVerify(0x0040 +ledNo, (uint8_t)state);
     }
 }
 

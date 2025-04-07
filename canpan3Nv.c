@@ -56,6 +56,8 @@ uint8_t APP_nvDefault(uint8_t index) {
                 return 16;
         if (index <= (NV_SWITCHMODE + NUM_BUTTONS))
                 return 0x00;
+        if (index == NV_STARTUP_EVENT_DELAY)
+            return 0;
     }
     return 0;
 }

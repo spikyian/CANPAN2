@@ -38433,8 +38433,10 @@ extern void initRomOps(void);
 
 
 extern int16_t readNVM(NVMtype type, uint24_t index);
-# 169 "../../VLCBlib_PIC/nvm.h"
+# 171 "../../VLCBlib_PIC/nvm.h"
 extern uint8_t writeNVM(NVMtype type, uint24_t index, uint8_t value);
+# 180 "../../VLCBlib_PIC/nvm.h"
+extern uint8_t EEPROM_WriteNoVerify(eeprom_address_t index, eeprom_data_t value);
 
 
 
@@ -38810,7 +38812,7 @@ extern void loadNvCache(void);
 
 
 uint8_t APP_nvDefault(uint8_t index) {
-    if (index < 66) {
+    if (index < 67) {
 
         if (index == 1)
                 return 0;
@@ -38818,8 +38820,10 @@ uint8_t APP_nvDefault(uint8_t index) {
                 return (62500/2)/1000;
         if (index < (3 + (4*8)))
                 return 16;
-        if (index <= (35 + (8*4)))
+        if (index <= ((3 +(8*4)) + (8*4)))
                 return 0x00;
+        if (index == ((3 +(8*4)) + (8*4)))
+            return 0;
     }
     return 0;
 }

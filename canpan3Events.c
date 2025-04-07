@@ -49,7 +49,7 @@ void rebuildLookupTable(void);
 
 extern void clearAllEvents(void);
 uint8_t APP_isProducedEvent(uint8_t tableIndex);
-uint8_t switch2Event[NUM_BUTTONS]; // Quick access from a switch number to an event
+uint8_t switch2Event[NUM_PRODUCED_EVENTS]; // Quick access from a switch number to an event
 
 void factoryResetGlobalEvents(void) {
     // No default switch/button events
@@ -113,13 +113,13 @@ void rebuildLookupTable(void) {
     uint8_t i;
     // zero out the lookup first
     
-    for (sw=0; sw < NUM_BUTTONS; sw++) {
+    for (sw=0; sw < NUM_PRODUCED_EVENTS; sw++) {
         switch2Event[sw] = NO_INDEX;
     }
     // Add in the events
     for (i=0; i<NUM_EVENTS; i++) {
         swNo = getEv(i, EV_SWITCHNO);
-        if ((swNo >0) && ( swNo <= NUM_BUTTONS)) {
+        if ((swNo >0) && ( swNo <= NUM_PRODUCED_EVENTS)) {
             switch2Event[swNo-1] = i;
         }
     }
@@ -164,7 +164,7 @@ uint8_t APP_isProducedEvent(uint8_t tableIndex) {
     int16_t ev;
     
     ev = getEv(tableIndex, EV_SWITCHNO);
-    if ((ev > 0) && (ev <= NUM_BUTTONS)) {
+    if ((ev > 0) && (ev <= NUM_PRODUCED_EVENTS)) {
         return 1;
     }
     return 0;
@@ -266,7 +266,7 @@ uint8_t APP_addEvent(uint16_t nodeNumber, uint16_t eventNumber, uint8_t evNum, u
         switchNo = evVal;
         tableIndex = findEvent(nodeNumber, eventNumber);
         
-        if ((switchNo > 0) && (switchNo <= NUM_BUTTONS)) {
+        if ((switchNo > 0) && (switchNo <= NUM_PRODUCED_EVENTS)) {
             oti = switch2Event[switchNo-1];
             if ((oti != NO_INDEX) && (oti != tableIndex)){
                 // there is an old event for this switch

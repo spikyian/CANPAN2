@@ -53,7 +53,6 @@ uint8_t outputState[NUM_BUTTONS];
 
 static uint8_t column;  // Column number
 uint8_t canpanScanReady;   /// indicates if the code has had chance to read all the buttons
-extern uint8_t switch2Event[NUM_BUTTONS];
 
 #define MODE_UNKNOWN    0
 #define MODE_ON_OFF     1
@@ -207,7 +206,7 @@ void inputScan(void) {
                                 }
                                 onOff = outputState[buttonNo];
                                 if ((getNV(NV_STARTUP) & NV_STARTUP_RESTORESWITCHES) == 0) {
-                                    writeNVM(EEPROM_NVM_TYPE, EE_ADDR_SWITCHES + buttonNo, outputState[buttonNo]);
+                                    EEPROM_WriteNoVerify(EE_ADDR_SWITCHES + buttonNo, outputState[buttonNo]);
                                 }
                                 break;
                             case MODE_PAIR:
@@ -306,7 +305,7 @@ void driveColumn(void) {
  * @return 
  */
 uint8_t findEventForSwitch(uint8_t switchNo) {
-    if (switchNo < NUM_BUTTONS) {
+    if (switchNo < NUM_PRODUCED_EVENTS) {
         return switch2Event[switchNo];
     }
     return NO_INDEX;

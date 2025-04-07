@@ -38519,8 +38519,10 @@ extern void initRomOps(void);
 
 
 extern int16_t readNVM(NVMtype type, uint24_t index);
-# 169 "../../VLCBlib_PIC/nvm.h"
+# 171 "../../VLCBlib_PIC/nvm.h"
 extern uint8_t writeNVM(NVMtype type, uint24_t index, uint8_t value);
+# 180 "../../VLCBlib_PIC/nvm.h"
+extern uint8_t EEPROM_WriteNoVerify(eeprom_address_t index, eeprom_data_t value);
 
 
 
@@ -39599,10 +39601,20 @@ void sendMessage(VlcbOpCodes opc, uint8_t len, uint8_t data1, uint8_t data2, uin
 
 void main(void) {
     uint8_t i;
-# 1271 "../../VLCBlib_PIC/vlcb.c"
+    uint8_t t1,t2;
+# 1272 "../../VLCBlib_PIC/vlcb.c"
     OSCCON1bits.NOSC = 2;
     OSCCON1bits.NDIV = 0;
-# 1287 "../../VLCBlib_PIC/vlcb.c"
+# 1284 "../../VLCBlib_PIC/vlcb.c"
+    for (t1=0; t1<64; t1++) {
+        for (t2=0; t2<255; t2++) {
+            for (i=0; i<255; i++) {
+
+                (LATBbits.LATB7=0);
+            }
+        }
+    }
+# 1301 "../../VLCBlib_PIC/vlcb.c"
     IVTBASEU = 0x00;
     IVTBASEH = 0x09;
     IVTBASEL = 0x00;
@@ -39610,7 +39622,7 @@ void main(void) {
     IVTLOCK = 0x55;
     IVTLOCK = 0xAA;
     IVTLOCKbits.IVTLOCKED = 0x01;
-# 1305 "../../VLCBlib_PIC/vlcb.c"
+# 1319 "../../VLCBlib_PIC/vlcb.c"
     initRomOps();
 
     if (readNVM(EEPROM_NVM_TYPE, 0x3FA) != 1) {
@@ -39637,7 +39649,7 @@ void main(void) {
         loop();
     }
 }
-# 1350 "../../VLCBlib_PIC/vlcb.c"
+# 1364 "../../VLCBlib_PIC/vlcb.c"
 void __attribute__((picinterrupt(("irq(default), base(0x900)")))) DEFAULT_ISR(void)
 {
 

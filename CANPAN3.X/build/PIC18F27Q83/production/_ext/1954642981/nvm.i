@@ -38519,8 +38519,10 @@ extern void initRomOps(void);
 
 
 extern int16_t readNVM(NVMtype type, uint24_t index);
-# 169 "../../VLCBlib_PIC/nvm.h"
+# 171 "../../VLCBlib_PIC/nvm.h"
 extern uint8_t writeNVM(NVMtype type, uint24_t index, uint8_t value);
+# 180 "../../VLCBlib_PIC/nvm.h"
+extern uint8_t EEPROM_WriteNoVerify(eeprom_address_t index, eeprom_data_t value);
 
 
 
@@ -38846,6 +38848,8 @@ eeprom_data_t EEPROM_Read(eeprom_address_t index) {
     while (NVMCON0bits.GO)
         ;
 
+
+    NVMCON1bits.NVMCMD = 0x07;
     return NVMDATL;
 
 }
@@ -38859,48 +38863,76 @@ eeprom_data_t EEPROM_Read(eeprom_address_t index) {
 uint8_t EEPROM_Write(eeprom_address_t index, eeprom_data_t value) {
     uint8_t interruptEnabled;
     interruptEnabled = (INTCON0bits.GIE);
-# 245 "../../VLCBlib_PIC/nvm.c"
-        while (NVMCON0bits.GO)
-            ;
 
-        NVMADRU = 0x38;
-        NVMADRH = (uint8_t) (index >> 8);
-        NVMADRL = (uint8_t) index;
+    do {
+        EEPROM_WriteNoVerify(index, value);
 
 
-        NVMDATL = value;
-
-
-        NVMCON1bits.NVMCMD = 0x03;
-
-
-        {INTCON0bits.GIE = 0;};
-
-
-        NVMLOCK = 0x55;
-        NVMLOCK = 0xAA;
-
-
-        NVMCON0bits.GO = 1;
-
-        if (interruptEnabled) {
-
-            {INTCON0bits.GIE = 1;};
+        if (EEPROM_Read(index) == value) {
+            break;
         }
 
+        mnsDiagnostics[0x04].asUint++;
+        updateModuleErrorStatus();
 
-        NVMCON1bits.NVMCMD = 0x07;
-# 287 "../../VLCBlib_PIC/nvm.c"
+    } while (1);
+
+
+    NVMCON1bits.NVMCMD = 0x07;
+    NVMADR = 0;
+
     return GRSP_OK;
 }
-# 297 "../../VLCBlib_PIC/nvm.c"
+
+
+
+
+
+
+
+uint8_t EEPROM_WriteNoVerify(eeprom_address_t index, eeprom_data_t value) {
+    uint8_t interruptEnabled;
+    interruptEnabled = (INTCON0bits.GIE);
+# 276 "../../VLCBlib_PIC/nvm.c"
+    while (NVMCON0bits.GO)
+        ;
+
+    NVMADRU = 0x38;
+    NVMADRH = (uint8_t) (index >> 8);
+    NVMADRL = (uint8_t) index;
+
+
+    NVMDATL = value;
+
+
+    NVMCON1bits.NVMCMD = 0x03;
+
+
+    {INTCON0bits.GIE = 0;};
+
+
+    NVMLOCK = 0x55;
+    NVMLOCK = 0xAA;
+
+
+    NVMCON0bits.GO = 1;
+
+    if (interruptEnabled) {
+
+        {INTCON0bits.GIE = 1;};
+    }
+
+
+    return GRSP_OK;
+}
+# 315 "../../VLCBlib_PIC/nvm.c"
 static flash_data_t FLASH_Read(flash_address_t address) {
 
     if ((address&(~((flash_address_t)(256U)-1))) == flashBlock) {
 
         return flashBuffer[(address&((256U)-1))];
     } else {
-# 311 "../../VLCBlib_PIC/nvm.c"
+# 329 "../../VLCBlib_PIC/nvm.c"
         TBLPTRU = (uint8_t) (address >> 16);
         TBLPTRH = (uint8_t) (address >> 8);
         TBLPTRL = (uint8_t) address;
@@ -38924,7 +38956,7 @@ void eraseFlashBlock(void) {
         ;
 
     interruptEnabled = (INTCON0bits.GIE);
-# 351 "../../VLCBlib_PIC/nvm.c"
+# 369 "../../VLCBlib_PIC/nvm.c"
     while (NVMCON0bits.GO)
         ;
 
@@ -38972,7 +39004,7 @@ void flushFlashBlock(void) {
 
     interruptEnabled = (INTCON0bits.GIE);
     {INTCON0bits.GIE = 0;};
-# 423 "../../VLCBlib_PIC/nvm.c"
+# 441 "../../VLCBlib_PIC/nvm.c"
     while (NVMCON0bits.GO)
         ;
 
@@ -39002,7 +39034,7 @@ void flushFlashBlock(void) {
 
 
 void loadFlashBlock(void) {
-# 466 "../../VLCBlib_PIC/nvm.c"
+# 484 "../../VLCBlib_PIC/nvm.c"
     while (NVMCON0bits.GO)
         ;
 
@@ -39017,10 +39049,10 @@ void loadFlashBlock(void) {
 
     flashFlags.asByte = 0;
 }
-# 489 "../../VLCBlib_PIC/nvm.c"
+# 507 "../../VLCBlib_PIC/nvm.c"
 uint8_t FLASH_Write(flash_address_t index, flash_data_t value) {
     uint8_t oldValue;
-# 505 "../../VLCBlib_PIC/nvm.c"
+# 523 "../../VLCBlib_PIC/nvm.c"
     if ((index&(~((flash_address_t)(256U)-1))) != flashBlock) {
         if (flashBlock != 0) {
 
@@ -39043,7 +39075,7 @@ uint8_t FLASH_Write(flash_address_t index, flash_data_t value) {
     }
     return GRSP_OK;
 }
-# 535 "../../VLCBlib_PIC/nvm.c"
+# 553 "../../VLCBlib_PIC/nvm.c"
 uint8_t writeNVM(NVMtype type, uint24_t index, uint8_t value) {
     switch(type) {
         case EEPROM_NVM_TYPE:

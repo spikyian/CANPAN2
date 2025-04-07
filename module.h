@@ -26,7 +26,7 @@
 //
 // NV service
 //
-#define NV_NUM          66
+#define NV_NUM          67
 #define NV_ADDRESS      0x200
 #define NV_NVM_TYPE     EEPROM_NVM_TYPE
 
@@ -119,7 +119,7 @@
 #define PARAM_MODULE_ID         MTYP_CANPAN
 #define PARAM_MAJOR_VERSION     5
 #define PARAM_MINOR_VERSION     'a'
-#define PARAM_BUILD_VERSION     4
+#define PARAM_BUILD_VERSION     5
 // Module name - must be 7 characters
 #define NAME    "PAN    "
 
@@ -146,6 +146,10 @@
 #define NUM_BUTTON_COLUMNS  8
 #define NUM_BUTTON_ROWS     4
 #define NUM_BUTTONS         (NUM_BUTTON_COLUMNS*NUM_BUTTON_ROWS)
+
+#define NUM_PRODUCED_EVENTS (NUM_BUTTONS+1)     // +1 for the auto generated SoD
+#define SOD_PSEUDO_SWITCH   (NUM_BUTTONS+1)
+
 #define NUM_LED_ROWS        4
 #define NUM_LED_COLUMNS     8
 #define NUM_LEDS            (NUM_LED_ROWS*NUM_LED_COLUMNS)

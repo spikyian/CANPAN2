@@ -99,7 +99,7 @@ void setLedStateNoSave(uint8_t ledNo, enum canpan3LedState state) {
 void setLedState(uint8_t ledNo, enum canpan3LedState state) {
     setLedStateNoSave(ledNo, state);
     if (startupNv & NV_STARTUP_RESTORELEDS) {
-        writeNVM(EEPROM_NVM_TYPE, EE_ADDR_LEDS+ledNo, (uint8_t)state);
+        EEPROM_WriteNoVerify(EE_ADDR_LEDS+ledNo, (uint8_t)state);
     }
 }
 

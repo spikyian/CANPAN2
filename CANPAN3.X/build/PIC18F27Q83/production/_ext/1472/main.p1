@@ -8,8 +8,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "211
 [u S3228 `ul 1 `S3229 1 `uc -> 4 `i `S3230 1 ]
 [n S3228 _TickValue val byte v word ]
-[v F22999 `(v ~T0 @X0 0 tf ]
-[v F23001 `(v ~T0 @X0 0 tf ]
+[v F23002 `(v ~T0 @X0 0 tf ]
+[v F23004 `(v ~T0 @X0 0 tf ]
 "155 ../main.c
 [; ;../main.c: 155: const Service * const services[] = {
 [c E22514 0 1 2 3 4 5 6 7 8 9 10 12 13 16 17 33 34 35 48 63 64 65 66 67 68 69 70 71 72 73 74 76 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 99 111 112 113 114 115 116 117 118 120 127 128 130 131 132 133 135 142 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 162 171 172 175 176 177 178 179 180 181 182 184 185 189 190 191 192 193 194 199 207 208 209 210 211 212 213 216 217 221 222 223 224 225 226 227 230 231 233 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 164 .. ]
@@ -19,20 +19,20 @@ Version 4.0 HI-TECH Software Intermediate Code
 [n S3221 Message len opc bytes ]
 "155 ../main.c
 [; ;../main.c: 155: const Service * const services[] = {
-[c E22923 0 1 .. ]
-[n E22923 Processed NOT_PROCESSED PROCESSED  ]
-[v F23003 `(E22923 ~T0 @X0 0 tf1`*S3221 ]
-[v F23006 `(v ~T0 @X0 0 tf ]
-[v F23008 `(uc ~T0 @X0 0 tf1`uc ]
+[c E22926 0 1 .. ]
+[n E22926 Processed NOT_PROCESSED PROCESSED  ]
+[v F23006 `(E22926 ~T0 @X0 0 tf1`*S3221 ]
+[v F23009 `(v ~T0 @X0 0 tf ]
+[v F23011 `(uc ~T0 @X0 0 tf1`uc ]
 "150 ../../VLCBlib_PIC\vlcb.h
 [s S3225 `uc 1 `uc 1 ]
 [n S3225 . lo hi ]
 "147
 [u S3224 `us 1 `s 1 `S3225 1 ]
 [n S3224 DiagnosticVal asUint asInt asBytes ]
-[v F23011 `(*S3224 ~T0 @X0 0 tf1`uc ]
+[v F23014 `(*S3224 ~T0 @X0 0 tf1`uc ]
 "299
-[s S3226 `uc 1 `uc 1 `*F22999 1 `*F23001 1 `*F23003 1 `*F23006 1 `*F23008 1 `*F23011 1 ]
+[s S3226 `uc 1 `uc 1 `*F23002 1 `*F23004 1 `*F23006 1 `*F23009 1 `*F23011 1 `*F23014 1 ]
 [n S3226 Service serviceNo version factoryReset powerUp processMessage poll getESDdata getDiagnostic ]
 "85 ../../VLCBlib_PIC\can.h
 [; ;../../VLCBlib_PIC\can.h: 85: extern const Service canService;
@@ -66,7 +66,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;../main.c: 181:         writeNVM(EEPROM_NVM_TYPE, 0x0000 +sw, 0);
 [c E22862 0 1 .. ]
 [n E22862 . EEPROM_NVM_TYPE FLASH_NVM_TYPE  ]
-"169 ../../VLCBlib_PIC\nvm.h
+"171 ../../VLCBlib_PIC\nvm.h
 [v _writeNVM `(uc ~T0 @X0 0 ef3`E22862`um`uc ]
 "142 ../main.c
 [; ;../main.c: 142: extern void clearAllEvents(void);
@@ -76,14 +76,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _addTestEvent `(uc ~T0 @X0 0 ef1`uc ]
 "212
 [; ;../main.c: 212:     transport = &canTransport;
-[c E23034 0 1 .. ]
-[n E23034 SendResult SEND_FAILED SEND_OK  ]
-[v F23040 `(E23034 ~T0 @X0 0 tf1`*S3221 ]
-[c E23030 0 1 .. ]
-[n E23030 MessageReceived NOT_RECEIVED RECEIVED  ]
-[v F23043 `(E23030 ~T0 @X0 0 tf1`*S3221 ]
+[c E23037 0 1 .. ]
+[n E23037 SendResult SEND_FAILED SEND_OK  ]
+[v F23043 `(E23037 ~T0 @X0 0 tf1`*S3221 ]
+[c E23033 0 1 .. ]
+[n E23033 MessageReceived NOT_RECEIVED RECEIVED  ]
+[v F23046 `(E23033 ~T0 @X0 0 tf1`*S3221 ]
 "422 ../../VLCBlib_PIC\vlcb.h
-[s S3227 `*F23040 1 `*F23043 1 ]
+[s S3227 `*F23043 1 `*F23046 1 ]
 [n S3227 Transport sendMessage receiveMessage ]
 "434
 [v _transport `*CS3227 ~T0 @X0 0 e ]
@@ -137,15 +137,21 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _tickGet `(ul ~T0 @X0 0 ef ]
 "250 ../main.c
 [; ;../main.c: 250:     started = FALSE;
-[c E22890 0 1 .. ]
-[n E22890 Boolean FALSE TRUE  ]
-"51 ../canpan3Inputs.h
-[; ;../canpan3Inputs.h: 51: extern uint8_t canpanScanReady;
+[c E22893 0 1 .. ]
+[n E22893 Boolean FALSE TRUE  ]
+"52 ../canpan3Inputs.h
+[; ;../canpan3Inputs.h: 52: extern uint8_t canpanScanReady;
 [v _canpanScanReady `uc ~T0 @X0 0 e ]
 "116 ../../VLCBlib_PIC\nv.h
 [; ;../../VLCBlib_PIC\nv.h: 116: extern int16_t getNV(uint8_t index);
 [v _getNV `(s ~T0 @X0 0 ef1`uc ]
-"44 ../canpan3Inputs.h
+"44 ../canpan3Events.h
+[; ;../canpan3Events.h: 44: extern uint8_t switch2Event[((8*4)+1)];
+[v _switch2Event `uc ~T0 @X0 -> 0 `x e ]
+"49 ../canpan3Inputs.h
+[; ;../canpan3Inputs.h: 49: extern void canpanSendProducedEvent(uint8_t tableIndex, uint8_t onOff);
+[v _canpanSendProducedEvent `(v ~T0 @X0 0 ef2`uc`uc ]
+"44
 [; ;../canpan3Inputs.h: 44: extern void inputScan(void);
 [v _inputScan `(v ~T0 @X0 0 ef ]
 "48
@@ -154,8 +160,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "41 ../canpan3Outputs.h
 [; ;../canpan3Outputs.h: 41: extern void pollOutputs(void);
 [v _pollOutputs `(v ~T0 @X0 0 ef ]
-"293 ../main.c
-[; ;../main.c: 293: ValidTime APP_isSuitableTimeToWriteFlash(void){
+"296 ../main.c
+[; ;../main.c: 296: ValidTime APP_isSuitableTimeToWriteFlash(void){
 [c E22866 0 1 .. ]
 [n E22866 ValidTime BAD_TIME GOOD_TIME  ]
 "364 C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h
@@ -3692,7 +3698,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 "153
 [; ;../main.c: 153: static TickValue outputPollTime;
 [v _outputPollTime `S3228 ~T0 @X0 1 s ]
-[v F23273 `*CS3226 ~T0 @X0 1 t ]
+[v F23280 `*CS3226 ~T0 @X0 1 t ]
 "155
 [; ;../main.c: 155: const Service * const services[] = {
 [v _services `C*CS3226 ~T0 @X0 -> 8 `i e ]
@@ -3841,7 +3847,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = . _outputPollTime 0 . _startTime 0 ]
 "250
 [; ;../main.c: 250:     started = FALSE;
-[e = _started -> . `E22890 0 `uc ]
+[e = _started -> . `E22893 0 `uc ]
 "251
 [; ;../main.c: 251:     canpanScanReady = 0;
 [e = _canpanScanReady -> -> 0 `i `uc ]
@@ -3858,86 +3864,103 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 [e :U _loop ]
 [f ]
-"261
-[; ;../main.c: 261:     if (!started && ((tickGet() - startTime.val) > (62500*2))) {
-[e $ ! && ! != -> _started `i -> 0 `i > - ( _tickGet ..  . _startTime 0 -> * -> 62500 `l -> -> 2 `i `l `ul 3242  ]
+"260
+[; ;../main.c: 260:     uint8_t tableIndex;
+[v _tableIndex `uc ~T0 @X0 1 a ]
+"263
+[; ;../main.c: 263:     if (started == FALSE) {
+[e $ ! == -> _started `i -> . `E22893 0 `i 3242  ]
 {
-"262
-[; ;../main.c: 262:         started = TRUE;
-[e = _started -> . `E22890 1 `uc ]
 "264
-[; ;../main.c: 264:     }
-}
-[e :U 3242 ]
+[; ;../main.c: 264:         if ((tickGet() - startTime.val) > ((62500*2)+getNV(((3 +(8*4)) + (8*4)))*62500)) {
+[e $ ! > - ( _tickGet ..  . _startTime 0 -> + * -> 62500 `l -> -> 2 `i `l * -> ( _getNV (1 -> + + -> 3 `i * -> 8 `i -> 4 `i * -> 8 `i -> 4 `i `uc `l -> 62500 `l `ul 3243  ]
+{
+"265
+[; ;../main.c: 265:             started = TRUE;
+[e = _started -> . `E22893 1 `uc ]
 "266
-[; ;../main.c: 266:     if (started) {
-[e $ ! != -> _started `i -> 0 `i 3243  ]
-{
+[; ;../main.c: 266:             tableIndex = switch2Event[((8*4)+1)-1];
+[e = _tableIndex *U + &U _switch2Event * -> -> - + * -> 8 `i -> 4 `i -> 1 `i -> 1 `i `ui `ux -> -> # *U &U _switch2Event `ui `ux ]
 "267
-[; ;../main.c: 267:         if ((tickGet() - lastInputScanTime.val) > 2*(62500/1000)) {
-[e $ ! > - ( _tickGet ..  . _lastInputScanTime 0 -> * -> -> 2 `i `l / -> 62500 `l -> -> 1000 `i `l `ul 3244  ]
-{
-"268
-[; ;../main.c: 268:             inputScan();
-[e ( _inputScan ..  ]
-"269
-[; ;../main.c: 269:             lastInputScanTime.val = tickGet();
-[e = . _lastInputScanTime 0 ( _tickGet ..  ]
-"270
-[; ;../main.c: 270:         }
-}
+[; ;../main.c: 267:             if (tableIndex != 0xff) canpanSendProducedEvent(tableIndex, TRUE);
+[e $ ! != -> _tableIndex `i -> 255 `i 3244  ]
+[e ( _canpanSendProducedEvent (2 , _tableIndex -> . `E22893 1 `uc ]
 [e :U 3244 ]
-"272
-[; ;../main.c: 272:         if ((tickGet() - flashTime.val) > 1000*getNV(2)) {
-[e $ ! > - ( _tickGet ..  . _flashTime 0 -> -> * -> 1000 `i -> ( _getNV (1 -> -> 2 `i `uc `i `l `ul 3245  ]
-{
-"273
-[; ;../main.c: 273:             doFlash();
-[e ( _doFlash ..  ]
-"274
-[; ;../main.c: 274:             flashTime.val = tickGet();
-[e = . _flashTime 0 ( _tickGet ..  ]
-"275
-[; ;../main.c: 275:         }
-}
-[e :U 3245 ]
-"276
-[; ;../main.c: 276:     }
+"268
+[; ;../main.c: 268:         }
 }
 [e :U 3243 ]
+"269
+[; ;../main.c: 269:     } else {
+}
+[e $U 3245  ]
+[e :U 3242 ]
+{
+"270
+[; ;../main.c: 270:         if ((tickGet() - lastInputScanTime.val) > 2*(62500/1000)) {
+[e $ ! > - ( _tickGet ..  . _lastInputScanTime 0 -> * -> -> 2 `i `l / -> 62500 `l -> -> 1000 `i `l `ul 3246  ]
+{
+"271
+[; ;../main.c: 271:             inputScan();
+[e ( _inputScan ..  ]
+"272
+[; ;../main.c: 272:             lastInputScanTime.val = tickGet();
+[e = . _lastInputScanTime 0 ( _tickGet ..  ]
+"273
+[; ;../main.c: 273:         }
+}
+[e :U 3246 ]
+"275
+[; ;../main.c: 275:         if ((tickGet() - flashTime.val) > 1000*getNV(2)) {
+[e $ ! > - ( _tickGet ..  . _flashTime 0 -> -> * -> 1000 `i -> ( _getNV (1 -> -> 2 `i `uc `i `l `ul 3247  ]
+{
+"276
+[; ;../main.c: 276:             doFlash();
+[e ( _doFlash ..  ]
+"277
+[; ;../main.c: 277:             flashTime.val = tickGet();
+[e = . _flashTime 0 ( _tickGet ..  ]
 "278
-[; ;../main.c: 278:     pollOutputs();
-[e ( _pollOutputs ..  ]
+[; ;../main.c: 278:         }
+}
+[e :U 3247 ]
 "279
-[; ;../main.c: 279: }
+[; ;../main.c: 279:     }
+}
+[e :U 3245 ]
+"281
+[; ;../main.c: 281:     pollOutputs();
+[e ( _pollOutputs ..  ]
+"282
+[; ;../main.c: 282: }
 [e :UE 3241 ]
 }
-"293
-[; ;../main.c: 293: ValidTime APP_isSuitableTimeToWriteFlash(void){
+"296
+[; ;../main.c: 296: ValidTime APP_isSuitableTimeToWriteFlash(void){
 [v _APP_isSuitableTimeToWriteFlash `(E22866 ~T0 @X0 1 ef ]
 {
 [e :U _APP_isSuitableTimeToWriteFlash ]
 [f ]
-"294
-[; ;../main.c: 294:     return GOOD_TIME;
+"297
+[; ;../main.c: 297:     return GOOD_TIME;
 [e ) . `E22866 1 ]
-[e $UE 3246  ]
-"295
-[; ;../main.c: 295: }
-[e :UE 3246 ]
+[e $UE 3248  ]
+"298
+[; ;../main.c: 298: }
+[e :UE 3248 ]
 }
-"300
-[; ;../main.c: 300: Processed APP_postProcessMessage(Message * m) {
-[v _APP_postProcessMessage `(E22923 ~T0 @X0 1 ef1`*S3221 ]
+"303
+[; ;../main.c: 303: Processed APP_postProcessMessage(Message * m) {
+[v _APP_postProcessMessage `(E22926 ~T0 @X0 1 ef1`*S3221 ]
 {
 [e :U _APP_postProcessMessage ]
 [v _m `*S3221 ~T0 @X0 1 r1 ]
 [f ]
-"301
-[; ;../main.c: 301:     return NOT_PROCESSED;
-[e ) . `E22923 0 ]
-[e $UE 3247  ]
-"302
-[; ;../main.c: 302: }
-[e :UE 3247 ]
+"304
+[; ;../main.c: 304:     return NOT_PROCESSED;
+[e ) . `E22926 0 ]
+[e $UE 3249  ]
+"305
+[; ;../main.c: 305: }
+[e :UE 3249 ]
 }

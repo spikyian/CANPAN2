@@ -7,8 +7,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;../../VLCBlib_PIC/vlcb.h: 147: typedef union DiagnosticVal {
 [u S3227 `us 1 `s 1 `S3228 1 ]
 [n S3227 DiagnosticVal asUint asInt asBytes ]
-[v F23049 `(v ~T0 @X0 0 tf ]
-[v F23051 `(v ~T0 @X0 0 tf ]
+[v F23052 `(v ~T0 @X0 0 tf ]
+[v F23054 `(v ~T0 @X0 0 tf ]
 "73 ../../VLCBlib_PIC/event_consumer_simple.c
 [; ;../../VLCBlib_PIC/event_consumer_simple.c: 73: const Service eventConsumerService = {
 [c E22564 0 1 2 3 4 5 6 7 8 9 10 12 13 16 17 33 34 35 48 63 64 65 66 67 68 69 70 71 72 73 74 76 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 99 111 112 113 114 115 116 117 118 120 127 128 130 131 132 133 135 142 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 162 171 172 175 176 177 178 179 180 181 182 184 185 189 190 191 192 193 194 199 207 208 209 210 211 212 213 216 217 221 222 223 224 225 226 227 230 231 233 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 164 .. ]
@@ -19,28 +19,28 @@ Version 4.0 HI-TECH Software Intermediate Code
 [n S3224 Message len opc bytes ]
 "73 ../../VLCBlib_PIC/event_consumer_simple.c
 [; ;../../VLCBlib_PIC/event_consumer_simple.c: 73: const Service eventConsumerService = {
-[c E22973 0 1 .. ]
-[n E22973 Processed NOT_PROCESSED PROCESSED  ]
-[v F23053 `(E22973 ~T0 @X0 0 tf1`*S3224 ]
-[v F23056 `(v ~T0 @X0 0 tf ]
-[v F23058 `(uc ~T0 @X0 0 tf1`uc ]
-[v F23061 `(*S3227 ~T0 @X0 0 tf1`uc ]
+[c E22976 0 1 .. ]
+[n E22976 Processed NOT_PROCESSED PROCESSED  ]
+[v F23056 `(E22976 ~T0 @X0 0 tf1`*S3224 ]
+[v F23059 `(v ~T0 @X0 0 tf ]
+[v F23061 `(uc ~T0 @X0 0 tf1`uc ]
+[v F23064 `(*S3227 ~T0 @X0 0 tf1`uc ]
 "299 ../../VLCBlib_PIC/vlcb.h
 [; ;../../VLCBlib_PIC/vlcb.h: 299: typedef struct Service {
-[s S3229 `uc 1 `uc 1 `*F23049 1 `*F23051 1 `*F23053 1 `*F23056 1 `*F23058 1 `*F23061 1 ]
+[s S3229 `uc 1 `uc 1 `*F23052 1 `*F23054 1 `*F23056 1 `*F23059 1 `*F23061 1 `*F23064 1 ]
 [n S3229 Service serviceNo version factoryReset powerUp processMessage poll getESDdata getDiagnostic ]
 "73 ../../VLCBlib_PIC/event_consumer_simple.c
 [; ;../../VLCBlib_PIC/event_consumer_simple.c: 73: const Service eventConsumerService = {
 [c E22771 0 1 2 3 4 5 6 7 8 9 10 17 .. ]
 [n E22771 VlcbServiceTypes SERVICE_ID_NONE SERVICE_ID_MNS SERVICE_ID_NV SERVICE_ID_CAN SERVICE_ID_OLD_TEACH SERVICE_ID_PRODUCER SERVICE_ID_CONSUMER SERVICE_ID_TEACH SERVICE_ID_CONSUME_OWN_EVENTS SERVICE_ID_EVENTACK SERVICE_ID_BOOT SERVICE_ID_STREAMING  ]
-[v F23163 `(v ~T0 @X0 0 tf ]
+[v F23166 `(v ~T0 @X0 0 tf ]
 "59
 [; ;../../VLCBlib_PIC/event_consumer_simple.c: 59: static void consumerPowerUp(void);
 [v _consumerPowerUp `(v ~T0 @X0 0 sf ]
 "60
 [; ;../../VLCBlib_PIC/event_consumer_simple.c: 60: static Processed consumerProcessMessage(Message * m);
-[v _consumerProcessMessage `(E22973 ~T0 @X0 0 sf1`*S3224 ]
-[v F23167 `(v ~T0 @X0 0 tf ]
+[v _consumerProcessMessage `(E22976 ~T0 @X0 0 sf1`*S3224 ]
+[v F23170 `(v ~T0 @X0 0 tf ]
 "62
 [; ;../../VLCBlib_PIC/event_consumer_simple.c: 62: static uint8_t consumerEsdData(uint8_t index);
 [v _consumerEsdData `(uc ~T0 @X0 0 sf1`uc ]
@@ -49,7 +49,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _consumerGetDiagnostic `(*S3227 ~T0 @X0 0 sf1`uc ]
 "63
 [; ;../../VLCBlib_PIC/event_consumer_simple.c: 63: static Processed consumerEventCheckLen(Message * m, uint8_t needed);
-[v _consumerEventCheckLen `(E22973 ~T0 @X0 0 sf2`*S3224`uc ]
+[v _consumerEventCheckLen `(E22976 ~T0 @X0 0 sf2`*S3224`uc ]
 "120 ../../VLCBlib_PIC/vlcb.h
 [; ;../../VLCBlib_PIC/vlcb.h: 120:     struct {
 [s S3226 `uc 1 `uc 1 ]
@@ -79,7 +79,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _sendMessage7 `(v ~T0 @X0 0 ef8`E22564`uc`uc`uc`uc`uc`uc`uc ]
 "80 ../../VLCBlib_PIC/event_consumer_simple.h
 [; ;../../VLCBlib_PIC/event_consumer_simple.h: 80: extern Processed APP_processConsumedEvent(uint8_t tableIndex, Message * m);
-[v _APP_processConsumedEvent `(E22973 ~T0 @X0 0 ef2`uc`*S3224 ]
+[v _APP_processConsumedEvent `(E22976 ~T0 @X0 0 ef2`uc`*S3224 ]
 "64 ../../VLCBlib_PIC/event_consumer_simple.c
 [; ;../../VLCBlib_PIC/event_consumer_simple.c: 64: extern uint8_t APP_isConsumedEvent(uint8_t eventIndex);
 [v _APP_isConsumedEvent `(uc ~T0 @X0 0 ef1`uc ]
@@ -89,7 +89,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [n E22901 VlcbConsumerEvUsage CONSUMER_EV_NOT_SPECIFIED CONSUMER_EV_ACTIONS CONSUMER_EV_SLOTS  ]
 "190 ../../VLCBlib_PIC/vlcb.h
 [; ;../../VLCBlib_PIC/vlcb.h: 190: extern Processed checkLen(Message * m, uint8_t needed, uint8_t service);
-[v _checkLen `(E22973 ~T0 @X0 0 ef3`*S3224`uc`uc ]
+[v _checkLen `(E22976 ~T0 @X0 0 ef3`*S3224`uc`uc ]
 "364 C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h
 [; ;C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.25.433/xc8\pic\include\proc\pic18f27q83.h: 364: __asm("BOOTREG equ 038h");
 [; <" BOOTREG equ 038h ;# ">
@@ -3620,10 +3620,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 :U ..
 -> . `E22771 6 `uc
 -> -> 2 `i `uc
--> -> -> 0 `i `*v `*F23163
+-> -> -> 0 `i `*v `*F23166
 &U _consumerPowerUp
 &U _consumerProcessMessage
--> -> -> 0 `i `*v `*F23167
+-> -> -> 0 `i `*v `*F23170
 &U _consumerEsdData
 &U _consumerGetDiagnostic
 ..
@@ -3665,14 +3665,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 "110
 [; ;../../VLCBlib_PIC/event_consumer_simple.c: 110: static Processed consumerProcessMessage(Message *m) {
-[v _consumerProcessMessage `(E22973 ~T0 @X0 1 sf1`*S3224 ]
+[v _consumerProcessMessage `(E22976 ~T0 @X0 1 sf1`*S3224 ]
 {
 [e :U _consumerProcessMessage ]
 [v _m `*S3224 ~T0 @X0 1 r1 ]
 [f ]
 "111
 [; ;../../VLCBlib_PIC/event_consumer_simple.c: 111:     Processed ret;
-[v _ret `E22973 ~T0 @X0 1 a ]
+[v _ret `E22976 ~T0 @X0 1 a ]
 "112
 [; ;../../VLCBlib_PIC/event_consumer_simple.c: 112:     uint8_t tableIndex;
 [v _tableIndex `uc ~T0 @X0 1 a ]
@@ -3685,8 +3685,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "117
 [; ;../../VLCBlib_PIC/event_consumer_simple.c: 117:         if (consumerEventCheckLen(m, 4) == PROCESSED) return PROCESSED;
-[e $ ! == -> ( _consumerEventCheckLen (2 , _m -> -> 4 `i `uc `ui -> . `E22973 1 `ui 3238  ]
-[e ) . `E22973 1 ]
+[e $ ! == -> ( _consumerEventCheckLen (2 , _m -> -> 4 `i `uc `ui -> . `E22976 1 `ui 3238  ]
+[e ) . `E22976 1 ]
 [e $UE 3236  ]
 [e :U 3238 ]
 "118
@@ -3702,7 +3702,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e =| _mode_flags -> -> 2 `i `uc ]
 "122
 [; ;../../VLCBlib_PIC/event_consumer_simple.c: 122:                 return PROCESSED;
-[e ) . `E22973 1 ]
+[e ) . `E22976 1 ]
 [e $UE 3236  ]
 "123
 [; ;../../VLCBlib_PIC/event_consumer_simple.c: 123:             } else if (m->bytes[2] == MODE_EVENT_ACK_OFF) {
@@ -3716,7 +3716,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e =& _mode_flags -> ~ -> 2 `i `uc ]
 "126
 [; ;../../VLCBlib_PIC/event_consumer_simple.c: 126:                 return PROCESSED;
-[e ) . `E22973 1 ]
+[e ) . `E22976 1 ]
 [e $UE 3236  ]
 "127
 [; ;../../VLCBlib_PIC/event_consumer_simple.c: 127:             }
@@ -3729,7 +3729,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 3239 ]
 "129
 [; ;../../VLCBlib_PIC/event_consumer_simple.c: 129:         return NOT_PROCESSED;
-[e ) . `E22973 0 ]
+[e ) . `E22976 0 ]
 [e $UE 3236  ]
 "130
 [; ;../../VLCBlib_PIC/event_consumer_simple.c: 130:     }
@@ -3738,7 +3738,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 "133
 [; ;../../VLCBlib_PIC/event_consumer_simple.c: 133:     if (m->len < 5) return NOT_PROCESSED;
 [e $ ! < -> . *U _m 0 `i -> 5 `i 3243  ]
-[e ) . `E22973 0 ]
+[e ) . `E22976 0 ]
 [e $UE 3236  ]
 [e :U 3243 ]
 "135
@@ -3813,7 +3813,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 3262 ]
 "169
 [; ;../../VLCBlib_PIC/event_consumer_simple.c: 169:             return NOT_PROCESSED;
-[e ) . `E22973 0 ]
+[e ) . `E22976 0 ]
 [e $UE 3236  ]
 "170
 [; ;../../VLCBlib_PIC/event_consumer_simple.c: 170:     }
@@ -3844,7 +3844,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 "173
 [; ;../../VLCBlib_PIC/event_consumer_simple.c: 173:     if (tableIndex == 0xff) return NOT_PROCESSED;
 [e $ ! == -> _tableIndex `i -> 255 `i 3263  ]
-[e ) . `E22973 0 ]
+[e ) . `E22976 0 ]
 [e $UE 3236  ]
 [e :U 3263 ]
 "175
@@ -3853,7 +3853,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "176
 [; ;../../VLCBlib_PIC/event_consumer_simple.c: 176:         return NOT_PROCESSED;
-[e ) . `E22973 0 ]
+[e ) . `E22976 0 ]
 [e $UE 3236  ]
 "177
 [; ;../../VLCBlib_PIC/event_consumer_simple.c: 177:     }
@@ -3878,7 +3878,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = _ret ( _APP_processConsumedEvent (2 , _tableIndex _m ]
 "196
 [; ;../../VLCBlib_PIC/event_consumer_simple.c: 196:     if (ret == PROCESSED) {
-[e $ ! == -> _ret `ui -> . `E22973 1 `ui 3266  ]
+[e $ ! == -> _ret `ui -> . `E22976 1 `ui 3266  ]
 {
 "197
 [; ;../../VLCBlib_PIC/event_consumer_simple.c: 197:         consumerDiagnostics[1].asUint++;
@@ -3976,7 +3976,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 "248
 [; ;../../VLCBlib_PIC/event_consumer_simple.c: 248: static Processed consumerEventCheckLen(Message * m, uint8_t needed) {
-[v _consumerEventCheckLen `(E22973 ~T0 @X0 1 sf2`*S3224`uc ]
+[v _consumerEventCheckLen `(E22976 ~T0 @X0 1 sf2`*S3224`uc ]
 {
 [e :U _consumerEventCheckLen ]
 [v _m `*S3224 ~T0 @X0 1 r1 ]

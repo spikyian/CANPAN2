@@ -38433,8 +38433,10 @@ extern void initRomOps(void);
 
 
 extern int16_t readNVM(NVMtype type, uint24_t index);
-# 169 "../../VLCBlib_PIC/nvm.h"
+# 171 "../../VLCBlib_PIC/nvm.h"
 extern uint8_t writeNVM(NVMtype type, uint24_t index, uint8_t value);
+# 180 "../../VLCBlib_PIC/nvm.h"
+extern uint8_t EEPROM_WriteNoVerify(eeprom_address_t index, eeprom_data_t value);
 
 
 
@@ -38827,6 +38829,8 @@ extern TickValue pbTimer;
 extern uint8_t APP_isProducedEvent(uint8_t tableIndex);
 extern void rebuildLookupTable(void);
 extern void initEvents(void);
+
+extern uint8_t switch2Event[((8*4)+1)];
 # 43 "../canpan3Events.c" 2
 
 # 1 "../canpan3Leds.h" 1
@@ -38855,6 +38859,7 @@ extern void doSoD(void);
 extern void canpanSetAllSwitchOff(void);
 extern void loadInputs(void);
 extern void doFlash(void);
+extern void canpanSendProducedEvent(uint8_t tableIndex, uint8_t onOff);
 
 extern uint8_t outputState[(8*4)];
 extern uint8_t canpanScanReady;
@@ -38866,7 +38871,7 @@ void rebuildLookupTable(void);
 
 extern void clearAllEvents(void);
 uint8_t APP_isProducedEvent(uint8_t tableIndex);
-uint8_t switch2Event[(8*4)];
+uint8_t switch2Event[((8*4)+1)];
 
 void factoryResetGlobalEvents(void) {
 
@@ -38913,13 +38918,13 @@ void rebuildLookupTable(void) {
     uint8_t i;
 
 
-    for (sw=0; sw < (8*4); sw++) {
+    for (sw=0; sw < ((8*4)+1); sw++) {
         switch2Event[sw] = 0xff;
     }
 
     for (i=0; i<254; i++) {
         swNo = getEv(i, 1);
-        if ((swNo >0) && ( swNo <= (8*4))) {
+        if ((swNo >0) && ( swNo <= ((8*4)+1))) {
             switch2Event[swNo-1] = i;
         }
     }
@@ -38957,7 +38962,7 @@ uint8_t APP_isProducedEvent(uint8_t tableIndex) {
     int16_t ev;
 
     ev = getEv(tableIndex, 1);
-    if ((ev > 0) && (ev <= (8*4))) {
+    if ((ev > 0) && (ev <= ((8*4)+1))) {
         return 1;
     }
     return 0;
@@ -39059,7 +39064,7 @@ uint8_t APP_addEvent(uint16_t nodeNumber, uint16_t eventNumber, uint8_t evNum, u
         switchNo = evVal;
         tableIndex = findEvent(nodeNumber, eventNumber);
 
-        if ((switchNo > 0) && (switchNo <= (8*4))) {
+        if ((switchNo > 0) && (switchNo <= ((8*4)+1))) {
             oti = switch2Event[switchNo-1];
             if ((oti != 0xff) && (oti != tableIndex)){
 
