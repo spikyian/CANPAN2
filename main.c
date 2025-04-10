@@ -1,16 +1,5 @@
 /* TODOs
 
-XXX 1) Work out what to do with EV3=None.
-    Having looked again at FCU I now believe that I need to make changes to the firmware 
-    and MDF to provide backward compatibility with MDF. I need to ensure that when 
-    the bottom 4 bits of EV3 are unset then no switch event should be produced.
-
-XXX 2) Change the Off only event so it is sent on switch make instead of switch break.
-    I have made code changes to fix this and testing seems to suggest that the fix is good.
-
-XXX 3) Fix SoD for paired switches.
-    I have made code changes to fix this and testing seems to suggest that the fix is good.
-
 4) Save event state when EVs are edited. I'm still unsure about this so I need to 
 investigate further.
 
@@ -20,19 +9,6 @@ caused by writing to EEPROM. If the switch processing takes place at different p
 of the LED refresh cycle then the LED will either flash brightly or flicker more dimly. 
 Still need to have a closer look on what can be done to resolve this. 
 It may become a feature :)
-
-XXX 6) SoD switch repeats.
-    Whilst testing the SoD for paired switches I noticed that is a SoD event is produced 
-    by a switch then when the switch is pressed the SoD responses include an ON event 
-    indicating the switch is pressed but this then triggers another SoD response so there 
-    is a continuous blast of partial SoD responses whilst the switch is on. Hmmm this 
-    is more of a design issue. This may be why CANPAN has separate SoD and Self-consumed 
-    SoD settings. Needs more thought.
-
-7) Corrupted message transmission.
-With the previous version of code I witnessed it generating corrupt messages when 
-doing SoD responses. I haven't seen it with the latest version but need to keep a 
-watch out for this.
 
 */
 
@@ -271,11 +247,10 @@ void loop(void) {
             inputScan();    // Strobe inputs for changes
             lastInputScanTime.val = tickGet();
         }
-        
-        if (tickTimeSince(flashTime) > 1000*getNV(NV_FLASHRATE)) {
-            doFlash();    // update flashing LEDs
-            flashTime.val = tickGet();
-        }
+    }
+    if (tickTimeSince(flashTime)/1000 > getNV(NV_FLASHRATE)) {
+        doFlash();    // update flashing LEDs
+        flashTime.val = tickGet();
     }
     // poll the LED display quickly. 
     pollOutputs();

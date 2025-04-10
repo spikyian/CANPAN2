@@ -119,7 +119,7 @@
 #define PARAM_MODULE_ID         MTYP_CANPAN
 #define PARAM_MAJOR_VERSION     5
 #define PARAM_MINOR_VERSION     'a'
-#define PARAM_BUILD_VERSION     5
+#define PARAM_BUILD_VERSION     6
 // Module name - must be 7 characters
 #define NAME    "PAN    "
 
