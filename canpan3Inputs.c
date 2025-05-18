@@ -42,11 +42,11 @@
 #include "event_teach.h"
 #include "timedResponse.h"
 #include "event_producer.h"
-#include "nvm.h"
 #include "canpan3Events.h"
 #include "canpan3Inputs.h"
 #include "canpan3Nv.h"
 #include "nv.h"
+#include "EEPROMbuffer.h"
 
 static uint8_t buttonState[NUM_BUTTON_COLUMNS];
 uint8_t outputState[NUM_BUTTONS];
@@ -67,6 +67,7 @@ uint8_t findEventForSwitch(uint8_t buttonNo);
 TimedResponseResult sodTRCallback(uint8_t type, uint8_t serviceIndex, uint8_t step);
 void canpanSendProducedEvent(uint8_t tableIndex, uint8_t onOff);
 EventState getSwitchEventState(uint8_t switchNo);
+void saveSwitchState(uint8_t buttonNo, uint8_t onOff);
 
 /**
  * Initialise the input (buttons) circuitry.
@@ -100,7 +101,7 @@ void initInputs(void) {
     startNv = (uint8_t)getNV(NV_STARTUP);
     for (i=0; i<NUM_BUTTONS; i++) {
         if (!(startNv & NV_STARTUP_RESTORESWITCHES)) {
-            outputState[i] = (uint8_t)readNVM(EEPROM_NVM_TYPE, EE_ADDR_SWITCHES+i);
+            outputState[i] = readEEvalue(EE_ADDR_SWITCHES+i);
         } else {
             outputState[i] = 0;     // default 0 but maybe loaded from EEPROM later
         }
@@ -205,15 +206,14 @@ void inputScan(void) {
                                     continue;   // don't react when button is released
                                 }
                                 onOff = outputState[buttonNo];
-                                if ((getNV(NV_STARTUP) & NV_STARTUP_RESTORESWITCHES) == 0) {
-                                    EEPROM_WriteNoVerify(EE_ADDR_SWITCHES + buttonNo, outputState[buttonNo]);
-                                }
+                                saveSwitchState(buttonNo, onOff);
                                 break;
                             case MODE_PAIR:
                                 if (! onOff) {
                                     continue;
                                 }
                                 outputState[buttonNo] = 1;
+                                saveSwitchState(buttonNo, 1);
                                 break;
                             case MODE_PAIRED:
                                 if (! onOff) {
@@ -221,6 +221,7 @@ void inputScan(void) {
                                 }
                                 onOff = 0;  // force off
                                 outputState[buttonNo&0xFE] = 0;
+                                saveSwitchState(buttonNo, 0);
                                 break;
                         }
                         
@@ -244,6 +245,18 @@ void inputScan(void) {
         column=0;
     }
     driveColumn();
+}
+
+/**
+ * Save the switch state in EEPROM if NV_STARTUP is set to save and restore.
+ * Will only write to EEPROM if the current state is incorrect.
+ * @param buttonNo index into EEPROM switches
+ * @param onOff state
+ */
+void saveSwitchState(uint8_t buttonNo, uint8_t onOff) {
+    if ((getNV(NV_STARTUP) & NV_STARTUP_RESTORESWITCHES) == 0) {
+        writeEEvalue(buttonNo, onOff);
+    }
 }
 
 

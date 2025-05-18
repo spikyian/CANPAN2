@@ -3742,8 +3742,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;../canpan3Outputs.c: 96:     SPI1CLK = 0x00;
 [e = _SPI1CLK -> -> 0 `i `uc ]
 "97
-[; ;../canpan3Outputs.c: 97:     SPI1BAUD = 15;
-[e = _SPI1BAUD -> -> 15 `i `uc ]
+[; ;../canpan3Outputs.c: 97:     SPI1BAUD = 7;
+[e = _SPI1BAUD -> -> 7 `i `uc ]
 "100
 [; ;../canpan3Outputs.c: 100:     RC5PPS = 0x32;
 [e = _RC5PPS -> -> 50 `i `uc ]
@@ -3939,11 +3939,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 [e :U 3316 ]
 "197
-[; ;../canpan3Outputs.c: 197:     brightness++;
-[e ++ _brightness -> -> 1 `i `uc ]
+[; ;../canpan3Outputs.c: 197:     brightness += 2;
+[e =+ _brightness -> -> 2 `i `uc ]
 "198
-[; ;../canpan3Outputs.c: 198:     if (brightness == 32) {
-[e $ ! == -> _brightness `i -> 32 `i 3324  ]
+[; ;../canpan3Outputs.c: 198:     if (brightness >= 32) {
+[e $ ! >= -> _brightness `i -> 32 `i 3324  ]
 {
 "199
 [; ;../canpan3Outputs.c: 199:         brightness = 0;

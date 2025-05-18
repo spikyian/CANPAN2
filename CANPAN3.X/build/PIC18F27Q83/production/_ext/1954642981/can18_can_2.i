@@ -38429,7 +38429,6 @@ typedef enum VlcbManufacturer
   MANU_SPROG = 44,
   MANU_ROCRAIL = 70,
   MANU_SPECTRUM = 80,
-  MANU_VLCB = 250,
   MANU_SYSPIXIE = 249,
   MANU_RME = 248,
 } VlcbManufacturer;
@@ -38530,6 +38529,7 @@ typedef enum VlcbMergModuleTypes
   MTYP_CANPIXEL = 84,
   MTYP_CANCABPE = 85,
   MTYP_CANSMARTTD = 86,
+  MTYP_CANARGB = 87,
   MTYP_VLCB = 0xFC,
 
 
@@ -39402,10 +39402,11 @@ typedef enum SendResult {
 typedef struct Transport {
     SendResult (* sendMessage)(Message * m);
     MessageReceived (* receiveMessage)(Message * m);
+    void (*waitForTxQueueToDrain)(void);
 } Transport;
-# 434 "../../VLCBlib_PIC/vlcb.h"
+# 435 "../../VLCBlib_PIC/vlcb.h"
 extern const Transport * transport;
-# 447 "../../VLCBlib_PIC/vlcb.h"
+# 448 "../../VLCBlib_PIC/vlcb.h"
 extern ValidTime APP_isSuitableTimeToWriteFlash(void);
 # 67 "../../VLCBlib_PIC/can18_can_2.c" 2
 
@@ -39562,6 +39563,7 @@ const Service canService = {
 
 static SendResult canSendMessage(Message * mp);
 static MessageReceived canReceiveMessage(Message * m);
+static void canWaitForTxQueueToDrain(void);
 
 
 
@@ -39571,7 +39573,8 @@ static MessageReceived canReceiveMessage(Message * m);
 
 const Transport canTransport = {
     canSendMessage,
-    canReceiveMessage
+    canReceiveMessage,
+    canWaitForTxQueueToDrain
 };
 
 
@@ -39625,14 +39628,14 @@ static const uint8_t canPri[] = {
     0b00001000,
     0b00000000
 };
-# 208 "../../VLCBlib_PIC/can18_can_2.c"
+# 210 "../../VLCBlib_PIC/can18_can_2.c"
 static void canFactoryReset(void) {
     canId = 0;
     writeNVM(EEPROM_NVM_TYPE, 0x3FE, canId);
 }
 
 #pragma warning disable 759
-# 252 "../../VLCBlib_PIC/can18_can_2.c"
+# 254 "../../VLCBlib_PIC/can18_can_2.c"
 static void canPowerUp(void) {
     int temp;
     uint8_t* txFifoObj;
@@ -39729,7 +39732,7 @@ static void canPowerUp(void) {
 
 
         (void)CAN1_OperationModeSet(CAN_NORMAL_2_0_MODE);
-    }
+     }
 
 
     prepareSelfEnumResponse();
@@ -39782,7 +39785,7 @@ void prepareSelfEnumResponse(void) {
         C1FIFOCON1Hbits.UINC = 1;
     }
 }
-# 409 "../../VLCBlib_PIC/can18_can_2.c"
+# 411 "../../VLCBlib_PIC/can18_can_2.c"
 static Processed canProcessMessage(Message * m) {
 
     if (m->len < 3) return NOT_PROCESSED;
@@ -39819,7 +39822,7 @@ void canPoll() {
     uint8_t t8;
 
     processEnumeration();
-# 458 "../../VLCBlib_PIC/can18_can_2.c"
+# 460 "../../VLCBlib_PIC/can18_can_2.c"
 }
 
 
@@ -39836,7 +39839,7 @@ uint8_t canEsdData(uint8_t id) {
             return 0;
     }
 }
-# 498 "../../VLCBlib_PIC/can18_can_2.c"
+# 500 "../../VLCBlib_PIC/can18_can_2.c"
 static DiagnosticVal * canGetDiagnostic(uint8_t index) {
     int16_t i16;
 
@@ -39899,7 +39902,7 @@ static uint8_t getNumRxBuffersInUse(void) {
         return (uint8_t) i16;
     }
 }
-# 568 "../../VLCBlib_PIC/can18_can_2.c"
+# 570 "../../VLCBlib_PIC/can18_can_2.c"
 static SendResult canSendMessage(Message * mp) {
     uint8_t i;
     uint8_t* txFifoObj;
@@ -40001,6 +40004,12 @@ static SendResult canSendMessage(Message * mp) {
     return SEND_OK;
 }
 
+static void canWaitForTxQueueToDrain(void) {
+    while (C1FIFOCON2H & 0x2) {
+        ;
+    }
+}
+
 
 
 
@@ -40014,7 +40023,7 @@ static void sendRTR(void) {
     canDiagnostics[0x06].asUint++;
 
 }
-# 692 "../../VLCBlib_PIC/can18_can_2.c"
+# 700 "../../VLCBlib_PIC/can18_can_2.c"
 static MessageReceived canReceiveMessage(Message * m){
     Message * mp;
     uint8_t incomingCanId;
@@ -40074,7 +40083,7 @@ static MessageReceived canReceiveMessage(Message * m){
         return RECEIVED;
     }
 }
-# 769 "../../VLCBlib_PIC/can18_can_2.c"
+# 777 "../../VLCBlib_PIC/can18_can_2.c"
 static void startEnumeration(Boolean txWaiting) {
     uint8_t i;
 
@@ -40090,7 +40099,7 @@ static void startEnumeration(Boolean txWaiting) {
 
     sendRTR();
 }
-# 792 "../../VLCBlib_PIC/can18_can_2.c"
+# 800 "../../VLCBlib_PIC/can18_can_2.c"
 static void handleSelfEnumeration(uint8_t receivedCanId) {
 
     switch (enumerationState) {
@@ -40201,7 +40210,7 @@ static CanidResult setNewCanId(uint8_t newCanId) {
         return CANID_FAIL;
     }
 }
-# 911 "../../VLCBlib_PIC/can18_can_2.c"
+# 919 "../../VLCBlib_PIC/can18_can_2.c"
 enum CAN_OP_MODE_STATUS CAN1_OperationModeSet(const enum CAN_OP_MODES requestMode)
 {
     enum CAN_OP_MODE_STATUS status = CAN_OP_MODE_REQUEST_SUCCESS;

@@ -106,8 +106,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;../../VLCBlib_PIC/nvm.c: 348:     while (! APP_isSuitableTimeToWriteFlash())
 [c E23280 0 1 .. ]
 [n E23280 ValidTime BAD_TIME GOOD_TIME  ]
-"447 ../../VLCBlib_PIC/vlcb.h
-[; ;../../VLCBlib_PIC/vlcb.h: 447: extern ValidTime APP_isSuitableTimeToWriteFlash(void);
+"448 ../../VLCBlib_PIC/vlcb.h
+[; ;../../VLCBlib_PIC/vlcb.h: 448: extern ValidTime APP_isSuitableTimeToWriteFlash(void);
 [v _APP_isSuitableTimeToWriteFlash `(E23280 ~T0 @X0 0 ef ]
 "553 ../../VLCBlib_PIC/nvm.c
 [; ;../../VLCBlib_PIC/nvm.c: 553: uint8_t writeNVM(NVMtype type, uint24_t index, uint8_t value) {

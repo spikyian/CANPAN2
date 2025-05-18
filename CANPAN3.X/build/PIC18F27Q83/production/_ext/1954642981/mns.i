@@ -38372,7 +38372,6 @@ typedef enum VlcbManufacturer
   MANU_SPROG = 44,
   MANU_ROCRAIL = 70,
   MANU_SPECTRUM = 80,
-  MANU_VLCB = 250,
   MANU_SYSPIXIE = 249,
   MANU_RME = 248,
 } VlcbManufacturer;
@@ -38473,6 +38472,7 @@ typedef enum VlcbMergModuleTypes
   MTYP_CANPIXEL = 84,
   MTYP_CANCABPE = 85,
   MTYP_CANSMARTTD = 86,
+  MTYP_CANARGB = 87,
   MTYP_VLCB = 0xFC,
 
 
@@ -39345,10 +39345,11 @@ typedef enum SendResult {
 typedef struct Transport {
     SendResult (* sendMessage)(Message * m);
     MessageReceived (* receiveMessage)(Message * m);
+    void (*waitForTxQueueToDrain)(void);
 } Transport;
-# 434 "../../VLCBlib_PIC/vlcb.h"
+# 435 "../../VLCBlib_PIC/vlcb.h"
 extern const Transport * transport;
-# 447 "../../VLCBlib_PIC/vlcb.h"
+# 448 "../../VLCBlib_PIC/vlcb.h"
 extern ValidTime APP_isSuitableTimeToWriteFlash(void);
 # 109 "../../VLCBlib_PIC/mns.c" 2
 
@@ -39779,9 +39780,11 @@ static Processed mnsProcessMessage(Message * m) {
             return PROCESSED;
         case OPC_NNRSM:
             previousNN.word = nn.word;
-            factoryReset();
+
+            writeNVM(EEPROM_NVM_TYPE, 0x3FA, 0xFF);
             if (previousNN.word != 0) {
                 sendMessage2(OPC_NNREL, previousNN.bytes.hi, previousNN.bytes.lo);
+                transport->waitForTxQueueToDrain();
             }
             __asm("reset");
 
@@ -40078,7 +40081,7 @@ static void mnsPoll(void) {
             }
     }
 }
-# 805 "../../VLCBlib_PIC/mns.c"
+# 807 "../../VLCBlib_PIC/mns.c"
 static DiagnosticVal * mnsGetDiagnostic(uint8_t index) {
     if (index > 6) {
         return ((void*)0);
@@ -40159,12 +40162,12 @@ static uint8_t getParameter(uint8_t idx) {
     case PAR_CPUMAN:
         return CPUM_MICROCHIP;
     case PAR_BETA:
-        return 6;
+        return 8;
     default:
         return 0;
     }
 }
-# 899 "../../VLCBlib_PIC/mns.c"
+# 901 "../../VLCBlib_PIC/mns.c"
 TimedResponseResult mnsTRserviceDiscoveryCallback(uint8_t type, uint8_t serviceIndex, uint8_t step) {
     if (step >= 8) {
         return TIMED_RESPONSE_RESULT_FINISHED;
@@ -40174,7 +40177,7 @@ TimedResponseResult mnsTRserviceDiscoveryCallback(uint8_t type, uint8_t serviceI
 
     return TIMED_RESPONSE_RESULT_NEXT;
 }
-# 918 "../../VLCBlib_PIC/mns.c"
+# 920 "../../VLCBlib_PIC/mns.c"
 TimedResponseResult mnsTRallDiagnosticsCallback(uint8_t type, uint8_t serviceIndex, uint8_t step) {
     if (services[serviceIndex]->getDiagnostic == ((void*)0)) {
         sendMessage6(OPC_DGN, nn.bytes.hi, nn.bytes.lo, serviceIndex+1, 0, 0, 0);
@@ -40189,7 +40192,7 @@ TimedResponseResult mnsTRallDiagnosticsCallback(uint8_t type, uint8_t serviceInd
     sendMessage6(OPC_DGN, nn.bytes.hi, nn.bytes.lo, serviceIndex+1, step, d->asBytes.hi, d->asBytes.lo);
     return TIMED_RESPONSE_RESULT_NEXT;
 }
-# 941 "../../VLCBlib_PIC/mns.c"
+# 943 "../../VLCBlib_PIC/mns.c"
 TimedResponseResult mnsTRrqnpnCallback(uint8_t type, uint8_t serviceIndex, uint8_t step) {
     if (step >= 20) {
         return TIMED_RESPONSE_RESULT_FINISHED;

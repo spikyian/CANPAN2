@@ -38288,7 +38288,6 @@ typedef enum VlcbManufacturer
   MANU_SPROG = 44,
   MANU_ROCRAIL = 70,
   MANU_SPECTRUM = 80,
-  MANU_VLCB = 250,
   MANU_SYSPIXIE = 249,
   MANU_RME = 248,
 } VlcbManufacturer;
@@ -38389,6 +38388,7 @@ typedef enum VlcbMergModuleTypes
   MTYP_CANPIXEL = 84,
   MTYP_CANCABPE = 85,
   MTYP_CANSMARTTD = 86,
+  MTYP_CANARGB = 87,
   MTYP_VLCB = 0xFC,
 
 
@@ -39261,10 +39261,11 @@ typedef enum SendResult {
 typedef struct Transport {
     SendResult (* sendMessage)(Message * m);
     MessageReceived (* receiveMessage)(Message * m);
+    void (*waitForTxQueueToDrain)(void);
 } Transport;
-# 434 "../../VLCBlib_PIC/vlcb.h"
+# 435 "../../VLCBlib_PIC/vlcb.h"
 extern const Transport * transport;
-# 447 "../../VLCBlib_PIC/vlcb.h"
+# 448 "../../VLCBlib_PIC/vlcb.h"
 extern ValidTime APP_isSuitableTimeToWriteFlash(void);
 # 43 "../../VLCBlib_PIC/statusLeds.h" 2
 # 1 "../../VLCBlib_PIC/ticktime.h" 1
@@ -39462,7 +39463,6 @@ extern EventState APP_GetEventState(Happening h);
 
 extern EventState APP_GetEventIndexState(uint8_t tableIndex);
 # 45 "../canpan3Inputs.c" 2
-
 # 1 "../canpan3Events.h" 1
 # 40 "../canpan3Events.h"
 extern uint8_t APP_isProducedEvent(uint8_t tableIndex);
@@ -39470,9 +39470,9 @@ extern void rebuildLookupTable(void);
 extern void initEvents(void);
 
 extern uint8_t switch2Event[((8*4)+1)];
-# 47 "../canpan3Inputs.c" 2
+# 46 "../canpan3Inputs.c" 2
 # 1 "../canpan3Inputs.h" 1
-# 43 "../canpan3Inputs.h"
+# 42 "../canpan3Inputs.h"
 extern void initInputs(void);
 extern void inputScan(void);
 extern void doSoD(void);
@@ -39483,9 +39483,9 @@ extern void canpanSendProducedEvent(uint8_t tableIndex, uint8_t onOff);
 
 extern uint8_t outputState[(8*4)];
 extern uint8_t canpanScanReady;
-# 48 "../canpan3Inputs.c" 2
+# 47 "../canpan3Inputs.c" 2
 # 1 "../canpan3Nv.h" 1
-# 49 "../canpan3Inputs.c" 2
+# 48 "../canpan3Inputs.c" 2
 # 1 "../../VLCBlib_PIC/nv.h" 1
 # 86 "../../VLCBlib_PIC/nv.h"
 extern const Service nvService;
@@ -39520,6 +39520,13 @@ extern uint8_t setNV(uint8_t index, uint8_t value);
 
 
 extern void loadNvCache(void);
+# 49 "../canpan3Inputs.c" 2
+# 1 "../EEPROMbuffer.h" 1
+# 40 "../EEPROMbuffer.h"
+extern void initEEPROMwriter(void);
+extern void writeEEvalue(uint8_t address, uint8_t value);
+extern uint8_t readEEvalue(uint8_t address);
+extern void pollEEPROMwriter(void);
 # 50 "../canpan3Inputs.c" 2
 
 static uint8_t buttonState[8];
@@ -39533,6 +39540,7 @@ uint8_t findEventForSwitch(uint8_t buttonNo);
 TimedResponseResult sodTRCallback(uint8_t type, uint8_t serviceIndex, uint8_t step);
 void canpanSendProducedEvent(uint8_t tableIndex, uint8_t onOff);
 EventState getSwitchEventState(uint8_t switchNo);
+void saveSwitchState(uint8_t buttonNo, uint8_t onOff);
 
 
 
@@ -39566,7 +39574,7 @@ void initInputs(void) {
     startNv = (uint8_t)getNV(1);
     for (i=0; i<(8*4); i++) {
         if (!(startNv & 0x01)) {
-            outputState[i] = (uint8_t)readNVM(EEPROM_NVM_TYPE, 0x0000 +i);
+            outputState[i] = readEEvalue((0x0000)+i);
         } else {
             outputState[i] = 0;
         }
@@ -39671,15 +39679,14 @@ void inputScan(void) {
                                     continue;
                                 }
                                 onOff = outputState[buttonNo];
-                                if ((getNV(1) & 0x01) == 0) {
-                                    EEPROM_WriteNoVerify(0x0000 + buttonNo, outputState[buttonNo]);
-                                }
+                                saveSwitchState(buttonNo, onOff);
                                 break;
                             case 4:
                                 if (! onOff) {
                                     continue;
                                 }
                                 outputState[buttonNo] = 1;
+                                saveSwitchState(buttonNo, 1);
                                 break;
                             case 5:
                                 if (! onOff) {
@@ -39687,6 +39694,7 @@ void inputScan(void) {
                                 }
                                 onOff = 0;
                                 outputState[buttonNo&0xFE] = 0;
+                                saveSwitchState(buttonNo, 0);
                                 break;
                         }
 
@@ -39710,6 +39718,18 @@ void inputScan(void) {
         column=0;
     }
     driveColumn();
+}
+
+
+
+
+
+
+
+void saveSwitchState(uint8_t buttonNo, uint8_t onOff) {
+    if ((getNV(1) & 0x01) == 0) {
+        writeEEvalue(buttonNo, onOff);
+    }
 }
 
 
@@ -39788,7 +39808,7 @@ void doSoD(void) {
         startTimedResponse(1, findServiceIndex(SERVICE_ID_PRODUCER), sodTRCallback);
     }
 }
-# 337 "../canpan3Inputs.c"
+# 350 "../canpan3Inputs.c"
 TimedResponseResult sodTRCallback(uint8_t type, uint8_t serviceIndex, uint8_t tableIndex) {
     EventState value;
     uint8_t sv;

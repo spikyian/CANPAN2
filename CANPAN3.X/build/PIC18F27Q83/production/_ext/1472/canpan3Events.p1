@@ -72,8 +72,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "97
 [; ;../../VLCBlib_PIC/event_teach.h: 97: extern uint8_t findEvent(uint16_t nodeNumber, uint16_t eventNumber);
 [v _findEvent `(uc ~T0 @X0 0 ef2`us`us ]
-"51 ../canpan3Inputs.h
-[; ;../canpan3Inputs.h: 51: extern uint8_t outputState[(8*4)];
+"50 ../canpan3Inputs.h
+[; ;../canpan3Inputs.h: 50: extern uint8_t outputState[(8*4)];
 [v _outputState `uc ~T0 @X0 -> 0 `x e ]
 "94 ../../VLCBlib_PIC/event_teach.h
 [; ;../../VLCBlib_PIC/event_teach.h: 94: extern uint8_t writeEv(uint8_t tableIndex, uint8_t evNum, uint8_t evVal);
@@ -95,16 +95,16 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;../../VLCBlib_PIC/event_teach.h: 109: typedef struct {
 [s S3301 `us 1 `us 1 ]
 [n S3301 . NN EN ]
-"45 ../canpan3Inputs.h
-[; ;../canpan3Inputs.h: 45: extern void doSoD(void);
+"44 ../canpan3Inputs.h
+[; ;../canpan3Inputs.h: 44: extern void doSoD(void);
 [v _doSoD `(v ~T0 @X0 0 ef ]
 "332 ../canpan3Events.c
 [; ;../canpan3Events.c: 332:                             setLedState(ledNo, CANPANLED_OFF);
-[c E23515 0 1 2 3 .. ]
-[n E23515 canpan3LedState CANPANLED_ON CANPANLED_OFF CANPANLED_FLASH CANPANLED_ANTIFLASH  ]
-"51 ../canpan3Leds.h
-[; ;../canpan3Leds.h: 51: extern void setLedState(uint8_t led, enum canpan3LedState state);
-[v _setLedState `(v ~T0 @X0 0 ef2`uc`E23515 ]
+[c E23517 0 1 2 3 .. ]
+[n E23517 canpan3LedState CANPANLED_ON CANPANLED_OFF CANPANLED_FLASH CANPANLED_ANTIFLASH  ]
+"50 ../canpan3Leds.h
+[; ;../canpan3Leds.h: 50: extern void setLedState(uint8_t led, enum canpan3LedState state);
+[v _setLedState `(v ~T0 @X0 0 ef2`uc`E23517 ]
 "387 ../canpan3Events.c
 [; ;../canpan3Events.c: 387: EventState APP_GetEventIndexState(uint8_t tableIndex) {
 [c E23277 255 0 1 .. ]
@@ -4301,7 +4301,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "332
 [; ;../canpan3Events.c: 332:                             setLedState(ledNo, CANPANLED_OFF);
-[e ( _setLedState (2 , _ledNo . `E23515 1 ]
+[e ( _setLedState (2 , _ledNo . `E23517 1 ]
 "333
 [; ;../canpan3Events.c: 333:                         } else {
 }
@@ -4310,7 +4310,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "334
 [; ;../canpan3Events.c: 334:                             setLedState(ledNo, CANPANLED_ON);
-[e ( _setLedState (2 , _ledNo . `E23515 0 ]
+[e ( _setLedState (2 , _ledNo . `E23517 0 ]
 "335
 [; ;../canpan3Events.c: 335:                         }
 }
@@ -4327,7 +4327,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "340
 [; ;../canpan3Events.c: 340:                             setLedState(ledNo, CANPANLED_ON);
-[e ( _setLedState (2 , _ledNo . `E23515 0 ]
+[e ( _setLedState (2 , _ledNo . `E23517 0 ]
 "341
 [; ;../canpan3Events.c: 341:                         } else {
 }
@@ -4336,7 +4336,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "342
 [; ;../canpan3Events.c: 342:                             setLedState(ledNo, CANPANLED_OFF);
-[e ( _setLedState (2 , _ledNo . `E23515 1 ]
+[e ( _setLedState (2 , _ledNo . `E23517 1 ]
 "343
 [; ;../canpan3Events.c: 343:                         }
 }
@@ -4361,7 +4361,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "349
 [; ;../canpan3Events.c: 349:                             setLedState(ledNo, CANPANLED_OFF);
-[e ( _setLedState (2 , _ledNo . `E23515 1 ]
+[e ( _setLedState (2 , _ledNo . `E23517 1 ]
 "350
 [; ;../canpan3Events.c: 350:                         } else {
 }
@@ -4370,7 +4370,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "351
 [; ;../canpan3Events.c: 351:                             setLedState(ledNo, CANPANLED_ON);
-[e ( _setLedState (2 , _ledNo . `E23515 0 ]
+[e ( _setLedState (2 , _ledNo . `E23517 0 ]
 "352
 [; ;../canpan3Events.c: 352:                         }
 }
@@ -4395,7 +4395,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "358
 [; ;../canpan3Events.c: 358:                             setLedState(ledNo, CANPANLED_ON);
-[e ( _setLedState (2 , _ledNo . `E23515 0 ]
+[e ( _setLedState (2 , _ledNo . `E23517 0 ]
 "359
 [; ;../canpan3Events.c: 359:                         } else {
 }
@@ -4404,7 +4404,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "360
 [; ;../canpan3Events.c: 360:                             setLedState(ledNo, CANPANLED_OFF);
-[e ( _setLedState (2 , _ledNo . `E23515 1 ]
+[e ( _setLedState (2 , _ledNo . `E23517 1 ]
 "361
 [; ;../canpan3Events.c: 361:                         }
 }
@@ -4429,7 +4429,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "367
 [; ;../canpan3Events.c: 367:                             setLedState(ledNo, CANPANLED_ANTIFLASH);
-[e ( _setLedState (2 , _ledNo . `E23515 3 ]
+[e ( _setLedState (2 , _ledNo . `E23517 3 ]
 "368
 [; ;../canpan3Events.c: 368:                         } else {
 }
@@ -4438,7 +4438,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "369
 [; ;../canpan3Events.c: 369:                             setLedState(ledNo, CANPANLED_FLASH);
-[e ( _setLedState (2 , _ledNo . `E23515 2 ]
+[e ( _setLedState (2 , _ledNo . `E23517 2 ]
 "370
 [; ;../canpan3Events.c: 370:                         }
 }
@@ -4451,7 +4451,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "372
 [; ;../canpan3Events.c: 372:                         setLedState(ledNo, CANPANLED_OFF);
-[e ( _setLedState (2 , _ledNo . `E23515 1 ]
+[e ( _setLedState (2 , _ledNo . `E23517 1 ]
 "373
 [; ;../canpan3Events.c: 373:                     }
 }

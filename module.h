@@ -119,7 +119,7 @@
 #define PARAM_MODULE_ID         MTYP_CANPAN
 #define PARAM_MAJOR_VERSION     5
 #define PARAM_MINOR_VERSION     'a'
-#define PARAM_BUILD_VERSION     6
+#define PARAM_BUILD_VERSION     8
 // Module name - must be 7 characters
 #define NAME    "PAN    "
 
@@ -154,4 +154,7 @@
 #define NUM_LED_COLUMNS     8
 #define NUM_LEDS            (NUM_LED_ROWS*NUM_LED_COLUMNS)
 
+// Store the Switches at 0x0000 followed by the LEDs at 0x00020
+#define EEPROM_BASE_ADDRESS 0x0000
+#define NUMBER_EEPROM       (NUM_BUTTONS + NUM_LEDS)
 #endif

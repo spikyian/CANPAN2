@@ -38371,7 +38371,6 @@ typedef enum VlcbManufacturer
   MANU_SPROG = 44,
   MANU_ROCRAIL = 70,
   MANU_SPECTRUM = 80,
-  MANU_VLCB = 250,
   MANU_SYSPIXIE = 249,
   MANU_RME = 248,
 } VlcbManufacturer;
@@ -38472,6 +38471,7 @@ typedef enum VlcbMergModuleTypes
   MTYP_CANPIXEL = 84,
   MTYP_CANCABPE = 85,
   MTYP_CANSMARTTD = 86,
+  MTYP_CANARGB = 87,
   MTYP_VLCB = 0xFC,
 
 
@@ -39344,10 +39344,11 @@ typedef enum SendResult {
 typedef struct Transport {
     SendResult (* sendMessage)(Message * m);
     MessageReceived (* receiveMessage)(Message * m);
+    void (*waitForTxQueueToDrain)(void);
 } Transport;
-# 434 "../../VLCBlib_PIC/vlcb.h"
+# 435 "../../VLCBlib_PIC/vlcb.h"
 extern const Transport * transport;
-# 447 "../../VLCBlib_PIC/vlcb.h"
+# 448 "../../VLCBlib_PIC/vlcb.h"
 extern ValidTime APP_isSuitableTimeToWriteFlash(void);
 # 42 "../../VLCBlib_PIC/vlcb.c" 2
 
@@ -40185,7 +40186,21 @@ void main(void) {
 # 1272 "../../VLCBlib_PIC/vlcb.c"
     OSCCON1bits.NOSC = 2;
     OSCCON1bits.NDIV = 0;
-# 1284 "../../VLCBlib_PIC/vlcb.c"
+
+
+
+
+
+
+    while ( ! OSCCON3bits.ORDY) {
+        ;
+    }
+
+
+
+
+
+
     for (t1=0; t1<64; t1++) {
         for (t2=0; t2<255; t2++) {
             for (i=0; i<255; i++) {
@@ -40194,7 +40209,7 @@ void main(void) {
             }
         }
     }
-# 1301 "../../VLCBlib_PIC/vlcb.c"
+# 1306 "../../VLCBlib_PIC/vlcb.c"
     IVTBASEU = 0x00;
     IVTBASEH = 0x09;
     IVTBASEL = 0x00;
@@ -40202,7 +40217,7 @@ void main(void) {
     IVTLOCK = 0x55;
     IVTLOCK = 0xAA;
     IVTLOCKbits.IVTLOCKED = 0x01;
-# 1319 "../../VLCBlib_PIC/vlcb.c"
+# 1324 "../../VLCBlib_PIC/vlcb.c"
     initRomOps();
 
     if (readNVM(EEPROM_NVM_TYPE, 0x3FA) != 1) {
@@ -40229,7 +40244,7 @@ void main(void) {
         loop();
     }
 }
-# 1364 "../../VLCBlib_PIC/vlcb.c"
+# 1369 "../../VLCBlib_PIC/vlcb.c"
 void __attribute__((picinterrupt(("irq(default), base(0x900)")))) DEFAULT_ISR(void)
 {
 

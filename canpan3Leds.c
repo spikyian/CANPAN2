@@ -43,6 +43,7 @@
 #include "canpan3Outputs.h"
 #include "canpan3Nv.h"
 #include "nv.h"
+#include "EEPROMbuffer.h"
 
 //forward references
 void setLedStateNoSave(uint8_t ledNo, enum canpan3LedState state);
@@ -61,8 +62,8 @@ void initLeds(void) {
     
     for (ledNo=0; ledNo<NUM_LEDS; ledNo++) {
         if (startupNv & NV_STARTUP_RESTORELEDS) {
-            enum canpan3LedState state = (uint8_t)readNVM(EEPROM_NVM_TYPE, EE_ADDR_LEDS+ledNo);
-            setLedStateNoSave(ledNo, state);
+            uint8_t state = readEEvalue(EE_ADDR_LEDS+ledNo);
+            setLedStateNoSave(ledNo, (enum canpan3LedState)state);
         } else {
             ledStates[ledNo] = CANPANLED_OFF;
         }
@@ -92,14 +93,14 @@ void setLedStateNoSave(uint8_t ledNo, enum canpan3LedState state) {
     
 }
 /**
- * Set the specified LED to the given state and save the vale in EEPROM.
+ * Set the specified LED to the given state and save the value in EEPROM.
  * @param led
  * @param state
  */
 void setLedState(uint8_t ledNo, enum canpan3LedState state) {
     setLedStateNoSave(ledNo, state);
     if (startupNv & NV_STARTUP_RESTORELEDS) {
-        EEPROM_WriteNoVerify(EE_ADDR_LEDS+ledNo, (uint8_t)state);
+        writeEEvalue(EE_ADDR_LEDS+ledNo, (uint8_t)state);
     }
 }
 

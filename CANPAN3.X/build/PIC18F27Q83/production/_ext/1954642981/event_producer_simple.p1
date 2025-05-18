@@ -33,14 +33,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;../../VLCBlib_PIC/event_producer_simple.c: 74: const Service eventProducerService = {
 [c E23085 0 1 2 3 4 5 6 7 8 9 10 17 .. ]
 [n E23085 VlcbServiceTypes SERVICE_ID_NONE SERVICE_ID_MNS SERVICE_ID_NV SERVICE_ID_CAN SERVICE_ID_OLD_TEACH SERVICE_ID_PRODUCER SERVICE_ID_CONSUMER SERVICE_ID_TEACH SERVICE_ID_CONSUME_OWN_EVENTS SERVICE_ID_EVENTACK SERVICE_ID_BOOT SERVICE_ID_STREAMING  ]
-[v F23534 `(v ~T0 @X0 0 tf ]
+[v F23536 `(v ~T0 @X0 0 tf ]
 "62
 [; ;../../VLCBlib_PIC/event_producer_simple.c: 62: static void producerPowerUp(void);
 [v _producerPowerUp `(v ~T0 @X0 0 sf ]
 "60
 [; ;../../VLCBlib_PIC/event_producer_simple.c: 60: static Processed producerProcessMessage(Message *m);
 [v _producerProcessMessage `(E23290 ~T0 @X0 0 sf1`*S3291 ]
-[v F23538 `(v ~T0 @X0 0 tf ]
+[v F23540 `(v ~T0 @X0 0 tf ]
 "66
 [; ;../../VLCBlib_PIC/event_producer_simple.c: 66: static uint8_t producerEsdData(uint8_t id);
 [v _producerEsdData `(uc ~T0 @X0 0 sf1`uc ]
@@ -3612,10 +3612,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 :U ..
 -> . `E23085 5 `uc
 -> -> 1 `i `uc
--> -> -> 0 `i `*v `*F23534
+-> -> -> 0 `i `*v `*F23536
 &U _producerPowerUp
 &U _producerProcessMessage
--> -> -> 0 `i `*v `*F23538
+-> -> -> 0 `i `*v `*F23540
 &U _producerEsdData
 &U _producerGetDiagnostic
 ..

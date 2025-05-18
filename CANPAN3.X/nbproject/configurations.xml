@@ -11,6 +11,7 @@
         <itemPath>../canpan3Inputs.h</itemPath>
         <itemPath>../canpan3Outputs.h</itemPath>
         <itemPath>../canpan3Leds.h</itemPath>
+        <itemPath>../EEPROMbuffer.h</itemPath>
       </logicalFolder>
       <logicalFolder name="VLCB-defs" displayName="VLCB-defs" projectFiles="true">
         <itemPath>../../VLCB-defs/vlcbdefs_enums.h</itemPath>
@@ -58,6 +59,7 @@
         <itemPath>../canpan3Nv.c</itemPath>
         <itemPath>../canpan3Outputs.c</itemPath>
         <itemPath>../canpan3Leds.c</itemPath>
+        <itemPath>../EEPROMbuffer.c</itemPath>
       </logicalFolder>
       <logicalFolder name="VLCBlib_PIC" displayName="VLCBlib_PIC" projectFiles="true">
         <itemPath>../../VLCBlib_PIC/boot.c</itemPath>

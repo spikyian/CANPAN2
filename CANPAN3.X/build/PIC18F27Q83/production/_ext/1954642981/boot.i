@@ -38371,7 +38371,6 @@ typedef enum VlcbManufacturer
   MANU_SPROG = 44,
   MANU_ROCRAIL = 70,
   MANU_SPECTRUM = 80,
-  MANU_VLCB = 250,
   MANU_SYSPIXIE = 249,
   MANU_RME = 248,
 } VlcbManufacturer;
@@ -38472,6 +38471,7 @@ typedef enum VlcbMergModuleTypes
   MTYP_CANPIXEL = 84,
   MTYP_CANCABPE = 85,
   MTYP_CANSMARTTD = 86,
+  MTYP_CANARGB = 87,
   MTYP_VLCB = 0xFC,
 
 
@@ -39344,10 +39344,11 @@ typedef enum SendResult {
 typedef struct Transport {
     SendResult (* sendMessage)(Message * m);
     MessageReceived (* receiveMessage)(Message * m);
+    void (*waitForTxQueueToDrain)(void);
 } Transport;
-# 434 "../../VLCBlib_PIC/vlcb.h"
+# 435 "../../VLCBlib_PIC/vlcb.h"
 extern const Transport * transport;
-# 447 "../../VLCBlib_PIC/vlcb.h"
+# 448 "../../VLCBlib_PIC/vlcb.h"
 extern ValidTime APP_isSuitableTimeToWriteFlash(void);
 # 42 "../../VLCBlib_PIC/boot.c" 2
 
@@ -39393,7 +39394,7 @@ static uint8_t bootEsdData(uint8_t id);
 
 const Service bootService = {
     SERVICE_ID_BOOT,
-    2,
+    3,
     ((void*)0),
     bootPowerUp,
     bootProcessMessage,
@@ -39450,7 +39451,7 @@ const uint8_t paramBlock[] __attribute__((address(0x820))) = {
     0,8,0,0,
     0,0,0,0,
     CPUM_MICROCHIP,
-    6,
+    8,
     0,
     0,
     0,
@@ -39461,8 +39462,8 @@ const uint8_t paramBlock[] __attribute__((address(0x820))) = {
     0x08,
     0,
     0,
-    ((MANU_MERG+'a'+MTYP_CANPAN+254 +13 +67 +5 +(8) +(8)+CPUM_MICROCHIP+6 +(20)+(0x48)+(0x08)+1 +2 +PB_CAN+P18F27Q83)&0xFF),
-    ((MANU_MERG+'a'+MTYP_CANPAN+254 +13 +67 +5 +(8) +(8)+CPUM_MICROCHIP+6 +(20)+(0x48)+(0x08)+1 +2 +PB_CAN+P18F27Q83)>>8)
+    ((MANU_MERG+'a'+MTYP_CANPAN+254 +13 +67 +5 +(8) +(8)+CPUM_MICROCHIP+8 +(20)+(0x48)+(0x08)+1 +2 +PB_CAN+P18F27Q83)&0xFF),
+    ((MANU_MERG+'a'+MTYP_CANPAN+254 +13 +67 +5 +(8) +(8)+CPUM_MICROCHIP+8 +(20)+(0x48)+(0x08)+1 +2 +PB_CAN+P18F27Q83)>>8)
 };
 
 
@@ -39513,11 +39514,6 @@ static Processed bootProcessMessage(Message * m) {
     if (m->bytes[1] != nn.bytes.lo) return NOT_PROCESSED;
 
     switch (m->opc) {
-
-        case OPC_MODE:
-            if (m->bytes[2] != MODE_BOOT) return NOT_PROCESSED;
-
-
         case OPC_BOOT:
 
             writeNVM(EEPROM_NVM_TYPE, 0x3FF, 0xFF);

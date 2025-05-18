@@ -38288,7 +38288,6 @@ typedef enum VlcbManufacturer
   MANU_SPROG = 44,
   MANU_ROCRAIL = 70,
   MANU_SPECTRUM = 80,
-  MANU_VLCB = 250,
   MANU_SYSPIXIE = 249,
   MANU_RME = 248,
 } VlcbManufacturer;
@@ -38389,6 +38388,7 @@ typedef enum VlcbMergModuleTypes
   MTYP_CANPIXEL = 84,
   MTYP_CANCABPE = 85,
   MTYP_CANSMARTTD = 86,
+  MTYP_CANARGB = 87,
   MTYP_VLCB = 0xFC,
 
 
@@ -39261,10 +39261,11 @@ typedef enum SendResult {
 typedef struct Transport {
     SendResult (* sendMessage)(Message * m);
     MessageReceived (* receiveMessage)(Message * m);
+    void (*waitForTxQueueToDrain)(void);
 } Transport;
-# 434 "../../VLCBlib_PIC/vlcb.h"
+# 435 "../../VLCBlib_PIC/vlcb.h"
 extern const Transport * transport;
-# 447 "../../VLCBlib_PIC/vlcb.h"
+# 448 "../../VLCBlib_PIC/vlcb.h"
 extern ValidTime APP_isSuitableTimeToWriteFlash(void);
 # 43 "../../VLCBlib_PIC/statusLeds.h" 2
 # 1 "../../VLCBlib_PIC/ticktime.h" 1
@@ -39576,7 +39577,7 @@ typedef int ptrdiff_t;
 # 1 "../canpan3Nv.h" 1
 # 38 "../main.c" 2
 # 1 "../canpan3Inputs.h" 1
-# 43 "../canpan3Inputs.h"
+# 42 "../canpan3Inputs.h"
 extern void initInputs(void);
 extern void inputScan(void);
 extern void doSoD(void);
@@ -39616,13 +39617,19 @@ enum canpan3LedState {
 
 
 
-
 extern void setLedState(uint8_t led, enum canpan3LedState state);
 extern void restoreLeds(void);
 
 extern uint8_t outputState[(4*8)];
 # 42 "../main.c" 2
-# 113 "../main.c"
+# 1 "../EEPROMbuffer.h" 1
+# 40 "../EEPROMbuffer.h"
+extern void initEEPROMwriter(void);
+extern void writeEEvalue(uint8_t address, uint8_t value);
+extern uint8_t readEEvalue(uint8_t address);
+extern void pollEEPROMwriter(void);
+# 43 "../main.c" 2
+# 114 "../main.c"
 void __init(void);
 uint8_t checkCBUS( void);
 void ISRHigh(void);
@@ -39640,6 +39647,7 @@ static uint8_t started;
 static TickValue lastInputScanTime;
 static TickValue flashTime;
 static TickValue outputPollTime;
+static TickValue eepromWriterTime;
 
 const Service * const services[] = {
     &canService,
@@ -39667,10 +39675,10 @@ void APP_factoryReset(void) {
 
 
     for (sw=0; sw < (8*4); sw++) {
-        writeNVM(EEPROM_NVM_TYPE, 0x0000 +sw, 0);
+        writeNVM(EEPROM_NVM_TYPE, (0x0000)+sw, 0);
     }
 }
-# 168 "../main.c"
+# 170 "../main.c"
 void APP_testMode(void) {
     uint8_t sw;
 
@@ -39692,7 +39700,7 @@ void setup(void) {
 
 
     transport = &canTransport;
-# 200 "../main.c"
+# 202 "../main.c"
     WPUA = 0b00001000;
     WPUB = 0;
     WPUC = 0;
@@ -39701,6 +39709,7 @@ void setup(void) {
     ANSELC = 0x00;
 
 
+    initEEPROMwriter();
     initOutputs();
     initLeds();
     initInputs();
@@ -39718,6 +39727,7 @@ void setup(void) {
     lastInputScanTime.val = startTime.val;
     flashTime.val = startTime.val;
     outputPollTime.val = startTime.val;
+    eepromWriterTime.val = startTime.val;
 
     started = FALSE;
     canpanScanReady = 0;
@@ -39749,9 +39759,18 @@ void loop(void) {
         flashTime.val = tickGet();
     }
 
-    pollOutputs();
+    if ((tickGet() - outputPollTime.val) > 6) {
+        pollOutputs();
+        outputPollTime.val = tickGet();
+    }
+
+
+
+    if ((tickGet() - eepromWriterTime.val) > (62500/1000)) {
+        pollEEPROMwriter();
+    }
 }
-# 271 "../main.c"
+# 284 "../main.c"
 ValidTime APP_isSuitableTimeToWriteFlash(void){
     return GOOD_TIME;
 }

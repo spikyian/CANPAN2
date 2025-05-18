@@ -39,6 +39,7 @@ It may become a feature :)
 #include "canpan3Events.h"
 #include "canpan3Outputs.h"
 #include "canpan3Leds.h"
+#include "EEPROMbuffer.h"
 
 /*
   This work is licensed under the:
@@ -127,6 +128,7 @@ static uint8_t     started;
 static TickValue   lastInputScanTime;
 static TickValue   flashTime;
 static TickValue   outputPollTime;
+static TickValue   eepromWriterTime;
 
 const Service * const services[] = {
     &canService,
@@ -204,7 +206,8 @@ void setup(void) {
     ANSELB = 0x00;
     ANSELC = 0x00;
 #endif
-
+    
+    initEEPROMwriter();
     initOutputs();
     initLeds();
     initInputs();
@@ -222,6 +225,7 @@ void setup(void) {
     lastInputScanTime.val = startTime.val;
     flashTime.val = startTime.val;
     outputPollTime.val = startTime.val;
+    eepromWriterTime.val = startTime.val;
 
     started = FALSE;
     canpanScanReady = 0;
@@ -252,8 +256,17 @@ void loop(void) {
         doFlash();    // update flashing LEDs
         flashTime.val = tickGet();
     }
-    // poll the LED display quickly. 
-    pollOutputs();
+    // poll the LED display quickly.
+    if (tickTimeSince(outputPollTime) > HUNDRED_MICRO_SECOND) {
+        pollOutputs();
+        outputPollTime.val = tickGet();
+    }
+    // Check to see if there are any EEPROM writes waiting to be done. 
+    // A write takes max 11 ms but CPU isn't blocked unless there is already 
+    // a write in progress. 
+    if (tickTimeSince(eepromWriterTime) > ONE_MILI_SECOND) {
+        pollEEPROMwriter();
+    }
 }
 
 // Application functions required by MERGLCB library

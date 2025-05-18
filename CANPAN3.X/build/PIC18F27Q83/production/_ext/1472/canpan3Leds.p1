@@ -1,30 +1,26 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"50 ../canpan3Leds.c
-[; ;../canpan3Leds.c: 50: static enum canpan3LedState ledStates[(4*8)];
-[c E23465 0 1 2 3 .. ]
-[n E23465 canpan3LedState CANPANLED_ON CANPANLED_OFF CANPANLED_FLASH CANPANLED_ANTIFLASH  ]
+"51 ../canpan3Leds.c
+[; ;../canpan3Leds.c: 51: static enum canpan3LedState ledStates[(4*8)];
+[c E23467 0 1 2 3 .. ]
+[n E23467 canpan3LedState CANPANLED_ON CANPANLED_OFF CANPANLED_FLASH CANPANLED_ANTIFLASH  ]
 "116 ../../VLCBlib_PIC/nv.h
 [; ;../../VLCBlib_PIC/nv.h: 116: extern int16_t getNV(uint8_t index);
 [v _getNV `(s ~T0 @X0 0 ef1`uc ]
-"64 ../canpan3Leds.c
-[; ;../canpan3Leds.c: 64:             enum canpan3LedState state = (uint8_t)readNVM(EEPROM_NVM_TYPE, 0x0040 +ledNo);
-[c E23226 0 1 .. ]
-[n E23226 . EEPROM_NVM_TYPE FLASH_NVM_TYPE  ]
-"160 ../../VLCBlib_PIC/nvm.h
-[; ;../../VLCBlib_PIC/nvm.h: 160: extern int16_t readNVM(NVMtype type, uint24_t index);
-[v _readNVM `(s ~T0 @X0 0 ef2`E23226`um ]
-"48 ../canpan3Leds.c
-[; ;../canpan3Leds.c: 48: void setLedStateNoSave(uint8_t ledNo, enum canpan3LedState state);
-[v _setLedStateNoSave `(v ~T0 @X0 0 ef2`uc`E23465 ]
+"42 ../EEPROMbuffer.h
+[; ;../EEPROMbuffer.h: 42: extern uint8_t readEEvalue(uint8_t address);
+[v _readEEvalue `(uc ~T0 @X0 0 ef1`uc ]
+"49 ../canpan3Leds.c
+[; ;../canpan3Leds.c: 49: void setLedStateNoSave(uint8_t ledNo, enum canpan3LedState state);
+[v _setLedStateNoSave `(v ~T0 @X0 0 ef2`uc`E23467 ]
 "43 ../canpan3Outputs.h
 [; ;../canpan3Outputs.h: 43: extern void setLed(uint8_t no);
 [v _setLed `(v ~T0 @X0 0 ef1`uc ]
 "44
 [; ;../canpan3Outputs.h: 44: extern void clearLed(uint8_t no);
 [v _clearLed `(v ~T0 @X0 0 ef1`uc ]
-"180 ../../VLCBlib_PIC/nvm.h
-[; ;../../VLCBlib_PIC/nvm.h: 180: extern uint8_t EEPROM_WriteNoVerify(eeprom_address_t index, eeprom_data_t value);
-[v _EEPROM_WriteNoVerify `(uc ~T0 @X0 0 ef2`um`uc ]
+"41 ../EEPROMbuffer.h
+[; ;../EEPROMbuffer.h: 41: extern void writeEEvalue(uint8_t address, uint8_t value);
+[v _writeEEvalue `(v ~T0 @X0 0 ef2`uc`uc ]
 "306 C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.28.451/xc8\pic\include\proc/pic18f27q83.h
 [; ;C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.28.451/xc8\pic\include\proc/pic18f27q83.h: 306: __asm("BOOTREG equ 038h");
 [; <" BOOTREG equ 038h ;# ">
@@ -3544,260 +3540,260 @@ Version 4.0 HI-TECH Software Intermediate Code
 "69598
 [; ;C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.28.451/xc8\pic\include\proc/pic18f27q83.h: 69598: __asm("TOSU equ 04FFh");
 [; <" TOSU equ 04FFh ;# ">
-"50 ../canpan3Leds.c
-[; ;../canpan3Leds.c: 50: static enum canpan3LedState ledStates[(4*8)];
-[v _ledStates `E23465 ~T0 @X0 -> 32 `i s ]
-"51
-[; ;../canpan3Leds.c: 51: static uint8_t flashToggle;
-[v _flashToggle `uc ~T0 @X0 1 s ]
+"51 ../canpan3Leds.c
+[; ;../canpan3Leds.c: 51: static enum canpan3LedState ledStates[(4*8)];
+[v _ledStates `E23467 ~T0 @X0 -> 32 `i s ]
 "52
-[; ;../canpan3Leds.c: 52: static uint8_t startupNv;
+[; ;../canpan3Leds.c: 52: static uint8_t flashToggle;
+[v _flashToggle `uc ~T0 @X0 1 s ]
+"53
+[; ;../canpan3Leds.c: 53: static uint8_t startupNv;
 [v _startupNv `uc ~T0 @X0 1 s ]
-"57
-[; ;../canpan3Leds.c: 57: void initLeds(void) {
+"58
+[; ;../canpan3Leds.c: 58: void initLeds(void) {
 [v _initLeds `(v ~T0 @X0 1 ef ]
 {
 [e :U _initLeds ]
 [f ]
-"58
-[; ;../canpan3Leds.c: 58:     uint8_t ledNo;
+"59
+[; ;../canpan3Leds.c: 59:     uint8_t ledNo;
 [v _ledNo `uc ~T0 @X0 1 a ]
-"60
-[; ;../canpan3Leds.c: 60:     startupNv = (uint8_t)getNV(1);
+"61
+[; ;../canpan3Leds.c: 61:     startupNv = (uint8_t)getNV(1);
 [e = _startupNv -> ( _getNV (1 -> -> 1 `i `uc `uc ]
-"62
-[; ;../canpan3Leds.c: 62:     for (ledNo=0; ledNo<(4*8); ledNo++) {
+"63
+[; ;../canpan3Leds.c: 63:     for (ledNo=0; ledNo<(4*8); ledNo++) {
 {
 [e = _ledNo -> -> 0 `i `uc ]
 [e $ < -> _ledNo `i * -> 4 `i -> 8 `i 3302  ]
 [e $U 3303  ]
 [e :U 3302 ]
 {
-"63
-[; ;../canpan3Leds.c: 63:         if (startupNv & 0x02) {
+"64
+[; ;../canpan3Leds.c: 64:         if (startupNv & 0x02) {
 [e $ ! != & -> _startupNv `i -> 2 `i -> 0 `i 3305  ]
 {
-"64
-[; ;../canpan3Leds.c: 64:             enum canpan3LedState state = (uint8_t)readNVM(EEPROM_NVM_TYPE, 0x0040 +ledNo);
-[v _state `E23465 ~T0 @X0 1 a ]
-[e = _state -> -> ( _readNVM (2 , . `E23226 0 -> -> + -> 64 `i -> _ledNo `i `m `um `uc `E23465 ]
 "65
-[; ;../canpan3Leds.c: 65:             setLedStateNoSave(ledNo, state);
-[e ( _setLedStateNoSave (2 , _ledNo _state ]
+[; ;../canpan3Leds.c: 65:             uint8_t state = readEEvalue((0x0000 +0x20)+ledNo);
+[v _state `uc ~T0 @X0 1 a ]
+[e = _state ( _readEEvalue (1 -> + + -> 0 `i -> 32 `i -> _ledNo `i `uc ]
 "66
-[; ;../canpan3Leds.c: 66:         } else {
+[; ;../canpan3Leds.c: 66:             setLedStateNoSave(ledNo, (enum canpan3LedState)state);
+[e ( _setLedStateNoSave (2 , _ledNo -> _state `E23467 ]
+"67
+[; ;../canpan3Leds.c: 67:         } else {
 }
 [e $U 3306  ]
 [e :U 3305 ]
 {
-"67
-[; ;../canpan3Leds.c: 67:             ledStates[ledNo] = CANPANLED_OFF;
-[e = *U + &U _ledStates * -> _ledNo `ux -> -> # *U &U _ledStates `ui `ux . `E23465 1 ]
 "68
-[; ;../canpan3Leds.c: 68:         }
+[; ;../canpan3Leds.c: 68:             ledStates[ledNo] = CANPANLED_OFF;
+[e = *U + &U _ledStates * -> _ledNo `ux -> -> # *U &U _ledStates `ui `ux . `E23467 1 ]
+"69
+[; ;../canpan3Leds.c: 69:         }
 }
 [e :U 3306 ]
-"69
-[; ;../canpan3Leds.c: 69:     }
+"70
+[; ;../canpan3Leds.c: 70:     }
 }
 [e ++ _ledNo -> -> 1 `i `uc ]
 [e $ < -> _ledNo `i * -> 4 `i -> 8 `i 3302  ]
 [e :U 3303 ]
 }
-"70
-[; ;../canpan3Leds.c: 70:     flashToggle = 0;
-[e = _flashToggle -> -> 0 `i `uc ]
 "71
-[; ;../canpan3Leds.c: 71: }
+[; ;../canpan3Leds.c: 71:     flashToggle = 0;
+[e = _flashToggle -> -> 0 `i `uc ]
+"72
+[; ;../canpan3Leds.c: 72: }
 [e :UE 3301 ]
 }
-"78
-[; ;../canpan3Leds.c: 78: void setLedStateNoSave(uint8_t ledNo, enum canpan3LedState state) {
-[v _setLedStateNoSave `(v ~T0 @X0 1 ef2`uc`E23465 ]
+"79
+[; ;../canpan3Leds.c: 79: void setLedStateNoSave(uint8_t ledNo, enum canpan3LedState state) {
+[v _setLedStateNoSave `(v ~T0 @X0 1 ef2`uc`E23467 ]
 {
 [e :U _setLedStateNoSave ]
 [v _ledNo `uc ~T0 @X0 1 r1 ]
-[v _state `E23465 ~T0 @X0 1 r2 ]
+[v _state `E23467 ~T0 @X0 1 r2 ]
 [f ]
-"79
-[; ;../canpan3Leds.c: 79:     ledStates[ledNo] = state;
-[e = *U + &U _ledStates * -> _ledNo `ux -> -> # *U &U _ledStates `ui `ux _state ]
 "80
-[; ;../canpan3Leds.c: 80:     switch (ledStates[ledNo]) {
+[; ;../canpan3Leds.c: 80:     ledStates[ledNo] = state;
+[e = *U + &U _ledStates * -> _ledNo `ux -> -> # *U &U _ledStates `ui `ux _state ]
+"81
+[; ;../canpan3Leds.c: 81:     switch (ledStates[ledNo]) {
 [e $U 3309  ]
 {
-"81
-[; ;../canpan3Leds.c: 81:         case CANPANLED_ON:
-[e :U 3310 ]
 "82
-[; ;../canpan3Leds.c: 82:             setLed(ledNo);
-[e ( _setLed (1 _ledNo ]
+[; ;../canpan3Leds.c: 82:         case CANPANLED_ON:
+[e :U 3310 ]
 "83
-[; ;../canpan3Leds.c: 83:             break;
-[e $U 3308  ]
+[; ;../canpan3Leds.c: 83:             setLed(ledNo);
+[e ( _setLed (1 _ledNo ]
 "84
-[; ;../canpan3Leds.c: 84:         case CANPANLED_OFF:
-[e :U 3311 ]
+[; ;../canpan3Leds.c: 84:             break;
+[e $U 3308  ]
 "85
-[; ;../canpan3Leds.c: 85:             clearLed(ledNo);
-[e ( _clearLed (1 _ledNo ]
+[; ;../canpan3Leds.c: 85:         case CANPANLED_OFF:
+[e :U 3311 ]
 "86
-[; ;../canpan3Leds.c: 86:             break;
-[e $U 3308  ]
+[; ;../canpan3Leds.c: 86:             clearLed(ledNo);
+[e ( _clearLed (1 _ledNo ]
 "87
-[; ;../canpan3Leds.c: 87:         case CANPANLED_FLASH:
-[e :U 3312 ]
-"88
-[; ;../canpan3Leds.c: 88:         case CANPANLED_ANTIFLASH:
-[e :U 3313 ]
-"90
-[; ;../canpan3Leds.c: 90:             break;
+[; ;../canpan3Leds.c: 87:             break;
 [e $U 3308  ]
+"88
+[; ;../canpan3Leds.c: 88:         case CANPANLED_FLASH:
+[e :U 3312 ]
+"89
+[; ;../canpan3Leds.c: 89:         case CANPANLED_ANTIFLASH:
+[e :U 3313 ]
 "91
-[; ;../canpan3Leds.c: 91:     }
+[; ;../canpan3Leds.c: 91:             break;
+[e $U 3308  ]
+"92
+[; ;../canpan3Leds.c: 92:     }
 }
 [e $U 3308  ]
 [e :U 3309 ]
-[e [\ -> *U + &U _ledStates * -> _ledNo `ux -> -> # *U &U _ledStates `ui `ux `ui , $ -> . `E23465 0 `ui 3310
- , $ -> . `E23465 1 `ui 3311
- , $ -> . `E23465 2 `ui 3312
- , $ -> . `E23465 3 `ui 3313
+[e [\ -> *U + &U _ledStates * -> _ledNo `ux -> -> # *U &U _ledStates `ui `ux `ui , $ -> . `E23467 0 `ui 3310
+ , $ -> . `E23467 1 `ui 3311
+ , $ -> . `E23467 2 `ui 3312
+ , $ -> . `E23467 3 `ui 3313
  3308 ]
 [e :U 3308 ]
-"93
-[; ;../canpan3Leds.c: 93: }
+"94
+[; ;../canpan3Leds.c: 94: }
 [e :UE 3307 ]
 }
-"99
-[; ;../canpan3Leds.c: 99: void setLedState(uint8_t ledNo, enum canpan3LedState state) {
-[v _setLedState `(v ~T0 @X0 1 ef2`uc`E23465 ]
+"100
+[; ;../canpan3Leds.c: 100: void setLedState(uint8_t ledNo, enum canpan3LedState state) {
+[v _setLedState `(v ~T0 @X0 1 ef2`uc`E23467 ]
 {
 [e :U _setLedState ]
 [v _ledNo `uc ~T0 @X0 1 r1 ]
-[v _state `E23465 ~T0 @X0 1 r2 ]
+[v _state `E23467 ~T0 @X0 1 r2 ]
 [f ]
-"100
-[; ;../canpan3Leds.c: 100:     setLedStateNoSave(ledNo, state);
-[e ( _setLedStateNoSave (2 , _ledNo _state ]
 "101
-[; ;../canpan3Leds.c: 101:     if (startupNv & 0x02) {
+[; ;../canpan3Leds.c: 101:     setLedStateNoSave(ledNo, state);
+[e ( _setLedStateNoSave (2 , _ledNo _state ]
+"102
+[; ;../canpan3Leds.c: 102:     if (startupNv & 0x02) {
 [e $ ! != & -> _startupNv `i -> 2 `i -> 0 `i 3315  ]
 {
-"102
-[; ;../canpan3Leds.c: 102:         EEPROM_WriteNoVerify(0x0040 +ledNo, (uint8_t)state);
-[e ( _EEPROM_WriteNoVerify (2 , -> -> + -> 64 `i -> _ledNo `i `m `um -> _state `uc ]
 "103
-[; ;../canpan3Leds.c: 103:     }
+[; ;../canpan3Leds.c: 103:         writeEEvalue((0x0000 +0x20)+ledNo, (uint8_t)state);
+[e ( _writeEEvalue (2 , -> + + -> 0 `i -> 32 `i -> _ledNo `i `uc -> _state `uc ]
+"104
+[; ;../canpan3Leds.c: 104:     }
 }
 [e :U 3315 ]
-"104
-[; ;../canpan3Leds.c: 104: }
+"105
+[; ;../canpan3Leds.c: 105: }
 [e :UE 3314 ]
 }
-"109
-[; ;../canpan3Leds.c: 109: void doFlash(void) {
+"110
+[; ;../canpan3Leds.c: 110: void doFlash(void) {
 [v _doFlash `(v ~T0 @X0 1 ef ]
 {
 [e :U _doFlash ]
 [f ]
-"110
-[; ;../canpan3Leds.c: 110:     uint8_t ledNo;
+"111
+[; ;../canpan3Leds.c: 111:     uint8_t ledNo;
 [v _ledNo `uc ~T0 @X0 1 a ]
-"112
-[; ;../canpan3Leds.c: 112:     for (ledNo=0; ledNo<(4*8); ledNo++) {
+"113
+[; ;../canpan3Leds.c: 113:     for (ledNo=0; ledNo<(4*8); ledNo++) {
 {
 [e = _ledNo -> -> 0 `i `uc ]
 [e $ < -> _ledNo `i * -> 4 `i -> 8 `i 3317  ]
 [e $U 3318  ]
 [e :U 3317 ]
 {
-"113
-[; ;../canpan3Leds.c: 113:         switch (ledStates[ledNo]) {
+"114
+[; ;../canpan3Leds.c: 114:         switch (ledStates[ledNo]) {
 [e $U 3321  ]
 {
-"114
-[; ;../canpan3Leds.c: 114:             case CANPANLED_FLASH:
-[e :U 3322 ]
 "115
-[; ;../canpan3Leds.c: 115:                 if (flashToggle) {
+[; ;../canpan3Leds.c: 115:             case CANPANLED_FLASH:
+[e :U 3322 ]
+"116
+[; ;../canpan3Leds.c: 116:                 if (flashToggle) {
 [e $ ! != -> _flashToggle `i -> 0 `i 3323  ]
 {
-"116
-[; ;../canpan3Leds.c: 116:                     setLed(ledNo);
-[e ( _setLed (1 _ledNo ]
 "117
-[; ;../canpan3Leds.c: 117:                 } else {
+[; ;../canpan3Leds.c: 117:                     setLed(ledNo);
+[e ( _setLed (1 _ledNo ]
+"118
+[; ;../canpan3Leds.c: 118:                 } else {
 }
 [e $U 3324  ]
 [e :U 3323 ]
 {
-"118
-[; ;../canpan3Leds.c: 118:                     clearLed(ledNo);
-[e ( _clearLed (1 _ledNo ]
 "119
-[; ;../canpan3Leds.c: 119:                 }
+[; ;../canpan3Leds.c: 119:                     clearLed(ledNo);
+[e ( _clearLed (1 _ledNo ]
+"120
+[; ;../canpan3Leds.c: 120:                 }
 }
 [e :U 3324 ]
-"120
-[; ;../canpan3Leds.c: 120:                 break;
-[e $U 3320  ]
 "121
-[; ;../canpan3Leds.c: 121:             case CANPANLED_ANTIFLASH:
-[e :U 3325 ]
+[; ;../canpan3Leds.c: 121:                 break;
+[e $U 3320  ]
 "122
-[; ;../canpan3Leds.c: 122:                 if (flashToggle) {
+[; ;../canpan3Leds.c: 122:             case CANPANLED_ANTIFLASH:
+[e :U 3325 ]
+"123
+[; ;../canpan3Leds.c: 123:                 if (flashToggle) {
 [e $ ! != -> _flashToggle `i -> 0 `i 3326  ]
 {
-"123
-[; ;../canpan3Leds.c: 123:                     clearLed(ledNo);
-[e ( _clearLed (1 _ledNo ]
 "124
-[; ;../canpan3Leds.c: 124:                 } else {
+[; ;../canpan3Leds.c: 124:                     clearLed(ledNo);
+[e ( _clearLed (1 _ledNo ]
+"125
+[; ;../canpan3Leds.c: 125:                 } else {
 }
 [e $U 3327  ]
 [e :U 3326 ]
 {
-"125
-[; ;../canpan3Leds.c: 125:                     setLed(ledNo);
-[e ( _setLed (1 _ledNo ]
 "126
-[; ;../canpan3Leds.c: 126:                 }
+[; ;../canpan3Leds.c: 126:                     setLed(ledNo);
+[e ( _setLed (1 _ledNo ]
+"127
+[; ;../canpan3Leds.c: 127:                 }
 }
 [e :U 3327 ]
-"127
-[; ;../canpan3Leds.c: 127:                 break;
-[e $U 3320  ]
 "128
-[; ;../canpan3Leds.c: 128:             case CANPANLED_ON:
-[e :U 3328 ]
-"129
-[; ;../canpan3Leds.c: 129:             case CANPANLED_OFF:
-[e :U 3329 ]
-"131
-[; ;../canpan3Leds.c: 131:                 break;
+[; ;../canpan3Leds.c: 128:                 break;
 [e $U 3320  ]
+"129
+[; ;../canpan3Leds.c: 129:             case CANPANLED_ON:
+[e :U 3328 ]
+"130
+[; ;../canpan3Leds.c: 130:             case CANPANLED_OFF:
+[e :U 3329 ]
 "132
-[; ;../canpan3Leds.c: 132:         }
+[; ;../canpan3Leds.c: 132:                 break;
+[e $U 3320  ]
+"133
+[; ;../canpan3Leds.c: 133:         }
 }
 [e $U 3320  ]
 [e :U 3321 ]
-[e [\ -> *U + &U _ledStates * -> _ledNo `ux -> -> # *U &U _ledStates `ui `ux `ui , $ -> . `E23465 2 `ui 3322
- , $ -> . `E23465 3 `ui 3325
- , $ -> . `E23465 0 `ui 3328
- , $ -> . `E23465 1 `ui 3329
+[e [\ -> *U + &U _ledStates * -> _ledNo `ux -> -> # *U &U _ledStates `ui `ux `ui , $ -> . `E23467 2 `ui 3322
+ , $ -> . `E23467 3 `ui 3325
+ , $ -> . `E23467 0 `ui 3328
+ , $ -> . `E23467 1 `ui 3329
  3320 ]
 [e :U 3320 ]
-"133
-[; ;../canpan3Leds.c: 133:     }
+"134
+[; ;../canpan3Leds.c: 134:     }
 }
 [e ++ _ledNo -> -> 1 `i `uc ]
 [e $ < -> _ledNo `i * -> 4 `i -> 8 `i 3317  ]
 [e :U 3318 ]
 }
-"134
-[; ;../canpan3Leds.c: 134:     flashToggle = !flashToggle;
-[e = _flashToggle -> -> ! != -> _flashToggle `i -> 0 `i `i `uc ]
 "135
-[; ;../canpan3Leds.c: 135: }
+[; ;../canpan3Leds.c: 135:     flashToggle = !flashToggle;
+[e = _flashToggle -> -> ! != -> _flashToggle `i -> 0 `i `i `uc ]
+"136
+[; ;../canpan3Leds.c: 136: }
 [e :UE 3316 ]
 }

@@ -45,13 +45,21 @@
 #include "canpan3Nv.h"
 #include "nv.h"
 
+/* METHOD 1 uses software to loop through all the anodes, sending a byte of
+ * cathode data to SPI. Software also used to turn off the cathode when brightness
+ * value reached.
+ * METHOD 2 similar to METHOD 1 but uses DMA to send data to SPI to turn off
+ * LEDs at the correct time due to brightness control.
+ * METHOD 3 Turns on each cathode in turn via SPI and uses PWM peripherals to
+ * drive the anodes.  
+ */
+
 // RB4 - RB7 are used to drive the LED Anodes
 // MSSP SSI Master is used to provide 8 bits for cathodes
 
-static unsigned char current_row = 0;
 unsigned char ledMatrix[NUM_LED_ROWS];
+static unsigned char current_row = 0;
 static uint8_t cathodes;
-
 #define MAX_BRIGHTNESS  32
 static uint8_t brightness = 0;
 
@@ -94,7 +102,7 @@ void initOutputs(void) {
     SPI1TWIDTH=0;   // 8 bits
 
     SPI1CLK = 0x00; // Clock from Fosc
-    SPI1BAUD = 15;  // Fosc/32
+    SPI1BAUD = 7;  // Fosc/16
 
     // set up PPS to the correct pins
     RC5PPS = 0x32; // SPI1SDO
@@ -194,8 +202,8 @@ void pollOutputs(void)
         // enable the cathode driver
         LATCbits.LATC2 = 0; //OE
     }
-    brightness++;
-    if (brightness == MAX_BRIGHTNESS) {
+    brightness += 2;
+    if (brightness >= MAX_BRIGHTNESS) {
         brightness = 0;
     }
 }

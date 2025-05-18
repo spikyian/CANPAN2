@@ -33,12 +33,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;../../VLCBlib_PIC/event_coe.c: 64: const Service eventCoeService = {
 [c E23135 0 1 2 3 4 5 6 7 8 9 10 17 .. ]
 [n E23135 VlcbServiceTypes SERVICE_ID_NONE SERVICE_ID_MNS SERVICE_ID_NV SERVICE_ID_CAN SERVICE_ID_OLD_TEACH SERVICE_ID_PRODUCER SERVICE_ID_CONSUMER SERVICE_ID_TEACH SERVICE_ID_CONSUME_OWN_EVENTS SERVICE_ID_EVENTACK SERVICE_ID_BOOT SERVICE_ID_STREAMING  ]
-[v F23467 `(v ~T0 @X0 0 tf ]
-[v F23468 `(v ~T0 @X0 0 tf ]
-[v F23469 `(E23340 ~T0 @X0 0 tf1`*S3294 ]
-[v F23471 `(v ~T0 @X0 0 tf ]
-[v F23472 `(uc ~T0 @X0 0 tf1`uc ]
-[v F23474 `(*S3297 ~T0 @X0 0 tf1`uc ]
+[v F23469 `(v ~T0 @X0 0 tf ]
+[v F23470 `(v ~T0 @X0 0 tf ]
+[v F23471 `(E23340 ~T0 @X0 0 tf1`*S3294 ]
+[v F23473 `(v ~T0 @X0 0 tf ]
+[v F23474 `(uc ~T0 @X0 0 tf1`uc ]
+[v F23476 `(*S3297 ~T0 @X0 0 tf1`uc ]
 "306 C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.28.451/xc8\pic\include\proc/pic18f27q83.h
 [; ;C:/Users/ianwh/.mchp_packs/Microchip/PIC18F-Q_DFP/1.28.451/xc8\pic\include\proc/pic18f27q83.h: 306: __asm("BOOTREG equ 038h");
 [; <" BOOTREG equ 038h ;# ">
@@ -3566,12 +3566,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 :U ..
 -> . `E23135 8 `uc
 -> -> 1 `i `uc
--> -> -> 0 `i `*v `*F23467
--> -> -> 0 `i `*v `*F23468
 -> -> -> 0 `i `*v `*F23469
+-> -> -> 0 `i `*v `*F23470
 -> -> -> 0 `i `*v `*F23471
--> -> -> 0 `i `*v `*F23472
+-> -> -> 0 `i `*v `*F23473
 -> -> -> 0 `i `*v `*F23474
+-> -> -> 0 `i `*v `*F23476
 ..
 ..
 ]
